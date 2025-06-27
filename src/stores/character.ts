@@ -1,5 +1,5 @@
 import { defaultItems, itemCatalog } from "@/data/items";
-import { CharacterState } from "@/types/state";
+import { CharacterState, FlagId, Stat } from "@/types/state";
 import { defineStore } from "pinia";
 import { useSnackbarStore } from "./snackbar";
 import { ItemId } from "@/types/item";
@@ -17,20 +17,20 @@ export const useCharacterStore = defineStore("character", {
     shitheadedness: 0,
     athletics: 0,
     inventory: [...defaultItems],
-    flags: {},
+    flags: {} as Record<FlagId, string | undefined>,
   }),
   // persist: true,
   actions: {
     takeDamage(amount: number) {
       this.health = Math.max(this.health - amount, 0);
     },
-    gainStat(
-      stat: "health" | "blueMagic" | "will" | "shitheadedness" | "athletics",
-      value: number
-    ) {
+    gainStat(stat: Stat, value: number) {
       if (this[stat] !== undefined) this[stat] += value;
     },
-    setFlag(key: string, value: string | undefined) {
+    loseStat(stat: Stat, value: number) {
+      if (this[stat] !== undefined) this[stat] -= value;
+    },
+    setFlag(key: FlagId, value: string | undefined) {
       this.flags[key] = value;
     },
     addToInventory(id: ItemId, pageAcquired: SceneId) {
@@ -61,6 +61,10 @@ export const useCharacterStore = defineStore("character", {
       if (itemCatalog[id].type == "consumable") {
         this.removeFromInventory(id, false);
       }
+    },
+
+    hasItem(id: ItemId): boolean {
+      return this.inventory.some((item) => item.id == id);
     },
   },
 });

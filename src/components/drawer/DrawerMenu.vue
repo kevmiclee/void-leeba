@@ -5,9 +5,12 @@
     <li @click.stop="drawer.setDrawerView('bag')">Bag</li>
     <li @click.stop="drawer.setDrawerView('phone')">
       Phone
-      <span v-if="drawer.notificationCount > 0" class="notification-bubble">{{
-        drawer.notificationCount
-      }}</span>
+      <span
+        v-if="drawer.notificationCount > 0 || drawer.phoneIsCrazy"
+        class="notification-bubble"
+        :class="{ 'phone-crazy': drawer.phoneIsCrazy }"
+        >{{ drawer.phoneIsCrazy ? "∞" : drawer.notificationCount }}</span
+      >
     </li>
     <li @click.stop="drawer.setDrawerView('dictionary')">Dictionary</li>
     <li @click.stop="drawer.setDrawerView('stats')">Stats</li>
@@ -36,4 +39,17 @@ function restart() {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.phone-crazy {
+  animation: pulse 0.5s infinite alternate;
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.3);
+  }
+}
+</style>

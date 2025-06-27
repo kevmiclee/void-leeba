@@ -10,8 +10,9 @@
     <button @click.stop="drawer.toggleDrawer">
       ☰
       <span
-        v-if="drawer.notificationCount > 0"
+        v-if="animatedCount > 0"
         class="notification-bubble"
+        :class="{ 'phone-crazy': drawer.phoneIsCrazy }"
         :style="{
           position: 'absolute',
           top:
@@ -20,7 +21,7 @@
               : `3.2vw`,
         }"
       >
-        {{ drawer.notificationCount }}
+        {{ animatedCount == 100 ? "∞" : animatedCount }}
       </span>
     </button>
   </div>
@@ -39,7 +40,7 @@
 import { useGameStore } from "@/stores/game";
 import { usePhoneStore } from "@/stores/phone";
 import Drawer from "@/components/drawer/Drawer.vue";
-import { computed, watch } from "vue";
+import { computed, ref, watch, watchEffect } from "vue";
 import { useDrawerStore } from "@/stores/drawer";
 
 const game = useGameStore();
@@ -57,6 +58,43 @@ const numberOfPhoneItems = computed(() => {
   const distinctScenes = Array.from(new Set(scenes.value));
   return Math.floor(distinctScenes.length / 4);
 });
+
+const animatedCount = ref(drawer.notificationCount);
+let stop = false;
+
+function animateToThousand(start: number, target = 100) {
+  let current = start;
+
+  const step = () => {
+    if (stop || current >= target) return;
+
+    current += 1;
+    animatedCount.value = current;
+
+    // Delay decreases as we approach 1000
+    const progress = (current - start) / (target - start); // 0 to 1
+    const delay = 100 - progress * 45; // Start at 50ms, down to ~5ms
+
+    setTimeout(step, delay);
+  };
+
+  step();
+}
+
+watch(
+  () => drawer.phoneIsCrazy,
+  (isCrazy) => {
+    stop = false;
+
+    if (isCrazy) {
+      animateToThousand(animatedCount.value);
+    } else {
+      stop = true;
+      animatedCount.value = drawer.notificationCount;
+    }
+  },
+  { immediate: true }
+);
 
 watch(
   () => ({
@@ -101,5 +139,18 @@ watch(
   width: 100vw;
   background: rgba(0, 0, 0, 0.3);
   z-index: 1000;
+}
+
+.phone-crazy {
+  animation: pulse 0.5s infinite alternate;
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.3);
+  }
 }
 </style>

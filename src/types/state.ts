@@ -23,8 +23,23 @@ export interface CharacterState {
   shitheadedness: number;
   athletics: number;
   inventory: Item[];
-  flags: Record<string, string | undefined>;
+  flags: Record<FlagId, string | undefined>;
 }
+
+export type Stat =
+  | "health"
+  | "blueMagic"
+  | "will"
+  | "shitheadedness"
+  | "athletics";
+
+export type FlagId =
+  | "closer-to-black-dog"
+  | "healed-dog"
+  | "faerie-manners"
+  | "gave-dog-food"
+  | "drunk-choice"
+  | "drunk-manners";
 
 export interface DrawerState {
   isDrawerOpen: boolean;
@@ -33,6 +48,7 @@ export interface DrawerState {
   drawerView: DrawerView;
   selectedItem: Item | null;
   selectedDictionaryEntry: DictionaryEntry | null;
+  phoneIsCrazy: boolean;
 }
 
 export type DrawerView =

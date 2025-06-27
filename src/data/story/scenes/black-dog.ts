@@ -8,6 +8,8 @@ import {
   getDrunkMannersRescueText,
   getDrunkRescueText,
 } from "../helper-functions/text-helper-functions";
+import { usePhoneStore } from "@/stores/phone";
+import { useDrawerStore } from "@/stores/drawer";
 
 export const blackDogScenes = {
   "black-dog": (payload?: ScenePayload): Scene => ({
@@ -15,8 +17,8 @@ export const blackDogScenes = {
     background: bgDefault,
     text:
       `They run past you to the skatepark. As they lope off, you turn around and lean against a tree.` +
-      `^^Your attention shifts to the field as the distant lights of the highway pull your attention, like shooting stars.` +
-      `^^Below your gaze, you think you can see a form is hunched across the field from you. Like a dark and burly bush, ` +
+      `^^Your attention shifts to the field as the distant lights of the highway pull your gaze, like shooting stars.` +
+      `^^Below your gaze, you think you can see a form hunched across the field from you. Like a dark and burly bush, ` +
       `you can't make out its features. You are sure that was not there a minute ago.`,
     choices: () => [
       {
@@ -24,10 +26,19 @@ export const blackDogScenes = {
         next: "black-dog1",
         onChoose: () => {
           const character = useCharacterStore();
-          character.setFlag("closerToBlackDog", "true");
+          character.setFlag("closer-to-black-dog", "true");
+          character.gainStat("will", 1);
         },
-      }, //TODO: brave, thinks the creature is good
-      { text: "Back away.", next: "black-dog1" }, //TODO: scared, thinks the creature is bad
+      },
+      {
+        text: "Back away.",
+        next: "black-dog1",
+        onChoose: () => {
+          const character = useCharacterStore();
+          character.setFlag("closer-to-black-dog", "false");
+          character.loseStat("will", 1);
+        },
+      },
     ],
   }),
 
@@ -74,7 +85,6 @@ export const blackDogScenes = {
   }),
 
   "black-dog-good": (payload?: ScenePayload): Scene => ({
-    //TODO: dog food?
     id: "black-dog-good",
     background: bgDefault,
     text:
@@ -100,22 +110,70 @@ export const blackDogScenes = {
     text:
       `Inside the locket is a dried bit of plant matter that smells of vanilla, and a taped lock of hair.` +
       `^^As you hold these items, they dissolve in your palm, and you feel an energy fill you with intention.`,
-    choices: () => [
-      {
-        text: `Heal the human-faced dog's face back into a dog's face.`,
-        // next: "black-dog-heal-dog",
-        //TODO:
-      },
-      {
-        text: `Heal the human-faced dog's body back into a human's body.`,
-        // next: "black-dog-heal-human",
-        //TODO:
-      },
-    ],
+    choices: () => {
+      const character = useCharacterStore();
+      return [
+        {
+          text: `Heal the human-faced dog's face back into a dog's face.`,
+          next: "black-dog-heal-dog",
+          onChoose: () => {
+            character.setFlag("healed-dog", "dog"); //TODO: what they heal them into dictates something -- the redux, the chracter comes back to help them
+          },
+        },
+        {
+          text: `Heal the human-faced dog's body back into a human's body.`,
+          next: "black-dog-heal-human",
+          onChoose: () => {
+            character.setFlag("healed-dog", "human");
+          },
+        },
+      ];
+    },
     onPageLoad: () => {
       const game = useGameStore();
       game.updateShowDisappearingItem(true);
     },
+  }),
+
+  "black-dog-heal-dog": (payload?: ScenePayload): Scene => ({
+    id: "black-dog-heal-dog",
+    background: bgDefault,
+    text:
+      `The creature's body seems to glow blue. Its human features morph and melt into the shape of a ` +
+      `regular dog, keeping its general size, shape, and coloration, albeit red and black piebald.` +
+      `^^The dog looks up at you, panting, its eyes searching you cautiously for treats or pets. Seeing mostly ` +
+      `surprise and wonder in your eyes, but no action, it turns tail to traipse across the field, stopping here ` +
+      `and there to sniff the ground, but disappearing into the neighborhood.`,
+    choices: () => {
+      const choices = [];
+
+      const character = useCharacterStore();
+      if (character.hasItem("dog-food")) {
+        choices.push({
+          text: "Give it some dog food.",
+          onChoose: () => {
+            //TODO: the dog eats the food
+            character.removeFromInventory("dog-food");
+          },
+        });
+      }
+
+      //TODO: other choices
+      return choices;
+    },
+  }),
+
+  "black-dog-heal-human": (payload?: ScenePayload): Scene => ({
+    id: "black-dog-heal-human",
+    background: bgDefault,
+    text:
+      `The creature's body seems to glow pink. Its dog features seem to morph and melt into the shape ` +
+      `of a human, kneeling on the ground, its limbs lengthening and its fur receeding and shifting into ` +
+      `a mop of red-black hair on the top of the skull, and faint hairs on the back and arms.` +
+      `^^The man looks up into your eyes, looking confused and wild, looking down at himself, he covers his ` +
+      `gonads, and turns tail to sprint across the field into the neighborhood.`,
+    choices: () => [],
+    //TODO:
   }),
 
   "black-dog-heal-human-redux": (payload?: ScenePayload): Scene => ({
@@ -157,7 +215,7 @@ export const blackDogScenes = {
           //If the player is closer to the dog, it's harder to dodge its attack
           const playerAthletics =
             character.athletics +
-            (character.flags["closerToBlackDog"] == "true" ? 0 : 1);
+            (character.flags["closer-to-black-dog"] == "true" ? 0 : 1);
           const roll = fateContest(playerAthletics, blackDogAthletics);
 
           const outcome = getBlackDogOutcome(roll);
@@ -227,6 +285,7 @@ export const blackDogScenes = {
         action: () => {
           const character = useCharacterStore();
           const game = useGameStore();
+          character.setFlag("gave-dog-food", "true");
           character.removeFromInventory("dog-food");
           game.goToScene("black-dog-bad-fail-food1");
         },
@@ -244,7 +303,7 @@ export const blackDogScenes = {
         text: "<i>*whimpers happily*</i>",
       },
     ],
-    //TODO:
+    //TODO: choices
   }),
 
   "black-dog-bad-fail-drunks": (payload?: ScenePayload): Scene => ({
@@ -262,7 +321,7 @@ export const blackDogScenes = {
           },
           {
             characterId: payload.filter == "sun" ? "drunk1" : "drunk2",
-            text: `No worries. I owe you one from before!.`,
+            text: `No worries. I owe you one from before!`,
             onClick: () => {
               const game = useGameStore();
               game.goToScene("black-dog-bad-fail-drunks-help", {
@@ -318,8 +377,17 @@ export const blackDogScenes = {
   "black-dog-bad-fail-drunks-leave": (payload?: ScenePayload): Scene => ({
     id: "black-dog-bad-fail-drunks-leave",
     background: bgDefault,
-    text: "They leave.",
-    //TODO:
+    text:
+      `They leave. And miracualously, so does the redblack dog. It seems to recognize the drunks and follows them happily.^^` +
+      `You feel embarassed for what just happened. {And alone}.`,
+    buttonActions: [
+      {
+        action: () => {
+          const game = useGameStore();
+          game.goToScene("black-dog-viral");
+        },
+      },
+    ],
   }),
 
   "black-dog-feel-bad": (payload?: ScenePayload): Scene => ({
@@ -333,11 +401,26 @@ export const blackDogScenes = {
     buttonActions: [
       {
         action: () => {
-          //TODO: the drunk you didn't agree with records you
-          //  or if you said I'm not from around here, they are both reording you especially because you 'not from around here'
-          //   use the drunkManners to dictate some dialog
+          const game = useGameStore();
+          game.goToScene("black-dog-viral");
         },
       },
     ],
+  }),
+
+  "black-dog-viral": (payload?: ScenePayload): Scene => ({
+    id: "black-dog-viral",
+    background: bgDefault,
+    text: "Suddenly, it's like a bomb went off on your phone. Alerts chirping like crazy.",
+    onPageLoad: () => {
+      const drawer = useDrawerStore();
+      drawer.togglePhoneIsCrazy();
+    },
+
+    //TODO: (Animate the notifications to go up to like 1000)
+    // Your phone is popping off and there is a video of you all over social media.
+    // the drunk you didn't agree with records you
+    //  or if you said I'm not from around here, they are both recording you especially because you 'not from around here'
+    //   use the drunkManners to dictate some dialog
   }),
 };

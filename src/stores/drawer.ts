@@ -14,6 +14,7 @@ export const useDrawerStore = defineStore("drawer", {
     drawerView: "main",
     selectedItem: null,
     selectedDictionaryEntry: null,
+    phoneIsCrazy: false,
   }),
   actions: {
     toggleDrawer() {
@@ -66,6 +67,10 @@ export const useDrawerStore = defineStore("drawer", {
 
     clearDictionaryEntry() {
       this.selectedDictionaryEntry = null;
+    },
+
+    togglePhoneIsCrazy() {
+      this.phoneIsCrazy = !this.phoneIsCrazy;
     },
   },
 });
