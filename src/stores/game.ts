@@ -25,7 +25,7 @@ export const useGameStore = defineStore("game", {
     scenes: [],
     showDisappearingItem: false,
     isPsychedelic: false,
-    //TODO: only lasts 3 scenes
+    psychedelicScenesRemaining: 0,
   }),
   // persist: true,
   getters: {
@@ -49,6 +49,13 @@ export const useGameStore = defineStore("game", {
         if (!this.scenes.includes(sceneId)) {
           const aspectStore = useAspectStore();
           aspectStore.decrementDurations();
+        }
+
+        if (this.psychedelicScenesRemaining > 0) {
+          this.psychedelicScenesRemaining--;
+          if (this.psychedelicScenesRemaining <= 0) {
+            this.isPsychedelic = false;
+          }
         }
       } else {
         const snackbar = useSnackbarStore();
@@ -109,6 +116,10 @@ export const useGameStore = defineStore("game", {
     },
     updateShowDisappearingItem(value: boolean) {
       this.showDisappearingItem = value;
+    },
+    startPsychedelicEffect(sceneCount = 3) {
+      this.isPsychedelic = true;
+      this.psychedelicScenesRemaining = sceneCount;
     },
   },
 });

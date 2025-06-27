@@ -6,4 +6,10 @@ export interface Aspect {
   scenesRemaining: number; // decremented each scene
 }
 
-export type AspectId = "magic-nosehairs" | "squirrel-tamer" | "squirrel-bitch";
+export type AspectId =
+  | "magic-nosehairs"
+  | "squirrel-tamer"
+  | "squirrel-bitch"
+  | "tree-murderer"
+  | "all-your-bones-are-broken"
+  | "jack-be-nimble";

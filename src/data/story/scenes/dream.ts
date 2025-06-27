@@ -2,6 +2,10 @@ import { Scene, ScenePayload } from "@/types/story";
 import bgDefault from "@/assets/images/backgrounds/new-game.png";
 import { useGameStore } from "@/stores/game";
 import { useCharacterStore } from "@/stores/character";
+import { getTreeChopOutcome } from "../helper-functions/outcome-helper-functions";
+import { fateContest } from "../helper-functions/roll-helper-functions";
+import { useAspectStore } from "@/stores/aspects";
+import { treeMurderer } from "@/data/aspects";
 
 export const dreamScenes = {
   dream: (payload?: ScenePayload): Scene => ({
@@ -71,16 +75,14 @@ export const dreamScenes = {
       },
       {
         action: () => {
-          // const game = useGameStore();
-          // game.goToScene("dream-chop");
-          //TODO:
+          const game = useGameStore();
+          game.goToScene("dream-chop");
         },
       },
       {
         action: () => {
           const game = useGameStore();
           game.goToScene("dream-within-a-dream");
-          //TODO:
         },
       },
       {
@@ -234,6 +236,50 @@ export const dreamScenes = {
         action: () => {
           const game = useGameStore();
           game.goToScene("hypno");
+        },
+      },
+    ],
+  }),
+
+  "dream-chop": (payload?: ScenePayload): Scene => ({
+    id: "dream-chop",
+    background: bgDefault,
+    text:
+      `You have chosen to swing a dream ax at a dream tree.` +
+      `^^Looking down, you see a single-headed carbon-fiber ax in your left hand. Heh. Hefty!` +
+      `^^You spit into each of your palms and aiming at the nearest tree, you get a good look at its bark. ` +
+      `The brown armor is thick and full of a maze of paths, following the pine's vertical growth. ` +
+      `You position the ax over your left shoulder, and closing one eye, take a swing at a healthy angle to hit the tree.`,
+    onPageLoad: () => {
+      const character = useCharacterStore();
+      const hasAxe = character.hasItem("axe");
+
+      if (!hasAxe) {
+        character.addToInventory("axe", "dream-chop");
+      }
+    },
+
+    choices: () => [
+      {
+        text: "THUNK",
+        onChoose: () => {
+          const character = useCharacterStore();
+          const treeAthletics = 0;
+
+          const roll = fateContest(character.athletics, treeAthletics);
+          const outcome = getTreeChopOutcome(roll);
+
+          if (outcome.success) {
+            const aspects = useAspectStore();
+            aspects.addAspect(treeMurderer);
+          }
+
+          const game = useGameStore();
+          game.goToScene("dream-tree-chase", { filter: outcome.text });
+
+          if (roll <= 0) {
+            character.removeFromInventory("axe");
+          }
         },
       },
     ],

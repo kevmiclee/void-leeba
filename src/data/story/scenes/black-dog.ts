@@ -8,7 +8,6 @@ import {
   getDrunkMannersRescueText,
   getDrunkRescueText,
 } from "../helper-functions/text-helper-functions";
-import { usePhoneStore } from "@/stores/phone";
 import { useDrawerStore } from "@/stores/drawer";
 
 export const blackDogScenes = {
@@ -117,7 +116,7 @@ export const blackDogScenes = {
           text: `Heal the human-faced dog's face back into a dog's face.`,
           next: "black-dog-heal-dog",
           onChoose: () => {
-            character.setFlag("healed-dog", "dog"); //TODO: what they heal them into dictates something -- the redux, the chracter comes back to help them
+            character.setFlag("healed-dog", "dog");
           },
         },
         {
@@ -145,22 +144,30 @@ export const blackDogScenes = {
       `surprise and wonder in your eyes, but no action, it turns tail to traipse across the field, stopping here ` +
       `and there to sniff the ground, but disappearing into the neighborhood.`,
     choices: () => {
-      const choices = [];
+      const choices: Choice[] = [];
 
       const character = useCharacterStore();
       if (character.hasItem("dog-food")) {
         choices.push({
           text: "Give it some dog food.",
           onChoose: () => {
-            //TODO: the dog eats the food
+            character.setFlag("gave-dog-food", "true");
             character.removeFromInventory("dog-food");
           },
+          next: "black-dog-heal-dog-food",
         });
       }
 
       //TODO: other choices
       return choices;
     },
+  }),
+
+  "black-dog-heal-dog-food": (payload?: ScenePayload): Scene => ({
+    id: "black-dog-heal-dog-food",
+    background: bgDefault,
+    text: "",
+    //TODO: the dog eats the food
   }),
 
   "black-dog-heal-human": (payload?: ScenePayload): Scene => ({
@@ -173,7 +180,7 @@ export const blackDogScenes = {
       `^^The man looks up into your eyes, looking confused and wild, looking down at himself, he covers his ` +
       `gonads, and turns tail to sprint across the field into the neighborhood.`,
     choices: () => [],
-    //TODO:
+    //TODO: choices
   }),
 
   "black-dog-heal-human-redux": (payload?: ScenePayload): Scene => ({
@@ -216,12 +223,12 @@ export const blackDogScenes = {
           const playerAthletics =
             character.athletics +
             (character.flags["closer-to-black-dog"] == "true" ? 0 : 1);
+
           const roll = fateContest(playerAthletics, blackDogAthletics);
 
           const outcome = getBlackDogOutcome(roll);
 
           const game = useGameStore();
-
           game.goToScene(
             outcome.success ? "black-dog-bad-success" : "black-dog-bad-fail",
             { text: outcome.text }
@@ -285,7 +292,6 @@ export const blackDogScenes = {
         action: () => {
           const character = useCharacterStore();
           const game = useGameStore();
-          character.setFlag("gave-dog-food", "true");
           character.removeFromInventory("dog-food");
           game.goToScene("black-dog-bad-fail-food1");
         },
@@ -303,7 +309,7 @@ export const blackDogScenes = {
         text: "<i>*whimpers happily*</i>",
       },
     ],
-    //TODO: choices
+    //TODO:
   }),
 
   "black-dog-bad-fail-drunks": (payload?: ScenePayload): Scene => ({
@@ -417,10 +423,11 @@ export const blackDogScenes = {
       drawer.togglePhoneIsCrazy();
     },
 
-    //TODO: (Animate the notifications to go up to like 1000)
+    //TODO:
     // Your phone is popping off and there is a video of you all over social media.
     // the drunk you didn't agree with records you
     //  or if you said I'm not from around here, they are both recording you especially because you 'not from around here'
     //   use the drunkManners to dictate some dialog
+    // toggle phone back to isCrazy: false
   }),
 };

@@ -35,3 +35,22 @@ export function getBlackDogOutcome(roll: number): FateOutcome {
     };
   }
 }
+
+export function getTreeChopOutcome(roll: number): FateOutcome {
+  if (roll > 0) {
+    return {
+      text: "chop-success",
+      success: true,
+    };
+  } else if (roll < 0) {
+    return {
+      text: "chop-fail",
+      success: false,
+    };
+  } else {
+    return {
+      text: "chop-neutral",
+      success: true,
+    };
+  }
+}

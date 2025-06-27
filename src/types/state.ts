@@ -13,6 +13,7 @@ export interface GameState {
   scenes: SceneId[];
   showDisappearingItem: boolean;
   isPsychedelic: boolean;
+  psychedelicScenesRemaining: number;
 }
 
 export interface CharacterState {
@@ -34,12 +35,12 @@ export type Stat =
   | "athletics";
 
 export type FlagId =
-  | "closer-to-black-dog"
-  | "healed-dog"
-  | "faerie-manners"
-  | "gave-dog-food"
-  | "drunk-choice"
-  | "drunk-manners";
+  | "closer-to-black-dog" //influences the outcome of the redblack dog attack
+  | "healed-dog" //TODO: what they heal them into dictates something -- the redux, the chracter comes back to help them
+  | "faerie-manners" //TODO: how the player response to the faeries
+  | "gave-dog-food" //TODO: the dog comes back to help
+  | "drunk-choice" // who they sided with on the Sun/Moon question. Dictates how the drunks assist (or not) the player during the redblack dog attack
+  | "drunk-manners"; // how the player responds to the drunks. Dictates how the drunks assist (or not) the player during the redblack dog attack
 
 export interface DrawerState {
   isDrawerOpen: boolean;

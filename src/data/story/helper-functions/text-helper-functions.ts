@@ -52,14 +52,20 @@ export function getTreeChaseText(filter?: string) {
     case "chop-success":
       return (
         `You slice through the tree with one fell swoop. Wow! Your parking lot dreams just might come true!` +
-        `^^The huge tree creaks ominously as it starts to fall. Just as you are about to yell, "Timber!", 
-        you hear strange noises from the depths of the forest. The tree hits the ground with a dull, lifeless thud. `
+        `^^The huge tree creaks ominously as it starts to fall. Just as you are about to yell, "Timber!", you hear strange ` +
+        `noises from the depths of the forest. The tree hits the ground with a dull, lifeless thud. `
       );
 
     case "chop-fail":
       return (
-        `The axe bounces off the tree and flies out of your hands. Not even a dent. Lame! Looks ` +
-        `like you won't get your parking lot after all. `
+        `The axe bounces off the tree and flies out of your hands, disappearing into the forest. ` +
+        `Not even a dent. Lame! Looks like you won't get your parking lot after all. `
+      );
+
+    case "chop-neutral":
+      return (
+        `You manage to slice into the tree, but the axe gets stuck in the trunk. You yank it free, ` +
+        `and as you do, it flies out of your hands, disappearing into the forest. `
       );
 
     default:

@@ -56,7 +56,7 @@ export const useCharacterStore = defineStore("character", {
     async useItem(id: ItemId) {
       if (id == "mushroom") {
         const game = useGameStore();
-        game.isPsychedelic = true;
+        game.startPsychedelicEffect();
       }
       if (itemCatalog[id].type == "consumable") {
         this.removeFromInventory(id, false);

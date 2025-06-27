@@ -6,13 +6,22 @@
     <div id="flash" class="flash"></div>
     <img id="player" :src="playerImg" ref="playerRef" alt="Player" />
   </div>
+  <img
+    class="pine-needles"
+    :style="{ height: `${hitCount * 1.5}vw` }"
+    :src="pineNeedlesImg"
+  />
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import playerImg from "@/assets/images/avatars/player.png";
+import pineNeedlesImg from "@/assets/images/backgrounds/pine-needles.jpg";
+
 import { useGameStore } from "../../stores/game";
 import { useCharacterStore } from "../../stores/character";
+import { useAspectStore } from "@/stores/aspects";
+import { allYourBonesAreBroken, jackBeNimble } from "@/data/aspects";
 
 const gameRef = ref<HTMLDivElement | null>(null);
 const playerRef = ref<HTMLDivElement | null>(null);
@@ -22,9 +31,12 @@ let timerInterval: number = 0;
 
 const character = useCharacterStore();
 const game = useGameStore();
-const numberOfItems = character.inventory.length;
+const itemWeight = character.inventory.reduce(
+  (sum, item) => sum + item.weight,
+  0
+);
 
-const agility = 40 - numberOfItems * 5;
+const agility = 40 - itemWeight * 5;
 
 function createTree() {
   const tree = document.createElement("div");
@@ -56,6 +68,8 @@ function createTree() {
       hitCount.value = hitCount.value + 1;
       if (hitCount.value > 3) {
         clearInterval(timerInterval);
+        const aspects = useAspectStore();
+        aspects.addAspect(allYourBonesAreBroken);
         game.goToScene("dream-tree-chase-game-lose");
       }
     } else if (top > window.innerHeight) {
@@ -127,6 +141,8 @@ onMounted(() => {
     elapsedTime.value++;
     if (elapsedTime.value == 30) {
       clearInterval(timerInterval);
+      const aspects = useAspectStore();
+      aspects.addAspect(jackBeNimble);
       game.goToScene("dream-tree-chase-game-win");
     }
   }, 1000);
@@ -182,5 +198,20 @@ onMounted(() => {
   justify-content: center;
   align-items: center;
   font-size: 1.2rem;
+}
+
+.player-wrapper {
+  /* position: relative; */
+  display: inline-block;
+}
+
+.pine-needles {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  object-fit: cover;
+  z-index: 1;
+  pointer-events: none;
 }
 </style>

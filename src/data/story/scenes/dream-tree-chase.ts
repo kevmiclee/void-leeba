@@ -23,12 +23,15 @@ export const dreamTreeChaseScenes = {
         action: () => {
           const game = useGameStore();
           const character = useCharacterStore();
-          const itemCount = character.inventory.length;
+          const itemWeight = character.inventory.reduce(
+            (sum, item) => sum + item.weight,
+            0
+          );
           game.goToScene("dream-tree-chase-game-intro", {
             text:
-              itemCount < 4
+              itemWeight < 4
                 ? "You feel unencumbered and are able to move nimbly."
-                : itemCount < 7
+                : itemWeight < 7
                   ? "You feel somewhat burdened by the weight of your bag. Your agility is limited."
                   : "Why did you pick up so much stuff? You can barely move to save your life.",
           });
@@ -68,7 +71,6 @@ export const dreamTreeChaseScenes = {
   }),
 
   "dream-tree-chase-game-win": (payload?: ScenePayload): Scene => ({
-    //TODO: aspect?
     id: "dream-tree-chase-game-win",
     background: bgDefault,
     text:
@@ -89,7 +91,6 @@ export const dreamTreeChaseScenes = {
   }),
 
   "dream-tree-chase-game-lose": (payload?: ScenePayload): Scene => ({
-    //TODO: aspect?
     id: "dream-tree-chase-game-lose",
     background: bgDefault,
     text:

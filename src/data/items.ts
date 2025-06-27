@@ -45,7 +45,6 @@ export const itemCatalog: Record<ItemId, Item> = {
     label: "Mushroom",
     description: "Spongy, earthy, fungal.",
     actionText: "Tastes like dirt. You feel funny.",
-    //TODO: action: +/-1 something, an ascpect?
     value: 0,
     weight: 1,
     type: "consumable",
@@ -65,7 +64,7 @@ export const itemCatalog: Record<ItemId, Item> = {
     description: `The book is titled "Sisu". The author's name sounds Finnish. There is an illustration of two hikers at the top of a snowy peak.`,
     actionText: "You aren't fluent enough in Finnish to read this.",
     value: 0,
-    weight: 1,
+    weight: 2,
   },
   "dog-food": {
     id: "dog-food",
@@ -107,12 +106,19 @@ export const itemCatalog: Record<ItemId, Item> = {
   },
   "brain-moss": {
     id: "brain-moss",
-    label: "",
+    label: "Brain moss",
     description: `Fine, leathery strings of pink stuff.`,
     actionText:
       "You twirl the moss around above your head like a ribbon dancer.",
     value: 0,
     weight: 1,
+  },
+  axe: {
+    id: "axe",
+    label: "Ax",
+    description: `A single-headed carbon-fiber ax.`,
+    value: 0,
+    weight: 5,
   },
 };
 

@@ -31,4 +31,5 @@ export type ItemId =
   | "spray-paint"
   | "translator"
   | "beest-recording"
-  | "brain-moss";
+  | "brain-moss"
+  | "axe";
