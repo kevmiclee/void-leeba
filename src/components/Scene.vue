@@ -96,8 +96,7 @@ const alignmentStyle = computed(() =>
 const backgroundColorFilter = computed(() =>
   game.currentScene(game.currentScenePayload).backgroundFilter
     ? {
-        filter:
-          "brightness(0.4) sepia(1) hue-rotate(-20deg) saturate(8) contrast(1.2)",
+        filter: game.currentScene(game.currentScenePayload).backgroundFilter,
       }
     : ""
 );

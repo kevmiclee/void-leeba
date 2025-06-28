@@ -8,6 +8,54 @@ export const magicNosehairs: Aspect = {
   scenesRemaining: 0,
 };
 
+export const oneWithTheHongatar: Aspect = {
+  id: "one-with-the-hongatar",
+  name: "One with the Hongatar",
+  description: "Unknown",
+  durationScenes: -1,
+  scenesRemaining: 0,
+};
+
+export const godOfTheForest: Aspect = {
+  id: "god-of-the-forest",
+  name: "God of the Forest",
+  description: "Unknown",
+  durationScenes: -1,
+  scenesRemaining: 0,
+};
+
+export const sexyGodOfTheForest: Aspect = {
+  id: "sexy-god-of-the-forest",
+  name: "Sexy God of the Forest",
+  description: "Unknown",
+  durationScenes: -1,
+  scenesRemaining: 0,
+};
+
+export const buttOfTheJoke: Aspect = {
+  id: "butt-of-the-joke",
+  name: "Butt of the Joke",
+  description: "Unknown",
+  durationScenes: -1,
+  scenesRemaining: 0,
+};
+
+export const boyWhoCriedWolf: Aspect = {
+  id: "boy-who-cried-wolf",
+  name: "Boy Who Cried Wolf",
+  description: "Unknown",
+  durationScenes: -1,
+  scenesRemaining: 0,
+};
+
+export const nobodysFriend: Aspect = {
+  id: "nobodys-friend",
+  name: "Nobody's Friend",
+  description: "Unknown",
+  durationScenes: -1,
+  scenesRemaining: 0,
+};
+
 export const squirrelTamer: Aspect = {
   id: "squirrel-tamer",
   name: "Squirrel Tamer",

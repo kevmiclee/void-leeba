@@ -1,10 +1,13 @@
 import { defaultItems, itemCatalog } from "@/data/items";
-import { CharacterState, FlagId, Stat } from "@/types/state";
+import { CharacterState } from "@/types/state";
 import { defineStore } from "pinia";
 import { useSnackbarStore } from "./snackbar";
 import { ItemId } from "@/types/item";
 import { SceneId } from "@/data/story/story";
 import { useGameStore } from "./game";
+import { FlagId, FlagValues } from "@/types/flag";
+import { Stat } from "@/types/stat";
+import { Manners } from "@/types/manners";
 
 export type CharacterStore = ReturnType<typeof useCharacterStore>;
 
@@ -17,7 +20,8 @@ export const useCharacterStore = defineStore("character", {
     shitheadedness: 0,
     athletics: 0,
     inventory: [...defaultItems],
-    flags: {} as Record<FlagId, string | undefined>,
+    flags: {},
+    manners: undefined,
   }),
   // persist: true,
   actions: {
@@ -30,7 +34,7 @@ export const useCharacterStore = defineStore("character", {
     loseStat(stat: Stat, value: number) {
       if (this[stat] !== undefined) this[stat] -= value;
     },
-    setFlag(key: FlagId, value: string | undefined) {
+    setFlag<K extends FlagId>(key: K, value: FlagValues[K]) {
       this.flags[key] = value;
     },
     addToInventory(id: ItemId, pageAcquired: SceneId) {
@@ -65,6 +69,10 @@ export const useCharacterStore = defineStore("character", {
 
     hasItem(id: ItemId): boolean {
       return this.inventory.some((item) => item.id == id);
+    },
+
+    setManners(value: Manners) {
+      this.manners = value;
     },
   },
 });

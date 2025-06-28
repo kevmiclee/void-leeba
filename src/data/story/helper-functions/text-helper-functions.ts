@@ -1,3 +1,5 @@
+import { Manners } from "@/types/manners";
+
 export function getNapFaeries2Text(filter?: string) {
   switch (filter) {
     case "bow":
@@ -81,8 +83,8 @@ export function getDrunkRescueText(filter?: string) {
   }
 }
 
-export function getDrunkMannersRescueText(drunkManners?: string) {
-  switch (drunkManners) {
+export function getDrunkMannersRescueText(manners?: Manners) {
+  switch (manners) {
     case "rude":
       return "Serves them right. Probably deserve whatever Paul has in mind for them.";
     case "depressing":

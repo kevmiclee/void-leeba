@@ -1,8 +1,9 @@
-import { DrawerState, DrawerView } from "@/types/state";
+import { DrawerState } from "@/types/state";
 import { defineStore } from "pinia";
 import { Item } from "@/types/item";
 import { usePhoneStore } from "./phone";
 import { DictionaryEntry } from "@/types/dictionary";
+import { DrawerView } from "@/types/drawer-view";
 
 export type DrawerStore = ReturnType<typeof useDrawerStore>;
 

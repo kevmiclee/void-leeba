@@ -8,6 +8,12 @@ export interface Aspect {
 
 export type AspectId =
   | "magic-nosehairs"
+  | "one-with-the-hongatar"
+  | "god-of-the-forest"
+  | "sexy-god-of-the-forest"
+  | "butt-of-the-joke"
+  | "boy-who-cried-wolf"
+  | "nobodys-friend"
   | "squirrel-tamer"
   | "squirrel-bitch"
   | "tree-murderer"

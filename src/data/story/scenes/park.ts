@@ -2,6 +2,7 @@ import { Scene, ScenePayload } from "@/types/story";
 import bgDefault from "@/assets/images/backgrounds/new-game.png";
 import { useGameStore } from "@/stores/game";
 import { useCharacterStore } from "@/stores/character";
+import { CharacterId } from "@/types/character";
 
 export const parkScenes = {
   park: (payload?: ScenePayload): Scene => ({
@@ -80,7 +81,7 @@ export const parkScenes = {
         next: "park-drunks2b",
         onChoose: () => {
           const character = useCharacterStore();
-          character.setFlag("drunk-choice", "sun");
+          character.setFlag("drunk-choice", "drunk1");
         },
       },
       {
@@ -88,7 +89,7 @@ export const parkScenes = {
         next: "park-drunks2b",
         onChoose: () => {
           const character = useCharacterStore();
-          character.setFlag("drunk-choice", "moon");
+          character.setFlag("drunk-choice", "drunk2");
         },
       },
     ],
@@ -111,7 +112,7 @@ export const parkScenes = {
         next: "park-drunks3",
         onChoose: () => {
           const character = useCharacterStore();
-          character.setFlag("drunk-manners", "rude");
+          character.setManners("rude");
         },
       },
       {
@@ -119,7 +120,7 @@ export const parkScenes = {
         next: "park-drunks3",
         onChoose: () => {
           const character = useCharacterStore();
-          character.setFlag("drunk-manners", "depressing");
+          character.setManners("depressing");
         },
       },
       {
@@ -127,7 +128,7 @@ export const parkScenes = {
         next: "park-drunks3",
         onChoose: () => {
           const character = useCharacterStore();
-          character.setFlag("drunk-manners", "polite");
+          character.setManners("polite");
         },
       },
     ],
@@ -141,16 +142,14 @@ export const parkScenes = {
       const character = useCharacterStore();
       return [
         {
-          characterId:
-            character.flags["drunk-choice"] == "sun" ? "drunk1" : "drunk2",
+          characterId: character.flags["drunk-choice"] as CharacterId,
           text:
-            character.flags["drunk-choice"] == "sun"
+            character.flags["drunk-choice"] == "drunk1"
               ? "THANK YOU!!"
               : "BOOYAH!!",
         },
         {
-          characterId:
-            character.flags["drunk-choice"] == "sun" ? "drunk2" : "drunk1",
+          characterId: character.flags["drunk-choice"] as CharacterId,
           text: `.........`,
           onClick: () => {
             const store = useGameStore();
@@ -165,7 +164,7 @@ export const parkScenes = {
         next: "park-drunks3",
         onChoose: () => {
           const character = useCharacterStore();
-          character.setFlag("drunk-manners", "depressing");
+          character.setManners("depressing");
         },
       },
       {
@@ -173,7 +172,7 @@ export const parkScenes = {
         next: "park-drunks3",
         onChoose: () => {
           const character = useCharacterStore();
-          character.setFlag("drunk-manners", "rude");
+          character.setManners("rude");
         },
       },
       {
@@ -181,7 +180,7 @@ export const parkScenes = {
         next: "park-drunks3",
         onChoose: () => {
           const character = useCharacterStore();
-          character.setFlag("drunk-manners", "polite");
+          character.setManners("polite");
         },
       },
     ],
@@ -195,8 +194,7 @@ export const parkScenes = {
       const character = useCharacterStore();
       return [
         {
-          characterId:
-            character.flags["drunk-choice"] == "sun" ? "drunk1" : "drunk2",
+          characterId: character.flags["drunk-choice"] as CharacterId,
           text: `HA, EAT IT!`,
           popUp: true,
         },
@@ -208,7 +206,7 @@ export const parkScenes = {
         next: "park-drunks3",
         onChoose: () => {
           const character = useCharacterStore();
-          character.setFlag("drunk-manners", "depressing");
+          character.setManners("depressing");
         },
       },
       {
@@ -216,7 +214,7 @@ export const parkScenes = {
         next: "park-drunks3",
         onChoose: () => {
           const character = useCharacterStore();
-          character.setFlag("drunk-manners", "rude");
+          character.setManners("rude");
         },
       },
       {
@@ -224,7 +222,7 @@ export const parkScenes = {
         next: "park-drunks3",
         onChoose: () => {
           const character = useCharacterStore();
-          character.setFlag("drunk-manners", "polite");
+          character.setManners("polite");
         },
       },
     ],
@@ -237,20 +235,20 @@ export const parkScenes = {
 
     dialogSequence: () => {
       const character = useCharacterStore();
-      const drunkManners = character.flags["drunk-manners"];
+      const manners = character.manners;
       const drunkChoice = character.flags["drunk-choice"];
 
       const mannersText =
-        drunkManners == "rude"
+        manners == "rude"
           ? drunkChoice
             ? "Woah. Easy man, that's my friend you're talking about! "
             : "Rude! "
-          : drunkManners == "depressing"
+          : manners == "depressing"
             ? "Depressing! "
             : "";
       return [
         {
-          characterId: drunkChoice == "moon" ? "drunk2" : "drunk1",
+          characterId: (drunkChoice ?? "drunk1") as CharacterId,
           text: `${mannersText}Oh dang! A skatepark! Cool! Bye!`,
           onClick: () => {
             const store = useGameStore();
@@ -261,5 +259,3 @@ export const parkScenes = {
     },
   }),
 };
-
-//TODO: fix the right avatars on some choices like in black-dog scenes

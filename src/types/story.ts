@@ -1,8 +1,7 @@
-import type { CharacterStore } from "@/stores/character";
 import { CharacterId } from "./character";
 import { SceneId } from "@/data/story/story";
-import { DrawerView } from "./state";
 import { DictionaryEntryId } from "./dictionary";
+import { DrawerView } from "./drawer-view";
 
 export interface ScenePayload {
   filter?: string;

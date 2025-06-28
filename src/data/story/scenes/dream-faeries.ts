@@ -3,7 +3,15 @@ import bgDefault from "@/assets/images/backgrounds/new-game.png";
 import faeriesSong from "@/assets/audio/story/faeries.mp3";
 import { useGameStore } from "@/stores/game";
 import { useCharacterStore } from "@/stores/character";
-import { magicNosehairs } from "@/data/aspects";
+import {
+  boyWhoCriedWolf,
+  buttOfTheJoke,
+  godOfTheForest,
+  magicNosehairs,
+  nobodysFriend,
+  oneWithTheHongatar,
+  sexyGodOfTheForest,
+} from "@/data/aspects";
 import { getNapFaeries2Text } from "../helper-functions/text-helper-functions";
 import { useAspectStore } from "@/stores/aspects";
 
@@ -203,34 +211,73 @@ export const dreamFaeriesScenes = {
       const choices: Choice[] = [
         {
           text: `"Oh I see, you were planting snail trees! The Hongatar truly are a noble breed.`,
-          // next: "dream-faeries-litter1",
-          //TODO:
-          onChoose: () => {
-            character.setFlag("faerie-manners", "polite");
-          },
+          next: "dream-faeries-litter1",
         },
         {
           text: `"LIES!"`,
-          // next: "dream-faeries-litter1",
-          //TODO:
-          onChoose: () => {
-            character.setFlag("faerie-manners", "rude");
-          },
+          next: "dream-faeries-litter1",
         },
       ];
 
       if (character.inventory.some((item) => item.id == "hongatar-trash")) {
-        //TODO: The faeries think you need to loosen up and definitely need some party action
         choices.push({
           text: "Show them the proof.",
           next: "dream-faeries-litter-police",
-          onChoose: () => {
-            character.setFlag("faerie-manners", "depressing");
-          },
+          //TODO: manners effects
         });
       }
 
-      return [];
+      return choices;
+    },
+  }),
+
+  "dream-faeries-litter1": (payload?: ScenePayload): Scene => ({
+    id: "dream-faeries-litter1",
+    background: bgDefault,
+    audio: faeriesSong,
+    text: "The {hongatar} puff up, proud.",
+    buttonActions: [{ dictionaryEntryId: "hongatar" }],
+    dialogSequence: () => [
+      {
+        characterId: "faerie1",
+        text:
+          `Humans have decimated the snail forest. We hongatar are nobly trying to ` +
+          `replant them one snail shell at a time.`,
+      },
+    ],
+    choices: () => {
+      const character = useCharacterStore();
+      const aspects = useAspectStore();
+
+      return [
+        {
+          text: `"You're lying. I saw you eating the snails!"`,
+          next: "dream-faeries2",
+          payload: { filter: "accuse" },
+          onChoose: () => {
+            character.setManners("depressing");
+            aspects.addAspect(boyWhoCriedWolf);
+          },
+        },
+        {
+          text: `"Your dedication to the ecosystem is so inspiring. If only we humans were so thoughtful and so brave."`,
+          next: "dream-faeries2",
+          payload: { filter: "flatter" },
+          onChoose: () => {
+            character.setManners("polite");
+            aspects.addAspect(oneWithTheHongatar);
+          },
+        },
+        {
+          text: `"That is asinine."`,
+          next: "dream-faeries2",
+          payload: { filter: "insult" },
+          onChoose: () => {
+            character.setManners("rude");
+            aspects.addAspect(nobodysFriend);
+          },
+        },
+      ];
     },
   }),
 
@@ -239,7 +286,108 @@ export const dreamFaeriesScenes = {
     background: bgDefault,
     audio: faeriesSong,
     text: "",
+    dialogSequence: () => [
+      {
+        characterId: "faerie2",
+        text: "Mercy!",
+      },
+      {
+        characterId: "faerie1",
+        text: "Forgive us!",
+        onClick: () => {
+          const game = useGameStore();
+          game.goToScene("dream-faeries-litter-police1");
+        },
+      },
+    ],
   }),
+
+  "dream-faeries-litter-police1": (payload?: ScenePayload): Scene => ({
+    id: "dream-faeries-litter-police1",
+    background: bgDefault,
+    audio: faeriesSong,
+    text:
+      `The {hongatar} now all seem to hold you in great reverence and awe, ` +
+      `as if you were a god of the whole forest.`,
+    buttonActions: [
+      {
+        dictionaryEntryId: "hongatar",
+      },
+    ],
+    dialogSequence: () => [
+      {
+        characterId: "faerie3",
+        text: `A being of your stature should not dirty their hands with such filth.`,
+        onClick: () => {
+          const character = useCharacterStore();
+          character.removeFromInventory("hongatar-trash");
+        },
+      },
+      {
+        characterId: "faerie3",
+        text: `We found this magical tome in the forest. We can't read it but we know it's valuable. Here.`,
+        onClick: () => {
+          const character = useCharacterStore();
+          character.addToInventory(
+            "self-help-book",
+            "dream-faeries-litter-police1"
+          );
+          const game = useGameStore();
+          game.goToScene("dream-faeries-litter-police2");
+        },
+      },
+    ],
+  }),
+
+  "dream-faeries-litter-police2": (payload?: ScenePayload): Scene => ({
+    id: "dream-faeries-litter-police2",
+    background: bgDefault,
+    audio: faeriesSong,
+    text: `The {hongatar} all stare at you expectantly, like eager children.`,
+    buttonActions: [
+      {
+        dictionaryEntryId: "hongatar",
+      },
+    ],
+    choices: () => [
+      {
+        text: `"Let that be a lesson to you."`,
+        next: "dream-faeries2",
+        payload: { filter: "lesson" },
+        onChoose: () => {
+          const aspectStore = useAspectStore();
+          aspectStore.addAspect(godOfTheForest);
+        },
+      },
+      {
+        text: `"Self-help is my favorite genre, thanks!"`,
+        next: "dream-faeries2",
+        payload: { filter: "thanks" },
+        onChoose: () => {
+          const aspectStore = useAspectStore();
+          aspectStore.addAspect(buttOfTheJoke);
+        },
+      },
+      {
+        text: `Wink.`,
+        next: "dream-faeries2",
+        payload: { filter: "wink" },
+        onChoose: () => {
+          const aspectStore = useAspectStore();
+          aspectStore.addAspect(sexyGodOfTheForest);
+        },
+      },
+    ],
+  }),
+
+  //     case 'insult':
+  //         localStorage.setItem('aspect', `nobody's friend`);
+  //         text = `"\`tHaT's ThE sTuPiDeSt ThInG i'Ve EvEr HeArD!\`" The {hongatar} are mocking you ruthlessly, totally unfazed by your shallow insult.`
+  //         break;
+  //     case 'accuse':
+  //         localStorage.setItem('aspect', 'boy who cried wolf');
+  //         text = `The {hongatar} dismiss you summarily. You simply don't have the proof to back your accusations.`
+  //         break;
 
   "dream-faeries-party-check": (payload?: ScenePayload): Scene => ({
     id: "dream-faeries-party-check",

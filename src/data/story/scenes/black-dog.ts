@@ -25,7 +25,7 @@ export const blackDogScenes = {
         next: "black-dog1",
         onChoose: () => {
           const character = useCharacterStore();
-          character.setFlag("closer-to-black-dog", "true");
+          character.setFlag("closer-to-black-dog", true);
           character.gainStat("will", 1);
         },
       },
@@ -34,7 +34,7 @@ export const blackDogScenes = {
         next: "black-dog1",
         onChoose: () => {
           const character = useCharacterStore();
-          character.setFlag("closer-to-black-dog", "false");
+          character.setFlag("closer-to-black-dog", false);
           character.loseStat("will", 1);
         },
       },
@@ -151,7 +151,7 @@ export const blackDogScenes = {
         choices.push({
           text: "Give it some dog food.",
           onChoose: () => {
-            character.setFlag("gave-dog-food", "true");
+            character.setFlag("gave-dog-food", true);
             character.removeFromInventory("dog-food");
           },
           next: "black-dog-heal-dog-food",
@@ -222,7 +222,7 @@ export const blackDogScenes = {
           //If the player is closer to the dog, it's harder to dodge its attack
           const playerAthletics =
             character.athletics +
-            (character.flags["closer-to-black-dog"] == "true" ? 0 : 1);
+            (character.flags["closer-to-black-dog"] ? 0 : 1);
 
           const roll = fateContest(playerAthletics, blackDogAthletics);
 
@@ -338,7 +338,7 @@ export const blackDogScenes = {
         ];
       } else {
         const character = useCharacterStore();
-        const drunkManners = character.flags["drunk-manners"];
+        const manners = character.manners;
         return [
           {
             characterId: "drunk2",
@@ -350,15 +350,15 @@ export const blackDogScenes = {
           },
           {
             characterId: "drunk2",
-            text: `They were awfully <i>${drunkManners}</i> for someone who's <i>not from around here</i>.`,
+            text: `They were awfully <i>${manners}</i> for someone who's <i>not from around here</i>.`,
           },
           {
             characterId: "drunk1",
-            text: `Facts. ${getDrunkMannersRescueText(drunkManners)}`,
+            text: `Facts. ${getDrunkMannersRescueText(manners)}`,
             onClick: () => {
               const game = useGameStore();
 
-              if (drunkManners == "polite") {
+              if (manners == "polite") {
                 game.goToScene("black-dog-bad-fail-drunks-help", {
                   filter: "both",
                 });
@@ -405,7 +405,7 @@ export const blackDogScenes = {
       `You animal abuser!! But...its face is human, you say. Does that make it okay?` +
       `^^Do you hate the human-faced dog because it's pieces of you?` +
       `^Did you kick the dog-bodied human because it's pieces of you?` +
-      `^^Or was it because it was {<i>so scary</i>}?`,
+      `^^Or was it because it was {so scary}?`,
     buttonActions: [
       {
         action: () => {
@@ -427,6 +427,7 @@ export const blackDogScenes = {
 
     //TODO:
     // Your phone is popping off and there is a video of you all over social media.
+    // add the viral post section to the phone
     // the drunk you didn't agree with records you
     //  or if you said I'm not from around here, they are both recording you especially because you 'not from around here'
     //   use the drunkManners to dictate some dialog

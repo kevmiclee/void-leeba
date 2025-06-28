@@ -16,6 +16,6 @@ export const hypnoScenes = {
       `^"Where's <i>my</i> wife? <i>I miiiiiss herrrrrrr</i>!!!"`,
     background: bgDefault,
     choices: () => [{ text: "Keep practicing." }, { text: "Finish." }],
-    //TODO:
+    //TODO: next
   }),
 };

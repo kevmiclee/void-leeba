@@ -47,10 +47,10 @@ function advanceDialog() {
 function onDialogClick() {
   if (props.dialog?.onClick) {
     props.dialog?.onClick();
-  } else if (!props.dialog?.popUp) {
+  }
+  if (!props.dialog?.popUp) {
     advanceDialog();
   }
-
   if (props.dialog?.popUp) {
     emit("update-dialog-clicked", true);
     game.updateShowChoices(true);

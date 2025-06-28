@@ -1,40 +1,42 @@
 import { Aspect, AspectId } from "@/types/aspect";
+import { AspectState } from "@/types/state";
 import { defineStore } from "pinia";
-import { ref } from "vue";
 
-export const useAspectStore = defineStore("aspect", () => {
-  const activeAspects = ref<Aspect[]>([]);
+export type AspectStore = ReturnType<typeof useAspectStore>;
 
-  function addAspect(aspect: Omit<Aspect, "scenesRemaining">) {
-    const existing = activeAspects.value.find((a) => a.id === aspect.id);
-    if (!existing) {
-      activeAspects.value.push({
-        ...aspect,
-        scenesRemaining: aspect.durationScenes,
+export const useAspectStore = defineStore("aspects", {
+  state: (): AspectState => ({
+    aspects: [],
+  }),
+  // persist: true,
+  actions: {
+    addAspect(aspect: Omit<Aspect, "scenesRemaining">) {
+      const existing = this.aspects.find((a) => a.id === aspect.id);
+      if (!existing) {
+        this.aspects.push({
+          ...aspect,
+          scenesRemaining: aspect.durationScenes,
+        });
+      }
+    },
+
+    removeAspect(id: AspectId) {
+      this.aspects = this.aspects.filter((a) => a.id !== id);
+    },
+
+    hasAspect(id: AspectId): boolean {
+      return this.aspects.some((a) => a.id === id);
+    },
+
+    decrementDurations() {
+      this.aspects.forEach((a) => {
+        if (a.durationScenes > -1) {
+          a.scenesRemaining--;
+        }
       });
-    }
-  }
-
-  function removeAspect(id: AspectId) {
-    activeAspects.value = activeAspects.value.filter((a) => a.id !== id);
-  }
-
-  function hasAspect(id: AspectId): boolean {
-    return activeAspects.value.some((a) => a.id === id);
-  }
-
-  function decrementDurations() {
-    activeAspects.value.forEach((a) => a.scenesRemaining--);
-    activeAspects.value = activeAspects.value.filter(
-      (a) => a.scenesRemaining > 0
-    );
-  }
-
-  return {
-    activeAspects,
-    addAspect,
-    removeAspect,
-    hasAspect,
-    decrementDurations,
-  };
+      this.aspects = this.aspects.filter(
+        (a) => a.durationScenes < 0 || a.scenesRemaining > 0
+      );
+    },
+  },
 });

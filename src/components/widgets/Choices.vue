@@ -46,7 +46,7 @@ import Avatar from "./Avatar.vue";
 import Dialog from "./Dialog.vue";
 import { CharacterId } from "@/types/character";
 import { useDrawerStore } from "@/stores/drawer";
-import { DrawerView } from "@/types/state";
+import { DrawerView } from "@/types/drawer-view";
 
 const game = useGameStore();
 const audioStore = useAudioStore();
