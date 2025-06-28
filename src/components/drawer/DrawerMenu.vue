@@ -15,7 +15,7 @@
     <li @click.stop="drawer.setDrawerView('dictionary')">Dictionary</li>
     <li @click.stop="drawer.setDrawerView('stats')">Stats</li>
     <li @click.stop="drawer.setDrawerView('scenes')">Scenes</li>
-
+    <li @click.stop="game.toggleShowSceneGraph">Scene Graph</li>
     <li @click.stop="restart">Restart</li>
     <!--@click="
         game.$reset();

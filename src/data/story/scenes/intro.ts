@@ -1,5 +1,6 @@
 import { Scene, ScenePayload } from "@/types/story";
 import bgStart from "@/assets/images/backgrounds/Landing-Page.png";
+import { useGameStore } from "@/stores/game";
 
 export const introScenes = {
   start: (payload?: ScenePayload): Scene => ({
@@ -25,6 +26,14 @@ export const introScenes = {
     text: "I left the home I'd come to know",
     audio: "src/assets/audio/story/wind-tunnel.mp3",
     animationRate: 250,
+    buttonActions: [
+      {
+        action: () => {
+          const game = useGameStore();
+          game.goToScene("home");
+        },
+      },
+    ],
   }),
 
   intro1: (payload?: ScenePayload): Scene => ({

@@ -229,10 +229,12 @@ export const blackDogScenes = {
           const outcome = getBlackDogOutcome(roll);
 
           const game = useGameStore();
-          game.goToScene(
-            outcome.success ? "black-dog-bad-success" : "black-dog-bad-fail",
-            { text: outcome.text }
-          );
+
+          if (outcome.success) {
+            game.goToScene("black-dog-bad-success", { text: outcome.text });
+          } else {
+            game.goToScene("black-dog-bad-fail", { text: outcome.text });
+          }
         },
       },
     ],
@@ -264,17 +266,15 @@ export const blackDogScenes = {
           const hasDogFood = character.inventory.some(
             (item) => item.id == "dog-food"
           );
-          const nextScene = hasDogFood
-            ? "black-dog-bad-fail-food"
-            : "black-dog-bad-fail-drunks";
-
           const drunkChoice = character.flags["drunk-choice"];
 
-          const payload: ScenePayload | undefined = hasDogFood
-            ? undefined
-            : { filter: drunkChoice };
-
-          game.goToScene(nextScene, payload);
+          if (hasDogFood) {
+            game.goToScene("black-dog-bad-fail-food");
+          } else {
+            game.goToScene("black-dog-bad-fail-drunks", {
+              filter: drunkChoice,
+            });
+          }
         },
       },
     ],
@@ -356,15 +356,17 @@ export const blackDogScenes = {
             characterId: "drunk1",
             text: `Facts. ${getDrunkMannersRescueText(drunkManners)}`,
             onClick: () => {
-              const nextScene =
-                drunkManners == "polite"
-                  ? "black-dog-bad-fail-drunks-help"
-                  : "black-dog-bad-fail-drunks-leave";
-              const payload =
-                drunkManners == "polite" ? { filter: "both" } : undefined;
-
               const game = useGameStore();
-              game.goToScene(nextScene, payload);
+
+              if (drunkManners == "polite") {
+                game.goToScene("black-dog-bad-fail-drunks-help", {
+                  filter: "both",
+                });
+              } else {
+                game.goToScene("black-dog-bad-fail-drunks-leave", {
+                  filter: "both",
+                });
+              }
             },
           },
         ];

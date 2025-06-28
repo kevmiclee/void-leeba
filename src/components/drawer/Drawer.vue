@@ -28,6 +28,7 @@ import Dictionary from "./Dictionary.vue";
 import Phone from "./Phone.vue";
 import Stats from "./Stats.vue";
 import Scenes from "./Scenes.vue";
+
 import { useDrawerStore } from "./../../stores/drawer";
 
 const drawer = useDrawerStore();

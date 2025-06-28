@@ -14,6 +14,7 @@ export interface GameState {
   showDisappearingItem: boolean;
   isPsychedelic: boolean;
   psychedelicScenesRemaining: number;
+  showSceneGraph: boolean;
 }
 
 export interface CharacterState {
@@ -58,7 +59,8 @@ export type DrawerView =
   | "phone"
   | "dictionary"
   | "stats"
-  | "scenes";
+  | "scenes"
+  | "scene-graph";
 
 export interface DictionaryState {
   entries: DictionaryEntry[];

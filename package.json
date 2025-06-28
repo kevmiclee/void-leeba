@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://https://kevmiclee.github.io/void-leeba/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -14,11 +15,13 @@
     "pinia": "^3.0.3",
     "pinia-plugin-persistedstate": "^4.3.0",
     "url": "^0.11.4",
+    "vis-network": "^9.1.13",
     "vue": "^3.5.13",
     "vue-router": "^4.5.1"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.2.3",
+    "gh-pages": "^6.3.0",
     "prettier": "^3.5.3",
     "vite": "^6.3.5"
   }

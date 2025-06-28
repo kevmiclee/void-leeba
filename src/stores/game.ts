@@ -26,6 +26,7 @@ export const useGameStore = defineStore("game", {
     showDisappearingItem: false,
     isPsychedelic: false,
     psychedelicScenesRemaining: 0,
+    showSceneGraph: false,
   }),
   // persist: true,
   getters: {
@@ -120,6 +121,9 @@ export const useGameStore = defineStore("game", {
     startPsychedelicEffect(sceneCount = 3) {
       this.isPsychedelic = true;
       this.psychedelicScenesRemaining = sceneCount;
+    },
+    toggleShowSceneGraph() {
+      this.showSceneGraph = !this.showSceneGraph;
     },
   },
 });
