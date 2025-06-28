@@ -88,6 +88,6 @@ export function getDrunkMannersRescueText(drunkManners?: string) {
     case "depressing":
       return "A good dose of mortal fear should remind them how to appreciate the little things in life.";
     case "polite":
-      return "We'll help you, but only because you so polite to us earlier.";
+      return "We should help them, but only because they were so polite to us earlier.";
   }
 }

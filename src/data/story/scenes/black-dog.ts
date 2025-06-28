@@ -378,7 +378,7 @@ export const blackDogScenes = {
     id: "black-dog-bad-fail-drunks-help",
     background: bgDefault,
     text:
-      `The ${payload?.filter == "both" ? "drunks scatters" : "drunk scatters"}  some dog food on the ground. The redblack dog retreats ` +
+      `The ${payload?.filter == "both" ? "drunks scatter" : "drunk scatters"}  some dog food on the ground. The redblack dog retreats ` +
       `and busies itself with the food.`,
   }),
 
@@ -405,7 +405,7 @@ export const blackDogScenes = {
       `You animal abuser!! But...its face is human, you say. Does that make it okay?` +
       `^^Do you hate the human-faced dog because it's pieces of you?` +
       `^Did you kick the dog-bodied human because it's pieces of you?` +
-      `^^Or was it because it was <i>{so scary}</i>?`,
+      `^^Or was it because it was {<i>so scary</i>}?`,
     buttonActions: [
       {
         action: () => {

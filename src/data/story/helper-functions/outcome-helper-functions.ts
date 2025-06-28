@@ -6,7 +6,8 @@ export function getBlackDogOutcome(roll: number): FateOutcome {
       text:
         `You take a running step toward it and fly through the air feet-first in preparation for a ` +
         `two-legged drop kick. The human-faced dog yelps. The dog-bodied human snarls. ` +
-        `It looks right into your eyes. You abandon your maneuver mid-air and start to {feel bad}.`,
+        `It looks right into your eyes. You abandon your maneuver mid-air. The creature retreats into the shadows. ` +
+        `Something inside you stirs and start to {feel bad}.`,
       success: true,
     };
   } else if (roll == 1) {
@@ -14,7 +15,8 @@ export function getBlackDogOutcome(roll: number): FateOutcome {
       text:
         `With malicious fury, you wind your leg up to your chest to prepare a wanton one-footed stomp. ` +
         `The human-faced dog squeals. The dog-bodied human snarls. ` +
-        `It looks right into your eyes. You lower your foot and start to {feel bad}.`,
+        `It looks right into your eyes. You lower your foot. The creature retreats into the shadows. ` +
+        `Something inside you stirs and start to {feel bad}.`,
       success: true,
     };
   } else if (roll == 0) {

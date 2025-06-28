@@ -1,11 +1,17 @@
 <template>
-  <div id="scene-graph" style="height: 600px"></div>
+  <div>
+    <button @click="game.toggleShowSceneGraph"><</button>
+    <div class="wrapper" id="scene-graph"></div>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { Network } from "vis-network";
+import { data, Network } from "vis-network";
 import { getSceneGraph } from "@/utils/sceneGraph";
 import { onMounted } from "vue";
+import { useGameStore } from "@/stores/game";
+
+const game = useGameStore();
 
 onMounted(() => {
   const container = document.getElementById("scene-graph")!;
@@ -22,6 +28,43 @@ onMounted(() => {
     arrows: "to",
   }));
 
-  new Network(container, { nodes, edges }, {});
+  new Network(
+    container,
+    { nodes, edges },
+    {
+      edges: {
+        arrows: {
+          to: {
+            enabled: true,
+            scaleFactor: 1.5, // makes the arrow head larger
+          },
+        },
+        length: 400, // increases visual edge length
+      },
+      physics: {
+        // solver: "hierarchicalRepulsion",
+        // hierarchicalRepulsion: {
+        //   avoidOverlap: 1,
+        //   damping: 1,
+        //   springLength: 90,
+        //   springConstant: 0.1,
+        //   nodeDistance: 200,
+        //   centralGravity: 0.1,
+        // },
+        // forceAtlas2Based: {
+        //   springLength: 300, // this controls the length of edges
+        // },
+        // stabilization: true,
+        enabled: true,
+      },
+    }
+  );
 });
 </script>
+
+<style scoped>
+.wrapper {
+  background-color: white;
+  height: 1000px;
+}
+</style>
