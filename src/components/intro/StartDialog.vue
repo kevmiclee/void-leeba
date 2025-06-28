@@ -11,13 +11,14 @@
 import { ref } from "vue";
 import { useGameStore } from "@/stores/game";
 import { useAudioStore } from "@/stores/audio";
+import introSong from "@/assets/audio/story/intro.mp3";
 
 const show = ref(true);
 const game = useGameStore();
 const { playBackgroundAudio } = useAudioStore();
 
 function startGame() {
-  playBackgroundAudio("src/assets/audio/story/intro.mp3");
+  playBackgroundAudio(introSong);
   show.value = false;
   game.start();
 }

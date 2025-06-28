@@ -1,8 +1,7 @@
 <template>
-  <!-- <StartDialog />
+  <StartDialog />
   <Scene v-if="game.started" />
-  <Snackbar /> -->
-  <div>Hello, Vue is working!</div>
+  <Snackbar />
 </template>
 
 <script setup lang="ts">

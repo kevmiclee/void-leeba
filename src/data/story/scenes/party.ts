@@ -1,5 +1,6 @@
 import { Scene, ScenePayload } from "@/types/story";
 import bgDefault from "@/assets/images/backgrounds/new-game.png";
+import partySong from "@/assets/audio/story/party.mp3";
 import { useGameStore } from "@/stores/game";
 
 export const partyScenes = {
@@ -43,7 +44,7 @@ export const partyScenes = {
         : `When you come to, you're still in the clearing, but it all seems <i>different</i>. ` +
           `The squirrel and hongatar are all here, but perfectly conscious. There is upbeat music, ` +
           `merry-making and of course, a keg!`,
-    audio: "src/assets/audio/story/party.mp3",
+    audio: partySong,
     backgroundFilter: "invert(1)",
     dialogSequence: () => [
       { characterId: "faerie1", text: "WOOOOOOOTTT!" },

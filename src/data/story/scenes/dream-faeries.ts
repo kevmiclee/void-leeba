@@ -1,5 +1,6 @@
 import { Choice, Scene, ScenePayload } from "@/types/story";
 import bgDefault from "@/assets/images/backgrounds/new-game.png";
+import faeriesSong from "@/assets/audio/story/faeries.mp3";
 import { useGameStore } from "@/stores/game";
 import { useCharacterStore } from "@/stores/character";
 import { magicNosehairs } from "@/data/aspects";
@@ -10,7 +11,7 @@ export const dreamFaeriesScenes = {
   "dream-faeries": (payload?: ScenePayload): Scene => ({
     id: "dream-faeries",
     background: bgDefault,
-    audio: "src/assets/audio/story/faeries.mp3",
+    audio: faeriesSong,
     text:
       `You follow after the {hongatar}. They all have the same dutch boy haircut and cro-magnon facial features. ` +
       `The wings look like fly's wings. The pack flies through the air, leaving rapidly fading trails of light in their wake. ` +
@@ -60,7 +61,7 @@ export const dreamFaeriesScenes = {
   "dream-faeries1": (payload?: ScenePayload): Scene => ({
     id: "dream-faeries1",
     background: bgDefault,
-    audio: "src/assets/audio/story/faeries.mp3",
+    audio: faeriesSong,
     text: "The group of {hongatar} turn to look at you.",
     buttonActions: [
       {
@@ -91,7 +92,7 @@ export const dreamFaeriesScenes = {
   "dream-faeries2": (payload?: ScenePayload): Scene => ({
     id: "dream-faeries2",
     background: bgDefault,
-    audio: "src/assets/audio/story/faeries.mp3",
+    audio: faeriesSong,
     text:
       `${getNapFaeries2Text(payload?.filter)} ` +
       `Their excited chattering finds a rhythmic unison in a sing-song chant.`,
@@ -122,7 +123,7 @@ export const dreamFaeriesScenes = {
   "dream-faeries3": (payload?: ScenePayload): Scene => ({
     id: "dream-faeries3",
     background: bgDefault,
-    audio: "src/assets/audio/story/faeries.mp3",
+    audio: faeriesSong,
     text: `The {hongatar} with the coolest outfit addresses you.`,
     buttonActions: [
       {
@@ -153,7 +154,7 @@ export const dreamFaeriesScenes = {
   "dream-faeries4": (payload?: ScenePayload): Scene => ({
     id: "dream-faeries4",
     background: bgDefault,
-    audio: "src/assets/audio/story/faeries.mp3",
+    audio: faeriesSong,
     text:
       `You follow them into a clearing where the hongatar with the dullest outfit starts ` +
       `handing out eggcorns. He hands you one.`,
@@ -172,7 +173,7 @@ export const dreamFaeriesScenes = {
   "dream-faeries5": (payload?: ScenePayload): Scene => ({
     id: "dream-faeries5",
     background: bgDefault,
-    audio: "src/assets/audio/story/faeries.mp3",
+    audio: faeriesSong,
     text:
       `Whatever that means.^^The eggcorn's skin is a luscious, lacquered brown. ` +
       `It has a neat little cap and a fine pointy bottom. In fact, you've never found an eggcorn to be so... ` +
@@ -187,7 +188,7 @@ export const dreamFaeriesScenes = {
   "dream-faeries-litter": (payload?: ScenePayload): Scene => ({
     id: "dream-faeries-litter",
     background: bgDefault,
-    audio: "src/assets/audio/story/faeries.mp3",
+    audio: faeriesSong,
     text: "",
     dialogSequence: () => [
       {
@@ -236,14 +237,14 @@ export const dreamFaeriesScenes = {
   "dream-faeries-litter-police": (payload?: ScenePayload): Scene => ({
     id: "dream-faeries-litter-police",
     background: bgDefault,
-    audio: "src/assets/audio/story/faeries.mp3",
+    audio: faeriesSong,
     text: "",
   }),
 
   "dream-faeries-party-check": (payload?: ScenePayload): Scene => ({
     id: "dream-faeries-party-check",
     background: bgDefault,
-    audio: "src/assets/audio/story/faeries.mp3",
+    audio: faeriesSong,
     text: ``,
     dialogSequence: () => [
       {
@@ -264,7 +265,7 @@ export const dreamFaeriesScenes = {
   "dream-faeries-party-decline": (payload?: ScenePayload): Scene => ({
     id: "dream-faeries-party-decline",
     background: bgDefault,
-    audio: "src/assets/audio/story/faeries.mp3",
+    audio: faeriesSong,
     text: ``,
     dialogSequence: () => [
       {

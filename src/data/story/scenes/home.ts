@@ -1,5 +1,6 @@
 import { Scene, ScenePayload } from "@/types/story";
 import bgDefault from "@/assets/images/backgrounds/new-game.png";
+import morningBirds from "@/assets/audio/story/morning-birds.mp3";
 import { useGameStore } from "@/stores/game";
 import { useCharacterStore } from "@/stores/character";
 
@@ -7,7 +8,7 @@ export const homeScenes = {
   home: (payload?: ScenePayload): Scene => ({
     id: "home",
     background: bgDefault,
-    audio: "src/assets/audio/story/morning-birds.mp3",
+    audio: morningBirds,
     text:
       `You have just moved away from the countryside, finally. Endless evergreens, oceans and coves, silence and stars, and quiet. ` +
       `People knew you, but you only knew a few. You didn't grow up near the ocean. You're from away. Isolation multiplies where ` +
@@ -30,7 +31,7 @@ export const homeScenes = {
   home1: (payload?: ScenePayload): Scene => ({
     id: "home1",
     background: bgDefault,
-    audio: "src/assets/audio/story/morning-birds.mp3",
+    audio: morningBirds,
     text:
       `Your rented room shares its house with roommates, who are at work. Daylight filters through the blinds of the living room window and is spilt onto the ceiling in stripes. ` +
       `The view out your window shows a lawn, a small tree speckled with red berries, and a quiet road with cars parked along its length.` +
