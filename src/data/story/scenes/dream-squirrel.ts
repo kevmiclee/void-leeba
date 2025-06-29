@@ -5,6 +5,7 @@ import { useCharacterStore } from "@/stores/character";
 import { squirrelBitch, squirrelTamer } from "@/data/aspects";
 import { fateContest } from "../helper-functions/roll-helper-functions";
 import { useAspectStore } from "@/stores/aspects";
+import { getFollowSquirrelText } from "../helper-functions/text-helper-functions";
 
 export const dreamSquirrelScenes = {
   "dream-squirrel": (payload?: ScenePayload): Scene => ({
@@ -18,7 +19,20 @@ export const dreamSquirrelScenes = {
       { text: "Reach for the closest branch.", next: "dream-squirrel1a" },
       { text: "Keep shimmying up.", next: "dream-squirrel1b" },
     ],
+    metadata: {
+      routes: [
+        {
+          label: `Reach for the closest branch.`,
+          redirect: "dream-squirrel1a",
+        },
+        {
+          label: `Keep shimmying up.`,
+          redirect: "dream-squirrel1b",
+        },
+      ],
+    },
   }),
+
   "dream-squirrel1a": (payload?: ScenePayload): Scene => ({
     id: "dream-squirrel1a",
     background: bgDefault,
@@ -33,7 +47,16 @@ export const dreamSquirrelScenes = {
         },
       },
     ],
+    metadata: {
+      routes: [
+        {
+          label: `Keep shimmying up`,
+          redirect: "dream-squirrel1b",
+        },
+      ],
+    },
   }),
+
   "dream-squirrel1b": (payload?: ScenePayload): Scene => ({
     id: "dream-squirrel1b",
     background: bgDefault,
@@ -49,7 +72,20 @@ export const dreamSquirrelScenes = {
         next: "dream-squirrel-give-up",
       },
     ],
+    metadata: {
+      routes: [
+        {
+          label: `Push yourself even harder.`,
+          redirect: "dream-squirrel2",
+        },
+        {
+          label: `This was a bad idea. Shimmy back down before you get hurt.`,
+          redirect: "dream-squirrel-give-up",
+        },
+      ],
+    },
   }),
+
   "dream-squirrel2": (payload?: ScenePayload): Scene => ({
     id: "dream-squirrel2",
     background: bgDefault,
@@ -68,6 +104,14 @@ export const dreamSquirrelScenes = {
         },
       },
     ],
+    metadata: {
+      routes: [
+        {
+          label: `squirrel dialog click`,
+          redirect: "dream-squirrel3",
+        },
+      ],
+    },
   }),
 
   "dream-squirrel3": (payload?: ScenePayload): Scene => ({
@@ -97,6 +141,14 @@ export const dreamSquirrelScenes = {
         },
       },
     ],
+    metadata: {
+      routes: [
+        {
+          label: `In a last ditch effort, dart your hand out to snatch the furball.`,
+          redirect: "dream-squirrel4",
+        },
+      ],
+    },
   }),
 
   "dream-squirrel4": (payload?: ScenePayload): Scene => ({
@@ -134,12 +186,174 @@ export const dreamSquirrelScenes = {
         },
       },
     ],
+    metadata: {
+      routes: [
+        {
+          label: `squirrel dialog click`,
+          redirect: "dream-squirrel5",
+        },
+      ],
+    },
   }),
 
   "dream-squirrel5": (payload?: ScenePayload): Scene => ({
     id: "dream-squirrel5",
     background: bgDefault,
-    text: "",
+    text:
+      `As you follow the squirrel, it is obvious the creature is very excited about something. ` +
+      `You faintly hear what might be voices in unison like a sing-song chant, growing louder as you progress. ` +
+      `This must be where the squirrel is leading you.`,
+    choices: () => [
+      {
+        text: `"Where are you taking me?"`,
+        next: "dream-squirrel6",
+        payload: { filter: "where" },
+      },
+      {
+        text: `"What's that chanting"`,
+        next: "dream-squirrel6",
+        payload: { filter: "what" },
+      },
+      {
+        text: `Why am I following a squirrel?`,
+        next: "dream-squirrel6",
+        payload: { filter: "why" },
+      },
+    ],
+    metadata: {
+      routes: [
+        {
+          label: `"Where are you taking me?"`,
+          redirect: "dream-squirrel6",
+        },
+        {
+          label: `"What's that chanting"`,
+          redirect: "dream-squirrel6",
+        },
+        {
+          label: `Why am I following a squirrel?`,
+          redirect: "dream-squirrel6",
+        },
+      ],
+    },
+  }),
+
+  "dream-squirrel6": (payload?: ScenePayload): Scene => ({
+    id: "dream-squirrel6",
+    background: bgDefault,
+    text:
+      getFollowSquirrelText(payload?.filter) +
+      `^^All the while the chanting is growing louder. You're sure it's voices now. ` +
+      `It sounds like they are chanting, "We're going to a party! We're going to a party!" ` +
+      `From time to time, the squirrel turns around, egging you on.`,
+    dialogSequence: () => [
+      {
+        characterId: "squirrel",
+        text: "Puolue! Puolue!",
+        onClick: () => {
+          const game = useGameStore();
+          game.goToScene("dream-squirrel7");
+        },
+      },
+    ],
+    metadata: {
+      routes: [
+        {
+          label: `squirrel dialog click`,
+          redirect: "dream-squirrel7",
+        },
+      ],
+    },
+  }),
+
+  "dream-squirrel7": (payload?: ScenePayload): Scene => ({
+    id: "dream-squirrel7",
+    background: bgDefault,
+    text:
+      `You arrive at a clearing. The {pine faeries} you saw earlier are all laying about on the ground, ` +
+      `apparently unconscious.^^The squirrel is darting here and there, sniffing the hongatar and chittering ` +
+      `excitedly.`,
+    buttonActions: [
+      {
+        dictionaryEntryId: "hongatar",
+      },
+    ],
+    dialogSequence: () => [
+      {
+        characterId: "squirrel",
+        text: "Puolue! Puolue!",
+        onClick: () => {
+          const game = useGameStore();
+          game.goToScene("dream-squirrel8");
+        },
+      },
+    ],
+    metadata: {
+      routes: [
+        {
+          label: `squirrel dialog click`,
+          redirect: "dream-squirrel8",
+        },
+      ],
+    },
+  }),
+
+  "dream-squirrel8": (payload?: ScenePayload): Scene => ({
+    id: "dream-squirrel8",
+    background: bgDefault,
+    text:
+      `The squirrel finds an eggcorn and begins to nibble it. Suddenly, its whiskers twitch a ` +
+      `few times and it swoons until it falls to ground unconcsious, just like the hongatar.`,
+    dialogSequence: () => [
+      {
+        characterId: "squirrel",
+        text: "Pu...o..lue.... Puo.....",
+      },
+    ],
+    choices: () => [
+      { text: "Inspect the hongatar", next: "dream-squirrel9" },
+      { text: "Inspect the squirrel", next: "dream-squirrel9" },
+    ],
+    metadata: {
+      routes: [
+        {
+          label: `Inspect the hongatar`,
+          redirect: "dream-squirrel9",
+        },
+        {
+          label: `Inspect the squirrel`,
+          redirect: "dream-squirrel9",
+        },
+      ],
+    },
+  }),
+
+  "dream-squirrel9": (payload?: ScenePayload): Scene => ({
+    id: "dream-squirrel9",
+    background: bgDefault,
+    text:
+      `${
+        payload?.filter == "hongatar"
+          ? `Yep. They're definitely unconscious, but they're breathing regularly.`
+          : `Poor little fella. It's actually snoring softly with eggcorn crumbs on its furry chest.`
+      } ` +
+      `You notice eggcorns scattered about near where all the hongatar lay, just like the one you ` +
+      `saw the squirrel eat. You see an uneaten one by your foot. {Inspect the eggcorn.}`,
+
+    choices: () => [
+      {
+        text: "Inspect the eggcorn",
+        next: "dream-faeries5",
+      },
+    ],
+    metadata: {
+      routes: [
+        {
+          label: `Inspect the eggcorn`,
+          redirect: "dream-faeries5",
+        },
+      ],
+    },
   }),
 
   "dream-squirrel-give-up": (payload?: ScenePayload): Scene => ({
@@ -158,6 +372,14 @@ export const dreamSquirrelScenes = {
         },
       },
     ],
+    metadata: {
+      routes: [
+        {
+          label: `squirrel dialog click`,
+          redirect: "dream-squirrel-give-up1",
+        },
+      ],
+    },
   }),
 
   "dream-squirrel-give-up1": (payload?: ScenePayload): Scene => ({
@@ -175,5 +397,13 @@ export const dreamSquirrelScenes = {
         },
       },
     ],
+    metadata: {
+      routes: [
+        {
+          label: `squirrel dialog click`,
+          redirect: "dream-tree-chase",
+        },
+      ],
+    },
   }),
 };

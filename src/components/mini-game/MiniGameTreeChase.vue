@@ -1,7 +1,7 @@
 <template>
   <div id="game" ref="gameRef">
-    <div class="hit-counter">Hits: {{ hitCount }}</div>
-    <div class="hit-counter">Time: {{ elapsedTime }}</div>
+    <!-- <div class="hit-counter">Hits: {{ hitCount }}</div>
+    <div class="hit-counter">Time: {{ elapsedTime }}</div> -->
 
     <div id="flash" class="flash"></div>
     <img id="player" :src="playerImg" ref="playerRef" alt="Player" />
@@ -156,6 +156,7 @@ onMounted(() => {
   width: 100vw;
   cursor: none;
   overflow: hidden;
+  background-color: saddlebrown;
 }
 
 #player {

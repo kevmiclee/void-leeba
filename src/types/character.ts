@@ -13,4 +13,5 @@ export type CharacterId =
   | "faerie1"
   | "faerie2"
   | "faerie3"
-  | "squirrel";
+  | "squirrel"
+  | "buzz";

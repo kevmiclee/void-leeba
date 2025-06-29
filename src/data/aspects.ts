@@ -95,3 +95,27 @@ export const jackBeNimble: Aspect = {
   durationScenes: -1,
   scenesRemaining: 0,
 };
+
+export const ascetic: Aspect = {
+  id: "ascetic",
+  name: "Ascetic",
+  description: "Unknown",
+  durationScenes: -1,
+  scenesRemaining: 0,
+};
+
+export const wellVersed: Aspect = {
+  id: "well-versed",
+  name: "Well-versed",
+  description: "Unknown",
+  durationScenes: -1,
+  scenesRemaining: 0,
+};
+
+export const lifeOfTheParty: Aspect = {
+  id: "life-of-the-party",
+  name: "Life of the Party",
+  description: "Unknown",
+  durationScenes: -1,
+  scenesRemaining: 0,
+};

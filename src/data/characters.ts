@@ -14,6 +14,8 @@ import faerie3Avatar from "@/assets/images/avatars/faerie3.png";
 import faerie3Sound from "@/assets/audio/characters/faerie3.mp3";
 import squirrelAvatar from "@/assets/images/avatars/squirrel.png";
 import squirrelSound from "@/assets/audio/characters/squirrel.mp3";
+import buzzAvatar from "@/assets/images/avatars/buzz.png";
+import buzzSound from "@/assets/audio/characters/buzz.mp3";
 
 export const characters: Record<CharacterId, Character> = {
   drunk1: {
@@ -63,5 +65,11 @@ export const characters: Record<CharacterId, Character> = {
     name: "Squirrel",
     avatar: squirrelAvatar,
     sound: squirrelSound,
+  },
+  buzz: {
+    id: "buzz",
+    name: "Buzz Morley",
+    avatar: buzzAvatar,
+    sound: buzzSound,
   },
 };

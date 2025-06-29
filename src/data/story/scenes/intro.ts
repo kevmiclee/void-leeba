@@ -22,6 +22,18 @@ export const introScenes = {
         next: "credits",
       },
     ],
+    metadata: {
+      routes: [
+        {
+          label: `New game`,
+          redirect: "intro",
+        },
+        {
+          label: `Credits`,
+          redirect: "credits",
+        },
+      ],
+    },
   }),
 
   intro: (payload?: ScenePayload): Scene => ({
@@ -29,14 +41,14 @@ export const introScenes = {
     text: "I left the home I'd come to know",
     audio: windTunnel,
     animationRate: 250,
-    buttonActions: [
-      {
-        action: () => {
-          const game = useGameStore();
-          game.goToScene("home");
+    metadata: {
+      routes: [
+        {
+          label: `trigger`,
+          redirect: "intro1",
         },
-      },
-    ],
+      ],
+    },
   }),
 
   intro1: (payload?: ScenePayload): Scene => ({
@@ -44,6 +56,14 @@ export const introScenes = {
     text: "I stayed alive to find a way to grow",
     audio: windTunnel,
     animationRate: 250,
+    metadata: {
+      routes: [
+        {
+          label: `trigger`,
+          redirect: "home",
+        },
+      ],
+    },
   }),
   credits: (payload?: ScenePayload): Scene => ({
     id: "credits",

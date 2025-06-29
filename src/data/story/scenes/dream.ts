@@ -26,7 +26,16 @@ export const dreamScenes = {
         },
       },
     ],
+    metadata: {
+      routes: [
+        {
+          label: `Admire the trees`,
+          redirect: "dream1",
+        },
+      ],
+    },
   }),
+
   dream1: (payload?: ScenePayload): Scene => ({
     id: "dream1",
     background: bgDefault,
@@ -52,7 +61,7 @@ export const dreamScenes = {
       `^^Dad-gum forest faeries. Yep, if you had you an ax, you'd {start chopping} down all these trees, right this second. If you don't, ` +
       `someone else surely will. A place like this? Prime real estate. Goodbye paradise, hello parking lot!` +
       `${
-        payload?.filter == "noNap"
+        payload?.filter == "nap"
           ? ""
           : `^^Forget the faeries, forget the trees, forget the parking lot... look at that brain-colored moss over there! ` +
             `Mmm, awww.... you wanna curl up and {take a nap}.^^{Pick up a handful of pine needles.}`
@@ -93,6 +102,26 @@ export const dreamScenes = {
         },
       },
     ],
+    metadata: {
+      routes: [
+        {
+          label: `Try to catch one`,
+          redirect: "dream-squirrel",
+        },
+        {
+          label: `Follow them`,
+          redirect: "dream-faeries",
+        },
+        {
+          label: `start chopping`,
+          redirect: "dream-chop",
+        },
+        {
+          label: `take a nap`,
+          redirect: "dream-within-a-dream",
+        },
+      ],
+    },
   }),
 
   "dream-within-a-dream": (payload?: ScenePayload): Scene => ({
@@ -118,6 +147,18 @@ export const dreamScenes = {
         next: "dream1",
       },
     ],
+    metadata: {
+      routes: [
+        {
+          label: `Fall asleep`,
+          redirect: "dream-within-a-dream1",
+        },
+        {
+          label: `Nevermind`,
+          redirect: "dream1",
+        },
+      ],
+    },
   }),
 
   "dream-within-a-dream1": (payload?: ScenePayload): Scene => ({
@@ -134,13 +175,25 @@ export const dreamScenes = {
         next: "dream-within-a-dream-refuse",
       },
     ],
+    metadata: {
+      routes: [
+        {
+          label: `Wait... will I fall asleep forever?`,
+          redirect: "dream-within-a-dream2",
+        },
+        {
+          label: `Nevermind`,
+          redirect: "dream-within-a-dream-refuse",
+        },
+      ],
+    },
   }),
 
   "dream-within-a-dream-refuse": (payload?: ScenePayload): Scene => ({
     id: "dream-within-a-dream-refuse",
     background: bgDefault,
     text:
-      `...^^The concept of dreaming twice is so scary! What if you don't wake up? ` +
+      `The concept of dreaming twice is so scary! What if you don't wake up? ` +
       `^^Too late, you fell asleep anyway. Radiating anxiety, your raw nerves attack you.` +
       `^^After a spiral of overthinking, you notice that you are hugging a brightly colored mushroom. ` +
       `You can tell because your face is right up against it and your arms are surrounding it. ` +
@@ -165,6 +218,14 @@ export const dreamScenes = {
         },
       },
     ],
+    metadata: {
+      routes: [
+        {
+          label: `awaken back into the first dream`,
+          redirect: "dream-tree-chase",
+        },
+      ],
+    },
   }),
 
   "dream-within-a-dream2": (payload?: ScenePayload): Scene => ({
@@ -194,6 +255,14 @@ export const dreamScenes = {
         },
       },
     ],
+    metadata: {
+      routes: [
+        {
+          label: `a hilly landscape sprawls out before you`,
+          redirect: "dream-within-a-dream3",
+        },
+      ],
+    },
   }),
 
   "dream-within-a-dream3": (payload?: ScenePayload): Scene => ({
@@ -218,6 +287,14 @@ export const dreamScenes = {
         },
       },
     ],
+    metadata: {
+      routes: [
+        {
+          label: `Breathe in`,
+          redirect: "dream-within-a-dream4",
+        },
+      ],
+    },
   }),
 
   "dream-within-a-dream4": (payload?: ScenePayload): Scene => ({
@@ -239,6 +316,14 @@ export const dreamScenes = {
         },
       },
     ],
+    metadata: {
+      routes: [
+        {
+          label: `Open your eyes`,
+          redirect: "hypno",
+        },
+      ],
+    },
   }),
 
   "dream-chop": (payload?: ScenePayload): Scene => ({
@@ -283,5 +368,13 @@ export const dreamScenes = {
         },
       },
     ],
+    metadata: {
+      routes: [
+        {
+          label: `THUNK`,
+          redirect: "dream-tree-chase",
+        },
+      ],
+    },
   }),
 };

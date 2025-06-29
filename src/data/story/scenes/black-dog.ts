@@ -39,6 +39,18 @@ export const blackDogScenes = {
         },
       },
     ],
+    metadata: {
+      routes: [
+        {
+          label: "Go closer.",
+          redirect: "black-dog1",
+        },
+        {
+          label: "Back away.",
+          redirect: "black-dog1",
+        },
+      ],
+    },
   }),
 
   "black-dog1": (payload?: ScenePayload): Scene => ({
@@ -59,6 +71,14 @@ export const blackDogScenes = {
         },
       },
     ],
+    metadata: {
+      routes: [
+        {
+          label: "You start acting careful.",
+          redirect: "black-dog2",
+        },
+      ],
+    },
   }),
 
   "black-dog2": (payload?: ScenePayload): Scene => ({
@@ -81,6 +101,18 @@ export const blackDogScenes = {
       { text: "Good puppy.", next: "black-dog-good" },
       { text: "Defend yourself.", next: "black-dog-bad" },
     ],
+    metadata: {
+      routes: [
+        {
+          label: "Good puppy.",
+          redirect: "black-dog-good",
+        },
+        {
+          label: "Defend yourself.",
+          redirect: "black-dog-bad",
+        },
+      ],
+    },
   }),
 
   "black-dog-good": (payload?: ScenePayload): Scene => ({
@@ -101,6 +133,14 @@ export const blackDogScenes = {
         },
       },
     ],
+    metadata: {
+      routes: [
+        {
+          label: "open it",
+          redirect: "black-dog-good1",
+        },
+      ],
+    },
   }),
 
   "black-dog-good1": (payload?: ScenePayload): Scene => ({
@@ -132,6 +172,18 @@ export const blackDogScenes = {
       const game = useGameStore();
       game.updateShowDisappearingItem(true);
     },
+    metadata: {
+      routes: [
+        {
+          label: "Heal the human-faced dog's face back into a dog's face.",
+          redirect: "black-dog-heal-dog",
+        },
+        {
+          label: "Heal the human-faced dog's body back into a human's body.",
+          redirect: "black-dog-heal-human",
+        },
+      ],
+    },
   }),
 
   "black-dog-heal-dog": (payload?: ScenePayload): Scene => ({
@@ -158,8 +210,24 @@ export const blackDogScenes = {
         });
       }
 
-      //TODO: other choices
+      choices.push({
+        text: "TODO",
+        next: "black-dog-done",
+      });
+
       return choices;
+    },
+    metadata: {
+      routes: [
+        {
+          label: "Give it some dog food.",
+          redirect: "black-dog-heal-dog-food",
+        },
+        {
+          label: "TODO",
+          redirect: "black-dog-done",
+        },
+      ],
     },
   }),
 
@@ -168,6 +236,20 @@ export const blackDogScenes = {
     background: bgDefault,
     text: "",
     //TODO: the dog eats the food
+    choices: () => [
+      {
+        text: "TODO",
+        next: "black-dog-done",
+      },
+    ],
+    metadata: {
+      routes: [
+        {
+          label: "TODO",
+          redirect: "black-dog-done",
+        },
+      ],
+    },
   }),
 
   "black-dog-heal-human": (payload?: ScenePayload): Scene => ({
@@ -179,8 +261,20 @@ export const blackDogScenes = {
       `a mop of red-black hair on the top of the skull, and faint hairs on the back and arms.` +
       `^^The man looks up into your eyes, looking confused and wild, looking down at himself, he covers his ` +
       `gonads, and turns tail to sprint across the field into the neighborhood.`,
-    choices: () => [],
-    //TODO: choices
+    choices: () => [
+      {
+        text: "TODO",
+        next: "black-dog-done",
+      },
+    ],
+    metadata: {
+      routes: [
+        {
+          label: "TODO",
+          redirect: "black-dog-done",
+        },
+      ],
+    },
   }),
 
   "black-dog-heal-human-redux": (payload?: ScenePayload): Scene => ({
@@ -199,6 +293,7 @@ export const blackDogScenes = {
       `find inside a door, inside a box within a box, in a box. I'm out.” I never saw the Moondog again, until I went to buy some used CDs. ` +
       `I heard the Moondog at the counter—I stop, I freeze. There they were, winking back at me, bearded, beastly, and barking up the tree` +
       `—of music—it was music to my ease.`,
+    //TODO: route to this
   }),
 
   "black-dog-bad": (payload?: ScenePayload): Scene => ({
@@ -238,6 +333,18 @@ export const blackDogScenes = {
         },
       },
     ],
+    metadata: {
+      routes: [
+        {
+          label: "getBlackDogOutcome success",
+          redirect: "black-dog-bad-success",
+        },
+        {
+          label: "getBlackDogOutcome fail",
+          redirect: "black-dog-bad-fail",
+        },
+      ],
+    },
   }),
 
   "black-dog-bad-success": (payload?: ScenePayload): Scene => ({
@@ -252,6 +359,14 @@ export const blackDogScenes = {
         },
       },
     ],
+    metadata: {
+      routes: [
+        {
+          label: "feel bad",
+          redirect: "black-dog-feel-bad",
+        },
+      ],
+    },
   }),
 
   "black-dog-bad-fail": (payload?: ScenePayload): Scene => ({
@@ -278,6 +393,18 @@ export const blackDogScenes = {
         },
       },
     ],
+    metadata: {
+      routes: [
+        {
+          label: "has dog food",
+          redirect: "black-dog-bad-fail-food",
+        },
+        {
+          label: "does not have dog food",
+          redirect: "black-dog-bad-fail-drunks",
+        },
+      ],
+    },
   }),
 
   "black-dog-bad-fail-food": (payload?: ScenePayload): Scene => ({
@@ -297,19 +424,41 @@ export const blackDogScenes = {
         },
       },
     ],
+    metadata: {
+      routes: [
+        {
+          label: "let the creature take the food",
+          redirect: "black-dog-bad-fail-food1",
+        },
+      ],
+    },
   }),
 
   "black-dog-bad-fail-food1": (payload?: ScenePayload): Scene => ({
     id: "black-dog-bad-fail-food1",
     background: bgDefault,
     text: ``,
+    //TODO:
     dialogSequence: () => [
       {
         characterId: "black-dog",
         text: "<i>*whimpers happily*</i>",
       },
     ],
-    //TODO:
+    choices: () => [
+      {
+        text: "TODO",
+        next: "black-dog-done",
+      },
+    ],
+    metadata: {
+      routes: [
+        {
+          label: "TODO",
+          redirect: "black-dog-done",
+        },
+      ],
+    },
   }),
 
   "black-dog-bad-fail-drunks": (payload?: ScenePayload): Scene => ({
@@ -372,6 +521,18 @@ export const blackDogScenes = {
         ];
       }
     },
+    metadata: {
+      routes: [
+        {
+          label: "sided with a drunk or is polite",
+          redirect: "black-dog-bad-fail-drunks-help",
+        },
+        {
+          label: "not from around here and not polite",
+          redirect: "black-dog-bad-fail-drunks-leave",
+        },
+      ],
+    },
   }),
 
   "black-dog-bad-fail-drunks-help": (payload?: ScenePayload): Scene => ({
@@ -380,6 +541,16 @@ export const blackDogScenes = {
     text:
       `The ${payload?.filter == "both" ? "drunks scatter" : "drunk scatters"}  some dog food on the ground. The redblack dog retreats ` +
       `and busies itself with the food.`,
+
+    choices: () => [{ text: "TODO", next: "black-dog-done" }],
+    metadata: {
+      routes: [
+        {
+          label: "TODO",
+          redirect: "black-dog-done",
+        },
+      ],
+    },
   }),
 
   "black-dog-bad-fail-drunks-leave": (payload?: ScenePayload): Scene => ({
@@ -396,6 +567,14 @@ export const blackDogScenes = {
         },
       },
     ],
+    metadata: {
+      routes: [
+        {
+          label: "And alone",
+          redirect: "black-dog-viral",
+        },
+      ],
+    },
   }),
 
   "black-dog-feel-bad": (payload?: ScenePayload): Scene => ({
@@ -414,6 +593,14 @@ export const blackDogScenes = {
         },
       },
     ],
+    metadata: {
+      routes: [
+        {
+          label: "so scary",
+          redirect: "black-dog-viral",
+        },
+      ],
+    },
   }),
 
   "black-dog-viral": (payload?: ScenePayload): Scene => ({
@@ -432,5 +619,12 @@ export const blackDogScenes = {
     //  or if you said I'm not from around here, they are both recording you especially because you 'not from around here'
     //   use the drunkManners to dictate some dialog
     // toggle phone back to isCrazy: false
+  }),
+
+  "black-dog-done": (payload?: ScenePayload): Scene => ({
+    id: "black-dog-done",
+    background: bgDefault,
+    text: "",
+    //TODO:
   }),
 };

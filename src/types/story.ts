@@ -2,6 +2,7 @@ import { CharacterId } from "./character";
 import { SceneId } from "@/data/story/story";
 import { DictionaryEntryId } from "./dictionary";
 import { DrawerView } from "./drawer-view";
+import { MiniGameId } from "./minigame";
 
 export interface ScenePayload {
   filter?: string;
@@ -40,10 +41,22 @@ export interface Scene {
   buttonActions?: ButtonAction[];
   onPageLoad?: () => void;
   backgroundFilter?: string;
-  miniGameId?: string;
+  miniGameId?: MiniGameId;
+  metadata?: SceneMetadata;
 }
 
 export interface FateOutcome {
   text: string;
   success: boolean;
+}
+
+export interface SceneMetadata {
+  routes?: SceneRouteMetadata[];
+  items?: string[];
+  aspects?: string[];
+}
+
+export interface SceneRouteMetadata {
+  label: string;
+  redirect: SceneId;
 }

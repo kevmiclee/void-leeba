@@ -1,4 +1,3 @@
-// stores/snackbar.ts
 import { defineStore } from "pinia";
 
 let timeoutId: number;

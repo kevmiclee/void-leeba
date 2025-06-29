@@ -45,6 +45,14 @@ export const dreamTreeChaseScenes = {
         },
       },
     ],
+    metadata: {
+      routes: [
+        {
+          label: `run`,
+          redirect: "dream-tree-chase-game-intro",
+        },
+      ],
+    },
   }),
 
   "dream-tree-chase-game-intro": (payload?: ScenePayload): Scene => ({
@@ -61,6 +69,14 @@ export const dreamTreeChaseScenes = {
         },
       },
     ],
+    metadata: {
+      routes: [
+        {
+          label: `dodge them`,
+          redirect: "dream-tree-chase-game",
+        },
+      ],
+    },
   }),
 
   "dream-tree-chase-game": (payload?: ScenePayload): Scene => ({
@@ -68,6 +84,18 @@ export const dreamTreeChaseScenes = {
     background: bgDefault,
     text: "",
     miniGameId: "tree-chase",
+    metadata: {
+      routes: [
+        {
+          label: `win`,
+          redirect: "dream-tree-chase-game-win",
+        },
+        {
+          label: `lose`,
+          redirect: "dream-tree-chase-game-lose",
+        },
+      ],
+    },
   }),
 
   "dream-tree-chase-game-win": (payload?: ScenePayload): Scene => ({

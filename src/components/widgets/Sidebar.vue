@@ -71,9 +71,8 @@ function animateToThousand(start: number, target = 100) {
     current += 1;
     animatedCount.value = current;
 
-    // Delay decreases as we approach 1000
-    const progress = (current - start) / (target - start); // 0 to 1
-    const delay = 100 - progress * 45; // Start at 50ms, down to ~5ms
+    const progress = (current - start) / (target - start);
+    const delay = 100 - progress * 45;
 
     setTimeout(step, delay);
   };

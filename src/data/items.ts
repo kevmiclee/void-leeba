@@ -5,7 +5,8 @@ export const itemCatalog: Record<ItemId, Item> = {
     id: "dragon-ring",
     label: "Dragon ring",
     description:
-      "The dragon is made of stainless steel with ruby red eyes, and in its claws, it holds a swirling planet of turquoise.",
+      `The dragon is made of stainless steel with ruby red eyes, and in its claws, it holds ` +
+      `a swirling planet of turquoise.`,
     actionText:
       "You slip your dragon ring on. It always makes you feel connected to the Gurpy you never met.",
     value: 0,
@@ -17,7 +18,8 @@ export const itemCatalog: Record<ItemId, Item> = {
     id: "patched-coat",
     label: "Patched coat",
     description:
-      "There is an intricately-hooked patch on its back that shows four images: an ancient windmill, an historic longship, a modern wind turbine, and a lobster boat.",
+      `There is an intricately-hooked patch on its back that shows four images: ` +
+      `an ancient windmill, an historic longship, a modern wind turbine, and a lobster boat.`,
     actionText: "You put on the coat. Smells like Mormor.",
     value: 0,
     weight: 0,
@@ -61,7 +63,9 @@ export const itemCatalog: Record<ItemId, Item> = {
   "self-help-book": {
     id: "self-help-book",
     label: "Self help book",
-    description: `The book is titled "Sisu". The author's name sounds Finnish. There is an illustration of two hikers at the top of a snowy peak.`,
+    description:
+      `The book is titled "Sisu". The author's name sounds Finnish. ` +
+      `There is an illustration of two hikers at the top of a snowy peak.`,
     actionText: "You aren't fluent enough in Finnish to read this.",
     value: 0,
     weight: 2,

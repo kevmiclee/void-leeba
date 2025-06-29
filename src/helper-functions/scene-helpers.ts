@@ -1,4 +1,3 @@
-// composables/sceneHelpers.ts
 import { useGameStore } from "@/stores/game";
 import { useTimeoutStore } from "@/stores/timeout";
 import { nextTick } from "vue";

@@ -18,4 +18,7 @@ export type AspectId =
   | "squirrel-bitch"
   | "tree-murderer"
   | "all-your-bones-are-broken"
-  | "jack-be-nimble";
+  | "jack-be-nimble"
+  | "ascetic"
+  | "well-versed"
+  | "life-of-the-party";

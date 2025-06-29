@@ -64,6 +64,14 @@ export const dreamFaeriesScenes = {
         },
       },
     ],
+    metadata: {
+      routes: [
+        {
+          label: "faerie dialog click",
+          redirect: "dream-faeries1",
+        },
+      ],
+    },
   }),
 
   "dream-faeries1": (payload?: ScenePayload): Scene => ({
@@ -95,6 +103,22 @@ export const dreamFaeriesScenes = {
         next: "dream-squirrel",
       },
     ],
+    metadata: {
+      routes: [
+        {
+          label: `Bow graciously. "Thanks for spitting in my nostril holes."`,
+          redirect: "dream-faeries2",
+        },
+        {
+          label: `Get on their case about littering.`,
+          redirect: "dream-faeries-litter",
+        },
+        {
+          label: `There's that squirrel again! Try to catch it.`,
+          redirect: "dream-squirrel",
+        },
+      ],
+    },
   }),
 
   "dream-faeries2": (payload?: ScenePayload): Scene => ({
@@ -126,6 +150,14 @@ export const dreamFaeriesScenes = {
         },
       },
     ],
+    metadata: {
+      routes: [
+        {
+          label: `faerie dialog click`,
+          redirect: "dream-faeries3",
+        },
+      ],
+    },
   }),
 
   "dream-faeries3": (payload?: ScenePayload): Scene => ({
@@ -149,14 +181,26 @@ export const dreamFaeriesScenes = {
     ],
     choices: () => [
       {
-        text: "Um...",
+        text: `"Um..."`,
         next: "dream-faeries-party-check",
       },
       {
-        text: "PARTY!!!",
+        text: `"PARTY!!!"`,
         next: "dream-faeries4",
       },
     ],
+    metadata: {
+      routes: [
+        {
+          label: `"Um..."`,
+          redirect: "dream-faeries-party-check",
+        },
+        {
+          label: `"PARTY!!!"`,
+          redirect: "dream-faeries4",
+        },
+      ],
+    },
   }),
 
   "dream-faeries4": (payload?: ScenePayload): Scene => ({
@@ -176,6 +220,14 @@ export const dreamFaeriesScenes = {
         },
       },
     ],
+    metadata: {
+      routes: [
+        {
+          label: `faerie dialog clicks`,
+          redirect: "dream-faeries5",
+        },
+      ],
+    },
   }),
 
   "dream-faeries5": (payload?: ScenePayload): Scene => ({
@@ -191,6 +243,18 @@ export const dreamFaeriesScenes = {
       { text: "YOLO! Eat the eggcorn.", next: `party-eggcorn` },
       { text: "On second thought...", next: "party-eggcorn-check" },
     ],
+    metadata: {
+      routes: [
+        {
+          label: `YOLO! Eat the eggcorn.`,
+          redirect: "party-eggcorn",
+        },
+        {
+          label: `On second thought...`,
+          redirect: "party-eggcorn-check",
+        },
+      ],
+    },
   }),
 
   "dream-faeries-litter": (payload?: ScenePayload): Scene => ({
@@ -228,6 +292,22 @@ export const dreamFaeriesScenes = {
       }
 
       return choices;
+    },
+    metadata: {
+      routes: [
+        {
+          label: `"Oh I see, you were planting snail trees! The Hongatar truly are a noble breed.`,
+          redirect: "dream-faeries-litter1",
+        },
+        {
+          label: `"LIES!"`,
+          redirect: "dream-faeries-litter1",
+        },
+        {
+          label: "Show them the proof.",
+          redirect: "dream-faeries-litter-police",
+        },
+      ],
     },
   }),
 
@@ -279,6 +359,22 @@ export const dreamFaeriesScenes = {
         },
       ];
     },
+    metadata: {
+      routes: [
+        {
+          label: `"You're lying. I saw you eating the snails!"`,
+          redirect: "dream-faeries2",
+        },
+        {
+          label: `"Your dedication to the ecosystem is so inspiring. If only we humans were so thoughtful and so brave."`,
+          redirect: "dream-faeries2",
+        },
+        {
+          label: `"That is asinine."`,
+          redirect: "dream-faeries2",
+        },
+      ],
+    },
   }),
 
   "dream-faeries-litter-police": (payload?: ScenePayload): Scene => ({
@@ -300,6 +396,14 @@ export const dreamFaeriesScenes = {
         },
       },
     ],
+    metadata: {
+      routes: [
+        {
+          label: `faerie dialog click`,
+          redirect: "dream-faeries-litter-police1",
+        },
+      ],
+    },
   }),
 
   "dream-faeries-litter-police1": (payload?: ScenePayload): Scene => ({
@@ -337,6 +441,14 @@ export const dreamFaeriesScenes = {
         },
       },
     ],
+    metadata: {
+      routes: [
+        {
+          label: `faerie dialog click`,
+          redirect: "dream-faeries-litter-police2",
+        },
+      ],
+    },
   }),
 
   "dream-faeries-litter-police2": (payload?: ScenePayload): Scene => ({
@@ -378,16 +490,23 @@ export const dreamFaeriesScenes = {
         },
       },
     ],
+    metadata: {
+      routes: [
+        {
+          label: `"Let that be a lesson to you."`,
+          redirect: "dream-faeries2",
+        },
+        {
+          label: `"Self-help is my favorite genre, thanks!"`,
+          redirect: "dream-faeries2",
+        },
+        {
+          label: `Wink.`,
+          redirect: "dream-faeries2",
+        },
+      ],
+    },
   }),
-
-  //     case 'insult':
-  //         localStorage.setItem('aspect', `nobody's friend`);
-  //         text = `"\`tHaT's ThE sTuPiDeSt ThInG i'Ve EvEr HeArD!\`" The {hongatar} are mocking you ruthlessly, totally unfazed by your shallow insult.`
-  //         break;
-  //     case 'accuse':
-  //         localStorage.setItem('aspect', 'boy who cried wolf');
-  //         text = `The {hongatar} dismiss you summarily. You simply don't have the proof to back your accusations.`
-  //         break;
 
   "dream-faeries-party-check": (payload?: ScenePayload): Scene => ({
     id: "dream-faeries-party-check",
@@ -402,12 +521,24 @@ export const dreamFaeriesScenes = {
       },
     ],
     choices: () => [
-      { text: `I'm good. Thanks`, next: "dream-faeries-party-decline" },
+      { text: `"I'm good. Thanks."`, next: "dream-faeries-party-decline" },
       {
-        text: "PARTY!!!",
+        text: `"PARTY!!!"`,
         next: "dream-faeries4",
       },
     ],
+    metadata: {
+      routes: [
+        {
+          label: `"I'm good. Thanks"`,
+          redirect: "dream-faeries-party-decline",
+        },
+        {
+          label: `"PARTY!!!"`,
+          redirect: "dream-faeries4",
+        },
+      ],
+    },
   }),
 
   "dream-faeries-party-decline": (payload?: ScenePayload): Scene => ({
@@ -425,5 +556,13 @@ export const dreamFaeriesScenes = {
         },
       },
     ],
+    metadata: {
+      routes: [
+        {
+          label: `fearie dialog click`,
+          redirect: "dream1",
+        },
+      ],
+    },
   }),
 };

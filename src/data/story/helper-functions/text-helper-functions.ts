@@ -93,3 +93,19 @@ export function getDrunkMannersRescueText(manners?: Manners) {
       return "We should help them, but only because they were so polite to us earlier.";
   }
 }
+
+export function getFollowSquirrelText(filter?: string) {
+  switch (filter) {
+    case "where":
+      return (
+        `The squirrel has no reply. You rememeber someone telling you: "Travel is about ` +
+        `the gorgeous feeling of teetering in the unknown." You suppose this is one of those times.`
+      );
+    case "what":
+      return `The squirrel has no reply. You rememeber someone telling you: "It's not a question, but a lesson learned in time." You suppose this is one of those times.`;
+    case "why":
+      return `You remember someone telling you: "Peculiar travel suggestions are dancing lessons from god." You suppose this is one of those times.`;
+    default:
+      return "";
+  }
+}

@@ -3,6 +3,8 @@ import bgDefault from "@/assets/images/backgrounds/new-game.png";
 import morningBirds from "@/assets/audio/story/morning-birds.mp3";
 import { useGameStore } from "@/stores/game";
 import { useCharacterStore } from "@/stores/character";
+import { useAspectStore } from "@/stores/aspects";
+import { ascetic } from "@/data/aspects";
 
 export const homeScenes = {
   home: (payload?: ScenePayload): Scene => ({
@@ -26,6 +28,14 @@ export const homeScenes = {
         },
       },
     ],
+    metadata: {
+      routes: [
+        {
+          label: `Continue`,
+          redirect: "home1",
+        },
+      ],
+    },
   }),
 
   home1: (payload?: ScenePayload): Scene => ({
@@ -50,6 +60,23 @@ export const homeScenes = {
         drawerView: "phone",
       },
     ],
+    metadata: {
+      routes: [
+        {
+          label: `Go out and explore`,
+          redirect: "home2",
+        },
+        {
+          label: `Enjoy some quiet time in your room`,
+          redirect: "room",
+        },
+        //TODO: drawer metadata
+        // {
+        //   label: `Look at your phone`,
+        //   redirect: "phone",
+        // },
+      ],
+    },
   }),
 
   home2: (payload?: ScenePayload): Scene => ({
@@ -107,8 +134,36 @@ export const homeScenes = {
         payload: {
           text: "Maybe you won't need anything. {Continue.}",
         },
+        onChoose: () => {
+          const aspects = useAspectStore();
+          aspects.addAspect(ascetic);
+        },
       },
     ],
+    metadata: {
+      routes: [
+        {
+          label: `Dog food can`,
+          redirect: "home3",
+        },
+        {
+          label: `Playing cards`,
+          redirect: "home3",
+        },
+        {
+          label: `Orange spray paint`,
+          redirect: "home3",
+        },
+        {
+          label: `Translator`,
+          redirect: "home3",
+        },
+        {
+          label: `Nothing`,
+          redirect: "home3",
+        },
+      ],
+    },
   }),
 
   home3: (payload?: ScenePayload): Scene => ({
@@ -123,6 +178,14 @@ export const homeScenes = {
         },
       },
     ],
+    metadata: {
+      routes: [
+        {
+          label: `Continue`,
+          redirect: "park",
+        },
+      ],
+    },
   }),
 
   room: (payload?: ScenePayload): Scene => ({
@@ -154,6 +217,22 @@ export const homeScenes = {
         },
       },
     ],
+    metadata: {
+      routes: [
+        {
+          label: `A nap sounds nice`,
+          redirect: "nap",
+        },
+        {
+          label: `Settle into the chair and make something`,
+          redirect: "make-something",
+        },
+        {
+          label: `I'm going to the park`,
+          redirect: "park",
+        },
+      ],
+    },
   }),
 
   nap: (payload?: ScenePayload): Scene => ({
@@ -169,6 +248,18 @@ export const homeScenes = {
         next: "make-something",
       },
     ],
+    metadata: {
+      routes: [
+        {
+          label: `Close your eyes`,
+          redirect: "dream",
+        },
+        {
+          label: `rather sit at my desk`,
+          redirect: "make-something",
+        },
+      ],
+    },
   }),
 
   "make-something": (payload?: ScenePayload): Scene => ({
@@ -205,5 +296,21 @@ export const homeScenes = {
         },
       },
     ],
+    metadata: {
+      routes: [
+        // {
+        //   label: `into the void`,
+        //   redirect: "void",
+        // },
+        // {
+        //   label: `paint with your heart`,
+        //   redirect: "paint",
+        // },
+        {
+          label: `going to sleep`,
+          redirect: "nap",
+        },
+      ],
+    },
   }),
 };

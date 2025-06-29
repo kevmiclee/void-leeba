@@ -19,6 +19,14 @@ export const partyScenes = {
         },
       },
     ],
+    metadata: {
+      routes: [
+        {
+          label: `everything goes dark`,
+          redirect: "party",
+        },
+      ],
+    },
   }),
 
   "party-eggcorn-check": (payload?: ScenePayload): Scene => ({
@@ -33,6 +41,18 @@ export const partyScenes = {
         payload: { filter: "noFaeries" },
       },
     ],
+    metadata: {
+      routes: [
+        {
+          label: `No. Seariously. I'm not eating it`,
+          redirect: "dream1",
+        },
+        {
+          label: `YOLO! Eat the eggcorn`,
+          redirect: "party-eggcorn",
+        },
+      ],
+    },
   }),
 
   party: (payload?: ScenePayload): Scene => ({

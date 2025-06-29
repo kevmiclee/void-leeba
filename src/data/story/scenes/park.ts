@@ -28,6 +28,22 @@ export const parkScenes = {
         //TODO:
       },
     ],
+    metadata: {
+      routes: [
+        {
+          label: `Still yourself and listen to the sounds.`,
+          redirect: "park-drunks",
+        },
+        // {
+        //   label: `Leave the park and enter the neighborhood.`,
+        //   redirect: "neighborhood",
+        // },
+        // {
+        //   label: `Play on the snowpile.`,
+        //   redirect: "snow-pile",
+        // },
+      ],
+    },
   }),
 
   "park-drunks": (payload?: ScenePayload): Scene => ({
@@ -49,7 +65,14 @@ export const parkScenes = {
         },
       },
     ],
-    choices: () => [],
+    metadata: {
+      routes: [
+        {
+          label: `drunk dialog click`,
+          redirect: "park-drunks1",
+        },
+      ],
+    },
   }),
 
   "park-drunks1": (payload?: ScenePayload): Scene => ({
@@ -93,6 +116,22 @@ export const parkScenes = {
         },
       },
     ],
+    metadata: {
+      routes: [
+        {
+          label: `I'm sorry, I'm not from around here.`,
+          redirect: "park-drunks2a",
+        },
+        {
+          label: `It's the sun`,
+          redirect: "park-drunks2b",
+        },
+        {
+          label: `It's the moon`,
+          redirect: "park-drunks2b",
+        },
+      ],
+    },
   }),
 
   "park-drunks2a": (payload?: ScenePayload): Scene => ({
@@ -132,6 +171,22 @@ export const parkScenes = {
         },
       },
     ],
+    metadata: {
+      routes: [
+        {
+          label: `I dont have time for this`,
+          redirect: "park-drunks3",
+        },
+        {
+          label: `Looki ngup is for the young and hopeful`,
+          redirect: "park-drunks3",
+        },
+        {
+          label: `Just laugh`,
+          redirect: "park-drunks3",
+        },
+      ],
+    },
   }),
 
   "park-drunks2b": (payload?: ScenePayload): Scene => ({
@@ -158,32 +213,14 @@ export const parkScenes = {
         },
       ];
     },
-    choices: () => [
-      {
-        text: `"Not cool."`,
-        next: "park-drunks3",
-        onChoose: () => {
-          const character = useCharacterStore();
-          character.setManners("depressing");
+    metadata: {
+      routes: [
+        {
+          label: `drunk dialog click`,
+          redirect: "park-drunks2c",
         },
-      },
-      {
-        text: `"YEAH! EAT IT, YA DOPE!"`,
-        next: "park-drunks3",
-        onChoose: () => {
-          const character = useCharacterStore();
-          character.setManners("rude");
-        },
-      },
-      {
-        text: "Just laugh.",
-        next: "park-drunks3",
-        onChoose: () => {
-          const character = useCharacterStore();
-          character.setManners("polite");
-        },
-      },
-    ],
+      ],
+    },
   }),
 
   "park-drunks2c": (payload?: ScenePayload): Scene => ({
@@ -226,6 +263,22 @@ export const parkScenes = {
         },
       },
     ],
+    metadata: {
+      routes: [
+        {
+          label: `Not cool`,
+          redirect: "park-drunks3",
+        },
+        {
+          label: `YEAH! EAT IT, YA DOPE!`,
+          redirect: "park-drunks3",
+        },
+        {
+          label: `Just laugh`,
+          redirect: "park-drunks3",
+        },
+      ],
+    },
   }),
 
   "park-drunks3": (payload?: ScenePayload): Scene => ({
@@ -256,6 +309,14 @@ export const parkScenes = {
           },
         },
       ];
+    },
+    metadata: {
+      routes: [
+        {
+          label: `drunk dialog click`,
+          redirect: "black-dog",
+        },
+      ],
     },
   }),
 };
