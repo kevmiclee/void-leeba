@@ -1,5 +1,6 @@
 import { Scene, ScenePayload } from "@/types/story";
 import bgDefault from "@/assets/images/backgrounds/new-game.png";
+import parkMusic from "@/assets/audio/story/background-themes/walk-in-the-park.mp3";
 import { useGameStore } from "@/stores/game";
 import { useCharacterStore } from "@/stores/character";
 import { CharacterId } from "@/types/character";
@@ -8,6 +9,7 @@ export const parkScenes = {
   park: (payload?: ScenePayload): Scene => ({
     id: "park",
     background: bgDefault,
+    audio: parkMusic,
     text:
       `You are in the park. In the distance, a children's play structure. ` +
       `Behind the play structure, an empty public pool in yellow and light blue. ` +
@@ -29,6 +31,7 @@ export const parkScenes = {
       },
     ],
     metadata: {
+      sectionId: "park",
       routes: [
         {
           label: `Still yourself and listen to the sounds.`,
@@ -49,6 +52,7 @@ export const parkScenes = {
   "park-drunks": (payload?: ScenePayload): Scene => ({
     id: "park-drunks",
     background: bgDefault,
+    audio: parkMusic,
     text:
       `The sun sets over the park. A few stars resist the city's lights. The playground and fences now set into silhouettes. ` +
       `As your eyes adjust, the park takes on a dark grey black clarity. The stars and a white crescent illuminate it with a soft ` +
@@ -66,6 +70,7 @@ export const parkScenes = {
       },
     ],
     metadata: {
+      sectionId: "park",
       routes: [
         {
           label: `drunk dialog click`,
@@ -78,6 +83,7 @@ export const parkScenes = {
   "park-drunks1": (payload?: ScenePayload): Scene => ({
     id: "park-drunks1",
     background: bgDefault,
+    audio: parkMusic,
     text:
       `In loopy diagonals from either direction, they come up to you.` +
       `^^The first drunk seizes on the opportunity to accost you, her breath bequeathing hot sick.`,
@@ -117,6 +123,7 @@ export const parkScenes = {
       },
     ],
     metadata: {
+      sectionId: "park",
       routes: [
         {
           label: `I'm sorry, I'm not from around here.`,
@@ -137,6 +144,7 @@ export const parkScenes = {
   "park-drunks2a": (payload?: ScenePayload): Scene => ({
     id: "park-drunks2a",
     background: bgDefault,
+    audio: parkMusic,
     text: "",
     dialogSequence: () => [
       {
@@ -172,6 +180,7 @@ export const parkScenes = {
       },
     ],
     metadata: {
+      sectionId: "park",
       routes: [
         {
           label: `I dont have time for this`,
@@ -192,6 +201,7 @@ export const parkScenes = {
   "park-drunks2b": (payload?: ScenePayload): Scene => ({
     id: "park-drunks2b",
     background: bgDefault,
+    audio: parkMusic,
     text: "",
     dialogSequence: () => {
       const character = useCharacterStore();
@@ -204,7 +214,10 @@ export const parkScenes = {
               : "BOOYAH!!",
         },
         {
-          characterId: character.flags["drunk-choice"] as CharacterId,
+          characterId:
+            character.flags["drunk-choice"] == "drunk1"
+              ? "drunk2"
+              : ("drunk1" as CharacterId),
           text: `.........`,
           onClick: () => {
             const store = useGameStore();
@@ -214,6 +227,7 @@ export const parkScenes = {
       ];
     },
     metadata: {
+      sectionId: "park",
       routes: [
         {
           label: `drunk dialog click`,
@@ -226,6 +240,7 @@ export const parkScenes = {
   "park-drunks2c": (payload?: ScenePayload): Scene => ({
     id: "park-drunks2c",
     background: bgDefault,
+    audio: parkMusic,
     text: "The one celebrates to the other.",
     dialogSequence: () => {
       const character = useCharacterStore();
@@ -264,6 +279,7 @@ export const parkScenes = {
       },
     ],
     metadata: {
+      sectionId: "park",
       routes: [
         {
           label: `Not cool`,
@@ -284,6 +300,7 @@ export const parkScenes = {
   "park-drunks3": (payload?: ScenePayload): Scene => ({
     id: "park-drunks3",
     background: bgDefault,
+    audio: parkMusic,
     text: "",
 
     dialogSequence: () => {
@@ -311,6 +328,7 @@ export const parkScenes = {
       ];
     },
     metadata: {
+      sectionId: "park",
       routes: [
         {
           label: `drunk dialog click`,

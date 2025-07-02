@@ -1,11 +1,13 @@
 import { Scene, ScenePayload } from "@/types/story";
 import bgDefault from "@/assets/images/backgrounds/new-game.png";
+import crunchyWalkingSound from "@/assets/audio/story/sounds/crunchy-walking.mp3";
 import { useGameStore } from "@/stores/game";
 import { useCharacterStore } from "@/stores/character";
 import { getTreeChopOutcome } from "../helper-functions/outcome-helper-functions";
 import { fateContest } from "../helper-functions/roll-helper-functions";
 import { useAspectStore } from "@/stores/aspects";
 import { treeMurderer } from "@/data/aspects";
+import { useAudioStore } from "@/stores/audio";
 
 export const dreamScenes = {
   dream: (payload?: ScenePayload): Scene => ({
@@ -26,7 +28,12 @@ export const dreamScenes = {
         },
       },
     ],
+    onPageLoad: () => {
+      const audioStore = useAudioStore();
+      audioStore.playGenericSound(crunchyWalkingSound);
+    },
     metadata: {
+      sectionId: "dream",
       routes: [
         {
           label: `Admire the trees`,
@@ -103,6 +110,7 @@ export const dreamScenes = {
       },
     ],
     metadata: {
+      sectionId: "dream",
       routes: [
         {
           label: `Try to catch one`,
@@ -148,6 +156,7 @@ export const dreamScenes = {
       },
     ],
     metadata: {
+      sectionId: "dream",
       routes: [
         {
           label: `Fall asleep`,
@@ -176,6 +185,7 @@ export const dreamScenes = {
       },
     ],
     metadata: {
+      sectionId: "dream",
       routes: [
         {
           label: `Wait... will I fall asleep forever?`,
@@ -219,6 +229,7 @@ export const dreamScenes = {
       },
     ],
     metadata: {
+      sectionId: "dream",
       routes: [
         {
           label: `awaken back into the first dream`,
@@ -256,6 +267,7 @@ export const dreamScenes = {
       },
     ],
     metadata: {
+      sectionId: "dream",
       routes: [
         {
           label: `a hilly landscape sprawls out before you`,
@@ -288,6 +300,7 @@ export const dreamScenes = {
       },
     ],
     metadata: {
+      sectionId: "dream",
       routes: [
         {
           label: `Breathe in`,
@@ -317,6 +330,7 @@ export const dreamScenes = {
       },
     ],
     metadata: {
+      sectionId: "dream",
       routes: [
         {
           label: `Open your eyes`,
@@ -369,10 +383,12 @@ export const dreamScenes = {
       },
     ],
     metadata: {
+      sectionId: "dream",
       routes: [
         {
           label: `THUNK`,
           redirect: "dream-tree-chase",
+          aspect: treeMurderer,
         },
       ],
     },

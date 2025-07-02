@@ -4,6 +4,8 @@
   <Snackbar />
 </template>
 
+/
+
 <script setup lang="ts">
 import StartDialog from "@/components/intro/StartDialog.vue";
 import Scene from "@/components/Scene.vue";

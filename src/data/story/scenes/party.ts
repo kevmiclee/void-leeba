@@ -1,6 +1,6 @@
 import { Scene, ScenePayload } from "@/types/story";
 import bgDefault from "@/assets/images/backgrounds/new-game.png";
-import partySong from "@/assets/audio/story/party.mp3";
+import partySong from "@/assets/audio/story/background-themes/party.mp3";
 import { useGameStore } from "@/stores/game";
 
 export const partyScenes = {
@@ -20,6 +20,7 @@ export const partyScenes = {
       },
     ],
     metadata: {
+      sectionId: "party",
       routes: [
         {
           label: `everything goes dark`,
@@ -42,6 +43,7 @@ export const partyScenes = {
       },
     ],
     metadata: {
+      sectionId: "party",
       routes: [
         {
           label: `No. Seariously. I'm not eating it`,

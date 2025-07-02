@@ -1,6 +1,7 @@
 import { Scene, ScenePayload } from "@/types/story";
 import bgDefault from "@/assets/images/backgrounds/new-game.png";
-import morningBirds from "@/assets/audio/story/morning-birds.mp3";
+import morningBirds from "@/assets/audio/story/background-themes/morning-birds.mp3";
+import homeSong from "@/assets/audio/story/background-themes/home.mp3";
 import { useGameStore } from "@/stores/game";
 import { useCharacterStore } from "@/stores/character";
 import { useAspectStore } from "@/stores/aspects";
@@ -29,6 +30,7 @@ export const homeScenes = {
       },
     ],
     metadata: {
+      sectionId: "home",
       routes: [
         {
           label: `Continue`,
@@ -41,7 +43,7 @@ export const homeScenes = {
   home1: (payload?: ScenePayload): Scene => ({
     id: "home1",
     background: bgDefault,
-    audio: morningBirds,
+    audio: homeSong,
     text:
       `Your rented room shares its house with roommates, who are at work. Daylight filters through the blinds of the living room window and is spilt onto the ceiling in stripes. ` +
       `The view out your window shows a lawn, a small tree speckled with red berries, and a quiet road with cars parked along its length.` +
@@ -58,9 +60,14 @@ export const homeScenes = {
       {
         text: "You can do anything! Look at your phone.",
         drawerView: "phone",
+        onChoose: () => {
+          const character = useCharacterStore();
+          character.gainStat("shitheadedness", 1);
+        },
       },
     ],
     metadata: {
+      sectionId: "home",
       routes: [
         {
           label: `Go out and explore`,
@@ -70,11 +77,14 @@ export const homeScenes = {
           label: `Enjoy some quiet time in your room`,
           redirect: "room",
         },
-        //TODO: drawer metadata
-        // {
-        //   label: `Look at your phone`,
-        //   redirect: "phone",
-        // },
+        {
+          label: `Look at your phone`,
+          redirect: "drawer",
+          stat: {
+            id: "shitheadedness",
+            amount: 1,
+          },
+        },
       ],
     },
   }),
@@ -82,6 +92,7 @@ export const homeScenes = {
   home2: (payload?: ScenePayload): Scene => ({
     id: "home2",
     background: bgDefault,
+    audio: homeSong,
     text: `Will you take anything with you?`,
     choices: () => [
       {
@@ -93,6 +104,7 @@ export const homeScenes = {
         onChoose: () => {
           const character = useCharacterStore();
           character.addToInventory("dog-food", "home2");
+          character.gainStat("athletics", 1);
         },
       },
       {
@@ -104,6 +116,7 @@ export const homeScenes = {
         onChoose: () => {
           const character = useCharacterStore();
           character.addToInventory("cards", "home2");
+          character.gainStat("blueMagic", 1);
         },
       },
       {
@@ -115,6 +128,7 @@ export const homeScenes = {
         onChoose: () => {
           const character = useCharacterStore();
           character.addToInventory("spray-paint", "home2");
+          character.gainStat("shitheadedness", 1);
         },
       },
       {
@@ -126,6 +140,7 @@ export const homeScenes = {
         onChoose: () => {
           const character = useCharacterStore();
           character.addToInventory("translator", "home2");
+          character.gainStat("blueMagic", 1);
         },
       },
       {
@@ -136,31 +151,56 @@ export const homeScenes = {
         },
         onChoose: () => {
           const aspects = useAspectStore();
+          const character = useCharacterStore();
+
           aspects.addAspect(ascetic);
+          character.gainStat("will", 1);
         },
       },
     ],
     metadata: {
+      sectionId: "home",
       routes: [
         {
           label: `Dog food can`,
           redirect: "home3",
+          stat: {
+            id: "athletics",
+            amount: 1,
+          },
         },
         {
           label: `Playing cards`,
           redirect: "home3",
+          stat: {
+            id: "blueMagic",
+            amount: 1,
+          },
         },
         {
           label: `Orange spray paint`,
           redirect: "home3",
+          stat: {
+            id: "shitheadedness",
+            amount: 1,
+          },
         },
         {
           label: `Translator`,
           redirect: "home3",
+          stat: {
+            id: "blueMagic",
+            amount: 1,
+          },
         },
         {
           label: `Nothing`,
           redirect: "home3",
+          aspect: ascetic,
+          stat: {
+            id: "will",
+            amount: 1,
+          },
         },
       ],
     },
@@ -168,6 +208,7 @@ export const homeScenes = {
 
   home3: (payload?: ScenePayload): Scene => ({
     id: "home3",
+    audio: homeSong,
     background: bgDefault,
     text: payload?.text ?? "",
     buttonActions: [
@@ -179,6 +220,7 @@ export const homeScenes = {
       },
     ],
     metadata: {
+      sectionId: "home",
       routes: [
         {
           label: `Continue`,
@@ -190,6 +232,8 @@ export const homeScenes = {
 
   room: (payload?: ScenePayload): Scene => ({
     id: "room",
+    // audio: homeSong,
+    //TODO: roomSong (cool)
     background: bgDefault,
     text:
       `You trudge up the light green carpeted narrow stairs to your room. Your room is festooned with posters, orderly piles of sorted odds and ends, and trinkets. ` +
@@ -218,6 +262,7 @@ export const homeScenes = {
       },
     ],
     metadata: {
+      sectionId: "home",
       routes: [
         {
           label: `A nap sounds nice`,
@@ -238,6 +283,7 @@ export const homeScenes = {
   nap: (payload?: ScenePayload): Scene => ({
     id: "nap",
     background: bgDefault,
+    //TODO: lullaby
     text:
       `You get over to your bed, pull up the sheets, slip in and nestle into the blankets. You're not very tired, ` +
       `but you're so unmotivated it hardly matters.`,
@@ -249,6 +295,7 @@ export const homeScenes = {
       },
     ],
     metadata: {
+      sectionId: "home",
       routes: [
         {
           label: `Close your eyes`,
@@ -297,6 +344,7 @@ export const homeScenes = {
       },
     ],
     metadata: {
+      sectionId: "home",
       routes: [
         // {
         //   label: `into the void`,

@@ -3,6 +3,7 @@ import bgDefault from "@/assets/images/backgrounds/new-game.png";
 import { useGameStore } from "@/stores/game";
 import { useCharacterStore } from "@/stores/character";
 import { getTreeChaseText } from "../helper-functions/text-helper-functions";
+import { allYourBonesAreBroken, jackBeNimble } from "@/data/aspects";
 
 export const dreamTreeChaseScenes = {
   "dream-tree-chase": (payload?: ScenePayload): Scene => ({
@@ -46,6 +47,7 @@ export const dreamTreeChaseScenes = {
       },
     ],
     metadata: {
+      sectionId: "dream-tree-chase",
       routes: [
         {
           label: `run`,
@@ -70,6 +72,7 @@ export const dreamTreeChaseScenes = {
       },
     ],
     metadata: {
+      sectionId: "dream-tree-chase",
       routes: [
         {
           label: `dodge them`,
@@ -85,14 +88,17 @@ export const dreamTreeChaseScenes = {
     text: "",
     miniGameId: "tree-chase",
     metadata: {
+      sectionId: "dream-tree-chase",
       routes: [
         {
           label: `win`,
           redirect: "dream-tree-chase-game-win",
+          aspect: jackBeNimble,
         },
         {
           label: `lose`,
           redirect: "dream-tree-chase-game-lose",
+          aspect: allYourBonesAreBroken,
         },
       ],
     },

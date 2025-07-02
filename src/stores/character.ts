@@ -37,6 +37,7 @@ export const useCharacterStore = defineStore("character", {
     setFlag<K extends FlagId>(key: K, value: FlagValues[K]) {
       this.flags[key] = value;
     },
+
     addToInventory(id: ItemId, pageAcquired: SceneId) {
       const item = itemCatalog[id];
       item.pageAcquired = pageAcquired;

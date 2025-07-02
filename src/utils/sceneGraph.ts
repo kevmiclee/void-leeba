@@ -1,14 +1,23 @@
 import { story, SceneId } from "@/data/story/story";
+import { Aspect } from "@/types/aspect";
 import { MiniGameId } from "@/types/minigame";
+import { SceneRouteStat } from "@/types/story";
 
 type SceneLink = {
-  from: SceneId | MiniGameId;
-  to: SceneId | MiniGameId;
+  from: SceneId | MiniGameId | "drawer";
+  to: SceneId | MiniGameId | "drawer";
   label?: string;
+  aspect?: string;
+  stat?: SceneRouteStat;
 };
 
-export function getSceneGraph(): SceneLink[] {
+export function getSceneGraph(): {
+  links: SceneLink[];
+  sectionMap: Record<string, SceneId[]>;
+} {
   const links: SceneLink[] = [];
+
+  const sectionMap: Record<string, SceneId[]> = {};
 
   for (const [id, sceneFn] of Object.entries(story)) {
     const scene = sceneFn();
@@ -20,11 +29,17 @@ export function getSceneGraph(): SceneLink[] {
             from: id as SceneId,
             to: route.redirect,
             label: route.label,
+            aspect: route.aspect?.name,
+            stat: route.stat,
           });
         }
       }
+
+      if (!sectionMap[scene.metadata.sectionId])
+        sectionMap[scene.metadata.sectionId] = [];
+      sectionMap[scene.metadata.sectionId].push(id as SceneId);
     }
   }
 
-  return links;
+  return { links, sectionMap };
 }

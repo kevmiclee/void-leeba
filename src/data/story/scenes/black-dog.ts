@@ -1,5 +1,6 @@
 import { Choice, Scene, ScenePayload } from "@/types/story";
 import bgDefault from "@/assets/images/backgrounds/new-game.png";
+import spookyMusic from "@/assets/audio/story/background-themes/spooky1.mp3";
 import { useGameStore } from "@/stores/game";
 import { useCharacterStore } from "@/stores/character";
 import { fateContest } from "../helper-functions/roll-helper-functions";
@@ -14,6 +15,7 @@ export const blackDogScenes = {
   "black-dog": (payload?: ScenePayload): Scene => ({
     id: "black-dog",
     background: bgDefault,
+    audio: spookyMusic,
     text:
       `They run past you to the skatepark. As they lope off, you turn around and lean against a tree.` +
       `^^Your attention shifts to the field as the distant lights of the highway pull your gaze, like shooting stars.` +
@@ -40,14 +42,23 @@ export const blackDogScenes = {
       },
     ],
     metadata: {
+      sectionId: "black-dog",
       routes: [
         {
           label: "Go closer.",
           redirect: "black-dog1",
+          stat: {
+            id: "will",
+            amount: 1,
+          },
         },
         {
           label: "Back away.",
           redirect: "black-dog1",
+          stat: {
+            id: "will",
+            amount: -1,
+          },
         },
       ],
     },
@@ -56,6 +67,7 @@ export const blackDogScenes = {
   "black-dog1": (payload?: ScenePayload): Scene => ({
     id: "black-dog1",
     background: bgDefault,
+    audio: spookyMusic,
     text:
       `Before you move a muscle, the dark star advances at a clip. As the distance closes, you notice rust red fur, ` +
       `interspersed with oily black. You feel riveted to the spot, unable to look away.` +
@@ -72,6 +84,7 @@ export const blackDogScenes = {
       },
     ],
     metadata: {
+      sectionId: "black-dog",
       routes: [
         {
           label: "You start acting careful.",
@@ -84,6 +97,7 @@ export const blackDogScenes = {
   "black-dog2": (payload?: ScenePayload): Scene => ({
     id: "black-dog2",
     background: bgDefault,
+    audio: spookyMusic,
     text:
       `As the Redblack dog approaches, you observe with rising nausea that it has a humanlike face but with dog flesh, ` +
       `and full dark eyes. The dog snarls, and it sounds like a hungry snarl. As it closes the distance to you, you see ` +
@@ -102,6 +116,7 @@ export const blackDogScenes = {
       { text: "Defend yourself.", next: "black-dog-bad" },
     ],
     metadata: {
+      sectionId: "black-dog",
       routes: [
         {
           label: "Good puppy.",
@@ -118,6 +133,7 @@ export const blackDogScenes = {
   "black-dog-good": (payload?: ScenePayload): Scene => ({
     id: "black-dog-good",
     background: bgDefault,
+    audio: spookyMusic,
     text:
       `You remember back to your childhood, to a dog you had, Calla. Calla, so stinky, so sweet, so loyal. The contrast between ` +
       `your childhood pet and this creature is striking. You feel few of the same feelings, despite the bodily similarity. ` +
@@ -134,6 +150,7 @@ export const blackDogScenes = {
       },
     ],
     metadata: {
+      sectionId: "black-dog",
       routes: [
         {
           label: "open it",
@@ -146,6 +163,7 @@ export const blackDogScenes = {
   "black-dog-good1": (payload?: ScenePayload): Scene => ({
     id: "black-dog-good1",
     background: bgDefault,
+    audio: spookyMusic,
     text:
       `Inside the locket is a dried bit of plant matter that smells of vanilla, and a taped lock of hair.` +
       `^^As you hold these items, they dissolve in your palm, and you feel an energy fill you with intention.`,
@@ -173,6 +191,7 @@ export const blackDogScenes = {
       game.updateShowDisappearingItem(true);
     },
     metadata: {
+      sectionId: "black-dog",
       routes: [
         {
           label: "Heal the human-faced dog's face back into a dog's face.",
@@ -189,6 +208,7 @@ export const blackDogScenes = {
   "black-dog-heal-dog": (payload?: ScenePayload): Scene => ({
     id: "black-dog-heal-dog",
     background: bgDefault,
+    audio: spookyMusic,
     text:
       `The creature's body seems to glow blue. Its human features morph and melt into the shape of a ` +
       `regular dog, keeping its general size, shape, and coloration, albeit red and black piebald.` +
@@ -218,6 +238,7 @@ export const blackDogScenes = {
       return choices;
     },
     metadata: {
+      sectionId: "black-dog",
       routes: [
         {
           label: "Give it some dog food.",
@@ -234,6 +255,7 @@ export const blackDogScenes = {
   "black-dog-heal-dog-food": (payload?: ScenePayload): Scene => ({
     id: "black-dog-heal-dog-food",
     background: bgDefault,
+    audio: spookyMusic,
     text: "",
     //TODO: the dog eats the food
     choices: () => [
@@ -243,6 +265,7 @@ export const blackDogScenes = {
       },
     ],
     metadata: {
+      sectionId: "black-dog",
       routes: [
         {
           label: "TODO",
@@ -255,6 +278,7 @@ export const blackDogScenes = {
   "black-dog-heal-human": (payload?: ScenePayload): Scene => ({
     id: "black-dog-heal-human",
     background: bgDefault,
+    audio: spookyMusic,
     text:
       `The creature's body seems to glow pink. Its dog features seem to morph and melt into the shape ` +
       `of a human, kneeling on the ground, its limbs lengthening and its fur receeding and shifting into ` +
@@ -268,6 +292,7 @@ export const blackDogScenes = {
       },
     ],
     metadata: {
+      sectionId: "black-dog",
       routes: [
         {
           label: "TODO",
@@ -280,6 +305,7 @@ export const blackDogScenes = {
   "black-dog-heal-human-redux": (payload?: ScenePayload): Scene => ({
     id: "black-dog-heal-human-redux",
     background: bgDefault,
+    audio: spookyMusic,
     text:
       `I saw the Moondog again today. Under the empty playground slide in the park. An empty locket hangs around their neck. ` +
       `They contemplate the slide and my hide. I work up the guts to say, “You're not a dog now, what the heck!”Moondog says, ` +
@@ -299,6 +325,7 @@ export const blackDogScenes = {
   "black-dog-bad": (payload?: ScenePayload): Scene => ({
     id: "black-dog-bad",
     background: bgDefault,
+    audio: spookyMusic,
 
     text:
       `Its bloodshot eyes stare into yours with shameless hunger. The smell of stale smoke like the stench of clothing bathed ` +
@@ -334,6 +361,7 @@ export const blackDogScenes = {
       },
     ],
     metadata: {
+      sectionId: "black-dog",
       routes: [
         {
           label: "getBlackDogOutcome success",
@@ -350,6 +378,7 @@ export const blackDogScenes = {
   "black-dog-bad-success": (payload?: ScenePayload): Scene => ({
     id: "black-dog-bad-success",
     background: bgDefault,
+    audio: spookyMusic,
     text: payload?.text ?? "",
     buttonActions: [
       {
@@ -360,6 +389,7 @@ export const blackDogScenes = {
       },
     ],
     metadata: {
+      sectionId: "black-dog",
       routes: [
         {
           label: "feel bad",
@@ -372,6 +402,7 @@ export const blackDogScenes = {
   "black-dog-bad-fail": (payload?: ScenePayload): Scene => ({
     id: "black-dog-bad-fail",
     background: bgDefault,
+    audio: spookyMusic,
     text: payload?.text ?? "",
     buttonActions: [
       {
@@ -394,6 +425,7 @@ export const blackDogScenes = {
       },
     ],
     metadata: {
+      sectionId: "black-dog",
       routes: [
         {
           label: "has dog food",
@@ -410,6 +442,7 @@ export const blackDogScenes = {
   "black-dog-bad-fail-food": (payload?: ScenePayload): Scene => ({
     id: "black-dog-bad-fail-food",
     background: bgDefault,
+    audio: spookyMusic,
     text:
       `...^^But wait! You're still here... You open your eyes. The redblack dog is harmlessly sniffing ` +
       `around your pack. That's when you remember -- the dog food! Sweet serendiptity! Cautiously, you ` +
@@ -425,6 +458,7 @@ export const blackDogScenes = {
       },
     ],
     metadata: {
+      sectionId: "black-dog",
       routes: [
         {
           label: "let the creature take the food",
@@ -437,6 +471,7 @@ export const blackDogScenes = {
   "black-dog-bad-fail-food1": (payload?: ScenePayload): Scene => ({
     id: "black-dog-bad-fail-food1",
     background: bgDefault,
+    audio: spookyMusic,
     text: ``,
     //TODO:
     dialogSequence: () => [
@@ -452,6 +487,7 @@ export const blackDogScenes = {
       },
     ],
     metadata: {
+      sectionId: "black-dog",
       routes: [
         {
           label: "TODO",
@@ -464,6 +500,7 @@ export const blackDogScenes = {
   "black-dog-bad-fail-drunks": (payload?: ScenePayload): Scene => ({
     id: "black-dog-bad-fail-drunks",
     background: bgDefault,
+    audio: spookyMusic,
     text: getDrunkRescueText(payload?.filter),
     dialogSequence: () => {
       if (payload?.filter) {
@@ -522,6 +559,7 @@ export const blackDogScenes = {
       }
     },
     metadata: {
+      sectionId: "black-dog",
       routes: [
         {
           label: "sided with a drunk or is polite",
@@ -538,12 +576,14 @@ export const blackDogScenes = {
   "black-dog-bad-fail-drunks-help": (payload?: ScenePayload): Scene => ({
     id: "black-dog-bad-fail-drunks-help",
     background: bgDefault,
+    audio: spookyMusic,
     text:
       `The ${payload?.filter == "both" ? "drunks scatter" : "drunk scatters"}  some dog food on the ground. The redblack dog retreats ` +
       `and busies itself with the food.`,
 
     choices: () => [{ text: "TODO", next: "black-dog-done" }],
     metadata: {
+      sectionId: "black-dog",
       routes: [
         {
           label: "TODO",
@@ -556,6 +596,7 @@ export const blackDogScenes = {
   "black-dog-bad-fail-drunks-leave": (payload?: ScenePayload): Scene => ({
     id: "black-dog-bad-fail-drunks-leave",
     background: bgDefault,
+    audio: spookyMusic,
     text:
       `They leave. And miracualously, so does the redblack dog. It seems to recognize the drunks and follows them happily.^^` +
       `You feel embarassed for what just happened. {And alone}.`,
@@ -568,6 +609,7 @@ export const blackDogScenes = {
       },
     ],
     metadata: {
+      sectionId: "black-dog",
       routes: [
         {
           label: "And alone",
@@ -580,6 +622,7 @@ export const blackDogScenes = {
   "black-dog-feel-bad": (payload?: ScenePayload): Scene => ({
     id: "black-dog-feel-bad",
     background: bgDefault,
+    audio: spookyMusic,
     text:
       `You animal abuser!! But...its face is human, you say. Does that make it okay?` +
       `^^Do you hate the human-faced dog because it's pieces of you?` +
@@ -594,6 +637,7 @@ export const blackDogScenes = {
       },
     ],
     metadata: {
+      sectionId: "black-dog",
       routes: [
         {
           label: "so scary",
@@ -606,6 +650,7 @@ export const blackDogScenes = {
   "black-dog-viral": (payload?: ScenePayload): Scene => ({
     id: "black-dog-viral",
     background: bgDefault,
+    audio: spookyMusic,
     text: "Suddenly, it's like a bomb went off on your phone. Alerts chirping like crazy.",
     onPageLoad: () => {
       const drawer = useDrawerStore();
@@ -624,7 +669,10 @@ export const blackDogScenes = {
   "black-dog-done": (payload?: ScenePayload): Scene => ({
     id: "black-dog-done",
     background: bgDefault,
+    audio: spookyMusic,
     text: "",
     //TODO:
   }),
 };
+
+//TODO: No aspects?

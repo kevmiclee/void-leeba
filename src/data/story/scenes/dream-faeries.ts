@@ -1,6 +1,6 @@
 import { Choice, Scene, ScenePayload } from "@/types/story";
 import bgDefault from "@/assets/images/backgrounds/new-game.png";
-import faeriesSong from "@/assets/audio/story/faeries.mp3";
+import faeriesSong from "@/assets/audio/story/background-themes/faeries.mp3";
 import { useGameStore } from "@/stores/game";
 import { useCharacterStore } from "@/stores/character";
 import {
@@ -65,6 +65,7 @@ export const dreamFaeriesScenes = {
       },
     ],
     metadata: {
+      sectionId: "dream-faeries",
       routes: [
         {
           label: "faerie dialog click",
@@ -104,10 +105,12 @@ export const dreamFaeriesScenes = {
       },
     ],
     metadata: {
+      sectionId: "dream-faeries",
       routes: [
         {
           label: `Bow graciously. "Thanks for spitting in my nostril holes."`,
           redirect: "dream-faeries2",
+          aspect: magicNosehairs,
         },
         {
           label: `Get on their case about littering.`,
@@ -151,6 +154,7 @@ export const dreamFaeriesScenes = {
       },
     ],
     metadata: {
+      sectionId: "dream-faeries",
       routes: [
         {
           label: `faerie dialog click`,
@@ -190,6 +194,7 @@ export const dreamFaeriesScenes = {
       },
     ],
     metadata: {
+      sectionId: "dream-faeries",
       routes: [
         {
           label: `"Um..."`,
@@ -221,6 +226,7 @@ export const dreamFaeriesScenes = {
       },
     ],
     metadata: {
+      sectionId: "dream-faeries",
       routes: [
         {
           label: `faerie dialog clicks`,
@@ -244,6 +250,7 @@ export const dreamFaeriesScenes = {
       { text: "On second thought...", next: "party-eggcorn-check" },
     ],
     metadata: {
+      sectionId: "dream-faeries",
       routes: [
         {
           label: `YOLO! Eat the eggcorn.`,
@@ -294,6 +301,7 @@ export const dreamFaeriesScenes = {
       return choices;
     },
     metadata: {
+      sectionId: "dream-faeries",
       routes: [
         {
           label: `"Oh I see, you were planting snail trees! The Hongatar truly are a noble breed.`,
@@ -360,18 +368,22 @@ export const dreamFaeriesScenes = {
       ];
     },
     metadata: {
+      sectionId: "dream-faeries",
       routes: [
         {
           label: `"You're lying. I saw you eating the snails!"`,
           redirect: "dream-faeries2",
+          aspect: boyWhoCriedWolf,
         },
         {
           label: `"Your dedication to the ecosystem is so inspiring. If only we humans were so thoughtful and so brave."`,
           redirect: "dream-faeries2",
+          aspect: oneWithTheHongatar,
         },
         {
           label: `"That is asinine."`,
           redirect: "dream-faeries2",
+          aspect: nobodysFriend,
         },
       ],
     },
@@ -397,6 +409,7 @@ export const dreamFaeriesScenes = {
       },
     ],
     metadata: {
+      sectionId: "dream-faeries",
       routes: [
         {
           label: `faerie dialog click`,
@@ -442,6 +455,7 @@ export const dreamFaeriesScenes = {
       },
     ],
     metadata: {
+      sectionId: "dream-faeries",
       routes: [
         {
           label: `faerie dialog click`,
@@ -491,18 +505,22 @@ export const dreamFaeriesScenes = {
       },
     ],
     metadata: {
+      sectionId: "dream-faeries",
       routes: [
         {
           label: `"Let that be a lesson to you."`,
           redirect: "dream-faeries2",
+          aspect: godOfTheForest,
         },
         {
           label: `"Self-help is my favorite genre, thanks!"`,
           redirect: "dream-faeries2",
+          aspect: buttOfTheJoke,
         },
         {
           label: `Wink.`,
           redirect: "dream-faeries2",
+          aspect: sexyGodOfTheForest,
         },
       ],
     },
@@ -528,6 +546,7 @@ export const dreamFaeriesScenes = {
       },
     ],
     metadata: {
+      sectionId: "dream-faeries",
       routes: [
         {
           label: `"I'm good. Thanks"`,
@@ -557,6 +576,7 @@ export const dreamFaeriesScenes = {
       },
     ],
     metadata: {
+      sectionId: "dream-faeries",
       routes: [
         {
           label: `fearie dialog click`,

@@ -3,6 +3,8 @@ import { SceneId } from "@/data/story/story";
 import { DictionaryEntryId } from "./dictionary";
 import { DrawerView } from "./drawer-view";
 import { MiniGameId } from "./minigame";
+import { Aspect } from "./aspect";
+import { Stat } from "./stat";
 
 export interface ScenePayload {
   filter?: string;
@@ -53,10 +55,17 @@ export interface FateOutcome {
 export interface SceneMetadata {
   routes?: SceneRouteMetadata[];
   items?: string[];
-  aspects?: string[];
+  sectionId: string;
 }
 
 export interface SceneRouteMetadata {
   label: string;
-  redirect: SceneId;
+  redirect: SceneId | "drawer";
+  aspect?: Aspect;
+  stat?: SceneRouteStat;
+}
+
+export interface SceneRouteStat {
+  id: Stat;
+  amount: number;
 }

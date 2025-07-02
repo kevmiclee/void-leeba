@@ -25,6 +25,13 @@ export function useAudioStore() {
     });
   }
 
+  function playGenericSound(src: string) {
+    const audio = new Audio(src);
+    audio.play().catch((e) => {
+      console.warn("Audio playback failed:", e);
+    });
+  }
+
   function playBackgroundAudio(src: string | undefined) {
     if (!src) {
       if (currentBgAudio.value) {
@@ -46,16 +53,20 @@ export function useAudioStore() {
     newAudio: HTMLAudioElement,
     oldAudio: HTMLAudioElement | null
   ) {
+    // need to make sure this completes
     if (oldAudio) {
+      oldAudio.removeEventListener("loadedmetadata", () => {
+        updateInterval();
+      });
       currentBgAudio.value = newAudio;
       const step = oldAudio.volume / (fadeDuration / 50);
+      fadeInAudio(newAudio);
       const fadeOut = setInterval(() => {
         if (oldAudio.volume > 0.05) {
           oldAudio.volume -= step;
         } else {
           clearInterval(fadeOut);
           oldAudio.pause();
-          fadeInAudio(newAudio);
         }
       }, 50);
     } else {
@@ -64,6 +75,7 @@ export function useAudioStore() {
       fadeInAudio(currentBgAudio.value);
     }
 
+    //before this code is called
     currentBgAudio.value?.addEventListener("loadedmetadata", () => {
       updateInterval();
     });
@@ -83,7 +95,7 @@ export function useAudioStore() {
 
   function fadeInAudio(audio: HTMLAudioElement) {
     audio.play();
-    const step = 1 / (fadeDuration / 50);
+    const step = 1 / (fadeDuration / 100);
     const fadeIn = setInterval(() => {
       if (audio.volume < 0.95) {
         audio.volume += step;
@@ -91,12 +103,13 @@ export function useAudioStore() {
         audio.volume = 1;
         clearInterval(fadeIn);
       }
-    }, 50);
+    }, 100);
   }
 
   return {
     playBackgroundAudio,
     playCharacterSound,
+    playGenericSound,
   };
 }
 
@@ -112,3 +125,6 @@ function updateInterval() {
     }
   }, intervalTime * 1000);
 }
+
+//TODO: sound when adding item to inventory
+//TODO: sound when clicking on something

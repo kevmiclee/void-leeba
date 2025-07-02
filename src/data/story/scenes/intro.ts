@@ -1,7 +1,7 @@
 import { Scene, ScenePayload } from "@/types/story";
 import bgStart from "@/assets/images/backgrounds/Landing-Page.png";
-import introAudio from "@/assets/audio/story/intro.mp3";
-import windTunnel from "@/assets/audio/story/wind-tunnel.mp3";
+import introAudio from "@/assets/audio/story/background-themes/intro.mp3";
+import windTunnel from "@/assets/audio/story/background-themes/wind-tunnel.mp3";
 
 import { useGameStore } from "@/stores/game";
 
@@ -23,6 +23,7 @@ export const introScenes = {
       },
     ],
     metadata: {
+      sectionId: "intro",
       routes: [
         {
           label: `New game`,
@@ -42,6 +43,7 @@ export const introScenes = {
     audio: windTunnel,
     animationRate: 250,
     metadata: {
+      sectionId: "intro",
       routes: [
         {
           label: `trigger`,
@@ -57,6 +59,7 @@ export const introScenes = {
     audio: windTunnel,
     animationRate: 250,
     metadata: {
+      sectionId: "intro",
       routes: [
         {
           label: `trigger`,

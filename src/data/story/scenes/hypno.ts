@@ -3,6 +3,7 @@ import bgDefault from "@/assets/images/backgrounds/new-game.png";
 import { useAspectStore } from "@/stores/aspects";
 import { lifeOfTheParty, wellVersed } from "@/data/aspects";
 import { useGameStore } from "@/stores/game";
+import { useCharacterStore } from "@/stores/character";
 
 export const hypnoScenes = {
   hypno: (payload?: ScenePayload): Scene => ({
@@ -23,6 +24,7 @@ export const hypnoScenes = {
       { text: "Finish.", next: "hypno1" },
     ],
     metadata: {
+      sectionId: "hypno",
       routes: [
         { label: "Keep practicing.", redirect: "hypno-practice" },
         { label: "Finish.", redirect: "hypno1" },
@@ -42,6 +44,7 @@ export const hypnoScenes = {
       { text: "Finish.", next: "hypno1" },
     ],
     metadata: {
+      sectionId: "hypno",
       routes: [
         { label: "Keep practicing.", redirect: "hypno-practice1" },
         { label: "Finish.", redirect: "hypno1" },
@@ -65,7 +68,8 @@ export const hypnoScenes = {
       },
     ],
     metadata: {
-      routes: [{ label: "Finish.", redirect: "hypno1" }],
+      sectionId: "hypno",
+      routes: [{ label: "Finish.", redirect: "hypno1", aspect: wellVersed }],
     },
   }),
 
@@ -94,9 +98,14 @@ export const hypnoScenes = {
         text: `"I got this!"`,
         next: "hypno2",
         payload: { filter: "confident" },
+        onChoose: () => {
+          const character = useCharacterStore();
+          character.gainStat("will", 1);
+        },
       },
     ],
     metadata: {
+      sectionId: "hypno",
       routes: [
         {
           label: `"I don't think I'm cut out for this."`,
@@ -109,6 +118,10 @@ export const hypnoScenes = {
         {
           label: `"I got this!"`,
           redirect: "hypno2",
+          stat: {
+            id: "will",
+            amount: 1,
+          },
         },
       ],
     },
@@ -134,6 +147,7 @@ export const hypnoScenes = {
       },
     ],
     metadata: {
+      sectionId: "hypno",
       routes: [{ label: "buzz dialog click.", redirect: "hypno3" }],
     },
   }),
@@ -154,6 +168,7 @@ export const hypnoScenes = {
       },
     ],
     metadata: {
+      sectionId: "hypno",
       routes: [{ label: "keg", redirect: "hypno4" }],
     },
   }),
@@ -175,6 +190,7 @@ export const hypnoScenes = {
       },
     ],
     metadata: {
+      sectionId: "hypno",
       routes: [{ label: "buzz dialog click.", redirect: "hypno5" }],
     },
   }),
@@ -199,6 +215,7 @@ export const hypnoScenes = {
       },
     ],
     metadata: {
+      sectionId: "hypno",
       routes: [{ label: "buzz dialog click.", redirect: "hypno6" }],
     },
   }),
@@ -228,6 +245,7 @@ export const hypnoScenes = {
       },
     ],
     metadata: {
+      sectionId: "hypno",
       routes: [
         {
           label: "I'm not doing this! Will yourself awake",
@@ -260,6 +278,7 @@ export const hypnoScenes = {
       },
     ],
     metadata: {
+      sectionId: "hypno",
       routes: [
         { label: "I said no", redirect: "dream1" },
         {
@@ -285,6 +304,7 @@ export const hypnoScenes = {
       },
     ],
     metadata: {
+      sectionId: "hypno",
       routes: [{ label: "buzz dialog click", redirect: "hypno-ready1" }],
     },
   }),
@@ -307,7 +327,10 @@ export const hypnoScenes = {
       },
     ],
     metadata: {
-      routes: [{ label: "Act like a keg", redirect: "party" }],
+      sectionId: "hypno",
+      routes: [
+        { label: "Act like a keg", redirect: "party", aspect: lifeOfTheParty },
+      ],
     },
   }),
 };
