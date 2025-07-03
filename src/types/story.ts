@@ -4,7 +4,8 @@ import { DictionaryEntryId } from "./dictionary";
 import { DrawerView } from "./drawer-view";
 import { MiniGameId } from "./minigame";
 import { Aspect } from "./aspect";
-import { Stat } from "./stat";
+import { Stat, StatId } from "./stat";
+import { Manners } from "./manners";
 
 export interface ScenePayload {
   filter?: string;
@@ -63,9 +64,10 @@ export interface SceneRouteMetadata {
   redirect: SceneId | "drawer";
   aspect?: Aspect;
   stat?: SceneRouteStat;
+  manners?: Manners;
 }
 
 export interface SceneRouteStat {
-  id: Stat;
+  id: StatId;
   amount: number;
 }

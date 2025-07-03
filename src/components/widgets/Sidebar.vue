@@ -2,12 +2,12 @@
   <div class="sidebar">
     <button
       v-if="scenes.length > 1 && currentSceneIndex > 0"
-      @click.stop="game.goBack()"
+      @click.stop="goBack"
     >
       <
     </button>
-    <button v-if="canGoForward" @click.stop="game.goForward()">></button>
-    <button @click.stop="drawer.toggleDrawer">
+    <button v-if="canGoForward" @click.stop="goForward">></button>
+    <button @click.stop="toggleDrawer">
       ☰
       <span
         v-if="animatedCount > 0"
@@ -40,12 +40,14 @@
 import { useGameStore } from "@/stores/game";
 import { usePhoneStore } from "@/stores/phone";
 import Drawer from "@/components/drawer/Drawer.vue";
-import { computed, ref, watch, watchEffect } from "vue";
+import { computed, ref, watch } from "vue";
 import { useDrawerStore } from "@/stores/drawer";
+import { useAudioStore } from "@/stores/audio";
 
 const game = useGameStore();
 const phone = usePhoneStore();
 const drawer = useDrawerStore();
+const audioStore = useAudioStore();
 
 const scenes = computed(() => game.scenes);
 const currentSceneIndex = computed(() =>
@@ -78,6 +80,21 @@ function animateToThousand(start: number, target = 100) {
   };
 
   step();
+}
+
+function goBack() {
+  audioStore.click();
+  game.goBack();
+}
+
+function goForward() {
+  audioStore.click();
+  game.goForward();
+}
+
+function toggleDrawer() {
+  audioStore.click();
+  drawer.toggleDrawer();
 }
 
 watch(

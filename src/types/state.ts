@@ -6,6 +6,7 @@ import { FlagId, Flags } from "./flag";
 import { DrawerView } from "./drawer-view";
 import { Manners } from "./manners";
 import { Aspect } from "./aspect";
+import { Stat } from "./stat";
 
 export interface GameState {
   currentSceneId: SceneId;
@@ -24,10 +25,10 @@ export interface GameState {
 export interface CharacterState {
   name: string;
   health: number;
-  blueMagic: number;
-  will: number;
-  shitheadedness: number;
-  athletics: number;
+  blueMagic: Stat;
+  will: Stat;
+  shitheadedness: Stat;
+  athletics: Stat;
   inventory: Item[];
   flags: Flags;
   manners: Manners | undefined;

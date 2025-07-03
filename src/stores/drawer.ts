@@ -4,6 +4,7 @@ import { Item } from "@/types/item";
 import { usePhoneStore } from "./phone";
 import { DictionaryEntry } from "@/types/dictionary";
 import { DrawerView } from "@/types/drawer-view";
+import { useAudioStore } from "./audio";
 
 export type DrawerStore = ReturnType<typeof useDrawerStore>;
 
@@ -39,6 +40,8 @@ export const useDrawerStore = defineStore("drawer", {
     },
 
     resetDrawerView() {
+      const audioStore = useAudioStore();
+      audioStore.click();
       if (this.drawerView == "phone") {
         const phone = usePhoneStore();
         phone.markAsRead();

@@ -1,5 +1,6 @@
 import { CharacterId } from "@/types/character";
 import { ref } from "vue";
+import clickSound from "@/assets/audio/story/sounds/click.mp3";
 
 let intervalId: number;
 let intervalTime: number = 0;
@@ -106,10 +107,15 @@ export function useAudioStore() {
     }, 100);
   }
 
+  function click() {
+    playGenericSound(clickSound);
+  }
+
   return {
     playBackgroundAudio,
     playCharacterSound,
     playGenericSound,
+    click,
   };
 }
 
@@ -125,6 +131,3 @@ function updateInterval() {
     }
   }, intervalTime * 1000);
 }
-
-//TODO: sound when adding item to inventory
-//TODO: sound when clicking on something

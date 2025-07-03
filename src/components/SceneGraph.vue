@@ -80,6 +80,7 @@ function renderGraph() {
   const outgoingMap: Record<string, Set<string>> = {};
   const incomingMap: Record<string, Set<string>> = {};
   const statEdgeCountMap: Record<string, number> = {};
+  const mannersEdgeCountMap: Record<string, number> = {};
 
   for (const edge of visibleLinks) {
     if (!outgoingMap[edge.from]) outgoingMap[edge.from] = new Set();
@@ -88,8 +89,7 @@ function renderGraph() {
     incomingMap[edge.to].add(edge.from);
   }
 
-  const aspectNodes = new Set<string>();
-  const statNodes = new Set<string>();
+  const characterNodes = new Set<string>();
   const syntheticNodes = new Set<string>();
   const edges: Edge[] = [];
   const edgeStackMap: Record<string, number> = {};
@@ -100,10 +100,27 @@ function renderGraph() {
     edgeStackMap[edgeId] = stackIndex + 1;
     let midNodeId: string | null = null;
 
-    if (g.aspect) {
+    if (g.aspect || g.stat || g.manners) {
       midNodeId = `mid:${edgeId}:${stackIndex}`;
       syntheticNodes.add(midNodeId);
-      aspectNodes.add(g.aspect);
+
+      let statNodeId = g.stat?.id ?? "";
+      let mannersNodeId = g.manners ?? "";
+
+      if (g.stat) {
+        const index = statEdgeCountMap[g.stat.id] ?? 0;
+        statEdgeCountMap[g.stat.id] = index + 1;
+        statNodeId = `${g.stat.id}_${index + 1}`;
+      }
+
+      if (g.manners) {
+        const index = mannersEdgeCountMap[g.manners] ?? 0;
+        mannersEdgeCountMap[g.manners] = index + 1;
+        mannersNodeId = `${g.manners}_${index + 1}`;
+      }
+
+      const char = `${g.aspect ?? ""}-${statNodeId}-${mannersNodeId}`;
+      characterNodes.add(char);
 
       edges.push({
         from: g.from,
@@ -122,8 +139,8 @@ function renderGraph() {
 
       edges.push({
         from: midNodeId,
-        to: `aspect:${g.aspect}`,
-        label: "aspect",
+        to: `char:${char}`,
+        label: g.stat ? `${g.stat.amount > 0 ? "+" : ""}${g.stat.amount}` : "",
         dashes: true,
         arrows: "to",
         color: { color: "orange" },
@@ -132,50 +149,13 @@ function renderGraph() {
       });
     }
 
-    if (g.stat) {
-      const statMidNodeId = midNodeId ?? `mid:${edgeId}:${stackIndex}`;
-      if (!midNodeId) syntheticNodes.add(statMidNodeId);
-
-      const index = statEdgeCountMap[g.stat.id] ?? 0;
-      statEdgeCountMap[g.stat.id] = index + 1;
-      const statNodeId = `${g.stat.id}_${index + 1}`;
-      statNodes.add(statNodeId);
-
-      if ((midNodeId ?? g.from) != statMidNodeId) {
-        edges.push({
-          from: midNodeId ?? g.from,
-          to: statMidNodeId,
-          arrows: "to",
-          label: wrapText(g.label ?? "", 20),
-          font: { size: 12, multi: true },
-          smooth: {
-            enabled: true,
-            type: i % 2 === 0 ? "curvedCW" : "curvedCCW",
-            roundness: 0.2 + (i % 3) * 0.1,
-          },
-        });
-      }
-
-      edges.push({ from: statMidNodeId, to: g.to, arrows: "to", smooth: true });
-
-      edges.push({
-        from: statMidNodeId,
-        to: `stat:${statNodeId}`,
-        label: `${g.stat.amount > 0 ? "+" : ""}${g.stat.amount}`,
-        dashes: true,
-        arrows: "to",
-        color: { color: "purple" },
-        smooth: { type: "discrete", enabled: true, roundness: 0.2 },
-        length: 10,
-      });
-    }
-
-    if (!g.aspect && !g.stat) {
+    if (!g.aspect && !g.stat && !g.manners) {
       edges.push({
         from: g.from,
         to: g.to,
         arrows: "to",
         label: wrapText(g.label ?? "", 20),
+
         font: { size: 12, multi: true },
         smooth: {
           enabled: true,
@@ -185,6 +165,44 @@ function renderGraph() {
       });
     }
   }
+
+  //  if (g.stat) {
+  //   const statMidNodeId = midNodeId ?? `mid:${edgeId}:${stackIndex}`;
+  //   if (!midNodeId) syntheticNodes.add(statMidNodeId);
+
+  //   const index = statEdgeCountMap[g.stat.id] ?? 0;
+  //   statEdgeCountMap[g.stat.id] = index + 1;
+  //   const statNodeId = `${g.stat.id}_${index + 1}`;
+  //   statNodes.add(statNodeId);
+
+  //   if ((midNodeId ?? g.from) != statMidNodeId) {
+  //     edges.push({
+  //       from: midNodeId ?? g.from,
+  //       to: statMidNodeId,
+  //       arrows: "to",
+  //       label: wrapText(g.label ?? "", 20),
+  //       font: { size: 12, multi: true },
+  //       smooth: {
+  //         enabled: true,
+  //         type: i % 2 === 0 ? "curvedCW" : "curvedCCW",
+  //         roundness: 0.2 + (i % 3) * 0.1,
+  //       },
+  //     });
+  //   }
+
+  //   edges.push({ from: statMidNodeId, to: g.to, arrows: "to", smooth: true });
+
+  //   edges.push({
+  //     from: statMidNodeId,
+  //     to: `stat:${statNodeId}`,
+  //     label: `${g.stat.amount > 0 ? "+" : ""}${g.stat.amount}`,
+  //     dashes: true,
+  //     arrows: "to",
+  //     color: { color: "purple" },
+  //     smooth: { type: "discrete", enabled: true, roundness: 0.2 },
+  //     length: 10,
+  //   });
+  // }
 
   const allNodeIds = new Set(visibleLinks.flatMap((g) => [g.from, g.to]));
   const sceneNodes = Array.from(allNodeIds).map((id) => {
@@ -216,19 +234,29 @@ function renderGraph() {
     };
   });
 
-  const aspectNodeObjs = Array.from(aspectNodes).map((aspect) => ({
-    id: `aspect:${aspect}`,
-    label: aspect,
-    shape: "diamond",
-    color: "orange",
-  }));
+  const characterNodeObjs = Array.from(characterNodes).map((char) => {
+    const chars = char.split("-");
+    let label = "";
 
-  const statNodeObjs = Array.from(statNodes).map((stat) => ({
-    id: `stat:${stat}`,
-    label: stat,
-    shape: "star",
-    color: "purple",
-  }));
+    if (chars[0] != "") {
+      label += `ASPECT: ${chars[0]} `;
+    }
+
+    if (chars[1] != "") {
+      label += `STAT: ${chars[1]} `;
+    }
+
+    if (chars[2] != "") {
+      label += `MANNERS: ${chars[2]} `;
+    }
+
+    return {
+      id: `char:${char}`,
+      label: label,
+      shape: "diamond",
+      color: "orange",
+    };
+  });
 
   const syntheticNodeObjs = Array.from(syntheticNodes).map((id) => ({
     id,
@@ -238,12 +266,7 @@ function renderGraph() {
     color: "#888",
   }));
 
-  const nodes = [
-    ...sceneNodes,
-    ...aspectNodeObjs,
-    ...statNodeObjs,
-    ...syntheticNodeObjs,
-  ];
+  const nodes = [...sceneNodes, ...characterNodeObjs, ...syntheticNodeObjs];
 
   const network = new Network(
     container,
@@ -253,11 +276,36 @@ function renderGraph() {
         length: 1200,
         smooth: { enabled: true, type: "dynamic", roundness: 0.4 },
       },
-      layout: { hierarchical: { enabled: false } },
-      physics: { enabled: false },
-      interaction: { hover: true },
+      layout: {
+        hierarchical: {
+          enabled: activeSection.value === "All",
+          levelSeparation: 200,
+          nodeSpacing: 200,
+          treeSpacing: 300,
+          direction: "UD", // or "LR"
+          sortMethod: "directed", // or "hubsize"
+        },
+      },
+      physics: {
+        enabled: false, // Usually disable physics with hierarchical layouts
+      },
+      interaction: {
+        hover: true,
+        dragNodes: true, // Allow users to move nodes
+        dragView: true,
+      },
     }
   );
+
+  network.once("afterDrawing", () => {
+    network.setOptions({
+      layout: {
+        hierarchical: {
+          enabled: false, // allow free-form movement
+        },
+      },
+    });
+  });
 
   network.on("click", function (params) {
     const nodeId = params.nodes[0];

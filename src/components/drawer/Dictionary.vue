@@ -7,7 +7,7 @@
       class="sub"
       v-for="(entry, index) in dictionary.entries"
       :key="entry.id"
-      @click.stop="drawer.updateSelectedDictionaryEntry(entry)"
+      @click.stop="updateSelectedDictionaryEntry(entry)"
     >
       <div>• {{ entry.name }}</div>
     </li>
@@ -17,9 +17,17 @@
 <script setup lang="ts">
 import { useDrawerStore } from "@/stores/drawer";
 import { useDictionaryStore } from "@/stores/dictionary";
+import { useAudioStore } from "@/stores/audio";
+import { DictionaryEntry } from "@/types/dictionary";
 
 const drawer = useDrawerStore();
 const dictionary = useDictionaryStore();
+const audioStore = useAudioStore();
+
+function updateSelectedDictionaryEntry(entry: DictionaryEntry) {
+  audioStore.click();
+  drawer.updateSelectedDictionaryEntry(entry);
+}
 </script>
 
 <style scoped>

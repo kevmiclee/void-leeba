@@ -15,11 +15,7 @@
         <div
           v-html="`• ${choice.text}`"
           class="choice"
-          @click.stop="
-            choice.drawerView
-              ? openDrawerToView(choice.drawerView)
-              : game.chooseOption(choice)
-          "
+          @click.stop="onChoiceClicked(choice)"
         ></div>
       </div>
     </div>
@@ -47,6 +43,7 @@ import Dialog from "./Dialog.vue";
 import { CharacterId } from "@/types/character";
 import { useDrawerStore } from "@/stores/drawer";
 import { DrawerView } from "@/types/drawer-view";
+import { Choice } from "@/types/story";
 
 const game = useGameStore();
 const audioStore = useAudioStore();
@@ -130,6 +127,13 @@ function onAvatarClicked() {
 function openDrawerToView(value: DrawerView) {
   drawer.toggleDrawer();
   drawer.setDrawerView(value);
+}
+
+function onChoiceClicked(choice: Choice) {
+  audioStore.click();
+  choice.drawerView
+    ? openDrawerToView(choice.drawerView)
+    : game.chooseOption(choice);
 }
 
 const rotationDeg = ref("0");

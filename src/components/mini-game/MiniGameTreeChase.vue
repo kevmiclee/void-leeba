@@ -17,11 +17,13 @@
 import { ref, onMounted } from "vue";
 import playerImg from "@/assets/images/avatars/player.png";
 import pineNeedlesImg from "@/assets/images/backgrounds/pine-needles.jpg";
+import playerHurtSound from "@/assets/audio/story/sounds/player-hurt.mp3";
 
 import { useGameStore } from "../../stores/game";
 import { useCharacterStore } from "../../stores/character";
 import { useAspectStore } from "@/stores/aspects";
 import { allYourBonesAreBroken, jackBeNimble } from "@/data/aspects";
+import { useAudioStore } from "@/stores/audio";
 
 const gameRef = ref<HTMLDivElement | null>(null);
 const playerRef = ref<HTMLDivElement | null>(null);
@@ -31,6 +33,7 @@ let timerInterval: number = 0;
 
 const character = useCharacterStore();
 const game = useGameStore();
+const audioStore = useAudioStore();
 const itemWeight = character.inventory.reduce(
   (sum, item) => sum + item.weight,
   0
@@ -61,6 +64,7 @@ function createTree() {
     tree.style.top = `${top}px`;
 
     if (isCollision(tree, player)) {
+      audioStore.playGenericSound(playerHurtSound);
       flashScreen();
       clearInterval(fallInterval);
       gameRef.value?.removeChild(tree);

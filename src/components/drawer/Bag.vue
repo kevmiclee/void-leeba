@@ -7,7 +7,7 @@
       class="sub"
       v-for="({ item, count }, index) in items"
       :key="item.id"
-      @click.stop="drawer.updateSelectedItem(item)"
+      @click.stop="updateSelectedItem(item)"
     >
       <div>
         • {{ item.label }} <span v-if="count > 1">x{{ count }}</span>
@@ -17,12 +17,20 @@
 </template>
 
 <script setup lang="ts">
+import { useAudioStore } from "@/stores/audio";
 import { useCharacterStore } from "../../stores/character";
 import { useDrawerStore } from "../../stores/drawer";
 import { computed } from "vue";
+import { Item } from "@/types/item";
 
 const drawer = useDrawerStore();
 const character = useCharacterStore();
+const audioStore = useAudioStore();
+
+function updateSelectedItem(item: Item) {
+  audioStore.click();
+  drawer.updateSelectedItem(item);
+}
 
 const items = computed(() => {
   const map = new Map<

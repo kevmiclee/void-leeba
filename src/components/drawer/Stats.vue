@@ -6,9 +6,12 @@
     Aspects
     <p v-for="(aspect, index) in aspects" class="stat">
       {{ aspect.name }}
-      Duration: {{ aspect.durationScenes }} Scenes remaining:
-      {{ aspect.scenesRemaining }}
-      <!-- TODO: Description -->
+      <br />
+      Duration: {{ aspect.durationScenes }}
+      <br />
+      Scenes remaining: {{ aspect.scenesRemaining }}
+      <br />
+      Description: {{ aspect.description }}
     </p>
   </div>
   <div v-if="Object.keys(character.flags).length > 0" class="stat-header">

@@ -86,7 +86,6 @@ export const itemCatalog: Record<ItemId, Item> = {
   },
   "spray-paint": {
     id: "spray-paint",
-    //TODO: gets empty???
     label: "Orange spray paint",
     description: ``,
     value: 0,
@@ -95,7 +94,7 @@ export const itemCatalog: Record<ItemId, Item> = {
   },
   translator: {
     id: "translator",
-    //TODO: translates the self help book???
+    //TODO: translates the self help book
     label: "Translator",
     description: ``,
     value: 0,

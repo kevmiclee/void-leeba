@@ -54,6 +54,7 @@ import { useGameStore } from "@/stores/game";
 import { useDrawerStore } from "@/stores/drawer";
 import { useDictionaryStore } from "@/stores/dictionary";
 import { dictionaryEntries } from "@/data/dictionary";
+import { useAudioStore } from "@/stores/audio";
 
 const props = defineProps<{
   letters: string[];
@@ -114,6 +115,9 @@ function handleButtonClick(index: number) {
     const buttonAction = buttonActions[index];
 
     if (buttonAction) {
+      const audioStore = useAudioStore();
+      audioStore.click();
+
       if (buttonAction.action) {
         buttonAction.action();
       }
