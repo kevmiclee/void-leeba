@@ -1,4 +1,4 @@
-import { Scene, ScenePayload } from "@/types/story";
+import { Scene } from "@/types/story";
 import bgDefault from "@/assets/images/backgrounds/new-game.png";
 import crunchyWalkingSound from "@/assets/audio/story/sounds/crunchy-walking.mp3";
 import { useGameStore } from "@/stores/game";
@@ -9,6 +9,8 @@ import { useAspectStore } from "@/stores/aspects";
 import { treeMurderer } from "@/data/aspects";
 import { useAudioStore } from "@/stores/audio";
 import { defineScene } from "../story";
+
+//TODO: dream music
 
 export const dreamScenes = {
   dream: defineScene("dream", function (payload): Scene {
@@ -379,6 +381,7 @@ export const dreamScenes = {
     return {
       id: this.id,
       background: bgDefault,
+      //use tree-chase music
       text:
         `You have chosen to swing a dream ax at a dream tree.` +
         `^^Looking down, you see a single-headed carbon-fiber ax in your left hand. Heh. Hefty!` +

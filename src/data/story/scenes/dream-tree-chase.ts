@@ -1,10 +1,15 @@
-import { Scene, ScenePayload } from "@/types/story";
+import { Scene } from "@/types/story";
 import bgDefault from "@/assets/images/backgrounds/new-game.png";
+import treeFallingSound from "@/assets/audio/story/sounds/tree-falling.mp3";
 import { useGameStore } from "@/stores/game";
 import { useCharacterStore } from "@/stores/character";
 import { getTreeChaseText } from "../helper-functions/text-helper-functions";
 import { allYourBonesAreBroken, jackBeNimble } from "@/data/aspects";
 import { defineScene } from "../story";
+import { useAudioStore } from "@/stores/audio";
+
+//TODO: tree-chase music
+//TODO: tree-chase game music
 
 export const dreamTreeChaseScenes = {
   "dream-tree-chase": defineScene(
@@ -50,6 +55,10 @@ export const dreamTreeChaseScenes = {
             },
           },
         ],
+        onPageLoad: () => {
+          const audioStore = useAudioStore();
+          audioStore.playGenericSound(treeFallingSound);
+        },
         metadata: {
           sectionId: "dream-tree-chase",
           routes: [
@@ -127,17 +136,16 @@ export const dreamTreeChaseScenes = {
         id: this.id,
         background: bgDefault,
         text:
-          `It suddenly occurs to you that your legs feel unprecedentedly supple. Like those little rubber caps you ` +
-          `used to get from the toy dispensers at the front of the grocery store. You'd put a quarter in and you'd get a ` +
-          `round clear plastic capsule with a colorful little rubber cap inside. You'd turn the cap inside-out, ` +
+          `It suddenly occurs to you that your legs feel unprecedentedly supple. Like those little rubber poppers you ` +
+          `used to get from the toy dispenser at the front of the grocery store. You'd put a quarter in the slot, twist the knob, ` +
+          `and out came a round clear plastic capsule with a colorful little rubber popper inside. You'd turn the popper inside-out, ` +
           `set it down and...` +
           `^^FWOOM!!! You're leaping and bounding through the air, {springing off the pine needles} like a tree frog on a trampoline.`,
         buttonActions: [
           {
             action: () => {
-              // const game = useGameStore();
-              // game.goToScene("dream-tree-chase-fly");
-              //TODO:
+              const game = useGameStore();
+              game.goToScene("dream-tree-chase-fly");
             },
           },
         ],
@@ -160,12 +168,35 @@ export const dreamTreeChaseScenes = {
         buttonActions: [
           {
             action: () => {
-              // const game = useGameStore();
-              // game.goToScene("dream-tree-chase-sink");
-              //TODO:
+              const game = useGameStore();
+              game.goToScene("dream-tree-chase-sink");
             },
           },
         ],
+      };
+    }
+  ),
+
+  "dream-tree-chase-fly": defineScene(
+    "dream-tree-chase-fly",
+    function (payload): Scene {
+      return {
+        id: this.id,
+        background: bgDefault,
+        text: `fly`,
+        //TODO:
+      };
+    }
+  ),
+
+  "dream-tree-chase-sink": defineScene(
+    "dream-tree-chase-sink",
+    function (payload): Scene {
+      return {
+        id: this.id,
+        background: bgDefault,
+        text: `sink`,
+        //TODO:
       };
     }
   ),

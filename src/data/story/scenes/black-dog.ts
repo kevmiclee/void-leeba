@@ -1,4 +1,4 @@
-import { Choice, Scene, ScenePayload } from "@/types/story";
+import { Choice, Scene } from "@/types/story";
 import bgDefault from "@/assets/images/backgrounds/new-game.png";
 import spookyMusic from "@/assets/audio/story/background-themes/spooky1.mp3";
 import { useGameStore } from "@/stores/game";
@@ -390,7 +390,7 @@ export const blackDogScenes = {
   ),
 
   "black-dog-heal-human-redux": defineScene(
-    "black-dog1",
+    "black-dog-heal-human-redux",
     function (payload): Scene {
       return {
         id: this.id,
@@ -514,7 +514,6 @@ export const blackDogScenes = {
                 (item) => item.id == "dog-food"
               );
               const drunkChoice = character.flags["drunk-choice"];
-              console.log(drunkChoice);
 
               if (hasDogFood) {
                 game.goToScene("black-dog-bad-fail-food");

@@ -1,5 +1,6 @@
-import { Scene, ScenePayload } from "@/types/story";
+import { Scene } from "@/types/story";
 import bgDefault from "@/assets/images/backgrounds/new-game.png";
+import fallingOutOfTreeSound from "@/assets/audio/story/sounds/falling-out-of-tree.mp3";
 import { useGameStore } from "@/stores/game";
 import { useCharacterStore } from "@/stores/character";
 import { squirrelBitch, squirrelTamer } from "@/data/aspects";
@@ -7,6 +8,9 @@ import { fateContest } from "../helper-functions/roll-helper-functions";
 import { useAspectStore } from "@/stores/aspects";
 import { getFollowSquirrelText } from "../helper-functions/text-helper-functions";
 import { defineScene } from "../story";
+import { useAudioStore } from "@/stores/audio";
+
+//TODO: squirrel music
 
 export const dreamSquirrelScenes = {
   "dream-squirrel": defineScene("dream-squirrel", function (payload): Scene {
@@ -258,6 +262,10 @@ export const dreamSquirrelScenes = {
             },
           },
         ],
+        onPageLoad: () => {
+          const audioStore = useAudioStore();
+          audioStore.playGenericSound(fallingOutOfTreeSound);
+        },
         metadata: {
           sectionId: "dream-squirrel",
           routes: [
@@ -427,11 +435,12 @@ export const dreamSquirrelScenes = {
         } ` +
         `You notice eggcorns scattered about near where all the hongatar lay, just like the one you ` +
         `saw the squirrel eat. You see an uneaten one by your foot. {Inspect the eggcorn.}`,
-
-      choices: () => [
+      buttonActions: [
         {
-          text: "Inspect the eggcorn",
-          next: "dream-faeries5",
+          action: () => {
+            const game = useGameStore();
+            game.goToScene("dream-faeries5");
+          },
         },
       ],
       metadata: {

@@ -1,6 +1,8 @@
-import { Scene, ScenePayload } from "@/types/story";
+import { Scene } from "@/types/story";
 import bgDefault from "@/assets/images/backgrounds/new-game.png";
 import { defineScene } from "../story";
+
+//TODO: snow pile music
 
 export const snowPileScenes = {
   "snow-pile": defineScene("snow-pile", function (payload): Scene {

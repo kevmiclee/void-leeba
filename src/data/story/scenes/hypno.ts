@@ -1,10 +1,12 @@
-import { Scene, ScenePayload } from "@/types/story";
+import { Scene } from "@/types/story";
 import bgDefault from "@/assets/images/backgrounds/new-game.png";
 import { useAspectStore } from "@/stores/aspects";
 import { lifeOfTheParty, wellVersed } from "@/data/aspects";
 import { useGameStore } from "@/stores/game";
 import { useCharacterStore } from "@/stores/character";
 import { defineScene } from "../story";
+
+//TODO: hypno music
 
 export const hypnoScenes = {
   hypno: defineScene("hypno", function (payload): Scene {

@@ -1,9 +1,8 @@
-import { Scene, ScenePayload } from "@/types/story";
+import { Scene } from "@/types/story";
 import bgStart from "@/assets/images/backgrounds/Landing-Page.png";
 import introAudio from "@/assets/audio/story/background-themes/intro.mp3";
 import windTunnel from "@/assets/audio/story/background-themes/wind-tunnel.mp3";
 
-import { useGameStore } from "@/stores/game";
 import { defineScene } from "../story";
 
 export const introScenes = {
@@ -77,13 +76,14 @@ export const introScenes = {
   }),
 
   credits: defineScene("credits", function (payload): Scene {
+    //TODO: credits music
     return {
       id: this.id,
       text: "credits",
     };
   }),
 
-  preamble: defineScene("hypno", function (payload): Scene {
+  preamble: defineScene("preamble", function (payload): Scene {
     return {
       id: this.id,
       text: "",

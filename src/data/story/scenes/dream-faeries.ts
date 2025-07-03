@@ -1,4 +1,4 @@
-import { Choice, Scene, ScenePayload } from "@/types/story";
+import { Choice, Scene } from "@/types/story";
 import bgDefault from "@/assets/images/backgrounds/new-game.png";
 import faeriesSong from "@/assets/audio/story/background-themes/faeries.mp3";
 import { useGameStore } from "@/stores/game";

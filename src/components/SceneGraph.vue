@@ -61,8 +61,6 @@ const activeSection = ref("All");
 const graphData = getSceneGraph();
 const sectionIds = Object.keys(graphData.sectionMap);
 
-console.log(graphData.sectionMap);
-
 function renderGraph() {
   const container = document.getElementById("scene-graph")!;
   const links = graphData.links;

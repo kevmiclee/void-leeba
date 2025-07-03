@@ -1,4 +1,4 @@
-import { Scene, ScenePayload } from "@/types/story";
+import { Scene } from "@/types/story";
 import bgDefault from "@/assets/images/backgrounds/new-game.png";
 import { defineScene } from "../story";
 
@@ -8,6 +8,7 @@ export const paintScenes = {
       id: this.id,
       text: "Paint",
       background: bgDefault,
+      // use make-something music
       //TODO: paint
     };
   }),

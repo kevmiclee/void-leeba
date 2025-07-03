@@ -1,8 +1,10 @@
-import { Scene, ScenePayload } from "@/types/story";
+import { Scene } from "@/types/story";
 import bgDefault from "@/assets/images/backgrounds/new-game.png";
 import partySong from "@/assets/audio/story/background-themes/party.mp3";
 import { useGameStore } from "@/stores/game";
 import { defineScene } from "../story";
+
+//TODO: eggcorn check music (faint party music)
 
 export const partyScenes = {
   "party-eggcorn": defineScene("party-eggcorn", function (payload): Scene {

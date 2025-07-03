@@ -1,5 +1,5 @@
 <template>
-  <div class="sub-menu-header" @click.stop="drawer.clearDictionaryEntry">
+  <div class="sub-menu-header" @click.stop="clearDictionaryEntry">
     < {{ drawer.selectedDictionaryEntry!.name }}
   </div>
   <p class="item-desc">
@@ -7,10 +7,7 @@
       <span
         v-if="chunk.entry"
         class="clickable-term"
-        @click="
-          drawer.updateSelectedDictionaryEntry(chunk.entry);
-          dictionary.addEntry(chunk.entry.id);
-        "
+        @click="updateSelectedDictionaryEntry(chunk.entry)"
       >
         {{ chunk.text }}
       </span>
@@ -21,6 +18,7 @@
 
 <script setup lang="ts">
 import { dictionaryEntries } from "@/data/dictionary";
+import { useAudioStore } from "@/stores/audio";
 import { useDictionaryStore } from "@/stores/dictionary";
 import { useDrawerStore } from "@/stores/drawer";
 import { DictionaryEntry, DictionaryEntryId } from "@/types/dictionary";
@@ -28,6 +26,8 @@ import { computed } from "vue";
 
 const drawer = useDrawerStore();
 const dictionary = useDictionaryStore();
+const audioStore = useAudioStore();
+
 const rawDescription = computed(
   () => drawer.selectedDictionaryEntry!.description
 );
@@ -60,6 +60,17 @@ const parsedDescription = computed(() => {
 
   return result;
 });
+
+function clearDictionaryEntry() {
+  audioStore.click();
+  drawer.clearDictionaryEntry();
+}
+
+function updateSelectedDictionaryEntry(entry: DictionaryEntry) {
+  audioStore.click();
+  drawer.updateSelectedDictionaryEntry(entry);
+  dictionary.addEntry(entry.id);
+}
 </script>
 
 <style scoped>

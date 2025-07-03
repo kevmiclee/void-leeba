@@ -1,4 +1,4 @@
-import { Scene, ScenePayload } from "@/types/story";
+import { Scene } from "@/types/story";
 import bgDefault from "@/assets/images/backgrounds/new-game.png";
 import morningBirds from "@/assets/audio/story/background-themes/morning-birds.mp3";
 import homeSong from "@/assets/audio/story/background-themes/home.mp3";
@@ -290,7 +290,7 @@ export const homeScenes = {
     };
   }),
 
-  nap: defineScene("room", function (payload): Scene {
+  nap: defineScene("nap", function (payload): Scene {
     return {
       id: this.id,
       background: bgDefault,
@@ -321,7 +321,9 @@ export const homeScenes = {
     };
   }),
 
-  "make-something": defineScene("room", function (payload): Scene {
+  //TODO: make-something music
+
+  "make-something": defineScene("make-something", function (payload): Scene {
     return {
       id: this.id,
       text:

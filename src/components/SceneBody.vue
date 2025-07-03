@@ -115,11 +115,11 @@ function handleButtonClick(index: number) {
     const buttonAction = buttonActions[index];
 
     if (buttonAction) {
-      const audioStore = useAudioStore();
-      audioStore.click();
-
       if (buttonAction.action) {
         buttonAction.action();
+      } else {
+        const audioStore = useAudioStore();
+        audioStore.click();
       }
       if (buttonAction.isItem) {
         hideButtons.value.push(index);
