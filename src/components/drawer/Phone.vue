@@ -1,5 +1,6 @@
 <template>
-  <ul class="list">
+  <div v-if="isViral">VIRAL DOG KICKER</div>
+  <ul v-else class="list">
     <div class="sub-menu-header" @click.stop="drawer.resetDrawerView">
       < Phone
     </div>
@@ -33,6 +34,10 @@ const items = computed(() => {
   return phoneItems.length <= numberOfPhoneItems.value
     ? phoneItems
     : phoneItems.slice(0, numberOfPhoneItems.value);
+});
+
+const isViral = computed(() => {
+  return drawer.phoneIsCrazy;
 });
 </script>
 

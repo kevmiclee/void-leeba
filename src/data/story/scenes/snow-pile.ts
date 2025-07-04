@@ -2,7 +2,7 @@ import { Scene } from "@/types/story";
 import bgDefault from "@/assets/images/backgrounds/new-game.png";
 import { defineScene } from "../story";
 
-//TODO: snow pile music
+//TODO: MUSIC - snow pile
 
 export const snowPileScenes = {
   "snow-pile": defineScene("snow-pile", function (payload): Scene {
@@ -11,6 +11,9 @@ export const snowPileScenes = {
       text: "snow pile",
       background: bgDefault,
       //TODO: snowpile
+      metadata: {
+        sectionId: "snow-pile",
+      },
     };
   }),
 };

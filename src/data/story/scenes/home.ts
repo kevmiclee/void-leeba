@@ -321,11 +321,10 @@ export const homeScenes = {
     };
   }),
 
-  //TODO: make-something music
-
   "make-something": defineScene("make-something", function (payload): Scene {
     return {
       id: this.id,
+      audio: homeSong,
       text:
         `You sit down at the desk and open to a fresh page of the pad.` +
         `^You look down onto the off-white paper. A void to fill. Dimensionless.` +

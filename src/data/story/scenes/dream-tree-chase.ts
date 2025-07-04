@@ -8,8 +8,8 @@ import { allYourBonesAreBroken, jackBeNimble } from "@/data/aspects";
 import { defineScene } from "../story";
 import { useAudioStore } from "@/stores/audio";
 
-//TODO: tree-chase music
-//TODO: tree-chase game music
+// MUSIC - tree-chase
+//TODO: MUSIC - tree-chase game
 
 export const dreamTreeChaseScenes = {
   "dream-tree-chase": defineScene(

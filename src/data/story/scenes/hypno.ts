@@ -6,7 +6,9 @@ import { useGameStore } from "@/stores/game";
 import { useCharacterStore } from "@/stores/character";
 import { defineScene } from "../story";
 
-//TODO: hypno music
+//TODO: MUSIC - hypno music
+
+//TODO: player has to recite their lines and earns stats/items/aspects/something for getting it right/wrong
 
 export const hypnoScenes = {
   hypno: defineScene("hypno", function (payload): Scene {

@@ -2,6 +2,10 @@
   <div class="sub-menu-header" @click.stop="drawer.resetDrawerView">
     < Stats
   </div>
+  <p class="stat">Blue Magic: {{ character.blueMagic.value }}</p>
+  <p class="stat">Will: {{ character.will.value }}</p>
+  <p class="stat">Shitheadedness: {{ character.shitheadedness.value }}</p>
+  <p class="stat">Athletics: {{ character.athletics.value }}</p>
   <div v-if="aspects.length > 0" class="stat-header">
     Aspects
     <p v-for="(aspect, index) in aspects" class="stat">

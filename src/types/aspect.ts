@@ -21,4 +21,5 @@ export type AspectId =
   | "jack-be-nimble"
   | "ascetic"
   | "well-versed"
-  | "life-of-the-party";
+  | "life-of-the-party"
+  | "animal-abuser";

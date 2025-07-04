@@ -3,15 +3,7 @@ import bgDefault from "@/assets/images/backgrounds/new-game.png";
 import faeriesSong from "@/assets/audio/story/background-themes/faeries.mp3";
 import { useGameStore } from "@/stores/game";
 import { useCharacterStore } from "@/stores/character";
-import {
-  boyWhoCriedWolf,
-  buttOfTheJoke,
-  godOfTheForest,
-  magicNosehairs,
-  nobodysFriend,
-  oneWithTheHongatar,
-  sexyGodOfTheForest,
-} from "@/data/aspects";
+import { magicNosehairs } from "@/data/aspects";
 import { getNapFaeries2Text } from "../helper-functions/text-helper-functions";
 import { useAspectStore } from "@/stores/aspects";
 import { defineScene } from "../story";
@@ -298,19 +290,18 @@ export const dreamFaeriesScenes = {
           const choices: Choice[] = [
             {
               text: `"Oh I see, you were planting snail trees! The Hongatar truly are a noble breed.`,
-              next: "dream-faeries-litter1",
+              next: "dream-faeries-litter-no-proof",
             },
             {
               text: `"LIES!"`,
-              next: "dream-faeries-litter1",
+              next: "dream-faeries-litter-no-proof",
             },
           ];
 
           if (character.inventory.some((item) => item.id == "hongatar-trash")) {
             choices.push({
               text: "Show them the proof.",
-              next: "dream-faeries-litter-police",
-              //TODO: manners effects
+              next: "dream-faeries-litter-proof",
             });
           }
 
@@ -321,15 +312,15 @@ export const dreamFaeriesScenes = {
           routes: [
             {
               label: `"Oh I see, you were planting snail trees! The Hongatar truly are a noble breed.`,
-              redirect: "dream-faeries-litter1",
+              redirect: "dream-faeries-litter-no-proof",
             },
             {
               label: `"LIES!"`,
-              redirect: "dream-faeries-litter1",
+              redirect: "dream-faeries-litter-no-proof",
             },
             {
               label: "Show them the proof.",
-              redirect: "dream-faeries-litter-police",
+              redirect: "dream-faeries-litter-proof",
             },
           ],
         },
@@ -337,8 +328,8 @@ export const dreamFaeriesScenes = {
     }
   ),
 
-  "dream-faeries-litter1": defineScene(
-    "dream-faeries-litter1",
+  "dream-faeries-litter-no-proof": defineScene(
+    "dream-faeries-litter-no-proof",
     function (payload): Scene {
       return {
         id: this.id,
@@ -356,7 +347,6 @@ export const dreamFaeriesScenes = {
         ],
         choices: () => {
           const character = useCharacterStore();
-          const aspects = useAspectStore();
 
           return [
             {
@@ -365,7 +355,6 @@ export const dreamFaeriesScenes = {
               payload: { filter: "accuse" },
               onChoose: () => {
                 character.setManners("depressing");
-                aspects.addAspect(boyWhoCriedWolf);
               },
             },
             {
@@ -374,7 +363,6 @@ export const dreamFaeriesScenes = {
               payload: { filter: "flatter" },
               onChoose: () => {
                 character.setManners("polite");
-                aspects.addAspect(oneWithTheHongatar);
               },
             },
             {
@@ -383,7 +371,6 @@ export const dreamFaeriesScenes = {
               payload: { filter: "insult" },
               onChoose: () => {
                 character.setManners("rude");
-                aspects.addAspect(nobodysFriend);
               },
             },
           ];
@@ -394,17 +381,17 @@ export const dreamFaeriesScenes = {
             {
               label: `"You're lying. I saw you eating the snails!"`,
               redirect: "dream-faeries2",
-              aspect: boyWhoCriedWolf,
+              manners: "depressing",
             },
             {
               label: `"Your dedication to the ecosystem is so inspiring. If only we humans were so thoughtful and so brave."`,
               redirect: "dream-faeries2",
-              aspect: oneWithTheHongatar,
+              manners: "polite",
             },
             {
               label: `"That is asinine."`,
               redirect: "dream-faeries2",
-              aspect: nobodysFriend,
+              manners: "rude",
             },
           ],
         },
@@ -412,8 +399,8 @@ export const dreamFaeriesScenes = {
     }
   ),
 
-  "dream-faeries-litter-police": defineScene(
-    "dream-faeries-litter-police",
+  "dream-faeries-litter-proof": defineScene(
+    "dream-faeries-litter-proof",
     function (payload): Scene {
       return {
         id: this.id,
@@ -430,7 +417,7 @@ export const dreamFaeriesScenes = {
             text: "Forgive us!",
             onClick: () => {
               const game = useGameStore();
-              game.goToScene("dream-faeries-litter-police1");
+              game.goToScene("dream-faeries-litter-proof1");
             },
           },
         ],
@@ -439,7 +426,7 @@ export const dreamFaeriesScenes = {
           routes: [
             {
               label: `faerie dialog click`,
-              redirect: "dream-faeries-litter-police1",
+              redirect: "dream-faeries-litter-proof1",
             },
           ],
         },
@@ -447,8 +434,8 @@ export const dreamFaeriesScenes = {
     }
   ),
 
-  "dream-faeries-litter-police1": defineScene(
-    "dream-faeries-litter-police1",
+  "dream-faeries-litter-proof1": defineScene(
+    "dream-faeries-litter-proof1",
     function (payload): Scene {
       return {
         id: this.id,
@@ -478,7 +465,7 @@ export const dreamFaeriesScenes = {
               const character = useCharacterStore();
               character.addToInventory("self-help-book", this.id);
               const game = useGameStore();
-              game.goToScene("dream-faeries-litter-police2");
+              game.goToScene("dream-faeries-litter-proof2");
             },
           },
         ],
@@ -487,7 +474,7 @@ export const dreamFaeriesScenes = {
           routes: [
             {
               label: `faerie dialog click`,
-              redirect: "dream-faeries-litter-police2",
+              redirect: "dream-faeries-litter-proof2",
             },
           ],
         },
@@ -495,8 +482,8 @@ export const dreamFaeriesScenes = {
     }
   ),
 
-  "dream-faeries-litter-police2": defineScene(
-    "dream-faeries-litter-police2",
+  "dream-faeries-litter-proof2": defineScene(
+    "dream-faeries-litter-proof2",
     function (payload): Scene {
       return {
         id: this.id,
@@ -508,52 +495,53 @@ export const dreamFaeriesScenes = {
             dictionaryEntryId: "hongatar",
           },
         ],
-        choices: () => [
-          {
-            text: `"Let that be a lesson to you."`,
-            next: "dream-faeries2",
-            payload: { filter: "lesson" },
-            onChoose: () => {
-              const aspectStore = useAspectStore();
-              aspectStore.addAspect(godOfTheForest);
+        choices: () => {
+          const character = useCharacterStore();
+
+          return [
+            {
+              text: `"Let that be a lesson to you."`,
+              next: "dream-faeries2",
+              payload: { filter: "lesson" },
+              onChoose: () => {
+                character.setManners("depressing");
+              },
             },
-          },
-          {
-            text: `"Self-help is my favorite genre, thanks!"`,
-            next: "dream-faeries2",
-            payload: { filter: "thanks" },
-            onChoose: () => {
-              const aspectStore = useAspectStore();
-              aspectStore.addAspect(buttOfTheJoke);
+            {
+              text: `"Self-help is my favorite genre, thanks!"`,
+              next: "dream-faeries2",
+              payload: { filter: "thanks" },
+              onChoose: () => {
+                character.setManners("polite");
+              },
             },
-          },
-          {
-            text: `Wink.`,
-            next: "dream-faeries2",
-            payload: { filter: "wink" },
-            onChoose: () => {
-              const aspectStore = useAspectStore();
-              aspectStore.addAspect(sexyGodOfTheForest);
+            {
+              text: `Wink.`,
+              next: "dream-faeries2",
+              payload: { filter: "wink" },
+              onChoose: () => {
+                character.setManners("weird");
+              },
             },
-          },
-        ],
+          ];
+        },
         metadata: {
           sectionId: "dream-faeries",
           routes: [
             {
               label: `"Let that be a lesson to you."`,
               redirect: "dream-faeries2",
-              aspect: godOfTheForest,
+              manners: "depressing",
             },
             {
               label: `"Self-help is my favorite genre, thanks!"`,
               redirect: "dream-faeries2",
-              aspect: buttOfTheJoke,
+              manners: "polite",
             },
             {
               label: `Wink.`,
               redirect: "dream-faeries2",
-              aspect: sexyGodOfTheForest,
+              manners: "weird",
             },
           ],
         },
@@ -624,6 +612,67 @@ export const dreamFaeriesScenes = {
             {
               label: `fearie dialog click`,
               redirect: "dream1",
+            },
+          ],
+        },
+      };
+    }
+  ),
+
+  "party-eggcorn": defineScene("party-eggcorn", function (payload): Scene {
+    return {
+      id: this.id,
+      background: bgDefault,
+      audio: faeriesSong,
+      text:
+        `Yuck! It tastes like...^^You don't get a chance to finish the thought. ` +
+        `It feels like the whole world is being stretched inside-out. You hear a voice, like an echo ` +
+        `in your mind, "See you soon, raccoon!" Then {everything goes dark}.`,
+      buttonActions: [
+        {
+          action: () => {
+            const game = useGameStore();
+            game.goToScene("party");
+          },
+        },
+      ],
+      metadata: {
+        sectionId: "dream-faeries",
+        routes: [
+          {
+            label: `everything goes dark`,
+            redirect: "party",
+          },
+        ],
+      },
+    };
+  }),
+
+  "party-eggcorn-check": defineScene(
+    "party-eggcorn-check",
+    function (payload): Scene {
+      return {
+        id: this.id,
+        background: bgDefault,
+        text: `But it's <i>so tantalizing!</i>`,
+        choices: () => [
+          { text: "YOLO! Eat the eggcorn.", next: "party-eggcorn" },
+          {
+            text: `No. Seriously. I'm not eating it.`,
+            next: "dream1",
+            payload: { filter: "noFaeries" },
+          },
+        ],
+        metadata: {
+          sectionId: "dream-faeries",
+          routes: [
+            {
+              label: `No. Seriously. I'm not eating it`,
+              redirect: "dream1",
+            },
+            {
+              label: `YOLO! Eat the eggcorn`,
+              redirect: "party-eggcorn",
             },
           ],
         },

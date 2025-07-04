@@ -3,14 +3,13 @@ import bgDefault from "@/assets/images/backgrounds/new-game.png";
 import fallingOutOfTreeSound from "@/assets/audio/story/sounds/falling-out-of-tree.mp3";
 import { useGameStore } from "@/stores/game";
 import { useCharacterStore } from "@/stores/character";
-import { squirrelBitch, squirrelTamer } from "@/data/aspects";
 import { fateContest } from "../helper-functions/roll-helper-functions";
 import { useAspectStore } from "@/stores/aspects";
 import { getFollowSquirrelText } from "../helper-functions/text-helper-functions";
 import { defineScene } from "../story";
 import { useAudioStore } from "@/stores/audio";
 
-//TODO: squirrel music
+//TODO: MUSIC - squirrel
 
 export const dreamSquirrelScenes = {
   "dream-squirrel": defineScene("dream-squirrel", function (payload): Scene {
@@ -93,23 +92,44 @@ export const dreamSquirrelScenes = {
           `giving out. The squirrel hasn't moved. The way it watches you, vacillating between ` +
           `tepid curiosity and utter indifference, suggests the thought of you as a threat could ` +
           `not be further from its mind.`,
-        choices: () => [
-          { text: "Push yourself even harder.", next: "dream-squirrel2" },
-          {
-            text: "This was a bad idea. Shimmy back down before you get hurt.",
-            next: "dream-squirrel-give-up",
-          },
-        ],
+        choices: () => {
+          const character = useCharacterStore();
+
+          return [
+            {
+              text: "Push yourself even harder.",
+              next: "dream-squirrel2",
+              onChoose: () => {
+                character.gainStat("will", 1, this.id);
+              },
+            },
+            {
+              text: "This was a bad idea. Shimmy back down before you get hurt.",
+              next: "dream-squirrel-give-up",
+              onChoose: () => {
+                character.loseStat("will", 1, this.id);
+              },
+            },
+          ];
+        },
         metadata: {
           sectionId: "dream-squirrel",
           routes: [
             {
               label: `Push yourself even harder.`,
               redirect: "dream-squirrel2",
+              stat: {
+                id: "will",
+                amount: 1,
+              },
             },
             {
               label: `This was a bad idea. Shimmy back down before you get hurt.`,
               redirect: "dream-squirrel-give-up",
+              stat: {
+                id: "will",
+                amount: -1,
+              },
             },
           ],
         },
@@ -158,7 +178,6 @@ export const dreamSquirrelScenes = {
           text: "In a last ditch effort, dart your hand out to snatch the furball.",
           onChoose: () => {
             const character = useCharacterStore();
-            const aspects = useAspectStore();
             const squirrelAthletics = 2;
             const roll = fateContest(
               character.athletics.value,
@@ -170,10 +189,10 @@ export const dreamSquirrelScenes = {
             const game = useGameStore();
 
             if (roll >= 0) {
-              aspects.addAspect(squirrelTamer);
+              character.setFlag("caught-squirrel", true);
               game.goToScene("dream-squirrel4-success");
             } else {
-              aspects.addAspect(squirrelBitch);
+              character.setFlag("caught-squirrel", false);
               game.goToScene("dream-squirrel4-fail");
             }
           },
@@ -185,12 +204,10 @@ export const dreamSquirrelScenes = {
           {
             label: `snatch the furball success`,
             redirect: "dream-squirrel4-success",
-            aspect: squirrelTamer,
           },
           {
             label: `snatch the furball fail`,
             redirect: "dream-squirrel4-fail",
-            aspect: squirrelBitch,
           },
         ],
       },
@@ -287,37 +304,66 @@ export const dreamSquirrelScenes = {
         `As you follow the squirrel, it is obvious the creature is very excited about something. ` +
         `You faintly hear what might be voices in unison like a sing-song chant, growing louder as you progress. ` +
         `This must be where the squirrel is leading you.`,
-      choices: () => [
-        {
-          text: `"Where are you taking me?"`,
-          next: "dream-squirrel6",
-          payload: { filter: "where" },
-        },
-        {
-          text: `"What's that chanting"`,
-          next: "dream-squirrel6",
-          payload: { filter: "what" },
-        },
-        {
-          text: `Why am I following a squirrel?`,
-          next: "dream-squirrel6",
-          payload: { filter: "why" },
-        },
-      ],
+      choices: () => {
+        const character = useCharacterStore();
+
+        return [
+          {
+            text: `"Where are we going?"`,
+            next: "dream-squirrel6",
+            payload: { filter: "where" },
+            onChoose: () => {
+              character.setManners("polite");
+            },
+          },
+          {
+            text: `"What is that infernal chanting?"`,
+            next: "dream-squirrel6",
+            payload: { filter: "what" },
+            onChoose: () => {
+              character.setManners("depressing");
+            },
+          },
+          {
+            text: `"Are we there yet?"`,
+            next: "dream-squirrel6",
+            payload: { filter: "what" },
+            onChoose: () => {
+              character.setManners("rude");
+            },
+          },
+          {
+            text: `Why am I following a squirrel?`,
+            next: "dream-squirrel6",
+            payload: { filter: "why" },
+            onChoose: () => {
+              character.setManners("weird");
+            },
+          },
+        ];
+      },
       metadata: {
         sectionId: "dream-squirrel",
         routes: [
           {
-            label: `"Where are you taking me?"`,
+            label: `"Where are we going?"`,
             redirect: "dream-squirrel6",
+            manners: "polite",
           },
           {
-            label: `"What's that chanting"`,
+            label: `"What is that infernal chanting"`,
             redirect: "dream-squirrel6",
+            manners: "depressing",
+          },
+          {
+            label: `"Are we there yet?"`,
+            redirect: "dream-squirrel6",
+            manners: "rude",
           },
           {
             label: `Why am I following a squirrel?`,
             redirect: "dream-squirrel6",
+            manners: "weird",
           },
         ],
       },

@@ -117,12 +117,12 @@ function handleButtonClick(index: number) {
     if (buttonAction) {
       if (buttonAction.action) {
         buttonAction.action();
-      } else {
-        const audioStore = useAudioStore();
-        audioStore.click();
       }
       if (buttonAction.isItem) {
         hideButtons.value.push(index);
+      } else {
+        const audioStore = useAudioStore();
+        audioStore.click();
       }
       if (buttonAction.dictionaryEntryId) {
         const drawer = useDrawerStore();

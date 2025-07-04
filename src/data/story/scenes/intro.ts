@@ -76,7 +76,7 @@ export const introScenes = {
   }),
 
   credits: defineScene("credits", function (payload): Scene {
-    //TODO: credits music
+    //TODO: MUSIC - credits music
     return {
       id: this.id,
       text: "credits",

@@ -13,6 +13,8 @@ import {
 import { useDrawerStore } from "@/stores/drawer";
 import { defineScene } from "../story";
 import { CharacterId } from "@/types/character";
+import { useAspectStore } from "@/stores/aspects";
+import { animalAbuser } from "@/data/aspects";
 
 export const blackDogScenes = {
   "black-dog": defineScene("black-dog", function (payload): Scene {
@@ -320,7 +322,7 @@ export const blackDogScenes = {
         background: bgDefault,
         audio: spookyMusic,
         text:
-          `The creature's body seems to glow pink. Its dog features seem to morph and melt into the shape ` +
+          `The creature's body glows pink. Its dog features seem to morph and melt into the shape ` +
           `of a human, kneeling on the ground, its limbs lengthening and its fur receeding and shifting into ` +
           `a mop of red-black hair on the top of the skull, and faint hairs on the back and arms.`,
         choices: () => {
@@ -480,6 +482,8 @@ export const blackDogScenes = {
           {
             action: () => {
               const game = useGameStore();
+              const aspects = useAspectStore();
+              aspects.addAspect(animalAbuser);
               game.goToScene("black-dog-feel-bad");
             },
           },
@@ -490,6 +494,7 @@ export const blackDogScenes = {
             {
               label: "feel bad",
               redirect: "black-dog-feel-bad",
+              aspect: animalAbuser,
             },
           ],
         },
@@ -742,13 +747,14 @@ export const blackDogScenes = {
         background: bgDefault,
         audio: spookyMusic,
         text:
-          `They leave. And miracualously, so does the redblack dog. It seems to recognize the drunks and follows them happily.^^` +
+          `They leave. And miracualously, so does the redblack dog. It seems to recognize the drunks, ` +
+          `and follows them happily.^^` +
           `You feel embarassed for what just happened. {And alone}.`,
         buttonActions: [
           {
             action: () => {
               const game = useGameStore();
-              game.goToScene("black-dog-viral");
+              game.goToScene("black-dog-feel-bad1");
             },
           },
         ],
@@ -757,7 +763,7 @@ export const blackDogScenes = {
           routes: [
             {
               label: "And alone",
-              redirect: "black-dog-viral",
+              redirect: "black-dog-feel-bad1",
             },
           ],
         },
@@ -772,10 +778,46 @@ export const blackDogScenes = {
         id: this.id,
         background: bgDefault,
         audio: spookyMusic,
+        dialogSequence: () => {
+          const character = useCharacterStore();
+          const drunkChoice = character.flags["drunk-choice"];
+          const characterId = (drunkChoice ?? "drunk1") as CharacterId;
+          return [
+            {
+              characterId: characterId,
+              text: "Animal abuser!!",
+              onClick: () => {
+                const game = useGameStore();
+                game.goToScene("black-dog-feel-bad1");
+              },
+            },
+          ];
+        },
+        text: "",
+        metadata: {
+          sectionId: "black-dog",
+          routes: [
+            {
+              label: "drunk dialog click",
+              redirect: "black-dog-feel-bad1",
+            },
+          ],
+        },
+      };
+    }
+  ),
+
+  "black-dog-feel-bad1": defineScene(
+    "black-dog-feel-bad1",
+    function (payload): Scene {
+      return {
+        id: this.id,
+        background: bgDefault,
+        audio: spookyMusic,
         text:
-          `You animal abuser!! But...its face is human, you say. Does that make it okay?` +
+          `But...its face is human, you say. Does that make it okay?` +
+          `^^Does that make you want to kick it?` +
           `^^Do you hate the human-faced dog because it's pieces of you?` +
-          `^Did you kick the dog-bodied human because it's pieces of you?` +
           `^^Or was it because it was {so scary}?`,
         buttonActions: [
           {
@@ -803,18 +845,24 @@ export const blackDogScenes = {
       id: this.id,
       background: bgDefault,
       audio: spookyMusic,
-      text: "Suddenly, it's like a bomb went off on your phone. Alerts chirping like crazy.",
+      text:
+        `It doesn't matter how you spin it. One of the drunks recorded it all on their phone, ` +
+        `and they've already posted to social media.` +
+        `^^Your phone is flooded with new notifications. You've {gone viral}.`,
       onPageLoad: () => {
         const drawer = useDrawerStore();
         drawer.togglePhoneIsCrazy();
       },
-
-      //TODO: viral dog kicker
-      // Your phone is popping off and there is a video of you all over social media.
-      // add the viral post section to the phone
-      // the drunk you didn't agree with records you
-      // or if you said I'm not from around here, they are both recording you especially because you 'not from around here'
-      // use the drunkManners to dictate some dialog
+      buttonActions: [
+        {
+          action: () => {
+            const drawer = useDrawerStore();
+            drawer.toggleDrawer();
+            drawer.setDrawerView("phone");
+          },
+        },
+      ],
+      //TODO: viral dog kicker phone
       // toggle phone back to isCrazy: false
     };
   }),

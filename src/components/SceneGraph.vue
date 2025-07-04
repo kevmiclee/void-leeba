@@ -164,44 +164,6 @@ function renderGraph() {
     }
   }
 
-  //  if (g.stat) {
-  //   const statMidNodeId = midNodeId ?? `mid:${edgeId}:${stackIndex}`;
-  //   if (!midNodeId) syntheticNodes.add(statMidNodeId);
-
-  //   const index = statEdgeCountMap[g.stat.id] ?? 0;
-  //   statEdgeCountMap[g.stat.id] = index + 1;
-  //   const statNodeId = `${g.stat.id}_${index + 1}`;
-  //   statNodes.add(statNodeId);
-
-  //   if ((midNodeId ?? g.from) != statMidNodeId) {
-  //     edges.push({
-  //       from: midNodeId ?? g.from,
-  //       to: statMidNodeId,
-  //       arrows: "to",
-  //       label: wrapText(g.label ?? "", 20),
-  //       font: { size: 12, multi: true },
-  //       smooth: {
-  //         enabled: true,
-  //         type: i % 2 === 0 ? "curvedCW" : "curvedCCW",
-  //         roundness: 0.2 + (i % 3) * 0.1,
-  //       },
-  //     });
-  //   }
-
-  //   edges.push({ from: statMidNodeId, to: g.to, arrows: "to", smooth: true });
-
-  //   edges.push({
-  //     from: statMidNodeId,
-  //     to: `stat:${statNodeId}`,
-  //     label: `${g.stat.amount > 0 ? "+" : ""}${g.stat.amount}`,
-  //     dashes: true,
-  //     arrows: "to",
-  //     color: { color: "purple" },
-  //     smooth: { type: "discrete", enabled: true, roundness: 0.2 },
-  //     length: 10,
-  //   });
-  // }
-
   const allNodeIds = new Set(visibleLinks.flatMap((g) => [g.from, g.to]));
   const sceneNodes = Array.from(allNodeIds).map((id) => {
     const outgoing = outgoingMap[id] ?? new Set();
@@ -210,7 +172,12 @@ function renderGraph() {
     const onlySelfLoop =
       outgoing.size === 1 && [...outgoing].every((x) => incoming.has(x));
     const shouldBeGold =
-      incoming.size == 0 || (isTerminal && sectionIds.includes(id));
+      incoming.size == 0 ||
+      (isTerminal &&
+        (sectionIds.includes(id) ||
+          id == "room" ||
+          id == "dream-faeries5" ||
+          id == "dream1"));
     const shouldBeRed = isTerminal || onlySelfLoop;
     return {
       id,
@@ -391,7 +358,7 @@ function wrapText(text: string, maxLength: number): string {
 .key {
   position: absolute;
   bottom: 0;
-  left: 0;
+  right: 0;
   background: rgba(255, 255, 255, 0.9); /* optional for contrast */
   padding: 10px;
   z-index: 10;
