@@ -56,3 +56,44 @@ export function getTreeChopOutcome(roll: number): FateOutcome {
     };
   }
 }
+
+export function getCatchSquirrelOutcome(roll: number): FateOutcome {
+  if (roll >= 2) {
+    return {
+      text:
+        `Sweet synergy! In one fluid motion, you grabbed that sucker! You were so fast, the squirrel didn't even see it coming. ` +
+        `OK, Mr. Miyagi!` +
+        `^^It almost squirms free before you can recover from the shock of actually catching it. ` +
+        `Overjoyed and triumphant, you shimmy back down to the forest floor with an easy swagger. ` +
+        `The squirrel crawls up your sleeve and runs a circle around your neck. You made a friend!` +
+        `^^The squirrel chitters beseechingly. It wants you to follow it.`,
+      success: true,
+    };
+  } else if (roll == 1) {
+    return {
+      text:
+        `The squirrel is fast, but you are faster... just barely. You manage to snatch the squirrel by its tail. ` +
+        `Between the shock of catching the squirrel, and the subsequent frenzy of its struggle to free itself from your grasp, ` +
+        `you lose your footing on the tree. Dangling from the tree by one hand, with the squirrel in the other, ` +
+        `your feet search to regain the trunk. Phew! The squirrel's frenzy abates to a limp submission. ` +
+        `You're able to shimmy back down to the forest floor. Once there, the squirrel crawls up your sleeve and ` +
+        `runs a circle around your neck. You made a friend!` +
+        `^^The squirrel chitters beseechingly. It wants you to follow it.`,
+      success: true,
+    };
+  } else if (roll == 0) {
+    return {
+      text:
+        `You are fast, but the squirrel is faster. You miss, and the momentum of your action causes you to lose your footing. ` +
+        `Your other hand loses its grip on the tree. As you're falling back, you flail your hand out in a final desparate attempt. ` +
+        `You hit the ground and somehow, the squirrel is in your hand. You're both a bit shaken up from the fall.` +
+        `^^After you both take a moment to regain your senses, the squirrel chitters beseechingly. It wants you to follow it.`,
+      success: true,
+    };
+  } else {
+    return {
+      text: ``,
+      success: false,
+    };
+  }
+}

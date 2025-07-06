@@ -4,7 +4,8 @@ export type FlagId =
   | "gave-dog-food" //TODO: the dog comes back to help
   | "gave-human-dog-food" //TODO: the human comes back to harm, they don't get the redux, or they get an unhappy redux
   | "drunk-choice" // who they sided with on the Sun/Moon question. Dictates how the drunks assist (or not) the player during the redblack dog attack
-  | "caught-squirrel";
+  | "caught-squirrel"
+  | "fell-from-tree";
 
 export type FlagValues = {
   "closer-to-black-dog": boolean;
@@ -13,6 +14,7 @@ export type FlagValues = {
   "gave-human-dog-food": boolean;
   "drunk-choice": "drunk1" | "drunk2" | undefined;
   "caught-squirrel": boolean;
+  "fell-from-tree": boolean;
 };
 
 export type Flags = {

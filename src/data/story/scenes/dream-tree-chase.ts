@@ -184,7 +184,7 @@ export const dreamTreeChaseScenes = {
         id: this.id,
         background: bgDefault,
         text: `fly`,
-        //TODO:
+        //TODO: dream-tree-chase-fly
       };
     }
   ),
@@ -196,7 +196,7 @@ export const dreamTreeChaseScenes = {
         id: this.id,
         background: bgDefault,
         text: `sink`,
-        //TODO:
+        //TODO: dream-tree-chase-sink
       };
     }
   ),

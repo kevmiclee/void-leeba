@@ -8,6 +8,7 @@ import { useAspectStore } from "@/stores/aspects";
 import { getFollowSquirrelText } from "../helper-functions/text-helper-functions";
 import { defineScene } from "../story";
 import { useAudioStore } from "@/stores/audio";
+import { getCatchSquirrelOutcome } from "../helper-functions/outcome-helper-functions";
 
 //TODO: MUSIC - squirrel
 
@@ -172,28 +173,37 @@ export const dreamSquirrelScenes = {
     return {
       id: this.id,
       background: bgDefault,
-      text: `The little vermin is taunting you!`,
-      choices: () => [
+      text:
+        `The little vermin is taunting you!` +
+        `^^In a last ditch effort, you dart your hand out to {snatch the furball}.`,
+      buttonActions: [
         {
-          text: "In a last ditch effort, dart your hand out to snatch the furball.",
-          onChoose: () => {
+          action: () => {
             const character = useCharacterStore();
+            const game = useGameStore();
             const squirrelAthletics = 2;
+
             const roll = fateContest(
               character.athletics.value,
               squirrelAthletics
             );
-            //TODO: more granualar outcomes
 
-            const filter = roll >= 0 ? "success" : "fail";
-            const game = useGameStore();
+            if (roll <= 0) {
+              character.setFlag("fell-from-tree", true);
+            } else {
+              character.setFlag("fell-from-tree", false);
+            }
 
-            if (roll >= 0) {
+            const outcome = getCatchSquirrelOutcome(roll);
+
+            if (outcome.success) {
               character.setFlag("caught-squirrel", true);
-              game.goToScene("dream-squirrel4-success");
+              game.goToScene("dream-squirrel4-success", {
+                filter: outcome.text,
+              });
             } else {
               character.setFlag("caught-squirrel", false);
-              game.goToScene("dream-squirrel4-fail");
+              game.goToScene("dream-squirrel4-fail", { filter: outcome.text });
             }
           },
         },
@@ -220,12 +230,7 @@ export const dreamSquirrelScenes = {
       return {
         id: this.id,
         background: bgDefault,
-        text:
-          `Sweet synergy! You grabbed that sucker! It almost squirms free before you can recover from the ` +
-          `shock of actually catching it. Overjoyed and triumphant, you shimmy back down to the forest floor ` +
-          `with an easy swagger. The squirrel crawls up your sleeve and runs a circle around your neck. ` +
-          `You made a friend!^^The squirrel wants you to follow it.`,
-
+        text: payload?.text ?? "",
         dialogSequence: () => [
           {
             characterId: "squirrel",
@@ -255,11 +260,7 @@ export const dreamSquirrelScenes = {
       return {
         id: this.id,
         background: bgDefault,
-        text:
-          `Pfft. Of course you missed. Who catches a squirrel with their bare hands? As a result, you lose ` +
-          `your grip and fall backwards like a defeated villain in slow-motion.` +
-          `^^You hit the ground with a soft thud and several pinecones scatter down around you. {Pick up a pinecone.}` +
-          `^^The squirrel wants you to follow it.`,
+        text: payload?.text ?? "",
         buttonActions: [
           {
             isItem: true,
