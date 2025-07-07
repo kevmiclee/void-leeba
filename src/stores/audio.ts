@@ -9,28 +9,33 @@ const characterCooldowns = new Map<CharacterId, number>();
 const COOLDOWN_MS = 15000;
 
 const currentBgAudio = ref<HTMLAudioElement | null>(null);
-const fadeDuration = 1000; //
+const isMuted = ref<boolean>(false);
+const fadeDuration = 1000;
 
 export function useAudioStore() {
   function playCharacterSound(src: string, speakerKey: CharacterId) {
-    const now = Date.now();
-    const lastPlay = characterCooldowns.get(speakerKey) || 0;
+    if (!isMuted.value) {
+      const now = Date.now();
+      const lastPlay = characterCooldowns.get(speakerKey) || 0;
 
-    if (now - lastPlay < COOLDOWN_MS) return;
+      if (now - lastPlay < COOLDOWN_MS) return;
 
-    characterCooldowns.set(speakerKey, now);
+      characterCooldowns.set(speakerKey, now);
 
-    const audio = new Audio(src);
-    audio.play().catch((e) => {
-      console.warn("Audio playback failed:", e);
-    });
+      const audio = new Audio(src);
+      audio.play().catch((e) => {
+        console.warn("Audio playback failed:", e);
+      });
+    }
   }
 
   function playGenericSound(src: string) {
-    const audio = new Audio(src);
-    audio.play().catch((e) => {
-      console.warn("Audio playback failed:", e);
-    });
+    if (!isMuted.value) {
+      const audio = new Audio(src);
+      audio.play().catch((e) => {
+        console.warn("Audio playback failed:", e);
+      });
+    }
   }
 
   function playBackgroundAudio(src: string | undefined) {
@@ -61,6 +66,7 @@ export function useAudioStore() {
       });
       currentBgAudio.value = newAudio;
       const step = oldAudio.volume / (fadeDuration / 50);
+      newAudio.volume = 0;
       fadeInAudio(newAudio);
       const fadeOut = setInterval(() => {
         if (oldAudio.volume > 0.05) {
@@ -96,19 +102,31 @@ export function useAudioStore() {
 
   function fadeInAudio(audio: HTMLAudioElement) {
     audio.play();
-    const step = 1 / (fadeDuration / 100);
-    const fadeIn = setInterval(() => {
-      if (audio.volume < 0.95) {
-        audio.volume += step;
-      } else {
-        audio.volume = 1;
-        clearInterval(fadeIn);
-      }
-    }, 100);
+    if (!isMuted.value) {
+      const step = 1 / (fadeDuration / 100);
+      const fadeIn = setInterval(() => {
+        if (audio.volume < 0.95) {
+          audio.volume += step;
+        } else {
+          audio.volume = 1;
+          clearInterval(fadeIn);
+        }
+      }, 100);
+    }
   }
 
   function click() {
     playGenericSound(clickSound);
+  }
+
+  function mute() {
+    if (currentBgAudio.value) {
+      isMuted.value = !isMuted.value;
+      currentBgAudio.value.muted = isMuted.value;
+      if (!isMuted.value && currentBgAudio.value.volume == 0) {
+        fadeInAudio(currentBgAudio.value);
+      }
+    }
   }
 
   return {
@@ -116,6 +134,8 @@ export function useAudioStore() {
     playCharacterSound,
     playGenericSound,
     click,
+    mute,
+    isMuted,
   };
 }
 

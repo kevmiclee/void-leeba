@@ -632,7 +632,11 @@ export const dreamFaeriesScenes = {
         {
           action: () => {
             const game = useGameStore();
-            game.goToScene("party");
+            if (payload?.filter == "squirrel") {
+              game.goToScene("party-squirrel");
+            } else {
+              game.goToScene("party-faeries");
+            }
           },
         },
       ],
@@ -641,7 +645,7 @@ export const dreamFaeriesScenes = {
         routes: [
           {
             label: `everything goes dark`,
-            redirect: "party",
+            redirect: "party-faeries",
           },
         ],
       },
@@ -656,7 +660,11 @@ export const dreamFaeriesScenes = {
         background: bgDefault,
         text: `But it's <i>so tantalizing!</i>`,
         choices: () => [
-          { text: "YOLO! Eat the eggcorn.", next: "party-eggcorn" },
+          {
+            text: "YOLO! Eat the eggcorn.",
+            next: "party-eggcorn",
+            payload: payload,
+          },
           {
             text: `No. Seriously. I'm not eating it.`,
             next: "dream1",

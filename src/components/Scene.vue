@@ -12,6 +12,11 @@
 
     <Sidebar v-if="isScene" />
 
+    <button @click.stop="audioStore.mute" class="mute-btn">
+      <span v-if="isMuted">🔇</span>
+      <span v-else>🔊</span>
+    </button>
+
     <StartBody
       v-if="game.currentSceneId === 'start'"
       :key="game.currentSceneId"
@@ -100,6 +105,7 @@ const backgroundColorFilter = computed(() =>
       }
     : ""
 );
+const isMuted = computed(() => audioStore.isMuted.value);
 
 onMounted(() => {
   triggerFade();
@@ -171,5 +177,13 @@ watch(
   100% {
     filter: hue-rotate(360deg);
   }
+}
+
+.mute-btn {
+  top: 1vw;
+  position: absolute;
+  z-index: 1000;
+  right: 1vw;
+  gap: 0.7vw;
 }
 </style>

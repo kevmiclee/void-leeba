@@ -864,10 +864,71 @@ export const blackDogScenes = {
           },
         },
       ],
-      //TODO: viral dog kicker phone
-      // toggle phone back to isCrazy: false
+      metadata: {
+        sectionId: "black-dog",
+        routes: [
+          {
+            label: "viewed viral comments",
+            redirect: "black-dog-viral1",
+          },
+        ],
+      },
     };
   }),
+
+  "black-dog-viral1": defineScene(
+    "black-dog-viral1",
+    function (payload): Scene {
+      return {
+        id: this.id,
+        background: bgDefault,
+        audio: spookyMusic,
+        text:
+          `Brutal... you try to console yourself with the Oscar Wilde quip you conveniently memorized.` +
+          `^^<i>“There's only one thing in the world worse than being talked about, and that is not being talked about."</i>` +
+          `^^It's not helping... You're done with this park. Part of you wishes you could find those drunks to give them a piece of your mind. ` +
+          `Maybe they went {into the neighborhood}. Or you could {check by that snow pile}.` +
+          `^^Another part of you just wants to {go home to your room} and forget about today.`,
+        buttonActions: [
+          {
+            action: () => {
+              const game = useGameStore();
+              game.goToScene("neighborhood");
+            },
+          },
+          {
+            action: () => {
+              const game = useGameStore();
+              game.goToScene("snow-pile");
+            },
+          },
+          {
+            action: () => {
+              const game = useGameStore();
+              game.goToScene("room");
+            },
+          },
+        ],
+        metadata: {
+          sectionId: "black-dog",
+          routes: [
+            {
+              label: "into the neighborhood",
+              redirect: "neighborhood",
+            },
+            {
+              label: "check by that snow pile",
+              redirect: "snow-pile",
+            },
+            {
+              label: "go home to your room",
+              redirect: "room",
+            },
+          ],
+        },
+      };
+    }
+  ),
 
   "black-dog-done-drunks": defineScene(
     "black-dog-done-drunks",

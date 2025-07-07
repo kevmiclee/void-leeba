@@ -5,6 +5,7 @@ import { usePhoneStore } from "./phone";
 import { DictionaryEntry } from "@/types/dictionary";
 import { DrawerView } from "@/types/drawer-view";
 import { useAudioStore } from "./audio";
+import { useGameStore } from "./game";
 
 export type DrawerStore = ReturnType<typeof useDrawerStore>;
 
@@ -25,6 +26,11 @@ export const useDrawerStore = defineStore("drawer", {
         const phone = usePhoneStore();
         phone.markAsRead();
         this.didViewPhone = false;
+      }
+      if (this.phoneIsCrazy && !this.isDrawerOpen) {
+        this.phoneIsCrazy = false;
+        const game = useGameStore();
+        game.goToScene("black-dog-viral1");
       }
     },
 

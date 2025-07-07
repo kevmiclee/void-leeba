@@ -451,8 +451,12 @@ export const dreamSquirrelScenes = {
         },
       ],
       choices: () => [
-        { text: "Inspect the hongatar", next: "dream-squirrel9" },
-        { text: "Inspect the squirrel", next: "dream-squirrel9" },
+        {
+          text: "Inspect the hongatar.",
+          next: "dream-squirrel9",
+          payload: { filter: "hongatar" },
+        },
+        { text: "Inspect the squirrel.", next: "dream-squirrel9" },
       ],
       metadata: {
         sectionId: "dream-squirrel",
@@ -486,7 +490,7 @@ export const dreamSquirrelScenes = {
         {
           action: () => {
             const game = useGameStore();
-            game.goToScene("dream-faeries5");
+            game.goToScene("dream-squirrel10");
           },
         },
       ],
@@ -495,12 +499,51 @@ export const dreamSquirrelScenes = {
         routes: [
           {
             label: `Inspect the eggcorn`,
-            redirect: "dream-faeries5",
+            redirect: "dream-squirrel10",
           },
         ],
       },
     };
   }),
+
+  "dream-squirrel10": defineScene(
+    "dream-squirrel10",
+    function (payload): Scene {
+      return {
+        id: this.id,
+        background: bgDefault,
+        text:
+          `The eggcorn's skin is a luscious, lacquered brown. ` +
+          `It has a neat little cap and a fine pointy bottom. In fact, you've never found an eggcorn to be so... ` +
+          `tantalizing. Definitely something odd about these eggcorns.`,
+        choices: () => [
+          {
+            text: "YOLO! Eat the eggcorn.",
+            next: `party-eggcorn`,
+            payload: { filter: "squirrel" },
+          },
+          {
+            text: "On second thought...",
+            next: "party-eggcorn-check",
+            payload: { filter: "squirrel" },
+          },
+        ],
+        metadata: {
+          sectionId: "dream-squirrel",
+          routes: [
+            {
+              label: `YOLO! Eat the eggcorn.`,
+              redirect: "party-eggcorn",
+            },
+            {
+              label: `On second thought...`,
+              redirect: "party-eggcorn-check",
+            },
+          ],
+        },
+      };
+    }
+  ),
 
   "dream-squirrel-give-up": defineScene(
     "dream-squirrel-give-up",

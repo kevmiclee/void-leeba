@@ -353,7 +353,7 @@ export const hypnoScenes = {
             const game = useGameStore();
             const aspects = useAspectStore();
             aspects.addAspect(lifeOfTheParty);
-            game.goToScene("party");
+            game.goToScene("party-keg");
           },
         },
       ],
@@ -362,7 +362,7 @@ export const hypnoScenes = {
         routes: [
           {
             label: "Act like a keg",
-            redirect: "party",
+            redirect: "party-keg",
             aspect: lifeOfTheParty,
           },
         ],

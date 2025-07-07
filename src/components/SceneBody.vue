@@ -55,6 +55,7 @@ import { useDrawerStore } from "@/stores/drawer";
 import { useDictionaryStore } from "@/stores/dictionary";
 import { dictionaryEntries } from "@/data/dictionary";
 import { useAudioStore } from "@/stores/audio";
+import { useSceneHelpers } from "@/helper-functions/scene-helpers";
 
 const props = defineProps<{
   letters: string[];
@@ -104,6 +105,7 @@ const chunks = computed(() => {
 });
 
 const game = useGameStore();
+const { finishAnimation } = useSceneHelpers();
 const buttonActions =
   game.currentScene(game.currentScenePayload).buttonActions ?? [];
 const animationSkipped = computed(() => game.animationSkipped);
@@ -135,6 +137,8 @@ function handleButtonClick(index: number) {
         );
       }
     }
+  } else {
+    finishAnimation();
   }
 }
 

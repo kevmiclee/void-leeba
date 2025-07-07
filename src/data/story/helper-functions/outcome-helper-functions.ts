@@ -92,7 +92,11 @@ export function getCatchSquirrelOutcome(roll: number): FateOutcome {
     };
   } else {
     return {
-      text: ``,
+      text:
+        `Pfft. Of course you missed. Who catches a squirrel with their bare hands? As a result, you lose ` +
+        `your grip and fall backwards like a defeated villain in slow-motion.` +
+        `^^You hit the ground with a soft thud and several pinecones scatter down around you. {Pick up a pinecone.}` +
+        `^^The squirrel wants you to follow it.`,
       success: false,
     };
   }

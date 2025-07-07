@@ -180,6 +180,7 @@ onMounted(() => {
   height: 8vh;
   font-size: 8vh;
   text-align: center;
+  animation: spin 2s linear infinite;
 }
 
 .flash {
@@ -218,5 +219,14 @@ onMounted(() => {
   object-fit: cover;
   z-index: 1;
   pointer-events: none;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 </style>
