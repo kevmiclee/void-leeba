@@ -80,6 +80,7 @@ export const introScenes = {
     return {
       id: this.id,
       text: "credits",
+      //TODO: credits
     };
   }),
 

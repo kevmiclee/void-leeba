@@ -16,6 +16,8 @@ import { CharacterId } from "@/types/character";
 import { useAspectStore } from "@/stores/aspects";
 import { animalAbuser } from "@/data/aspects";
 
+//TODO: MUSIC - Add bass drum
+
 export const blackDogScenes = {
   "black-dog": defineScene("black-dog", function (payload): Scene {
     return {

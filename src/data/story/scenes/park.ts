@@ -6,7 +6,7 @@ import { useCharacterStore } from "@/stores/character";
 import { CharacterId } from "@/types/character";
 import { defineScene } from "../story";
 
-//TODO: MUSIC - park - add egg-shaker sound, and like fun guttural burpy percussive noises
+//TODO: MUSIC - park - add egg-shaker sound, and like fun guttural burpy percussive noises, crickets
 
 export const parkScenes = {
   park: defineScene("park", function (payload): Scene {

@@ -14,7 +14,7 @@ export function getNapFaeries2Text(filter?: string): string {
     case "thanks":
       return (
         `"Thanks!".."\`Thanks!\`".."tHaNkS!!" The {hongatar} are mocking you ruthlessly in what you ` +
-        `tell yourself is all in good fun.`
+        `tell yourself is all good fun.`
       );
 
     case "wink":
@@ -126,8 +126,8 @@ export function getBlackDogDoneText(filter: string): string {
 
     case "food-human":
       return (
-        `The man eyes the food cautiously, and takes a furtive step toward it. After a suspicious sniff, as if suddenly recalling an unpleasant memory ` +
-        `he recoils in disgust. He darts an accusatory gaze at you and sprints off into the neighborhood.`
+        `The man eyes the food cautiously, and takes a furtive step toward it. After a suspicious sniff, he recoils in disgust, ` +
+        `as if suddenly recalling an unpleasant memory. He darts an accusatory gaze at you and sprints off into the neighborhood.`
       );
     case "pets-human":
       return (

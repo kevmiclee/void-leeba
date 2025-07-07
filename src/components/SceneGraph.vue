@@ -117,7 +117,7 @@ function renderGraph() {
         mannersNodeId = `${g.manners}_${index + 1}`;
       }
 
-      const char = `${g.aspect ?? ""}-${statNodeId}-${mannersNodeId}`;
+      const char = `${g.aspect ?? ""}^${statNodeId}^${mannersNodeId}`;
       characterNodes.add(char);
 
       edges.push({
@@ -200,7 +200,7 @@ function renderGraph() {
   });
 
   const characterNodeObjs = Array.from(characterNodes).map((char) => {
-    const chars = char.split("-");
+    const chars = char.split("^");
     let label = "";
 
     if (chars[0] != "") {
