@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isViral">VIRAL DOG KICKER</div>
+  <div v-if="isViral">VIRAL DOG KICKER???????</div>
   <ul v-else class="list">
     <div class="sub-menu-header" @click.stop="drawer.resetDrawerView">
       < Phone

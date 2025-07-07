@@ -79,7 +79,7 @@ export function getDrunkRescueText(filter?: string): string {
   if (filter) {
     return `The drunk from before stumbles by.`;
   } else {
-    return `There are those drunks from before. You cry out for help, but they don't see to care.`;
+    return `There are those drunks from before. You cry out for help, but they don't seem to care.`;
   }
 }
 
