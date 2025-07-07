@@ -664,7 +664,7 @@ export const blackDogScenes = {
         background: bgDefault,
         audio: spookyMusic,
         text:
-          `The ${payload?.filter ? "drunks set" : "drunk sets"}  a can of dog food on the ground. The redblack dog retreats ` +
+          `The ${payload?.filter ? "drunk sets" : "drunks set"}  a can of dog food on the ground. The redblack dog retreats ` +
           `and busies itself with the food.`,
         dialogSequence: () => [
           {
