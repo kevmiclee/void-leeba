@@ -119,10 +119,29 @@ export const useCharacterStore = defineStore("character", {
     },
 
     async useItem(id: ItemId) {
-      if (id == "mushroom") {
-        const game = useGameStore();
-        game.startPsychedelicEffect();
+      const game = useGameStore();
+      const snackbar = useSnackbarStore();
+
+      switch (id) {
+        case "mushroom": {
+          game.startPsychedelicEffect();
+          break;
+        }
+
+        case "self-help-book": {
+          const hasTranslator = this.hasItem("translator");
+
+          if (hasTranslator) {
+            //TODO: translated book;
+          } else {
+            snackbar.show("You aren't fluent enough in Finnish to read this.");
+          }
+        }
+
+        default:
+          break;
       }
+
       if (itemCatalog[id].type == "consumable") {
         this.removeFromInventory(id, false);
       }

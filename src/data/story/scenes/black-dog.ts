@@ -85,7 +85,7 @@ export const blackDogScenes = {
         `"You must be careful! There is a Red Dog. And, there is a Black Dog." But...` +
         `^^...this is both? ` +
         `^^{You start acting careful.}`,
-      buttonActions: [
+      buttonActions: () => [
         {
           action: () => {
             const store = useGameStore();
@@ -177,7 +177,7 @@ export const blackDogScenes = {
         `^^The dog submits to your touch, and leans against you. You find a collar with a locket wrapped around its neck. ` +
         `The locket is glowing faintly with a sigul of a crescent moon. The dog does not react to you touching the locket, and you ` +
         `think to {open it}.`,
-      buttonActions: [
+      buttonActions: () => [
         {
           action: () => {
             const game = useGameStore();
@@ -301,14 +301,17 @@ export const blackDogScenes = {
             {
               label: "Give it some dog food.",
               redirect: "black-dog-done",
+              manners: "polite",
             },
             {
               label: "Give it some pets.",
               redirect: "black-dog-done",
+              manners: "polite",
             },
             {
               label: "Do nothing.",
               redirect: "black-dog-done",
+              manners: "depressing",
             },
           ],
         },
@@ -378,14 +381,17 @@ export const blackDogScenes = {
                 id: "shitheadedness",
                 amount: 1,
               },
+              manners: "rude",
             },
             {
               label: "Give it some pets.",
               redirect: "black-dog-done",
+              manners: "weird",
             },
             {
               label: "Do nothing.",
               redirect: "black-dog-done",
+              manners: "polite",
             },
           ],
         },
@@ -480,7 +486,7 @@ export const blackDogScenes = {
         background: bgDefault,
         audio: spookyMusic,
         text: payload?.text ?? "",
-        buttonActions: [
+        buttonActions: () => [
           {
             action: () => {
               const game = useGameStore();
@@ -512,7 +518,7 @@ export const blackDogScenes = {
         background: bgDefault,
         audio: spookyMusic,
         text: payload?.text ?? "",
-        buttonActions: [
+        buttonActions: () => [
           {
             action: () => {
               const game = useGameStore();
@@ -560,7 +566,7 @@ export const blackDogScenes = {
           `...^^But wait! You're still here... You open your eyes. The redblack dog is harmlessly sniffing ` +
           `around your pack. That's when you remember -- the dog food! Sweet serendiptity! Cautiously, you ` +
           `open your pack and {let the creature take the food}.`,
-        buttonActions: [
+        buttonActions: () => [
           {
             action: () => {
               const character = useCharacterStore();
@@ -752,7 +758,7 @@ export const blackDogScenes = {
           `They leave. And miracualously, so does the redblack dog. It seems to recognize the drunks, ` +
           `and follows them happily.^^` +
           `You feel embarassed for what just happened. {And alone}.`,
-        buttonActions: [
+        buttonActions: () => [
           {
             action: () => {
               const game = useGameStore();
@@ -821,7 +827,7 @@ export const blackDogScenes = {
           `^^Does that make you want to kick it?` +
           `^^Do you hate the human-faced dog because it's pieces of you?` +
           `^^Or was it because it was {so scary}?`,
-        buttonActions: [
+        buttonActions: () => [
           {
             action: () => {
               const game = useGameStore();
@@ -855,7 +861,7 @@ export const blackDogScenes = {
         const drawer = useDrawerStore();
         drawer.togglePhoneIsCrazy();
       },
-      buttonActions: [
+      buttonActions: () => [
         {
           action: () => {
             const drawer = useDrawerStore();
@@ -889,7 +895,7 @@ export const blackDogScenes = {
           `^^It's not helping... You're done with this park. Part of you wishes you could find those drunks to give them a piece of your mind. ` +
           `Maybe they went {into the neighborhood}. Or you could {check by that snow pile}.` +
           `^^Another part of you just wants to {go home to your room} and forget about today.`,
-        buttonActions: [
+        buttonActions: () => [
           {
             action: () => {
               const game = useGameStore();

@@ -22,7 +22,7 @@ import playerHurtSound from "@/assets/audio/story/sounds/player-hurt.mp3";
 import { useGameStore } from "../../stores/game";
 import { useCharacterStore } from "../../stores/character";
 import { useAspectStore } from "@/stores/aspects";
-import { allYourBonesAreBroken, jackBeNimble } from "@/data/aspects";
+import { allYourBonesAreBroken, partBird } from "@/data/aspects";
 import { useAudioStore } from "@/stores/audio";
 
 const gameRef = ref<HTMLDivElement | null>(null);
@@ -146,7 +146,7 @@ onMounted(() => {
     if (elapsedTime.value == 30) {
       clearInterval(timerInterval);
       const aspects = useAspectStore();
-      aspects.addAspect(jackBeNimble);
+      aspects.addAspect(partBird);
       game.goToScene("dream-tree-chase-game-win");
     }
   }, 1000);

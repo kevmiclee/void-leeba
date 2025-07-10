@@ -4,7 +4,7 @@ import treeFallingSound from "@/assets/audio/story/sounds/tree-falling.mp3";
 import { useGameStore } from "@/stores/game";
 import { useCharacterStore } from "@/stores/character";
 import { getTreeChaseText } from "../helper-functions/text-helper-functions";
-import { allYourBonesAreBroken, jackBeNimble } from "@/data/aspects";
+import { allYourBonesAreBroken, partBird } from "@/data/aspects";
 import { defineScene } from "../story";
 import { useAudioStore } from "@/stores/audio";
 
@@ -28,7 +28,7 @@ export const dreamTreeChaseScenes = {
           `^^The trees are chasing you!` +
           `^^You {run} forward through the forest.` +
           `^^{Pick up a handful of pine needles.}`,
-        buttonActions: [
+        buttonActions: () => [
           {
             action: () => {
               const game = useGameStore();
@@ -81,7 +81,7 @@ export const dreamTreeChaseScenes = {
         text:
           (payload?.text ?? "") +
           "^^Trees are falling all around you. You have to {dodge them}.",
-        buttonActions: [
+        buttonActions: () => [
           {
             action: () => {
               const game = useGameStore();
@@ -116,7 +116,7 @@ export const dreamTreeChaseScenes = {
             {
               label: `win`,
               redirect: "dream-tree-chase-game-win",
-              aspect: jackBeNimble,
+              aspect: partBird,
             },
             {
               label: `lose`,
@@ -141,7 +141,7 @@ export const dreamTreeChaseScenes = {
           `and out came a round clear plastic capsule with a colorful little rubber popper inside. You'd turn the popper inside-out, ` +
           `set it down and...` +
           `^^FWOOM!!! You're leaping and bounding through the air, {springing off the pine needles} like a tree frog on a trampoline.`,
-        buttonActions: [
+        buttonActions: () => [
           {
             action: () => {
               const game = useGameStore();
@@ -149,6 +149,15 @@ export const dreamTreeChaseScenes = {
             },
           },
         ],
+        metadata: {
+          sectionId: "dream-tree-chase",
+          routes: [
+            {
+              label: "springing off the pine needles",
+              redirect: "dream-tree-chase-fly",
+            },
+          ],
+        },
       };
     }
   ),
@@ -165,7 +174,7 @@ export const dreamTreeChaseScenes = {
           `^^The trees are closing in on you now and there is nothing you can do.` +
           `^^WHACK!^THOOMB!!^CRACK!!!` +
           `^^You're mangled in a barrage of falling trees. {All your bones are broken.}`,
-        buttonActions: [
+        buttonActions: () => [
           {
             action: () => {
               const game = useGameStore();
@@ -173,6 +182,15 @@ export const dreamTreeChaseScenes = {
             },
           },
         ],
+        metadata: {
+          sectionId: "dream-tree-chase",
+          routes: [
+            {
+              label: "All your bones are broken",
+              redirect: "dream-tree-chase-sink",
+            },
+          ],
+        },
       };
     }
   ),
@@ -183,8 +201,14 @@ export const dreamTreeChaseScenes = {
       return {
         id: this.id,
         background: bgDefault,
-        text: `fly`,
-        //TODO: dream-tree-chase-fly
+        text:
+          `As you vault above the canopy, a great bird grabs you by your turtleneck. It carries you high above the forest. ` +
+          `You can see the tree line and a sprawling countryside beyond it. Before long, you feel a sudden shift in trajectory and you ` +
+          `and the bird shooting up, up, up at a very high speed. Craning your neck back, you see a pair of huge tatooed arms that ` +
+          `have latched on to the bird. The arms a attached to a rocket. The tattoo-armed rocket propels you and the bird into space, just beyond the atmosphere. ` +
+          `Reaching its zenith, there is a moment of quiet, motionless stillness, then you're re-entering the atmosphere, careening faster and faster ` +
+          `back down until you all meet the forest floor in an explosive blast. You find yourself at the center of a massive crater. ` +
+          `There is no sign of the bird, but you now have wings. The force of the blast must have fused your body and the bird's in some magical union.`,
       };
     }
   ),
@@ -195,8 +219,40 @@ export const dreamTreeChaseScenes = {
       return {
         id: this.id,
         background: bgDefault,
-        text: `sink`,
-        //TODO: dream-tree-chase-sink
+        text:
+          `As you lay there motionless, in a mangled heap, conciousness slipping, what appears to be one of the faeries ` +
+          `from before enters your vision.`,
+        dialogSequence: () => [
+          {
+            characterId: "faerie1",
+            text: "Oh little pölkkypää... What you tried to do to the trees was not nice! I guess you learned your lesson though. Rest now.",
+            onClick: () => {
+              const game = useGameStore();
+              game.goToScene("dream-tree-chase-sink1");
+            },
+          },
+        ],
+      };
+    }
+  ),
+
+  "dream-tree-chase-sink1": defineScene(
+    "dream-tree-chase-sink1",
+    function (payload): Scene {
+      return {
+        id: this.id,
+        background: bgDefault,
+        text:
+          `The faerie has something round and shiny in its hand, which it inserts into your mouth. ` +
+          `You have no choice but to {swallow it}.`,
+        buttonActions: () => [
+          {
+            action: () => {
+              const game = useGameStore();
+              game.goToScene("party-eggcorn");
+            },
+          },
+        ],
       };
     }
   ),

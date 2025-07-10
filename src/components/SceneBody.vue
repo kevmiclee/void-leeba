@@ -106,8 +106,9 @@ const chunks = computed(() => {
 
 const game = useGameStore();
 const { finishAnimation } = useSceneHelpers();
-const buttonActions =
-  game.currentScene(game.currentScenePayload).buttonActions ?? [];
+const buttonActions = game.currentScene(game.currentScenePayload).buttonActions
+  ? game.currentScene(game.currentScenePayload).buttonActions!()
+  : [];
 const animationSkipped = computed(() => game.animationSkipped);
 
 const hideButtons: Ref<number[], number[]> = ref([]);

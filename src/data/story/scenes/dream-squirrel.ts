@@ -61,7 +61,7 @@ export const dreamSquirrelScenes = {
         text:
           `You reach for a nearby branch. It breaks, but your thighs remain firmly clenched on the trunk. ` +
           `{Keep shimmying up}.`,
-        buttonActions: [
+        buttonActions: () => [
           {
             action: () => {
               const game = useGameStore();
@@ -176,7 +176,7 @@ export const dreamSquirrelScenes = {
       text:
         `The little vermin is taunting you!` +
         `^^In a last ditch effort, you dart your hand out to {snatch the furball}.`,
-      buttonActions: [
+      buttonActions: () => [
         {
           action: () => {
             const character = useCharacterStore();
@@ -261,7 +261,7 @@ export const dreamSquirrelScenes = {
         id: this.id,
         background: bgDefault,
         text: payload?.text ?? "",
-        buttonActions: [
+        buttonActions: () => [
           {
             isItem: true,
             action: () => {
@@ -341,6 +341,14 @@ export const dreamSquirrelScenes = {
               character.setManners("weird");
             },
           },
+          {
+            text: `Don't speak. Don't think. Just follow.`,
+            next: "dream-squirrel6",
+            onChoose: () => {
+              character.setManners("weird");
+              character.gainStat("blueMagic", 1, "dream-squirrel5");
+            },
+          },
         ];
       },
       metadata: {
@@ -365,6 +373,15 @@ export const dreamSquirrelScenes = {
             label: `Why am I following a squirrel?`,
             redirect: "dream-squirrel6",
             manners: "weird",
+          },
+          {
+            label: `Don't speak. Don't think. Just follow.`,
+            redirect: "dream-squirrel6",
+            manners: "weird",
+            stat: {
+              id: "blueMagic",
+              amount: 1,
+            },
           },
         ],
       },
@@ -410,7 +427,7 @@ export const dreamSquirrelScenes = {
         `You arrive at a clearing. The {pine faeries} you saw earlier are all laying about on the ground, ` +
         `apparently unconscious.^^The squirrel is darting here and there, sniffing the hongatar and chittering ` +
         `excitedly.`,
-      buttonActions: [
+      buttonActions: () => [
         {
           dictionaryEntryId: "hongatar",
         },
@@ -486,7 +503,7 @@ export const dreamSquirrelScenes = {
         } ` +
         `You notice eggcorns scattered about near where all the hongatar lay, just like the one you ` +
         `saw the squirrel eat. You see an uneaten one by your foot. {Inspect the eggcorn.}`,
-      buttonActions: [
+      buttonActions: () => [
         {
           action: () => {
             const game = useGameStore();

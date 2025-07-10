@@ -23,7 +23,7 @@ export const homeScenes = {
         `^^You have on your grandfather's dragon ring. The dragon is made of stainless steel with ruby red eyes, and in its claws, ` +
         `it holds a swirling planet of turquoise. You wear your grandmother's wool coat, with an intricately-hooked patch on its ` +
         `back that shows four images: an ancient windmill, an historic longship, a modern wind turbine, and a lobster boat. {Continue.}`,
-      buttonActions: [
+      buttonActions: () => [
         {
           action: () => {
             const store = useGameStore();
@@ -219,7 +219,7 @@ export const homeScenes = {
       audio: homeSong,
       background: bgDefault,
       text: payload?.text ?? "",
-      buttonActions: [
+      buttonActions: () => [
         {
           action: () => {
             const store = useGameStore();
@@ -250,7 +250,7 @@ export const homeScenes = {
         `^^A notebook sits on a little desk, a stiff chair next to it. Drawing utensils rest here. {Settle into the chair to make something}.` +
         `^^The empty bed and the blank page remind you of fresh snow, a bright day, the smell of morning mud, and afternoon heat. Wait, ` +
         `{I'm going to the park}.`,
-      buttonActions: [
+      buttonActions: () => [
         {
           action: () => {
             const store = useGameStore();
@@ -335,7 +335,7 @@ export const homeScenes = {
         `Nonononono! You pick up the paintbrush, smoosh some acrylic paint into the palette and {paint with your heart}.` +
         `^^Nah, nevermind, I'm {going to sleep}.`,
       background: bgDefault,
-      buttonActions: [
+      buttonActions: () => [
         {
           action: () => {
             const game = useGameStore();
@@ -358,14 +358,14 @@ export const homeScenes = {
       metadata: {
         sectionId: "home",
         routes: [
-          // {
-          //   label: `into the void`,
-          //   redirect: "void",
-          // },
-          // {
-          //   label: `paint with your heart`,
-          //   redirect: "paint",
-          // },
+          {
+            label: `into the void`,
+            redirect: "void",
+          },
+          {
+            label: `paint with your heart`,
+            redirect: "paint",
+          },
           {
             label: `going to sleep`,
             redirect: "nap",

@@ -11,6 +11,7 @@ export interface Item {
   action?: () => void;
   permanent?: boolean;
   pageAcquired?: string;
+  usable: boolean;
 }
 
 export const defaultItems: Item[] = [

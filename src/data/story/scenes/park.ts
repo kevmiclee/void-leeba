@@ -39,14 +39,14 @@ export const parkScenes = {
             label: `Still yourself and listen to the sounds.`,
             redirect: "park-drunks",
           },
-          // {
-          //   label: `Leave the park and enter the neighborhood.`,
-          //   redirect: "neighborhood",
-          // },
-          // {
-          //   label: `Play on the snowpile.`,
-          //   redirect: "snow-pile",
-          // },
+          {
+            label: `Leave the park and enter the neighborhood.`,
+            redirect: "neighborhood",
+          },
+          {
+            label: `Play on the snowpile.`,
+            redirect: "snow-pile",
+          },
         ],
       },
     };
@@ -193,14 +193,17 @@ export const parkScenes = {
           {
             label: `I dont have time for this`,
             redirect: "park-drunks3",
+            manners: "rude",
           },
           {
-            label: `Looki ngup is for the young and hopeful`,
+            label: `Looking up is for the young and hopeful`,
             redirect: "park-drunks3",
+            manners: "depressing",
           },
           {
             label: `Just laugh`,
             redirect: "park-drunks3",
+            manners: "polite",
           },
         ],
       },
@@ -296,14 +299,17 @@ export const parkScenes = {
           {
             label: `Not cool`,
             redirect: "park-drunks3",
+            manners: "depressing",
           },
           {
             label: `YEAH! EAT IT, YA DOPE!`,
             redirect: "park-drunks3",
+            manners: "rude",
           },
           {
             label: `Just laugh`,
             redirect: "park-drunks3",
+            manners: "polite",
           },
         ],
       },

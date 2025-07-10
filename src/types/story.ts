@@ -28,6 +28,7 @@ export interface Dialog {
 }
 
 export interface ButtonAction {
+  id?: string;
   isItem?: boolean;
   dictionaryEntryId?: DictionaryEntryId;
   action?: () => void;
@@ -41,7 +42,7 @@ export interface Scene {
   audio?: string;
   dialogSequence?: () => Dialog[];
   choices?: () => Choice[];
-  buttonActions?: ButtonAction[];
+  buttonActions?: () => ButtonAction[];
   onPageLoad?: () => void;
   backgroundFilter?: string;
   miniGameId?: MiniGameId;

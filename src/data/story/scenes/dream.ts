@@ -1,4 +1,4 @@
-import { Scene } from "@/types/story";
+import { ButtonAction, Scene } from "@/types/story";
 import bgDefault from "@/assets/images/backgrounds/new-game.png";
 import crunchyWalkingSound from "@/assets/audio/story/sounds/crunchy-walking.mp3";
 import { useGameStore } from "@/stores/game";
@@ -23,7 +23,7 @@ export const dreamScenes = {
         `if you were any heavier, you might start to sink. Your progress is slow while you focus on balance. ` +
         `{Pick up a handful of pine needles.}`,
       choices: () => [{ text: "Admire the trees.", next: "dream1" }],
-      buttonActions: [
+      buttonActions: () => [
         {
           isItem: true,
           action: () => {
@@ -49,24 +49,30 @@ export const dreamScenes = {
   }),
 
   dream1: defineScene("dream1", function (payload): Scene {
+    const character = useCharacterStore();
+    const didFaeries = character.flags["did-faeries"];
+    const didNap = character.flags["did-nap"];
+
+    // payload?.filter == "fromNap"
+    //       ? `You're able to wake up from the dream within the dream, but you're still dreaming. You are back ` +
+    //         `where you started.^^`
+    //       :
+
     return {
       id: this.id,
       background: bgDefault,
       text:
         `${
-          payload?.filter == "fromNap"
-            ? `You're able to wake up from the dream within the dream, but you're still dreaming. You are back ` +
-              `where you started.^^`
-            : payload?.filter
-              ? "You find your way back to where you started.^^"
-              : ""
+          didFaeries || didNap
+            ? "You find your way back to where you started.^^"
+            : ""
         }` +
         `Trees! Grand, huge, awe-inspiring trees! The crisp, beautiful pine scent cuts through the pervading damp of the forest. ` +
         `${payload?.filter == "noSquirrel" ? "" : "There are squirrels and spiders scurrying and spindling. {Try to catch one}. "}` +
         `Above, the pines' trunks creak. Their creaky columns bend into the sky. You gaze at the trees, taking them in like a worshipper ` +
         `at the shrine. The woody deities are set in bas-relief against the backdrop of clear sky.` +
         `${
-          payload?.filter == "noFaeries"
+          didFaeries
             ? ""
             : `^^A group of {pine faeries} emerge from the knot of a nearby tree. They circle around you, teasing you, ` +
               `plucking your eyelashes and spitting in your nostril holes. They swirl away off to your left.^{Follow them}.`
@@ -74,65 +80,99 @@ export const dreamScenes = {
         `^^Dad-gum forest faeries. Yep, if you had you an ax, you'd {start chopping} down all these trees, right this second. If you don't, ` +
         `someone else surely will. A place like this? Prime real estate. Goodbye paradise, hello parking lot!` +
         `${
-          payload?.filter == "nap"
+          didNap
             ? ""
             : `^^Forget the faeries, forget the trees, forget the parking lot... look at that brain-colored moss over there! ` +
-              `Mmm, awww.... you wanna curl up and {take a nap}.^^{Pick up a handful of pine needles.}`
-        }`,
-      buttonActions: [
-        {
-          action: () => {
-            const game = useGameStore();
-            game.goToScene("dream-squirrel");
+              `Mmm, awww.... you wanna curl up and {take a nap}.`
+        }` +
+        `^^{Pick up a handful of pine needles.}`,
+      buttonActions: () => {
+        const character = useCharacterStore();
+        const game = useGameStore();
+
+        let buttonActions: ButtonAction[] = [
+          {
+            id: "squirrel",
+            action: () => {
+              character.gainStat("athletics", 1, "dream1");
+              game.goToScene("dream-squirrel");
+            },
           },
-        },
-        {
-          dictionaryEntryId: "hongatar",
-        },
-        {
-          action: () => {
-            const game = useGameStore();
-            game.goToScene("dream-faeries");
+          {
+            id: "faeries",
+            dictionaryEntryId: "hongatar",
           },
-        },
-        {
-          action: () => {
-            const game = useGameStore();
-            game.goToScene("dream-chop");
+          {
+            id: "faeries",
+            action: () => {
+              character.gainStat("blueMagic", 1, "dream1");
+              game.goToScene("dream-faeries");
+            },
           },
-        },
-        {
-          action: () => {
-            const game = useGameStore();
-            game.goToScene("dream-within-a-dream");
+          {
+            id: "chop",
+            action: () => {
+              character.gainStat("shitheadedness", 1, "dream1");
+              game.goToScene("dream-chop");
+            },
           },
-        },
-        {
-          isItem: true,
-          action: () => {
-            const character = useCharacterStore();
-            character.addToInventory("pine-needles", this.id);
+          {
+            id: "nap",
+            action: () => {
+              character.gainStat("will", 1, "dream1");
+              game.goToScene("dream-within-a-dream");
+            },
           },
-        },
-      ],
+          {
+            isItem: true,
+            action: () => {
+              character.addToInventory("pine-needles", this.id);
+            },
+          },
+        ];
+
+        buttonActions = buttonActions.filter(
+          (action) =>
+            (!character.flags["did-faeries"] || action.id != "faeries") &&
+            (!character.flags["did-nap"] || action.id != "nap")
+        );
+
+        return buttonActions;
+      },
       metadata: {
         sectionId: "dream",
         routes: [
           {
             label: `Try to catch one`,
             redirect: "dream-squirrel",
+            stat: {
+              id: "athletics",
+              amount: 1,
+            },
           },
           {
             label: `Follow them`,
             redirect: "dream-faeries",
+            stat: {
+              id: "blueMagic",
+              amount: 1,
+            },
           },
           {
             label: `start chopping`,
             redirect: "dream-chop",
+            stat: {
+              id: "shitheadedness",
+              amount: 1,
+            },
           },
           {
             label: `take a nap`,
             redirect: "dream-within-a-dream",
+            stat: {
+              id: "will",
+              amount: 1,
+            },
           },
         ],
       },
@@ -149,7 +189,7 @@ export const dreamScenes = {
           `It's so serene and beautiful here. It would be funny if you could go to sleep again when you ` +
           `are already dreaming. You pick a spot to nap on the brain moss, sinking into it, supple and cozy.` +
           `^^{Pick up a handful of brain moss.}`,
-        buttonActions: [
+        buttonActions: () => [
           {
             isItem: true,
             action: () => {
@@ -161,8 +201,13 @@ export const dreamScenes = {
         choices: () => [
           { text: "Fall asleep.", next: "dream-within-a-dream1" },
           {
-            text: `Nevermind`,
+            text: `Nevermind.`,
             next: "dream1",
+            payload: { filter: "nap" },
+            onChoose: () => {
+              const character = useCharacterStore();
+              character.setFlag("did-nap", true);
+            },
           },
         ],
         metadata: {
@@ -233,7 +278,7 @@ export const dreamScenes = {
           `^^{Grab up a handful of the mushroom's flesh.}^^You begin to hear a faint thudding noise like the labored heartbeat of ` +
           `some distant goliath. Oh no. Your dreaming was weak, filled with worry. A foreboding sense of doom cuts forces ` +
           `you to {awaken back into the first dream}.`,
-        buttonActions: [
+        buttonActions: () => [
           {
             isItem: true,
             action: () => {
@@ -276,7 +321,7 @@ export const dreamScenes = {
           `^^You lean back for a while just admiring the mushroom's shape.` +
           `^^{Grab up a handful of the mushroom's flesh.}` +
           `^^Looking up from the shroom, {a hilly landscape sprawls out before you}.`,
-        buttonActions: [
+        buttonActions: () => [
           {
             isItem: true,
             action: () => {
@@ -321,7 +366,7 @@ export const dreamScenes = {
           `their coverage, large buildings and the grey of steel and asphalt overtakes the vegetative green. The stars in the night ` +
           `sky become less, the clarity of day is obscured by haze. The quiet is consumed by an ever-surmounting hum.` +
           `^^{Breathe in.}`,
-        buttonActions: [
+        buttonActions: () => [
           {
             action: () => {
               const game = useGameStore();
@@ -356,7 +401,7 @@ export const dreamScenes = {
           `The highways wither like wisps of smoke disintegrating into the hills. The once imposing grids of farms and ` +
           `neighborhoods fade into amorphous wilderness.^^Day, night, day, night. Seasons cycle and time dutifully carves ` +
           `the terrain with imperceptible changes. All is as it was before.^^{Open your eyes}.`,
-        buttonActions: [
+        buttonActions: () => [
           {
             action: () => {
               const game = useGameStore();

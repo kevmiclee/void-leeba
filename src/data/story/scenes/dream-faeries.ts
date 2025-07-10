@@ -20,7 +20,7 @@ export const dreamFaeriesScenes = {
         `They seem to be eating small snails, and then casting their shells to the forest floor.` +
         `^^{Pick up a handful of hongatar trash.}` +
         `^^The faeries are excitedly chattering amongst themselves.`,
-      buttonActions: [
+      buttonActions: () => [
         {
           dictionaryEntryId: "hongatar",
         },
@@ -76,7 +76,7 @@ export const dreamFaeriesScenes = {
       background: bgDefault,
       audio: faeriesSong,
       text: "The group of {hongatar} turn to look at you.",
-      buttonActions: [
+      buttonActions: () => [
         {
           dictionaryEntryId: "hongatar",
         },
@@ -98,6 +98,10 @@ export const dreamFaeriesScenes = {
         {
           text: `There's that squirrel again! Try to catch it.`,
           next: "dream-squirrel",
+          onChoose: () => {
+            const character = useCharacterStore();
+            character.gainStat("athletics", 1, "dream-faeries1");
+          },
         },
       ],
       metadata: {
@@ -115,6 +119,10 @@ export const dreamFaeriesScenes = {
           {
             label: `There's that squirrel again! Try to catch it.`,
             redirect: "dream-squirrel",
+            stat: {
+              id: "athletics",
+              amount: 1,
+            },
           },
         ],
       },
@@ -129,7 +137,7 @@ export const dreamFaeriesScenes = {
       text:
         `${getNapFaeries2Text(payload?.filter)} ` +
         `Their excited chattering finds a rhythmic unison in a sing-song chant.`,
-      buttonActions: [
+      buttonActions: () => [
         {
           dictionaryEntryId: "hongatar",
         },
@@ -169,7 +177,7 @@ export const dreamFaeriesScenes = {
       background: bgDefault,
       audio: faeriesSong,
       text: `The {hongatar} with the coolest outfit addresses you.`,
-      buttonActions: [
+      buttonActions: () => [
         {
           dictionaryEntryId: "hongatar",
         },
@@ -336,7 +344,7 @@ export const dreamFaeriesScenes = {
         background: bgDefault,
         audio: faeriesSong,
         text: "The {hongatar} puff up, proud.",
-        buttonActions: [{ dictionaryEntryId: "hongatar" }],
+        buttonActions: () => [{ dictionaryEntryId: "hongatar" }],
         dialogSequence: () => [
           {
             characterId: "faerie1",
@@ -363,6 +371,11 @@ export const dreamFaeriesScenes = {
               payload: { filter: "flatter" },
               onChoose: () => {
                 character.setManners("polite");
+                character.gainStat(
+                  "shitheadedness",
+                  1,
+                  "dream-faeries-litter-no-proof"
+                );
               },
             },
             {
@@ -387,6 +400,10 @@ export const dreamFaeriesScenes = {
               label: `"Your dedication to the ecosystem is so inspiring. If only we humans were so thoughtful and so brave."`,
               redirect: "dream-faeries2",
               manners: "polite",
+              stat: {
+                id: "shitheadedness",
+                amount: 1,
+              },
             },
             {
               label: `"That is asinine."`,
@@ -444,7 +461,7 @@ export const dreamFaeriesScenes = {
         text:
           `The {hongatar} now all seem to hold you in great reverence and awe, ` +
           `as if you were a god of the whole forest.`,
-        buttonActions: [
+        buttonActions: () => [
           {
             dictionaryEntryId: "hongatar",
           },
@@ -490,7 +507,7 @@ export const dreamFaeriesScenes = {
         background: bgDefault,
         audio: faeriesSong,
         text: `The {hongatar} all stare at you expectantly, like eager children.`,
-        buttonActions: [
+        buttonActions: () => [
           {
             dictionaryEntryId: "hongatar",
           },
@@ -565,7 +582,14 @@ export const dreamFaeriesScenes = {
           },
         ],
         choices: () => [
-          { text: `"I'm good. Thanks."`, next: "dream-faeries-party-decline" },
+          {
+            text: `"I'm good. Thanks."`,
+            next: "dream-faeries-party-decline",
+            onChoose: () => {
+              const character = useCharacterStore();
+              character.gainStat("will", 1, "dream-faeries-party-check");
+            },
+          },
           {
             text: `"PARTY!!!"`,
             next: "dream-faeries4",
@@ -577,6 +601,10 @@ export const dreamFaeriesScenes = {
             {
               label: `"I'm good. Thanks"`,
               redirect: "dream-faeries-party-decline",
+              stat: {
+                id: "will",
+                amount: 1,
+              },
             },
             {
               label: `"PARTY!!!"`,
@@ -602,6 +630,8 @@ export const dreamFaeriesScenes = {
             text: `Suit yourself!`,
             onClick: () => {
               const game = useGameStore();
+              const character = useCharacterStore();
+              character.setFlag("did-faeries", true);
               game.goToScene("dream1", { filter: "noFaeries" });
             },
           },
@@ -628,7 +658,7 @@ export const dreamFaeriesScenes = {
         `Yuck! It tastes like...^^You don't get a chance to finish the thought. ` +
         `It feels like the whole world is being stretched inside-out. You hear a voice, like an echo ` +
         `in your mind, "See you soon, raccoon!" Then {everything goes dark}.`,
-      buttonActions: [
+      buttonActions: () => [
         {
           action: () => {
             const game = useGameStore();
@@ -646,6 +676,10 @@ export const dreamFaeriesScenes = {
           {
             label: `everything goes dark`,
             redirect: "party-faeries",
+          },
+          {
+            label: `everything goes dark`,
+            redirect: "party-squirrel",
           },
         ],
       },
@@ -669,6 +703,11 @@ export const dreamFaeriesScenes = {
             text: `No. Seriously. I'm not eating it.`,
             next: "dream1",
             payload: { filter: "noFaeries" },
+            onChoose: () => {
+              const character = useCharacterStore();
+              character.gainStat("will", 1, "party-eggcorn-check");
+              character.setFlag("did-faeries", true);
+            },
           },
         ],
         metadata: {
@@ -677,6 +716,10 @@ export const dreamFaeriesScenes = {
             {
               label: `No. Seriously. I'm not eating it`,
               redirect: "dream1",
+              stat: {
+                id: "will",
+                amount: 1,
+              },
             },
             {
               label: `YOLO! Eat the eggcorn`,

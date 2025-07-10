@@ -1,7 +1,7 @@
 import { Scene } from "@/types/story";
 import bgDefault from "@/assets/images/backgrounds/new-game.png";
 import { useAspectStore } from "@/stores/aspects";
-import { lifeOfTheParty, wellVersed } from "@/data/aspects";
+import { wellVersed } from "@/data/aspects";
 import { useGameStore } from "@/stores/game";
 import { useCharacterStore } from "@/stores/character";
 import { defineScene } from "../story";
@@ -175,7 +175,7 @@ export const hypnoScenes = {
         `He shoves a costume at you and turns away with a huff. You feel obliged to put it on quickly. ` +
         `No sooner than your head slips through the top of the costume is the large man ushering you out ` +
         `the door. You barely catch a glimpse of yourself in the dressing room mirror.^^You're a... {keg}?`,
-      buttonActions: [
+      buttonActions: () => [
         {
           action: () => {
             const game = useGameStore();
@@ -297,6 +297,10 @@ export const hypnoScenes = {
             text: `"I said no."`,
             next: "dream1",
             payload: { filter: "nap" },
+            onChoose: () => {
+              const character = useCharacterStore();
+              character.setFlag("did-nap", true);
+            },
           },
           {
             text: `"You're right. <i>The show must go on</i>!"`,
@@ -347,12 +351,11 @@ export const hypnoScenes = {
         `With that, the stage door shuts.^^It's dark, and doesn't really seem like a stage at all. ` +
         `As your eyes adjust and the scene takes shape, it seems eerily similar to the forest from your original dream.` +
         `^^You hear voices approaching. Quick! {Act like a keg!}`,
-      buttonActions: [
+      buttonActions: () => [
         {
           action: () => {
             const game = useGameStore();
             const aspects = useAspectStore();
-            aspects.addAspect(lifeOfTheParty);
             game.goToScene("party-keg");
           },
         },
@@ -363,7 +366,6 @@ export const hypnoScenes = {
           {
             label: "Act like a keg",
             redirect: "party-keg",
-            aspect: lifeOfTheParty,
           },
         ],
       },
