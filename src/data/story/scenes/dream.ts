@@ -75,7 +75,7 @@ export const dreamScenes = {
           didFaeries
             ? ""
             : `^^A group of {pine faeries} emerge from the knot of a nearby tree. They circle around you, teasing you, ` +
-              `plucking your eyelashes and spitting in your nostril holes. They swirl away off to your left.^{Follow them}.`
+              `plucking your eyelashes and spitting in your nostril holes. They swirl away off to your left. {Follow them}.`
         }` +
         `^^Dad-gum forest faeries. Yep, if you had you an ax, you'd {start chopping} down all these trees, right this second. If you don't, ` +
         `someone else surely will. A place like this? Prime real estate. Goodbye paradise, hello parking lot!` +
@@ -363,7 +363,7 @@ export const dreamScenes = {
           `^^You begin to exhale and as you do, the huts morph into vinyl-sided cookie-cutter houses. Spidery networks of highways ` +
           `fan out and spread upon the landscape like mycelia exploring a forest floor.` +
           `^^A hill flattens here, a plain rises into a mountain there. The houses multiply and spread out along the roads, and from ` +
-          `their coverage, large buildings and the grey of steel and asphalt overtakes the vegetative green. The stars in the night ` +
+          `their coverage, large buildings and the grey of steel and asphalt overtake the vegetative green. The stars in the night ` +
           `sky become less, the clarity of day is obscured by haze. The quiet is consumed by an ever-surmounting hum.` +
           `^^{Breathe in.}`,
         buttonActions: () => [

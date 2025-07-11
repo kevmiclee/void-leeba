@@ -4,7 +4,7 @@
   <div
     v-else
     class="scene-wrapper"
-    :class="{ psychedelic: game.isPsychedelic }"
+    :class="{ psychedelic: game.isPsychedelic, 'zoom-out': game.isZoomedOut }"
     :style="[backgroundStyle, alignmentStyle, backgroundColorFilter]"
     @click="finishAnimation"
   >
@@ -140,7 +140,7 @@ watch(
 .scene-wrapper {
   height: 100vh;
   width: 100vw;
-  background-size: cover !important;
+  background-size: 100%;
   background-position: center !important;
   display: flex;
   flex-direction: column;
@@ -148,6 +148,12 @@ watch(
   margin: 0;
   position: relative;
   background-repeat: no-repeat;
+
+  transition: background-size 15s ease-in-out;
+}
+
+.scene-wrapper.zoom-out {
+  background-size: 0.1%;
 }
 
 .psychedelic {

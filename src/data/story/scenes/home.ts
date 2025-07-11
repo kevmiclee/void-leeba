@@ -49,8 +49,9 @@ export const homeScenes = {
       background: bgDefault,
       audio: homeSong,
       text:
-        `Your rented room shares its house with roommates, who are at work. Daylight filters through the blinds of the living room window and is spilt onto the ceiling in stripes. ` +
-        `The view out your window shows a lawn, a small tree speckled with red berries, and a quiet road with cars parked along its length.` +
+        `Your rented room shares its house with roommates, who are at work. Daylight filters through the blinds of the ` +
+        `living room window and spills onto the ceiling in stripes. The view out your window shows a lawn, a small tree ` +
+        `speckled with red berries, and a quiet road with cars parked along its length.` +
         `^^You could go out and explore. Also, no one is home. You might enjoy some quiet time in your room.`,
       choices: () => [
         {
@@ -245,11 +246,13 @@ export const homeScenes = {
       audio: homeSong,
       background: bgDefault,
       text:
-        `You trudge up the light green carpeted narrow stairs to your room. Your room is festooned with posters, orderly piles of sorted odds and ends, and trinkets. ` +
-        `Your bed may be a full, but its puffy yellow comforter looks inviting. {A nap sounds nice}.` +
-        `^^A notebook sits on a little desk, a stiff chair next to it. Drawing utensils rest here. {Settle into the chair to make something}.` +
-        `^^The empty bed and the blank page remind you of fresh snow, a bright day, the smell of morning mud, and afternoon heat. Wait, ` +
-        `{I'm going to the park}.`,
+        `You trudge up the light green carpeted narrow stairs to your room. Your room is festooned with posters, ` +
+        `orderly piles of sorted odds and ends, and trinkets. Your bed may be a full, but its puffy yellow comforter ` +
+        `looks inviting. {A nap sounds nice}.` +
+        `^^A notebook sits on the little desk, a stiff chair next to it. Drawing utensils rest here. ` +
+        `{Settle into the chair to make something}.` +
+        `^^The empty bed and the blank page remind you of fresh snow, a bright day, the smell of morning mud, ` +
+        `and afternoon heat. Wait, {I'm going to the park}.`,
       buttonActions: () => [
         {
           action: () => {

@@ -206,9 +206,47 @@ export const dreamTreeChaseScenes = {
           `You can see the tree line and a sprawling countryside beyond it. Before long, you feel a sudden shift in trajectory and you ` +
           `and the bird shooting up, up, up at a very high speed. Craning your neck back, you see a pair of huge tatooed arms that ` +
           `have latched on to the bird. The arms a attached to a rocket. The tattoo-armed rocket propels you and the bird into space, just beyond the atmosphere. ` +
+          `{Continue.}`,
+        onPageLoad: () => {
+          const game = useGameStore();
+          game.toggleIsZoomedOut();
+        },
+        buttonActions: () => [
+          {
+            action: () => {
+              const game = useGameStore();
+              game.goToScene("dream-tree-chase-fly1");
+            },
+          },
+        ],
+        metadata: {
+          sectionId: "dream-tree-chase-fly1",
+          routes: [
+            {
+              label: "Continue.",
+              redirect: "dream-tree-chase-fly1",
+            },
+          ],
+        },
+      };
+    }
+  ),
+
+  "dream-tree-chase-fly1": defineScene(
+    "dream-tree-chase-fly1",
+    function (payload): Scene {
+      return {
+        id: this.id,
+        background: bgDefault,
+        text:
           `Reaching its zenith, there is a moment of quiet, motionless stillness, then you're re-entering the atmosphere, careening faster and faster ` +
           `back down until you all meet the forest floor in an explosive blast. You find yourself at the center of a massive crater. ` +
           `There is no sign of the bird, but you now have wings. The force of the blast must have fused your body and the bird's in some magical union.`,
+        onPageLoad: () => {
+          const game = useGameStore();
+          game.toggleIsZoomedOut();
+          //TODO: explosion -> crater
+        },
       };
     }
   ),
@@ -225,7 +263,9 @@ export const dreamTreeChaseScenes = {
         dialogSequence: () => [
           {
             characterId: "faerie1",
-            text: "Oh little pölkkypää... What you tried to do to the trees was not nice! I guess you learned your lesson though. Rest now.",
+            text:
+              `Oh little pölkkypää... What you tried to do to the trees was not nice! I guess you learned your lesson though. ` +
+              `Rest now.`,
             onClick: () => {
               const game = useGameStore();
               game.goToScene("dream-tree-chase-sink1");

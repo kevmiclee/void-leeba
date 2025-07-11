@@ -13,7 +13,7 @@ export function getNapFaeries2Text(filter?: string): string {
 
     case "thanks":
       return (
-        `"Thanks!".."\`Thanks!\`".."tHaNkS!!" The {hongatar} are mocking you ruthlessly in what you ` +
+        `"Thanks!".."<i>Thanks!</i>".."tHaNkS!!" The {hongatar} are mocking you ruthlessly in what you ` +
         `tell yourself is all good fun.`
       );
 
@@ -25,7 +25,7 @@ export function getNapFaeries2Text(filter?: string): string {
 
     case "insult":
       return (
-        `"\`tHaT's ThE sTuPiDeSt ThInG i'Ve EvEr HeArD!\`" The {hongatar} are mocking you ruthlessly, ` +
+        `"<i>tHaT iS aSiNiNe!</i>" The {hongatar} are mocking you ruthlessly, ` +
         `totally unfazed by your shallow insult.`
       );
 

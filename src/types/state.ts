@@ -19,6 +19,7 @@ export interface GameState {
   showDisappearingItem: boolean;
   isPsychedelic: boolean;
   psychedelicScenesRemaining: number;
+  isZoomedOut: boolean;
   showSceneGraph: boolean;
 }
 

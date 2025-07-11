@@ -26,6 +26,7 @@ export const useGameStore = defineStore("game", {
     showDisappearingItem: false,
     isPsychedelic: false,
     psychedelicScenesRemaining: 0,
+    isZoomedOut: false,
     showSceneGraph: false,
   }),
   // persist: true,
@@ -124,6 +125,9 @@ export const useGameStore = defineStore("game", {
     },
     toggleShowSceneGraph() {
       this.showSceneGraph = !this.showSceneGraph;
+    },
+    toggleIsZoomedOut() {
+      this.isZoomedOut = !this.isZoomedOut;
     },
   },
 });

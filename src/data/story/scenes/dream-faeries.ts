@@ -186,7 +186,7 @@ export const dreamFaeriesScenes = {
         {
           characterId: "faerie2",
           text:
-            `Wow, a human that understands Fairy etiquette, how amusing, how rare! What a find! ` +
+            `Wow, a human that understands Faerie etiquette, how amusing, how rare! What a find! ` +
             `Will you join us? We are headed to a Leak Party.`,
           popUp: true,
         },

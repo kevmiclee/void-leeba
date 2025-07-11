@@ -10,7 +10,7 @@ export const snowPileScenes = {
       id: this.id,
       text: "snow pile",
       background: bgDefault,
-      //TODO: snowpile
+      //TODO: snowpile -- do we really want/need this branch?
       metadata: {
         sectionId: "snow-pile",
       },

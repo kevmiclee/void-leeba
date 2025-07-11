@@ -252,7 +252,7 @@ export const hypnoScenes = {
         {
           characterId: "buzz",
           text:
-            `No matter! It will have to do. \`The show must go on!\` But absolutely NO leg breaking, ` +
+            `No matter! It will have to do. <i>The show must go on!</i> But absolutely NO leg breaking, ` +
             `or any bones while we're on the subject.`,
         },
       ],
