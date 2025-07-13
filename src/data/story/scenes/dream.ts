@@ -93,7 +93,7 @@ export const dreamScenes = {
           {
             id: "squirrel",
             action: () => {
-              character.gainStat("athletics", 1, "dream1");
+              character.gainStat("athletics", 1, this.id);
               game.goToScene("dream-squirrel");
             },
           },
@@ -104,21 +104,21 @@ export const dreamScenes = {
           {
             id: "faeries",
             action: () => {
-              character.gainStat("blueMagic", 1, "dream1");
+              character.gainStat("blueMagic", 1, this.id);
               game.goToScene("dream-faeries");
             },
           },
           {
             id: "chop",
             action: () => {
-              character.gainStat("shitheadedness", 1, "dream1");
+              character.gainStat("shitheadedness", 1, this.id);
               game.goToScene("dream-chop");
             },
           },
           {
             id: "nap",
             action: () => {
-              character.gainStat("will", 1, "dream1");
+              character.gainStat("will", 1, this.id);
               game.goToScene("dream-within-a-dream");
             },
           },

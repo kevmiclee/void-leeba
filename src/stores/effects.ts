@@ -27,8 +27,8 @@ export const useEffectsStore = defineStore("effects", {
       this.showOverlay = value;
     },
 
-    toggleDisappearingItem() {
-      this.showDisappearingItem = !this.showDisappearingItem;
+    toggleDisappearingItem(value: boolean) {
+      this.showDisappearingItem = value;
     },
 
     startPsychedelicEffect(sceneCount = 3) {
@@ -45,16 +45,16 @@ export const useEffectsStore = defineStore("effects", {
       }
     },
 
-    toggleIsZoomedOut() {
-      this.isZoomedOut = !this.isZoomedOut;
+    toggleIsZoomedOut(value: boolean) {
+      this.isZoomedOut = value;
     },
 
-    toggleBlurChoices() {
-      this.blurChoices = !this.blurChoices;
+    toggleBlurChoices(value: boolean) {
+      this.blurChoices = value;
     },
 
-    toggleStretchAvatar() {
-      this.stretchAvatar = !this.stretchAvatar;
+    toggleStretchAvatar(value: boolean) {
+      this.stretchAvatar = value;
     },
   },
 });

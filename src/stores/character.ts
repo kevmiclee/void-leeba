@@ -10,6 +10,7 @@ import { Stat, StatId } from "@/types/stat";
 import { Manners } from "@/types/manners";
 import { useAudioStore } from "./audio";
 import pickUpItemSound from "@/assets/audio/story/sounds/pick-up-item.mp3";
+import { useEffectsStore } from "./effects";
 
 export type CharacterStore = ReturnType<typeof useCharacterStore>;
 
@@ -119,12 +120,12 @@ export const useCharacterStore = defineStore("character", {
     },
 
     async useItem(id: ItemId) {
-      const game = useGameStore();
+      const effects = useEffectsStore();
       const snackbar = useSnackbarStore();
 
       switch (id) {
         case "mushroom": {
-          game.startPsychedelicEffect();
+          effects.startPsychedelicEffect();
           break;
         }
 

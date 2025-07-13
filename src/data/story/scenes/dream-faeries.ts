@@ -99,7 +99,7 @@ export const dreamFaeriesScenes = {
           next: "dream-squirrel",
           onChoose: () => {
             const character = useCharacterStore();
-            character.gainStat("athletics", 1, "dream-faeries1");
+            character.gainStat("athletics", 1, this.id);
           },
         },
       ],
@@ -370,11 +370,7 @@ export const dreamFaeriesScenes = {
               payload: { filter: "flatter" },
               onChoose: () => {
                 character.setManners("polite");
-                character.gainStat(
-                  "shitheadedness",
-                  1,
-                  "dream-faeries-litter-no-proof"
-                );
+                character.gainStat("shitheadedness", 1, this.id);
               },
             },
             {
@@ -586,7 +582,7 @@ export const dreamFaeriesScenes = {
             next: "dream-faeries-party-decline",
             onChoose: () => {
               const character = useCharacterStore();
-              character.gainStat("will", 1, "dream-faeries-party-check");
+              character.gainStat("will", 1, this.id);
             },
           },
           {
@@ -704,7 +700,7 @@ export const dreamFaeriesScenes = {
             payload: { filter: "noFaeries" },
             onChoose: () => {
               const character = useCharacterStore();
-              character.gainStat("will", 1, "party-eggcorn-check");
+              character.gainStat("will", 1, this.id);
               character.setFlag("did-faeries", true);
             },
           },

@@ -219,7 +219,7 @@ export const dreamTreeChaseScenes = {
           `{Continue.}`,
         onPageLoad: () => {
           const effects = useEffectsStore();
-          effects.toggleIsZoomedOut();
+          effects.toggleIsZoomedOut(true);
         },
         buttonActions: () => [
           {
@@ -256,7 +256,7 @@ export const dreamTreeChaseScenes = {
         onPageLoad: async () => {
           const effects = useEffectsStore();
           await new Promise((resolve) => setTimeout(resolve, 2000));
-          effects.toggleIsZoomedOut();
+          effects.toggleIsZoomedOut(false);
 
           const aspects = useAspectStore();
           aspects.addAspect("part-bird");

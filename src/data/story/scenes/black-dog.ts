@@ -226,7 +226,7 @@ export const blackDogScenes = {
       },
       onPageLoad: () => {
         const effects = useEffectsStore();
-        effects.toggleDisappearingItem();
+        effects.toggleDisappearingItem(true);
       },
       metadata: {
         sectionId: "black-dog",

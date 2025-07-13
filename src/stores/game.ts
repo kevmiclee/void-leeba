@@ -19,6 +19,7 @@ export const useGameStore = defineStore("game", {
   state: (): GameState => ({
     currentSceneId: "preamble",
     currentScenePayload: undefined as ScenePayload | undefined,
+    currentSceneIndex: -1,
     started: false,
     scenes: [],
     showSceneGraph: false,
@@ -53,9 +54,8 @@ export const useGameStore = defineStore("game", {
     },
 
     goBack() {
-      //TODO: debug this
-      const index = this.scenes.lastIndexOf(this.currentSceneId);
-      const newIndex = index - 1;
+      const newIndex = this.currentSceneIndex - 1;
+      this.currentSceneIndex = newIndex;
 
       if (newIndex > -1) {
         const newScene = this.scenes[newIndex];
@@ -69,14 +69,18 @@ export const useGameStore = defineStore("game", {
     },
 
     goForward() {
-      const index = this.scenes.indexOf(this.currentSceneId);
-      const newIndex = index + 1;
+      const newIndex = this.currentSceneIndex + 1;
+      this.currentSceneIndex = newIndex;
       const newScene = this.scenes[newIndex];
       this.goToScene(newScene);
     },
 
     addSceneToHistory() {
-      if (!NON_ROUTING_PAGES.includes(this.currentSceneId)) {
+      if (
+        !NON_ROUTING_PAGES.includes(this.currentSceneId) &&
+        !this.scenes.includes(this.currentSceneId)
+      ) {
+        this.currentSceneIndex = this.currentSceneIndex + 1;
         this.scenes.push(this.currentSceneId);
       }
     },

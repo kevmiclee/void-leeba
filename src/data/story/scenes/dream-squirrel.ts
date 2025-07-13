@@ -346,7 +346,7 @@ export const dreamSquirrelScenes = {
             next: "dream-squirrel6",
             onChoose: () => {
               character.setManners("weird");
-              character.gainStat("blueMagic", 1, "dream-squirrel5");
+              character.gainStat("blueMagic", 1, this.id);
             },
           },
         ];

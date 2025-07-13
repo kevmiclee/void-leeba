@@ -11,6 +11,7 @@ import { Stat } from "./stat";
 export interface GameState {
   currentSceneId: SceneId;
   currentScenePayload: ScenePayload | undefined;
+  currentSceneIndex: number;
   started: boolean;
   scenes: SceneId[];
   showSceneGraph: boolean;

@@ -131,35 +131,35 @@ export const voidScenes = {
             text: "Do you believe in lice after lunch?",
             next: "void-not-alone-lunch",
             onChoose: () => {
-              effects.toggleBlurChoices();
+              effects.toggleBlurChoices(false);
             },
           },
           {
             text: "Dad, if I have some pie, will you have some pie?",
             next: "void-not-alone-pie",
             onChoose: () => {
-              effects.toggleBlurChoices();
+              effects.toggleBlurChoices(false);
             },
           },
           {
             text: `What's my adage again?`,
             next: "void-not-alone-adage",
             onChoose: () => {
-              effects.toggleBlurChoices();
+              effects.toggleBlurChoices(false);
             },
           },
           {
             text: "Are we hummus or are we dander?",
             next: "void-not-alone-hummus",
             onChoose: () => {
-              effects.toggleBlurChoices();
+              effects.toggleBlurChoices(false);
             },
           },
         ];
       },
       onPageLoad: () => {
         const effects = useEffectsStore();
-        effects.toggleBlurChoices();
+        effects.toggleBlurChoices(true);
       },
       metadata: {
         sectionId: "void",
@@ -206,7 +206,7 @@ export const voidScenes = {
         ],
         onPageLoad: () => {
           const effects = useEffectsStore();
-          effects.toggleStretchAvatar();
+          effects.toggleStretchAvatar(true);
         },
         metadata: {
           sectionId: "void",
