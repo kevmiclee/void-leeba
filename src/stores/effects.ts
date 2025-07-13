@@ -56,5 +56,11 @@ export const useEffectsStore = defineStore("effects", {
     toggleStretchAvatar(value: boolean) {
       this.stretchAvatar = value;
     },
+
+    clearEffects() {
+      if (this.blurChoices) {
+        this.blurChoices = false;
+      }
+    },
   },
 });

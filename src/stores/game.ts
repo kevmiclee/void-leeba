@@ -73,6 +73,9 @@ export const useGameStore = defineStore("game", {
       this.currentSceneIndex = newIndex;
       const newScene = this.scenes[newIndex];
       this.goToScene(newScene);
+
+      const effects = useEffectsStore();
+      effects.clearEffects();
     },
 
     addSceneToHistory() {
