@@ -27,12 +27,12 @@ export const introScenes = {
         sectionId: "intro",
         routes: [
           {
-            label: `New game`,
-            redirect: "intro",
+            text: `New game`,
+            next: "intro",
           },
           {
-            label: `Credits`,
-            redirect: "credits",
+            text: `Credits`,
+            next: "credits",
           },
         ],
       },
@@ -49,8 +49,8 @@ export const introScenes = {
         sectionId: "intro",
         routes: [
           {
-            label: `trigger`,
-            redirect: "intro1",
+            text: `trigger`,
+            next: "intro1",
           },
         ],
       },
@@ -67,8 +67,8 @@ export const introScenes = {
         sectionId: "intro",
         routes: [
           {
-            label: `trigger`,
-            redirect: "home",
+            text: `trigger`,
+            next: "home",
           },
         ],
       },

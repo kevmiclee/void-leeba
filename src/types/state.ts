@@ -2,7 +2,7 @@ import { SceneId } from "@/data/story/story";
 import { Item } from "./item";
 import { ScenePayload } from "./story";
 import { DictionaryEntry } from "./dictionary";
-import { FlagId, Flags } from "./flag";
+import { Flags } from "./flag";
 import { DrawerView } from "./drawer-view";
 import { Manners } from "./manners";
 import { Aspect } from "./aspect";
@@ -12,14 +12,7 @@ export interface GameState {
   currentSceneId: SceneId;
   currentScenePayload: ScenePayload | undefined;
   started: boolean;
-  showChoices: boolean;
-  animationSkipped: boolean;
-  showOverlay: boolean;
   scenes: SceneId[];
-  showDisappearingItem: boolean;
-  isPsychedelic: boolean;
-  psychedelicScenesRemaining: number;
-  isZoomedOut: boolean;
   showSceneGraph: boolean;
 }
 
@@ -51,4 +44,16 @@ export interface DictionaryState {
 
 export interface AspectState {
   aspects: Aspect[];
+}
+
+export interface EffectsState {
+  showChoices: boolean;
+  animationSkipped: boolean;
+  showOverlay: boolean;
+  showDisappearingItem: boolean;
+  isPsychedelic: boolean;
+  psychedelicScenesRemaining: number;
+  isZoomedOut: boolean;
+  blurChoices: boolean;
+  stretchAvatar: boolean;
 }

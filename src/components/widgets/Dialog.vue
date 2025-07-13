@@ -18,9 +18,9 @@
 
 <script setup lang="ts">
 import { Dialog } from "@/types/story";
-import { useGameStore } from "@/stores/game";
+import { useEffectsStore } from "@/stores/effects";
 
-const game = useGameStore();
+const effects = useEffectsStore();
 
 const props = defineProps<{
   hasDialog: boolean;
@@ -40,7 +40,7 @@ function advanceDialog() {
   if (props.hasDialog) {
     emit("update-dialog-index", props.dialogIndex + 1);
   } else {
-    game.updateShowChoices(true);
+    effects.updateShowChoices(true);
   }
 }
 
@@ -53,7 +53,7 @@ function onDialogClick() {
   }
   if (props.dialog?.popUp) {
     emit("update-dialog-clicked", true);
-    game.updateShowChoices(true);
+    effects.updateShowChoices(true);
   }
 }
 </script>

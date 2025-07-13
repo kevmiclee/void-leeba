@@ -1,5 +1,5 @@
 import { story, SceneId } from "@/data/story/story";
-import { MiniGameId } from "@/types/minigame";
+import { MiniGameId } from "@/types/mini-game";
 import { SceneRouteStat } from "@/types/story";
 
 type SceneLink = {
@@ -29,7 +29,7 @@ export function getSceneGraph(): {
             from: id as SceneId,
             to: route.redirect,
             label: route.label,
-            aspect: route.aspect?.name,
+            aspect: route.aspect,
             manners: route.manners,
             stat: route.stat,
           });

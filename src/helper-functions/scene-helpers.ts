@@ -1,65 +1,53 @@
+import { useEffectsStore } from "@/stores/effects";
 import { useGameStore } from "@/stores/game";
 import { useTimeoutStore } from "@/stores/timeout";
 import { nextTick } from "vue";
 
 export function useSceneHelpers() {
   const game = useGameStore();
+  const effects = useEffectsStore();
   const timeoutStore = useTimeoutStore();
 
   function finishAnimation() {
-    const animationSkipped = game.animationSkipped;
+    const animationSkipped = effects.animationSkipped;
     const currentSceneId = game.currentSceneId;
+    const isIntroScene = ["intro", "intro1"].includes(game.currentSceneId);
 
-    if (
-      (animationSkipped && currentSceneId == "intro") ||
-      currentSceneId == "intro1"
-    ) {
+    if (animationSkipped && isIntroScene) {
       timeoutStore.clearAll();
       game.goToScene(currentSceneId === "intro" ? "intro1" : "home");
     }
-    game.updateAnimationSkipped(true);
-    game.updateShowChoices(true);
+    effects.updateAnimationSkipped(true);
+    effects.updateShowChoices(true);
     timeoutStore.clear(currentSceneId, true);
   }
 
   function triggerFade() {
-    game.updateShowOverlay(true);
+    effects.updateShowOverlay(true);
     requestAnimationFrame(() => {
-      game.updateShowOverlay(false);
+      effects.updateShowOverlay(false);
     });
   }
 
   async function onSceneChanged(animationDuration: number) {
-    if (!game.scenes.includes(game.currentSceneId)) {
-      game.updateAnimationSkipped(false);
-      game.updateShowChoices(false);
+    const isNewScene = !game.scenes.includes(game.currentSceneId);
+    const isIntroScene = ["intro", "intro1"].includes(game.currentSceneId);
+
+    if (isNewScene) {
+      effects.updateAnimationSkipped(false);
+      effects.updateShowChoices(false);
     }
-    game.addSceneToHistory();
     await nextTick();
+    game.addSceneToHistory();
     triggerFade();
     timeoutStore.set(
       game.currentSceneId,
       async () => {
-        if (game.currentSceneId == "intro" || game.currentSceneId == "intro1") {
-          timeoutStore.set(
-            `${game.currentSceneId}-overlay`,
-            () => {
-              game.updateShowOverlay(true);
-              timeoutStore.set(
-                `${game.currentSceneId}-scene`,
-                () => {
-                  game.goToScene(
-                    game.currentSceneId == "intro" ? "intro1" : "home"
-                  );
-                },
-                2000
-              );
-            },
-            2000
-          );
+        if (isIntroScene) {
+          introSequence();
         }
-        game.updateShowChoices(true);
-        game.updateAnimationSkipped(true);
+        effects.updateShowChoices(true);
+        effects.updateAnimationSkipped(true);
       },
       animationDuration
     );
@@ -70,4 +58,26 @@ export function useSceneHelpers() {
     triggerFade,
     onSceneChanged,
   };
+}
+
+function introSequence() {
+  const game = useGameStore();
+  const effects = useEffectsStore();
+  const timeoutStore = useTimeoutStore();
+  const nextScene = game.currentSceneId == "intro" ? "intro1" : "home";
+
+  timeoutStore.set(
+    `${game.currentSceneId}-overlay`,
+    () => {
+      effects.updateShowOverlay(true);
+      timeoutStore.set(
+        `${game.currentSceneId}-scene`,
+        () => {
+          game.goToScene(nextScene);
+        },
+        2000
+      );
+    },
+    2000
+  );
 }

@@ -36,12 +36,12 @@ export const dreamSquirrelScenes = {
         sectionId: "dream-squirrel",
         routes: [
           {
-            label: `Reach for the closest branch.`,
-            redirect: "dream-squirrel1a",
+            text: `Reach for the closest branch.`,
+            next: "dream-squirrel1a",
           },
           {
-            label: `Keep shimmying up.`,
-            redirect: "dream-squirrel1b",
+            text: `Keep shimmying up.`,
+            next: "dream-squirrel1b",
             stat: {
               id: "athletics",
               amount: 1,
@@ -73,8 +73,8 @@ export const dreamSquirrelScenes = {
           sectionId: "dream-squirrel",
           routes: [
             {
-              label: `Keep shimmying up`,
-              redirect: "dream-squirrel1b",
+              text: `Keep shimmying up`,
+              next: "dream-squirrel1b",
             },
           ],
         },
@@ -117,16 +117,16 @@ export const dreamSquirrelScenes = {
           sectionId: "dream-squirrel",
           routes: [
             {
-              label: `Push yourself even harder.`,
-              redirect: "dream-squirrel2",
+              text: `Push yourself even harder.`,
+              next: "dream-squirrel2",
               stat: {
                 id: "will",
                 amount: 1,
               },
             },
             {
-              label: `This was a bad idea. Shimmy back down before you get hurt.`,
-              redirect: "dream-squirrel-give-up",
+              text: `This was a bad idea. Shimmy back down before you get hurt.`,
+              next: "dream-squirrel-give-up",
               stat: {
                 id: "will",
                 amount: -1,
@@ -161,8 +161,8 @@ export const dreamSquirrelScenes = {
         sectionId: "dream-squirrel",
         routes: [
           {
-            label: `squirrel dialog click`,
-            redirect: "dream-squirrel3",
+            text: `squirrel dialog click`,
+            next: "dream-squirrel3",
           },
         ],
       },
@@ -212,12 +212,12 @@ export const dreamSquirrelScenes = {
         sectionId: "dream-squirrel",
         routes: [
           {
-            label: `snatch the furball success`,
-            redirect: "dream-squirrel4-success",
+            text: `snatch the furball success`,
+            next: "dream-squirrel4-success",
           },
           {
-            label: `snatch the furball fail`,
-            redirect: "dream-squirrel4-fail",
+            text: `snatch the furball fail`,
+            next: "dream-squirrel4-fail",
           },
         ],
       },
@@ -245,8 +245,8 @@ export const dreamSquirrelScenes = {
           sectionId: "dream-squirrel",
           routes: [
             {
-              label: `squirrel dialog click`,
-              redirect: "dream-squirrel5",
+              text: `squirrel dialog click`,
+              next: "dream-squirrel5",
             },
           ],
         },
@@ -288,8 +288,8 @@ export const dreamSquirrelScenes = {
           sectionId: "dream-squirrel",
           routes: [
             {
-              label: `squirrel dialog click`,
-              redirect: "dream-squirrel5",
+              text: `squirrel dialog click`,
+              next: "dream-squirrel5",
             },
           ],
         },
@@ -355,28 +355,28 @@ export const dreamSquirrelScenes = {
         sectionId: "dream-squirrel",
         routes: [
           {
-            label: `"Where are we going?"`,
-            redirect: "dream-squirrel6",
+            text: `"Where are we going?"`,
+            next: "dream-squirrel6",
             manners: "polite",
           },
           {
-            label: `"What is that infernal chanting"`,
-            redirect: "dream-squirrel6",
+            text: `"What is that infernal chanting"`,
+            next: "dream-squirrel6",
             manners: "depressing",
           },
           {
-            label: `"Are we there yet?"`,
-            redirect: "dream-squirrel6",
+            text: `"Are we there yet?"`,
+            next: "dream-squirrel6",
             manners: "rude",
           },
           {
-            label: `Why am I following a squirrel?`,
-            redirect: "dream-squirrel6",
+            text: `Why am I following a squirrel?`,
+            next: "dream-squirrel6",
             manners: "weird",
           },
           {
-            label: `Don't speak. Don't think. Just follow.`,
-            redirect: "dream-squirrel6",
+            text: `Don't speak. Don't think. Just follow.`,
+            next: "dream-squirrel6",
             manners: "weird",
             stat: {
               id: "blueMagic",
@@ -411,8 +411,8 @@ export const dreamSquirrelScenes = {
         sectionId: "dream-squirrel",
         routes: [
           {
-            label: `squirrel dialog click`,
-            redirect: "dream-squirrel7",
+            text: `squirrel dialog click`,
+            next: "dream-squirrel7",
           },
         ],
       },
@@ -446,8 +446,8 @@ export const dreamSquirrelScenes = {
         sectionId: "dream-squirrel",
         routes: [
           {
-            label: `squirrel dialog click`,
-            redirect: "dream-squirrel8",
+            text: `squirrel dialog click`,
+            next: "dream-squirrel8",
           },
         ],
       },
@@ -479,12 +479,12 @@ export const dreamSquirrelScenes = {
         sectionId: "dream-squirrel",
         routes: [
           {
-            label: `Inspect the hongatar`,
-            redirect: "dream-squirrel9",
+            text: `Inspect the hongatar`,
+            next: "dream-squirrel9",
           },
           {
-            label: `Inspect the squirrel`,
-            redirect: "dream-squirrel9",
+            text: `Inspect the squirrel`,
+            next: "dream-squirrel9",
           },
         ],
       },
@@ -515,8 +515,8 @@ export const dreamSquirrelScenes = {
         sectionId: "dream-squirrel",
         routes: [
           {
-            label: `Inspect the eggcorn`,
-            redirect: "dream-squirrel10",
+            text: `Inspect the eggcorn`,
+            next: "dream-squirrel10",
           },
         ],
       },
@@ -549,12 +549,12 @@ export const dreamSquirrelScenes = {
           sectionId: "dream-squirrel",
           routes: [
             {
-              label: `YOLO! Eat the eggcorn.`,
-              redirect: "party-eggcorn",
+              text: `YOLO! Eat the eggcorn.`,
+              next: "party-eggcorn",
             },
             {
-              label: `On second thought...`,
-              redirect: "party-eggcorn-check",
+              text: `On second thought...`,
+              next: "party-eggcorn-check",
             },
           ],
         },
@@ -585,8 +585,8 @@ export const dreamSquirrelScenes = {
           sectionId: "dream-squirrel",
           routes: [
             {
-              label: `squirrel dialog click`,
-              redirect: "dream-squirrel-give-up1",
+              text: `squirrel dialog click`,
+              next: "dream-squirrel-give-up1",
             },
           ],
         },
@@ -616,8 +616,8 @@ export const dreamSquirrelScenes = {
           sectionId: "dream-squirrel",
           routes: [
             {
-              label: `squirrel dialog click`,
-              redirect: "dream-tree-chase",
+              text: `squirrel dialog click`,
+              next: "dream-tree-chase",
             },
           ],
         },

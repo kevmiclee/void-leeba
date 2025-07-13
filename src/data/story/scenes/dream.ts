@@ -6,7 +6,6 @@ import { useCharacterStore } from "@/stores/character";
 import { getTreeChopOutcome } from "../helper-functions/outcome-helper-functions";
 import { fateContest } from "../helper-functions/roll-helper-functions";
 import { useAspectStore } from "@/stores/aspects";
-import { treeMurderer } from "@/data/aspects";
 import { useAudioStore } from "@/stores/audio";
 import { defineScene } from "../story";
 
@@ -40,8 +39,8 @@ export const dreamScenes = {
         sectionId: "dream",
         routes: [
           {
-            label: `Admire the trees`,
-            redirect: "dream1",
+            text: `Admire the trees`,
+            next: "dream1",
           },
         ],
       },
@@ -143,32 +142,32 @@ export const dreamScenes = {
         sectionId: "dream",
         routes: [
           {
-            label: `Try to catch one`,
-            redirect: "dream-squirrel",
+            text: `Try to catch one`,
+            next: "dream-squirrel",
             stat: {
               id: "athletics",
               amount: 1,
             },
           },
           {
-            label: `Follow them`,
-            redirect: "dream-faeries",
+            text: `Follow them`,
+            next: "dream-faeries",
             stat: {
               id: "blueMagic",
               amount: 1,
             },
           },
           {
-            label: `start chopping`,
-            redirect: "dream-chop",
+            text: `start chopping`,
+            next: "dream-chop",
             stat: {
               id: "shitheadedness",
               amount: 1,
             },
           },
           {
-            label: `take a nap`,
-            redirect: "dream-within-a-dream",
+            text: `take a nap`,
+            next: "dream-within-a-dream",
             stat: {
               id: "will",
               amount: 1,
@@ -214,12 +213,12 @@ export const dreamScenes = {
           sectionId: "dream",
           routes: [
             {
-              label: `Fall asleep`,
-              redirect: "dream-within-a-dream1",
+              text: `Fall asleep`,
+              next: "dream-within-a-dream1",
             },
             {
-              label: `Nevermind`,
-              redirect: "dream1",
+              text: `Nevermind`,
+              next: "dream1",
             },
           ],
         },
@@ -248,12 +247,12 @@ export const dreamScenes = {
           sectionId: "dream",
           routes: [
             {
-              label: `Wait... will I fall asleep forever?`,
-              redirect: "dream-within-a-dream2",
+              text: `Wait... will I fall asleep forever?`,
+              next: "dream-within-a-dream2",
             },
             {
-              label: `Nevermind`,
-              redirect: "dream-within-a-dream-refuse",
+              text: `Nevermind`,
+              next: "dream-within-a-dream-refuse",
             },
           ],
         },
@@ -297,8 +296,8 @@ export const dreamScenes = {
           sectionId: "dream",
           routes: [
             {
-              label: `awaken back into the first dream`,
-              redirect: "dream-tree-chase",
+              text: `awaken back into the first dream`,
+              next: "dream-tree-chase",
             },
           ],
         },
@@ -340,8 +339,8 @@ export const dreamScenes = {
           sectionId: "dream",
           routes: [
             {
-              label: `a hilly landscape sprawls out before you`,
-              redirect: "dream-within-a-dream3",
+              text: `a hilly landscape sprawls out before you`,
+              next: "dream-within-a-dream3",
             },
           ],
         },
@@ -378,8 +377,8 @@ export const dreamScenes = {
           sectionId: "dream",
           routes: [
             {
-              label: `Breathe in`,
-              redirect: "dream-within-a-dream4",
+              text: `Breathe in`,
+              next: "dream-within-a-dream4",
             },
           ],
         },
@@ -413,8 +412,8 @@ export const dreamScenes = {
           sectionId: "dream",
           routes: [
             {
-              label: `Open your eyes`,
-              redirect: "hypno",
+              text: `Open your eyes`,
+              next: "hypno",
             },
           ],
         },
@@ -454,7 +453,7 @@ export const dreamScenes = {
 
             if (outcome.success) {
               const aspects = useAspectStore();
-              aspects.addAspect(treeMurderer);
+              aspects.addAspect("tree-murderer");
             }
 
             const game = useGameStore();
@@ -470,9 +469,9 @@ export const dreamScenes = {
         sectionId: "dream",
         routes: [
           {
-            label: `THUNK`,
-            redirect: "dream-tree-chase",
-            aspect: treeMurderer,
+            text: `THUNK`,
+            next: "dream-tree-chase",
+            aspect: "tree-murderer",
           },
         ],
       },

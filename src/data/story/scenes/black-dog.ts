@@ -14,7 +14,7 @@ import { useDrawerStore } from "@/stores/drawer";
 import { defineScene } from "../story";
 import { CharacterId } from "@/types/character";
 import { useAspectStore } from "@/stores/aspects";
-import { animalAbuser } from "@/data/aspects";
+import { useEffectsStore } from "@/stores/effects";
 
 //TODO: MUSIC - Add bass drum
 
@@ -53,16 +53,16 @@ export const blackDogScenes = {
         sectionId: "black-dog",
         routes: [
           {
-            label: "Go closer.",
-            redirect: "black-dog1",
+            text: "Go closer.",
+            next: "black-dog1",
             stat: {
               id: "will",
               amount: 1,
             },
           },
           {
-            label: "Back away.",
-            redirect: "black-dog1",
+            text: "Back away.",
+            next: "black-dog1",
             stat: {
               id: "will",
               amount: -1,
@@ -97,8 +97,8 @@ export const blackDogScenes = {
         sectionId: "black-dog",
         routes: [
           {
-            label: "You start acting careful.",
-            redirect: "black-dog2",
+            text: "You start acting careful.",
+            next: "black-dog2",
           },
         ],
       },
@@ -145,16 +145,16 @@ export const blackDogScenes = {
         sectionId: "black-dog",
         routes: [
           {
-            label: "Good puppy.",
-            redirect: "black-dog-good",
+            text: "Good puppy.",
+            next: "black-dog-good",
             stat: {
               id: "blueMagic",
               amount: 1,
             },
           },
           {
-            label: "Defend yourself.",
-            redirect: "black-dog-bad",
+            text: "Defend yourself.",
+            next: "black-dog-bad",
             stat: {
               id: "athletics",
               amount: 1,
@@ -189,8 +189,8 @@ export const blackDogScenes = {
         sectionId: "black-dog",
         routes: [
           {
-            label: "open it",
-            redirect: "black-dog-good1",
+            text: "open it",
+            next: "black-dog-good1",
           },
         ],
       },
@@ -225,19 +225,19 @@ export const blackDogScenes = {
         ];
       },
       onPageLoad: () => {
-        const game = useGameStore();
-        game.updateShowDisappearingItem(true);
+        const effects = useEffectsStore();
+        effects.toggleDisappearingItem();
       },
       metadata: {
         sectionId: "black-dog",
         routes: [
           {
-            label: "Heal the human-faced dog's face back into a dog's face.",
-            redirect: "black-dog-heal-dog",
+            text: "Heal the human-faced dog's face back into a dog's face.",
+            next: "black-dog-heal-dog",
           },
           {
-            label: "Heal the human-faced dog's body back into a human's body.",
-            redirect: "black-dog-heal-human",
+            text: "Heal the human-faced dog's body back into a human's body.",
+            next: "black-dog-heal-human",
           },
         ],
       },
@@ -299,18 +299,18 @@ export const blackDogScenes = {
           sectionId: "black-dog",
           routes: [
             {
-              label: "Give it some dog food.",
-              redirect: "black-dog-done",
+              text: "Give it some dog food.",
+              next: "black-dog-done",
               manners: "polite",
             },
             {
-              label: "Give it some pets.",
-              redirect: "black-dog-done",
+              text: "Give it some pets.",
+              next: "black-dog-done",
               manners: "polite",
             },
             {
-              label: "Do nothing.",
-              redirect: "black-dog-done",
+              text: "Do nothing.",
+              next: "black-dog-done",
               manners: "depressing",
             },
           ],
@@ -375,8 +375,8 @@ export const blackDogScenes = {
           sectionId: "black-dog",
           routes: [
             {
-              label: "Give it some dog food.",
-              redirect: "black-dog-done",
+              text: "Give it some dog food.",
+              next: "black-dog-done",
               stat: {
                 id: "shitheadedness",
                 amount: 1,
@@ -384,13 +384,13 @@ export const blackDogScenes = {
               manners: "rude",
             },
             {
-              label: "Give it some pets.",
-              redirect: "black-dog-done",
+              text: "Give it some pets.",
+              next: "black-dog-done",
               manners: "weird",
             },
             {
-              label: "Do nothing.",
-              redirect: "black-dog-done",
+              text: "Do nothing.",
+              next: "black-dog-done",
               manners: "polite",
             },
           ],
@@ -466,12 +466,12 @@ export const blackDogScenes = {
         sectionId: "black-dog",
         routes: [
           {
-            label: "getBlackDogOutcome success",
-            redirect: "black-dog-bad-success",
+            text: "getBlackDogOutcome success",
+            next: "black-dog-bad-success",
           },
           {
-            label: "getBlackDogOutcome fail",
-            redirect: "black-dog-bad-fail",
+            text: "getBlackDogOutcome fail",
+            next: "black-dog-bad-fail",
           },
         ],
       },
@@ -491,7 +491,7 @@ export const blackDogScenes = {
             action: () => {
               const game = useGameStore();
               const aspects = useAspectStore();
-              aspects.addAspect(animalAbuser);
+              aspects.addAspect("animal-abuser");
               game.goToScene("black-dog-feel-bad");
             },
           },
@@ -500,9 +500,9 @@ export const blackDogScenes = {
           sectionId: "black-dog",
           routes: [
             {
-              label: "feel bad",
-              redirect: "black-dog-feel-bad",
-              aspect: animalAbuser,
+              text: "feel bad",
+              next: "black-dog-feel-bad",
+              aspect: "animal-abuser",
             },
           ],
         },
@@ -542,12 +542,12 @@ export const blackDogScenes = {
           sectionId: "black-dog",
           routes: [
             {
-              label: "has dog food",
-              redirect: "black-dog-bad-fail-food",
+              text: "has dog food",
+              next: "black-dog-bad-fail-food",
             },
             {
-              label: "does not have dog food",
-              redirect: "black-dog-bad-fail-drunks",
+              text: "does not have dog food",
+              next: "black-dog-bad-fail-drunks",
             },
           ],
         },
@@ -580,8 +580,8 @@ export const blackDogScenes = {
           sectionId: "black-dog",
           routes: [
             {
-              label: "let the creature take the food",
-              redirect: "black-dog-done",
+              text: "let the creature take the food",
+              next: "black-dog-done",
             },
           ],
         },
@@ -649,12 +649,12 @@ export const blackDogScenes = {
           sectionId: "black-dog",
           routes: [
             {
-              label: "sided with a drunk or is polite",
-              redirect: "black-dog-bad-fail-drunks-help",
+              text: "sided with a drunk or is polite",
+              next: "black-dog-bad-fail-drunks-help",
             },
             {
-              label: "not from around here and not polite",
-              redirect: "black-dog-bad-fail-drunks-leave",
+              text: "not from around here and not polite",
+              next: "black-dog-bad-fail-drunks-leave",
             },
           ],
         },
@@ -722,23 +722,23 @@ export const blackDogScenes = {
           sectionId: "black-dog",
           routes: [
             {
-              label: `"Thanks a lot!"`,
-              redirect: "black-dog-done-drunks",
+              text: `"Thanks a lot!"`,
+              next: "black-dog-done-drunks",
               manners: "polite",
             },
             {
-              label: `"I didn't ask for your help..."`,
-              redirect: "black-dog-done-drunks",
+              text: `"I didn't ask for your help..."`,
+              next: "black-dog-done-drunks",
               manners: "rude",
             },
             {
-              label: `"I wish you had just let it have me..."`,
-              redirect: "black-dog-done-drunks",
+              text: `"I wish you had just let it have me..."`,
+              next: "black-dog-done-drunks",
               manners: "depressing",
             },
             {
-              label: `Go in for a hug.`,
-              redirect: "black-dog-done-drunks",
+              text: `Go in for a hug.`,
+              next: "black-dog-done-drunks",
               manners: "weird",
             },
           ],
@@ -770,8 +770,8 @@ export const blackDogScenes = {
           sectionId: "black-dog",
           routes: [
             {
-              label: "And alone",
-              redirect: "black-dog-feel-bad1",
+              text: "And alone",
+              next: "black-dog-feel-bad1",
             },
           ],
         },
@@ -806,8 +806,8 @@ export const blackDogScenes = {
           sectionId: "black-dog",
           routes: [
             {
-              label: "drunk dialog click",
-              redirect: "black-dog-feel-bad1",
+              text: "drunk dialog click",
+              next: "black-dog-feel-bad1",
             },
           ],
         },
@@ -839,8 +839,8 @@ export const blackDogScenes = {
           sectionId: "black-dog",
           routes: [
             {
-              label: "so scary",
-              redirect: "black-dog-viral",
+              text: "so scary",
+              next: "black-dog-viral",
             },
           ],
         },
@@ -874,8 +874,8 @@ export const blackDogScenes = {
         sectionId: "black-dog",
         routes: [
           {
-            label: "viewed viral comments",
-            redirect: "black-dog-viral1",
+            text: "viewed viral comments",
+            next: "black-dog-viral1",
           },
         ],
       },
@@ -919,16 +919,16 @@ export const blackDogScenes = {
           sectionId: "black-dog",
           routes: [
             {
-              label: "into the neighborhood",
-              redirect: "neighborhood",
+              text: "into the neighborhood",
+              next: "neighborhood",
             },
             {
-              label: "check by that snow pile",
-              redirect: "snow-pile",
+              text: "check by that snow pile",
+              next: "snow-pile",
             },
             {
-              label: "go home to your room",
-              redirect: "room",
+              text: "go home to your room",
+              next: "room",
             },
           ],
         },
@@ -996,16 +996,16 @@ export const blackDogScenes = {
           sectionId: "black-dog",
           routes: [
             {
-              label: "Go into the neighborhood.",
-              redirect: "neighborhood",
+              text: "Go into the neighborhood.",
+              next: "neighborhood",
             },
             {
-              label: `Follow the drunk${payload?.filter ? "" : "s"}.`,
-              redirect: "snow-pile",
+              text: `Follow the drunk${payload?.filter ? "" : "s"}.`,
+              next: "snow-pile",
             },
             {
-              label: "Go back home.",
-              redirect: "room",
+              text: "Go back home.",
+              next: "room",
             },
           ],
         },
@@ -1038,16 +1038,16 @@ export const blackDogScenes = {
         sectionId: "black-dog",
         routes: [
           {
-            label: "Follow it.",
-            redirect: "neighborhood",
+            text: "Follow it.",
+            next: "neighborhood",
           },
           {
-            label: "Play on the snowpile.",
-            redirect: "snow-pile",
+            text: "Play on the snowpile.",
+            next: "snow-pile",
           },
           {
-            label: "Go back home.",
-            redirect: "room",
+            text: "Go back home.",
+            next: "room",
           },
         ],
       },

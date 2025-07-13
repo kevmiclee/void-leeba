@@ -1,3 +1,4 @@
+import { aspects } from "@/data/aspects";
 import { Aspect, AspectId } from "@/types/aspect";
 import { AspectState } from "@/types/state";
 import { defineStore } from "pinia";
@@ -10,9 +11,10 @@ export const useAspectStore = defineStore("aspects", {
   }),
   // persist: true,
   actions: {
-    addAspect(aspect: Omit<Aspect, "scenesRemaining">) {
-      const existing = this.aspects.find((a) => a.id === aspect.id);
+    addAspect(id: AspectId) {
+      const existing = this.aspects.find((a) => a.id === id);
       if (!existing) {
+        const aspect: Omit<Aspect, "scenesRemaining"> = aspects[id];
         this.aspects.push({
           ...aspect,
           scenesRemaining: aspect.durationScenes,

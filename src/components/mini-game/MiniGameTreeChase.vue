@@ -21,8 +21,6 @@ import playerHurtSound from "@/assets/audio/story/sounds/player-hurt.mp3";
 
 import { useGameStore } from "../../stores/game";
 import { useCharacterStore } from "../../stores/character";
-import { useAspectStore } from "@/stores/aspects";
-import { allYourBonesAreBroken, partBird } from "@/data/aspects";
 import { useAudioStore } from "@/stores/audio";
 
 const gameRef = ref<HTMLDivElement | null>(null);
@@ -72,8 +70,6 @@ function createTree() {
       hitCount.value = hitCount.value + 1;
       if (hitCount.value > 3) {
         clearInterval(timerInterval);
-        const aspects = useAspectStore();
-        aspects.addAspect(allYourBonesAreBroken);
         game.goToScene("dream-tree-chase-game-lose");
       }
     } else if (top > window.innerHeight) {
@@ -145,8 +141,6 @@ onMounted(() => {
     elapsedTime.value++;
     if (elapsedTime.value == 30) {
       clearInterval(timerInterval);
-      const aspects = useAspectStore();
-      aspects.addAspect(partBird);
       game.goToScene("dream-tree-chase-game-win");
     }
   }, 1000);

@@ -1,7 +1,8 @@
 <template>
   <Avatar
     :showUserAvatar="
-      isScene && showChoices && visibleChoices.length > 0 && !dialogClicked
+      (isScene && showChoices && visibleChoices.length > 0 && !dialogClicked) ||
+      effects.stretchAvatar
     "
     :currentCharacter="currentCharacter"
     :hasDialog="hasDialog ?? false"
@@ -15,6 +16,7 @@
         <div
           v-html="`• ${choice.text}`"
           class="choice"
+          :class="{ 'blurry-text': effects.blurChoices }"
           @click.stop="onChoiceClicked(choice)"
         ></div>
       </div>
@@ -44,10 +46,12 @@ import { CharacterId } from "@/types/character";
 import { useDrawerStore } from "@/stores/drawer";
 import { DrawerView } from "@/types/drawer-view";
 import { Choice } from "@/types/story";
+import { useEffectsStore } from "@/stores/effects";
 
 const game = useGameStore();
 const audioStore = useAudioStore();
 const drawer = useDrawerStore();
+const effects = useEffectsStore();
 
 const dialogIndex = ref(0);
 const dialogClicked = ref(false);
@@ -57,7 +61,7 @@ const hasDialog = computed(() => {
 
   if (typeof dialogs == "function") {
     const length = dialogs().length ?? 0;
-    return !!length && dialogIndex.value < length && game.animationSkipped;
+    return !!length && dialogIndex.value < length && effects.animationSkipped;
   }
 });
 const currentDialog = computed(() => {
@@ -75,7 +79,7 @@ const showChoices = computed(() => {
       dialogClicked.value ||
       dialogIndex.value >=
         game.currentScene(game.currentScenePayload).dialogSequence!().length) &&
-    game.showChoices
+    effects.showChoices
   );
 });
 const visibleChoices = computed(() => {
@@ -114,13 +118,13 @@ function onAvatarClicked() {
     if (hasDialog.value) {
       updateDialogIndex(dialogIndex.value + 1);
     } else {
-      game.updateShowChoices(true);
+      effects.updateShowChoices(true);
     }
   }
 
   if (currentDialog.value?.popUp) {
     updateDialogClicked(true);
-    game.updateShowChoices(true);
+    effects.updateShowChoices(true);
   }
 }
 
@@ -231,5 +235,19 @@ watch(
   100% {
     transform: translate(0.5px, 0.5px) rotate(0deg);
   }
+}
+
+.blurry-text {
+  filter: blur(4px);
+  transition:
+    filter 0.6s ease,
+    opacity 0.6s ease;
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+.blurry-text:hover {
+  filter: blur(0);
+  opacity: 1;
 }
 </style>

@@ -4,9 +4,10 @@ import treeFallingSound from "@/assets/audio/story/sounds/tree-falling.mp3";
 import { useGameStore } from "@/stores/game";
 import { useCharacterStore } from "@/stores/character";
 import { getTreeChaseText } from "../helper-functions/text-helper-functions";
-import { allYourBonesAreBroken, partBird } from "@/data/aspects";
 import { defineScene } from "../story";
 import { useAudioStore } from "@/stores/audio";
+import { useEffectsStore } from "@/stores/effects";
+import { useAspectStore } from "@/stores/aspects";
 
 // MUSIC - tree-chase
 //TODO: MUSIC - tree-chase game
@@ -63,8 +64,8 @@ export const dreamTreeChaseScenes = {
           sectionId: "dream-tree-chase",
           routes: [
             {
-              label: `run`,
-              redirect: "dream-tree-chase-game-intro",
+              text: `run`,
+              next: "dream-tree-chase-game-intro",
             },
           ],
         },
@@ -93,8 +94,8 @@ export const dreamTreeChaseScenes = {
           sectionId: "dream-tree-chase",
           routes: [
             {
-              label: `dodge them`,
-              redirect: "dream-tree-chase-game",
+              text: `dodge them`,
+              next: "dream-tree-chase-game",
             },
           ],
         },
@@ -114,14 +115,14 @@ export const dreamTreeChaseScenes = {
           sectionId: "dream-tree-chase",
           routes: [
             {
-              label: `win`,
-              redirect: "dream-tree-chase-game-win",
-              aspect: partBird,
+              text: `win`,
+              next: "dream-tree-chase-game-win",
+              aspect: "part-bird",
             },
             {
-              label: `lose`,
-              redirect: "dream-tree-chase-game-lose",
-              aspect: allYourBonesAreBroken,
+              text: `lose`,
+              next: "dream-tree-chase-game-lose",
+              aspect: "all-your-bones-are-broken",
             },
           ],
         },
@@ -149,12 +150,16 @@ export const dreamTreeChaseScenes = {
             },
           },
         ],
+        onPageLoad: () => {
+          const aspects = useAspectStore();
+          aspects.addAspect("part-bird");
+        },
         metadata: {
           sectionId: "dream-tree-chase",
           routes: [
             {
-              label: "springing off the pine needles",
-              redirect: "dream-tree-chase-fly",
+              text: "springing off the pine needles",
+              next: "dream-tree-chase-fly",
             },
           ],
         },
@@ -182,12 +187,16 @@ export const dreamTreeChaseScenes = {
             },
           },
         ],
+        onPageLoad: () => {
+          const aspects = useAspectStore();
+          aspects.addAspect("all-your-bones-are-broken");
+        },
         metadata: {
           sectionId: "dream-tree-chase",
           routes: [
             {
-              label: "All your bones are broken",
-              redirect: "dream-tree-chase-sink",
+              text: "All your bones are broken",
+              next: "dream-tree-chase-sink",
             },
           ],
         },
@@ -201,15 +210,16 @@ export const dreamTreeChaseScenes = {
       return {
         id: this.id,
         background: bgDefault,
+        //TODO: speeding into space sound
         text:
           `As you vault above the canopy, a great bird grabs you by your turtleneck. It carries you high above the forest. ` +
           `You can see the tree line and a sprawling countryside beyond it. Before long, you feel a sudden shift in trajectory and you ` +
           `and the bird shooting up, up, up at a very high speed. Craning your neck back, you see a pair of huge tatooed arms that ` +
-          `have latched on to the bird. The arms a attached to a rocket. The tattoo-armed rocket propels you and the bird into space, just beyond the atmosphere. ` +
+          `have latched on to the bird. The arms are attached to a rocket. The tattoo-armed rocket propels you and the bird into space, just beyond the atmosphere. ` +
           `{Continue.}`,
         onPageLoad: () => {
-          const game = useGameStore();
-          game.toggleIsZoomedOut();
+          const effects = useEffectsStore();
+          effects.toggleIsZoomedOut();
         },
         buttonActions: () => [
           {
@@ -220,11 +230,11 @@ export const dreamTreeChaseScenes = {
           },
         ],
         metadata: {
-          sectionId: "dream-tree-chase-fly1",
+          sectionId: "dream-tree-chase",
           routes: [
             {
-              label: "Continue.",
-              redirect: "dream-tree-chase-fly1",
+              text: "Continue.",
+              next: "dream-tree-chase-fly1",
             },
           ],
         },
@@ -238,14 +248,18 @@ export const dreamTreeChaseScenes = {
       return {
         id: this.id,
         background: bgDefault,
+        //TODO: crashing back down to earth in an explosion sound -> explosion animation -> crater
         text:
           `Reaching its zenith, there is a moment of quiet, motionless stillness, then you're re-entering the atmosphere, careening faster and faster ` +
           `back down until you all meet the forest floor in an explosive blast. You find yourself at the center of a massive crater. ` +
           `There is no sign of the bird, but you now have wings. The force of the blast must have fused your body and the bird's in some magical union.`,
-        onPageLoad: () => {
-          const game = useGameStore();
-          game.toggleIsZoomedOut();
-          //TODO: explosion -> crater
+        onPageLoad: async () => {
+          const effects = useEffectsStore();
+          await new Promise((resolve) => setTimeout(resolve, 2000));
+          effects.toggleIsZoomedOut();
+
+          const aspects = useAspectStore();
+          aspects.addAspect("part-bird");
         },
       };
     }

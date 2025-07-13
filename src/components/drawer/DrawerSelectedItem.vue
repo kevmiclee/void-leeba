@@ -23,7 +23,6 @@ const drawer = useDrawerStore();
 const audioStore = useAudioStore();
 
 async function useItem() {
-  //TODO: what would you like to translate?
   audioStore.click();
   const item = drawer.selectedItem!;
   drawer.closeDrawer();

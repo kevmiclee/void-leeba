@@ -14,6 +14,7 @@ export const itemCatalog: Record<ItemId, Item> = {
     permanent: true,
     usable: false,
   },
+
   "patched-coat": {
     id: "patched-coat",
     label: "Patched coat",
@@ -26,6 +27,7 @@ export const itemCatalog: Record<ItemId, Item> = {
     permanent: true,
     usable: false,
   },
+
   pinecone: {
     id: "pinecone",
     label: "Pinecone",
@@ -35,6 +37,7 @@ export const itemCatalog: Record<ItemId, Item> = {
     weight: 1,
     usable: true,
   },
+
   "pine-needles": {
     id: "pine-needles",
     label: "Pine needles",
@@ -45,6 +48,7 @@ export const itemCatalog: Record<ItemId, Item> = {
     weight: 1,
     usable: true,
   },
+
   mushroom: {
     id: "mushroom",
     label: "Mushroom",
@@ -55,6 +59,7 @@ export const itemCatalog: Record<ItemId, Item> = {
     type: "consumable",
     usable: true,
   },
+
   "hongatar-trash": {
     id: "hongatar-trash",
     label: "Hongatar trash",
@@ -65,6 +70,7 @@ export const itemCatalog: Record<ItemId, Item> = {
     weight: 1,
     usable: true,
   },
+
   "self-help-book": {
     id: "self-help-book",
     label: "Self help book",
@@ -75,6 +81,7 @@ export const itemCatalog: Record<ItemId, Item> = {
     weight: 2,
     usable: true,
   },
+
   "dog-food": {
     id: "dog-food",
     label: "Dog food can",
@@ -83,6 +90,7 @@ export const itemCatalog: Record<ItemId, Item> = {
     weight: 1,
     usable: true,
   },
+
   cards: {
     id: "cards",
     label: "Playing cards",
@@ -91,6 +99,7 @@ export const itemCatalog: Record<ItemId, Item> = {
     weight: 1,
     usable: true,
   },
+
   "spray-paint": {
     id: "spray-paint",
     label: "Orange spray paint",
@@ -100,6 +109,7 @@ export const itemCatalog: Record<ItemId, Item> = {
     type: "consumable",
     usable: true,
   },
+
   translator: {
     id: "translator",
     label: "Translator",
@@ -108,6 +118,7 @@ export const itemCatalog: Record<ItemId, Item> = {
     weight: 1,
     usable: false,
   },
+
   "beest-recording": {
     id: "beest-recording",
     label: "Beest recording",
@@ -117,6 +128,7 @@ export const itemCatalog: Record<ItemId, Item> = {
     weight: 1,
     usable: true,
   },
+
   "brain-moss": {
     id: "brain-moss",
     label: "Brain moss",
@@ -127,6 +139,7 @@ export const itemCatalog: Record<ItemId, Item> = {
     weight: 1,
     usable: true,
   },
+
   axe: {
     id: "axe",
     label: "Ax",

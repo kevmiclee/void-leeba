@@ -5,7 +5,6 @@ import homeSong from "@/assets/audio/story/background-themes/home.mp3";
 import { useGameStore } from "@/stores/game";
 import { useCharacterStore } from "@/stores/character";
 import { useAspectStore } from "@/stores/aspects";
-import { ascetic } from "@/data/aspects";
 import { defineScene } from "../story";
 
 export const homeScenes = {
@@ -35,8 +34,8 @@ export const homeScenes = {
         sectionId: "home",
         routes: [
           {
-            label: `Continue`,
-            redirect: "home1",
+            text: `Continue`,
+            next: "home1",
           },
         ],
       },
@@ -49,9 +48,11 @@ export const homeScenes = {
       background: bgDefault,
       audio: homeSong,
       text:
-        `Your rented room shares its house with roommates, who are at work. Daylight filters through the blinds of the ` +
-        `living room window and spills onto the ceiling in stripes. The view out your window shows a lawn, a small tree ` +
-        `speckled with red berries, and a quiet road with cars parked along its length.` +
+        `Daylight filters through the blinds of the bathroom window and spills onto the ceiling in stripes. ` +
+        `The view out your window shows a wild backyard with a copse of trees on the right and a forest at the ` +
+        `back of the field. A tree stump sits at the center of the mowed section of the lawn behind the house. ` +
+        `There is a clothesline and some bird feeders. In the field, seven turkeys walk, foraging in the bushes. ` +
+        `Their leader sits at the front of the formation, scanning the meadow ahead.` +
         `^^You could go out and explore. Also, no one is home. You might enjoy some quiet time in your room.`,
       choices: () => [
         {
@@ -75,16 +76,16 @@ export const homeScenes = {
         sectionId: "home",
         routes: [
           {
-            label: `Go out and explore`,
-            redirect: "home2",
+            text: `Go out and explore`,
+            next: "home2",
           },
           {
-            label: `Enjoy some quiet time in your room`,
-            redirect: "room",
+            text: `Enjoy some quiet time in your room`,
+            next: "room",
           },
           {
-            label: `Look at your phone`,
-            redirect: "drawer",
+            text: `Look at your phone`,
+            next: "drawer",
             stat: {
               id: "shitheadedness",
               amount: 1,
@@ -160,7 +161,7 @@ export const homeScenes = {
             const aspects = useAspectStore();
             const character = useCharacterStore();
 
-            aspects.addAspect(ascetic);
+            aspects.addAspect("ascetic");
             character.gainStat("will", 1, this.id);
           },
         },
@@ -169,41 +170,41 @@ export const homeScenes = {
         sectionId: "home",
         routes: [
           {
-            label: `Dog food can`,
-            redirect: "home3",
+            text: `Dog food can`,
+            next: "home3",
             stat: {
               id: "athletics",
               amount: 1,
             },
           },
           {
-            label: `Playing cards`,
-            redirect: "home3",
+            text: `Playing cards`,
+            next: "home3",
             stat: {
               id: "blueMagic",
               amount: 1,
             },
           },
           {
-            label: `Orange spray paint`,
-            redirect: "home3",
+            text: `Orange spray paint`,
+            next: "home3",
             stat: {
               id: "shitheadedness",
               amount: 1,
             },
           },
           {
-            label: `Translator`,
-            redirect: "home3",
+            text: `Translator`,
+            next: "home3",
             stat: {
               id: "blueMagic",
               amount: 1,
             },
           },
           {
-            label: `Nothing`,
-            redirect: "home3",
-            aspect: ascetic,
+            text: `Nothing`,
+            next: "home3",
+            aspect: "ascetic",
             stat: {
               id: "will",
               amount: 1,
@@ -232,8 +233,8 @@ export const homeScenes = {
         sectionId: "home",
         routes: [
           {
-            label: `Continue`,
-            redirect: "park",
+            text: `Continue`,
+            next: "park",
           },
         ],
       },
@@ -252,7 +253,7 @@ export const homeScenes = {
         `^^A notebook sits on the little desk, a stiff chair next to it. Drawing utensils rest here. ` +
         `{Settle into the chair to make something}.` +
         `^^The empty bed and the blank page remind you of fresh snow, a bright day, the smell of morning mud, ` +
-        `and afternoon heat. Wait, {I'm going to the park}.`,
+        `and afternoon heat. {Wait, I'm going to the park}.`,
       buttonActions: () => [
         {
           action: () => {
@@ -277,16 +278,16 @@ export const homeScenes = {
         sectionId: "home",
         routes: [
           {
-            label: `A nap sounds nice`,
-            redirect: "nap",
+            text: `A nap sounds nice`,
+            next: "nap",
           },
           {
-            label: `Settle into the chair and make something`,
-            redirect: "make-something",
+            text: `Settle into the chair and make something`,
+            next: "make-something",
           },
           {
-            label: `I'm going to the park`,
-            redirect: "park",
+            text: `I'm going to the park`,
+            next: "park",
           },
         ],
       },
@@ -312,12 +313,12 @@ export const homeScenes = {
         sectionId: "home",
         routes: [
           {
-            label: `Close your eyes`,
-            redirect: "dream",
+            text: `Close your eyes`,
+            next: "dream",
           },
           {
-            label: `rather sit at my desk`,
-            redirect: "make-something",
+            text: `rather sit at my desk`,
+            next: "make-something",
           },
         ],
       },
@@ -332,11 +333,11 @@ export const homeScenes = {
         `You sit down at the desk and open to a fresh page of the pad.` +
         `^You look down onto the off-white paper. A void to fill. Dimensionless.` +
         `^The desire to form and create something in that void. It pulls you, amuses you, scares you. ` +
-        `You feel like proving your stoicism, resisting the urge to make marks. Go {into the Void}.` +
+        `You feel like proving your stoicism, resisting the urge to make marks. {Go into the Void}.` +
         `^^You can feel the spirit rising in you, and the thrill of channeling that spirit! ` +
         `Feelings with no where to go are like idle hands...they animate. Or, no, do they become animate hands!? ` +
         `Nonononono! You pick up the paintbrush, smoosh some acrylic paint into the palette and {paint with your heart}.` +
-        `^^Nah, nevermind, I'm {going to sleep}.`,
+        `^^{Nah, nevermind, I'm going to sleep}.`,
       background: bgDefault,
       buttonActions: () => [
         {
@@ -362,16 +363,16 @@ export const homeScenes = {
         sectionId: "home",
         routes: [
           {
-            label: `into the void`,
-            redirect: "void",
+            text: `into the void`,
+            next: "void",
           },
           {
-            label: `paint with your heart`,
-            redirect: "paint",
+            text: `paint with your heart`,
+            next: "paint",
           },
           {
-            label: `going to sleep`,
-            redirect: "nap",
+            text: `going to sleep`,
+            next: "nap",
           },
         ],
       },

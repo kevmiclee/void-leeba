@@ -16,6 +16,7 @@ import squirrelAvatar from "@/assets/images/avatars/squirrel.png";
 import squirrelSound from "@/assets/audio/characters/squirrel.mp3";
 import buzzAvatar from "@/assets/images/avatars/buzz.png";
 import buzzSound from "@/assets/audio/characters/buzz.mp3";
+import pinkSnakeAvatar from "@/assets/images/avatars/pink-snake.png";
 
 export const characters: Record<CharacterId, Character> = {
   drunk1: {
@@ -24,52 +25,67 @@ export const characters: Record<CharacterId, Character> = {
     avatar: drunk1Avatar,
     sound: drunk1Sound,
   },
+
   drunk2: {
     id: "drunk2",
     name: "Drunk #2",
     avatar: drunk2Avatar,
     sound: drunk2Sound,
   },
+
   "black-dog": {
     id: "black-dog",
     name: "Redblack Dog",
     avatar: blackDogAvatar,
     sound: blackDogSound,
   },
+
   "black-dog-scary": {
     id: "black-dog-scary",
     name: "Redblack Dog",
     avatar: blackDogScaryAvatar,
     sound: blackDogSound,
   },
+
   faerie1: {
     id: "faerie1",
     name: "Hongatar #1",
     avatar: faerie1Avatar,
     sound: faerie1Sound,
   },
+
   faerie2: {
     id: "faerie2",
     name: "Hongatar #2",
     avatar: faerie2Avatar,
     sound: faerie2Sound,
   },
+
   faerie3: {
     id: "faerie3",
     name: "Hongatar #3",
     avatar: faerie3Avatar,
     sound: faerie3Sound,
   },
+
   squirrel: {
     id: "squirrel",
     name: "Squirrel",
     avatar: squirrelAvatar,
     sound: squirrelSound,
   },
+
   buzz: {
     id: "buzz",
     name: "Buzz Morley",
     avatar: buzzAvatar,
     sound: buzzSound,
+  },
+
+  "pink-snake": {
+    id: "pink-snake",
+    name: "Pink Snake",
+    avatar: pinkSnakeAvatar,
+    //TOOD: pink snake sound
   },
 };

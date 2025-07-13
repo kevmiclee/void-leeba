@@ -50,11 +50,11 @@
 
 <script setup lang="ts">
 import { Edge, Network } from "vis-network";
-import { getSceneGraph } from "@/utils/sceneGraph";
+import { getSceneGraph } from "@/utils/scene-graph";
 import { onMounted, ref, watch } from "vue";
 import { useGameStore } from "@/stores/game";
 import { SceneId, sceneKeys } from "@/data/story/story";
-import { miniGameIds } from "@/types/minigame";
+import { miniGameIds } from "@/types/mini-game";
 
 const game = useGameStore();
 const activeSection = ref("All");

@@ -10,6 +10,7 @@ export const dictionaryEntries: Record<DictionaryEntryId, DictionaryEntry> = {
       `and make fun of the kid. Sometimes they will help a megalomaniac into great power by hacking their competitor's ` +
       `{hyperleak}s. The reason faeries glow is because they have a pure and beautiful life force like {dorgang}.`,
   },
+
   hyperleak: {
     id: "hyperleak",
     name: "Hyperleak",
@@ -19,6 +20,7 @@ export const dictionaryEntries: Record<DictionaryEntryId, DictionaryEntry> = {
       `<br><br>That being said, this machine is SO user-friendly or 'easy-to-use'. Though, it is easy to use mostly because ` +
       `everyone in the Leakyverse uses Survecap interfaces and are used to their particular type of user-hostile. Organisms resist change.`,
   },
+
   dorgang: {
     id: "dorgang",
     name: "Dorgang",
@@ -31,6 +33,7 @@ export const dictionaryEntries: Record<DictionaryEntryId, DictionaryEntry> = {
       `Leaktable. If a comparative reference to Dorgang led you here, just know that Dorgang can be used as a comparative ` +
       `character-reference to the chracter that is being compared to Dorgang. They are Dorgang-like.`,
   },
+
   whatever: {
     id: "whatever",
     name: "Whatever",

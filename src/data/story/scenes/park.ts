@@ -36,16 +36,16 @@ export const parkScenes = {
         sectionId: "park",
         routes: [
           {
-            label: `Still yourself and listen to the sounds.`,
-            redirect: "park-drunks",
+            text: `Still yourself and listen to the sounds.`,
+            next: "park-drunks",
           },
           {
-            label: `Leave the park and enter the neighborhood.`,
-            redirect: "neighborhood",
+            text: `Leave the park and enter the neighborhood.`,
+            next: "neighborhood",
           },
           {
-            label: `Play on the snowpile.`,
-            redirect: "snow-pile",
+            text: `Play on the snowpile.`,
+            next: "snow-pile",
           },
         ],
       },
@@ -77,8 +77,8 @@ export const parkScenes = {
         sectionId: "park",
         routes: [
           {
-            label: `drunk dialog click`,
-            redirect: "park-drunks1",
+            text: `drunk dialog click`,
+            next: "park-drunks1",
           },
         ],
       },
@@ -132,16 +132,16 @@ export const parkScenes = {
         sectionId: "park",
         routes: [
           {
-            label: `I'm sorry, I'm not from around here.`,
-            redirect: "park-drunks2a",
+            text: `I'm sorry, I'm not from around here.`,
+            next: "park-drunks2a",
           },
           {
-            label: `It's the sun`,
-            redirect: "park-drunks2b",
+            text: `It's the sun`,
+            next: "park-drunks2b",
           },
           {
-            label: `It's the moon`,
-            redirect: "park-drunks2b",
+            text: `It's the moon`,
+            next: "park-drunks2b",
           },
         ],
       },
@@ -191,18 +191,18 @@ export const parkScenes = {
         sectionId: "park",
         routes: [
           {
-            label: `I dont have time for this`,
-            redirect: "park-drunks3",
+            text: `I dont have time for this`,
+            next: "park-drunks3",
             manners: "rude",
           },
           {
-            label: `Looking up is for the young and hopeful`,
-            redirect: "park-drunks3",
+            text: `Looking up is for the young and hopeful`,
+            next: "park-drunks3",
             manners: "depressing",
           },
           {
-            label: `Just laugh`,
-            redirect: "park-drunks3",
+            text: `Just laugh`,
+            next: "park-drunks3",
             manners: "polite",
           },
         ],
@@ -243,8 +243,8 @@ export const parkScenes = {
         sectionId: "park",
         routes: [
           {
-            label: `drunk dialog click`,
-            redirect: "park-drunks2c",
+            text: `drunk dialog click`,
+            next: "park-drunks2c",
           },
         ],
       },
@@ -297,18 +297,18 @@ export const parkScenes = {
         sectionId: "park",
         routes: [
           {
-            label: `Not cool`,
-            redirect: "park-drunks3",
+            text: `Not cool`,
+            next: "park-drunks3",
             manners: "depressing",
           },
           {
-            label: `YEAH! EAT IT, YA DOPE!`,
-            redirect: "park-drunks3",
+            text: `YEAH! EAT IT, YA DOPE!`,
+            next: "park-drunks3",
             manners: "rude",
           },
           {
-            label: `Just laugh`,
-            redirect: "park-drunks3",
+            text: `Just laugh`,
+            next: "park-drunks3",
             manners: "polite",
           },
         ],
@@ -361,8 +361,8 @@ export const parkScenes = {
         sectionId: "park",
         routes: [
           {
-            label: `drunk dialog click`,
-            redirect: "black-dog",
+            text: `drunk dialog click`,
+            next: "black-dog",
           },
         ],
       },

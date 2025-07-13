@@ -3,7 +3,6 @@ import bgDefault from "@/assets/images/backgrounds/new-game.png";
 import faeriesSong from "@/assets/audio/story/background-themes/faeries.mp3";
 import { useGameStore } from "@/stores/game";
 import { useCharacterStore } from "@/stores/character";
-import { magicNosehairs } from "@/data/aspects";
 import { getNapFaeries2Text } from "../helper-functions/text-helper-functions";
 import { useAspectStore } from "@/stores/aspects";
 import { defineScene } from "../story";
@@ -62,8 +61,8 @@ export const dreamFaeriesScenes = {
         sectionId: "dream-faeries",
         routes: [
           {
-            label: "faerie dialog click",
-            redirect: "dream-faeries1",
+            text: "faerie dialog click",
+            next: "dream-faeries1",
           },
         ],
       },
@@ -88,7 +87,7 @@ export const dreamFaeriesScenes = {
           payload: { filter: "bow" },
           onChoose: () => {
             const aspectStore = useAspectStore();
-            aspectStore.addAspect(magicNosehairs);
+            aspectStore.addAspect("magic-nosehairs");
           },
         },
         {
@@ -108,17 +107,17 @@ export const dreamFaeriesScenes = {
         sectionId: "dream-faeries",
         routes: [
           {
-            label: `Bow graciously. "Thanks for spitting in my nostril holes."`,
-            redirect: "dream-faeries2",
-            aspect: magicNosehairs,
+            text: `Bow graciously. "Thanks for spitting in my nostril holes."`,
+            next: "dream-faeries2",
+            aspect: "magic-nosehairs",
           },
           {
-            label: `Get on their case about littering.`,
-            redirect: "dream-faeries-litter",
+            text: `Get on their case about littering.`,
+            next: "dream-faeries-litter",
           },
           {
-            label: `There's that squirrel again! Try to catch it.`,
-            redirect: "dream-squirrel",
+            text: `There's that squirrel again! Try to catch it.`,
+            next: "dream-squirrel",
             stat: {
               id: "athletics",
               amount: 1,
@@ -163,8 +162,8 @@ export const dreamFaeriesScenes = {
         sectionId: "dream-faeries",
         routes: [
           {
-            label: `faerie dialog click`,
-            redirect: "dream-faeries3",
+            text: `faerie dialog click`,
+            next: "dream-faeries3",
           },
         ],
       },
@@ -205,12 +204,12 @@ export const dreamFaeriesScenes = {
         sectionId: "dream-faeries",
         routes: [
           {
-            label: `"Um..."`,
-            redirect: "dream-faeries-party-check",
+            text: `"Um..."`,
+            next: "dream-faeries-party-check",
           },
           {
-            label: `"PARTY!!!"`,
-            redirect: "dream-faeries4",
+            text: `"PARTY!!!"`,
+            next: "dream-faeries4",
           },
         ],
       },
@@ -239,8 +238,8 @@ export const dreamFaeriesScenes = {
         sectionId: "dream-faeries",
         routes: [
           {
-            label: `faerie dialog clicks`,
-            redirect: "dream-faeries5",
+            text: `faerie dialog clicks`,
+            next: "dream-faeries5",
           },
         ],
       },
@@ -265,12 +264,12 @@ export const dreamFaeriesScenes = {
         sectionId: "dream-faeries",
         routes: [
           {
-            label: `YOLO! Eat the eggcorn.`,
-            redirect: "party-eggcorn",
+            text: `YOLO! Eat the eggcorn.`,
+            next: "party-eggcorn",
           },
           {
-            label: `On second thought...`,
-            redirect: "party-eggcorn-check",
+            text: `On second thought...`,
+            next: "party-eggcorn-check",
           },
         ],
       },
@@ -319,16 +318,16 @@ export const dreamFaeriesScenes = {
           sectionId: "dream-faeries",
           routes: [
             {
-              label: `"Oh I see, you were planting snail trees! The Hongatar truly are a noble breed.`,
-              redirect: "dream-faeries-litter-no-proof",
+              text: `"Oh I see, you were planting snail trees! The Hongatar truly are a noble breed.`,
+              next: "dream-faeries-litter-no-proof",
             },
             {
-              label: `"LIES!"`,
-              redirect: "dream-faeries-litter-no-proof",
+              text: `"LIES!"`,
+              next: "dream-faeries-litter-no-proof",
             },
             {
-              label: "Show them the proof.",
-              redirect: "dream-faeries-litter-proof",
+              text: "Show them the proof.",
+              next: "dream-faeries-litter-proof",
             },
           ],
         },
@@ -392,13 +391,13 @@ export const dreamFaeriesScenes = {
           sectionId: "dream-faeries",
           routes: [
             {
-              label: `"You're lying. I saw you eating the snails!"`,
-              redirect: "dream-faeries2",
+              text: `"You're lying. I saw you eating the snails!"`,
+              next: "dream-faeries2",
               manners: "depressing",
             },
             {
-              label: `"Your dedication to the ecosystem is so inspiring. If only we humans were so thoughtful and so brave."`,
-              redirect: "dream-faeries2",
+              text: `"Your dedication to the ecosystem is so inspiring. If only we humans were so thoughtful and so brave."`,
+              next: "dream-faeries2",
               manners: "polite",
               stat: {
                 id: "shitheadedness",
@@ -406,8 +405,8 @@ export const dreamFaeriesScenes = {
               },
             },
             {
-              label: `"That is asinine."`,
-              redirect: "dream-faeries2",
+              text: `"That is asinine."`,
+              next: "dream-faeries2",
               manners: "rude",
             },
           ],
@@ -442,8 +441,8 @@ export const dreamFaeriesScenes = {
           sectionId: "dream-faeries",
           routes: [
             {
-              label: `faerie dialog click`,
-              redirect: "dream-faeries-litter-proof1",
+              text: `faerie dialog click`,
+              next: "dream-faeries-litter-proof1",
             },
           ],
         },
@@ -490,8 +489,8 @@ export const dreamFaeriesScenes = {
           sectionId: "dream-faeries",
           routes: [
             {
-              label: `faerie dialog click`,
-              redirect: "dream-faeries-litter-proof2",
+              text: `faerie dialog click`,
+              next: "dream-faeries-litter-proof2",
             },
           ],
         },
@@ -546,18 +545,18 @@ export const dreamFaeriesScenes = {
           sectionId: "dream-faeries",
           routes: [
             {
-              label: `"Let that be a lesson to you."`,
-              redirect: "dream-faeries2",
+              text: `"Let that be a lesson to you."`,
+              next: "dream-faeries2",
               manners: "depressing",
             },
             {
-              label: `"Self-help is my favorite genre, thanks!"`,
-              redirect: "dream-faeries2",
+              text: `"Self-help is my favorite genre, thanks!"`,
+              next: "dream-faeries2",
               manners: "polite",
             },
             {
-              label: `Wink.`,
-              redirect: "dream-faeries2",
+              text: `Wink.`,
+              next: "dream-faeries2",
               manners: "weird",
             },
           ],
@@ -599,16 +598,16 @@ export const dreamFaeriesScenes = {
           sectionId: "dream-faeries",
           routes: [
             {
-              label: `"I'm good. Thanks"`,
-              redirect: "dream-faeries-party-decline",
+              text: `"I'm good. Thanks"`,
+              next: "dream-faeries-party-decline",
               stat: {
                 id: "will",
                 amount: 1,
               },
             },
             {
-              label: `"PARTY!!!"`,
-              redirect: "dream-faeries4",
+              text: `"PARTY!!!"`,
+              next: "dream-faeries4",
             },
           ],
         },
@@ -640,8 +639,8 @@ export const dreamFaeriesScenes = {
           sectionId: "dream-faeries",
           routes: [
             {
-              label: `fearie dialog click`,
-              redirect: "dream1",
+              text: `fearie dialog click`,
+              next: "dream1",
             },
           ],
         },
@@ -674,12 +673,12 @@ export const dreamFaeriesScenes = {
         sectionId: "dream-faeries",
         routes: [
           {
-            label: `everything goes dark`,
-            redirect: "party-faeries",
+            text: `everything goes dark`,
+            next: "party-faeries",
           },
           {
-            label: `everything goes dark`,
-            redirect: "party-squirrel",
+            text: `everything goes dark`,
+            next: "party-squirrel",
           },
         ],
       },
@@ -714,16 +713,16 @@ export const dreamFaeriesScenes = {
           sectionId: "dream-faeries",
           routes: [
             {
-              label: `No. Seriously. I'm not eating it`,
-              redirect: "dream1",
+              text: `No. Seriously. I'm not eating it`,
+              next: "dream1",
               stat: {
                 id: "will",
                 amount: 1,
               },
             },
             {
-              label: `YOLO! Eat the eggcorn`,
-              redirect: "party-eggcorn",
+              text: `YOLO! Eat the eggcorn`,
+              next: "party-eggcorn",
             },
           ],
         },

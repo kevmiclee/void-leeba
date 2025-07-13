@@ -56,6 +56,7 @@ import { useDictionaryStore } from "@/stores/dictionary";
 import { dictionaryEntries } from "@/data/dictionary";
 import { useAudioStore } from "@/stores/audio";
 import { useSceneHelpers } from "@/helper-functions/scene-helpers";
+import { useEffectsStore } from "@/stores/effects";
 
 const props = defineProps<{
   letters: string[];
@@ -105,11 +106,12 @@ const chunks = computed(() => {
 });
 
 const game = useGameStore();
+const effects = useEffectsStore();
 const { finishAnimation } = useSceneHelpers();
 const buttonActions = game.currentScene(game.currentScenePayload).buttonActions
   ? game.currentScene(game.currentScenePayload).buttonActions!()
   : [];
-const animationSkipped = computed(() => game.animationSkipped);
+const animationSkipped = computed(() => effects.animationSkipped);
 
 const hideButtons: Ref<number[], number[]> = ref([]);
 

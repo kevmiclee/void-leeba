@@ -1,7 +1,6 @@
 import { Scene } from "@/types/story";
 import bgDefault from "@/assets/images/backgrounds/new-game.png";
 import { useAspectStore } from "@/stores/aspects";
-import { wellVersed } from "@/data/aspects";
 import { useGameStore } from "@/stores/game";
 import { useCharacterStore } from "@/stores/character";
 import { defineScene } from "../story";
@@ -32,8 +31,8 @@ export const hypnoScenes = {
       metadata: {
         sectionId: "hypno",
         routes: [
-          { label: "Keep practicing.", redirect: "hypno-practice" },
-          { label: "Finish.", redirect: "hypno1" },
+          { text: "Keep practicing.", next: "hypno-practice" },
+          { text: "Finish.", next: "hypno1" },
         ],
       },
     };
@@ -54,8 +53,8 @@ export const hypnoScenes = {
       metadata: {
         sectionId: "hypno",
         routes: [
-          { label: "Keep practicing.", redirect: "hypno-practice1" },
-          { label: "Finish.", redirect: "hypno1" },
+          { text: "Keep practicing.", next: "hypno-practice1" },
+          { text: "Finish.", next: "hypno1" },
         ],
       },
     };
@@ -73,13 +72,13 @@ export const hypnoScenes = {
           next: "hypno1",
           onChoose: () => {
             const aspects = useAspectStore();
-            aspects.addAspect(wellVersed);
+            aspects.addAspect("well-versed");
           },
         },
       ],
       metadata: {
         sectionId: "hypno",
-        routes: [{ label: "Finish.", redirect: "hypno1", aspect: wellVersed }],
+        routes: [{ text: "Finish.", next: "hypno1", aspect: "well-versed" }],
       },
     };
   }),
@@ -120,16 +119,16 @@ export const hypnoScenes = {
         sectionId: "hypno",
         routes: [
           {
-            label: `"I don't think I'm cut out for this."`,
-            redirect: "hypno2",
+            text: `"I don't think I'm cut out for this."`,
+            next: "hypno2",
           },
           {
-            label: `"I need more time to go over my lines!"`,
-            redirect: "hypno-practice",
+            text: `"I need more time to go over my lines!"`,
+            next: "hypno-practice",
           },
           {
-            label: `"I got this!"`,
-            redirect: "hypno2",
+            text: `"I got this!"`,
+            next: "hypno2",
             stat: {
               id: "will",
               amount: 1,
@@ -162,7 +161,7 @@ export const hypnoScenes = {
       ],
       metadata: {
         sectionId: "hypno",
-        routes: [{ label: "buzz dialog click.", redirect: "hypno3" }],
+        routes: [{ text: "buzz dialog click.", next: "hypno3" }],
       },
     };
   }),
@@ -185,7 +184,7 @@ export const hypnoScenes = {
       ],
       metadata: {
         sectionId: "hypno",
-        routes: [{ label: "keg", redirect: "hypno4" }],
+        routes: [{ text: "keg", next: "hypno4" }],
       },
     };
   }),
@@ -209,7 +208,7 @@ export const hypnoScenes = {
       ],
       metadata: {
         sectionId: "hypno",
-        routes: [{ label: "buzz dialog click.", redirect: "hypno5" }],
+        routes: [{ text: "buzz dialog click.", next: "hypno5" }],
       },
     };
   }),
@@ -236,7 +235,7 @@ export const hypnoScenes = {
       ],
       metadata: {
         sectionId: "hypno",
-        routes: [{ label: "buzz dialog click.", redirect: "hypno6" }],
+        routes: [{ text: "buzz dialog click.", next: "hypno6" }],
       },
     };
   }),
@@ -270,10 +269,10 @@ export const hypnoScenes = {
         sectionId: "hypno",
         routes: [
           {
-            label: "I'm not doing this! Will yourself awake",
-            redirect: "hypno-ready-check",
+            text: "I'm not doing this! Will yourself awake",
+            next: "hypno-ready-check",
           },
-          { label: "I'm ready", redirect: "hypno-ready" },
+          { text: "I'm ready", next: "hypno-ready" },
         ],
       },
     };
@@ -310,10 +309,10 @@ export const hypnoScenes = {
         metadata: {
           sectionId: "hypno",
           routes: [
-            { label: "I said no", redirect: "dream1" },
+            { text: "I said no", next: "dream1" },
             {
-              label: "You're right. <i>The show must go on</i>!",
-              redirect: "hypno-ready",
+              text: "You're right. <i>The show must go on</i>!",
+              next: "hypno-ready",
             },
           ],
         },
@@ -338,7 +337,7 @@ export const hypnoScenes = {
       ],
       metadata: {
         sectionId: "hypno",
-        routes: [{ label: "buzz dialog click", redirect: "hypno-ready1" }],
+        routes: [{ text: "buzz dialog click", next: "hypno-ready1" }],
       },
     };
   }),
@@ -364,8 +363,8 @@ export const hypnoScenes = {
         sectionId: "hypno",
         routes: [
           {
-            label: "Act like a keg",
-            redirect: "party-keg",
+            text: "Act like a keg",
+            next: "party-keg",
           },
         ],
       },

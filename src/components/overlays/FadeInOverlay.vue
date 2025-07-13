@@ -7,12 +7,14 @@
 </template>
 
 <script setup lang="ts">
+import { useEffectsStore } from "@/stores/effects";
 import { useGameStore } from "@/stores/game";
 import { computed, ref } from "vue";
 
+const effects = useEffectsStore();
 const game = useGameStore();
 
-const showOverlay = computed(() => game.showOverlay);
+const showOverlay = computed(() => effects.showOverlay);
 const fadeDuration = ref(2000);
 </script>
 

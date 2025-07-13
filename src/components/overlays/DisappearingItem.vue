@@ -6,16 +6,16 @@
 
 <script setup lang="ts">
 import { ref, watch } from "vue";
-import { useGameStore } from "@/stores/game";
 import itemImg from "@/assets/images/items/plant-matter-lock-of-hair.png";
+import { useEffectsStore } from "@/stores/effects";
 
-const game = useGameStore();
+const effects = useEffectsStore();
 const showFadeDiv = ref(false);
 
 watch(
-  () => game.showDisappearingItem,
+  () => effects.showDisappearingItem,
   () => {
-    if (game.showDisappearingItem) {
+    if (effects.showDisappearingItem) {
       showFadeDiv.value = true;
       setTimeout(() => {
         showFadeDiv.value = false;
@@ -25,7 +25,7 @@ watch(
 );
 
 function onAfterLeave() {
-  game.updateShowDisappearingItem(false);
+  effects.toggleDisappearingItem();
 }
 </script>
 

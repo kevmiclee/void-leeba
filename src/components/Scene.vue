@@ -4,7 +4,10 @@
   <div
     v-else
     class="scene-wrapper"
-    :class="{ psychedelic: game.isPsychedelic, 'zoom-out': game.isZoomedOut }"
+    :class="{
+      psychedelic: effects.isPsychedelic,
+      'zoom-out': effects.isZoomedOut,
+    }"
     :style="[backgroundStyle, alignmentStyle, backgroundColorFilter]"
     @click="finishAnimation"
   >
@@ -64,18 +67,24 @@ import Sidebar from "@/components/widgets/Sidebar.vue";
 import { Scene } from "@/types/story";
 import DisappearingItem from "./overlays/DisappearingItem.vue";
 import MiniGame from "./mini-game/MiniGame.vue";
+import { useEffectsStore } from "@/stores/effects";
 
 const timeoutStore = useTimeoutStore();
 const game = useGameStore();
 const audioStore = useAudioStore();
+const effects = useEffectsStore();
 const { finishAnimation, triggerFade, onSceneChanged } = useSceneHelpers();
 
 const background = computed(() => game.currentScene().background);
 const backgroundStyle = computed(() =>
   background.value
-    ? {
-        backgroundImage: `url(${background.value})`,
-      }
+    ? background.value == "white"
+      ? {
+          backgroundColor: "white",
+        }
+      : {
+          backgroundImage: `url(${background.value})`,
+        }
     : ""
 );
 const text = computed(() => {
@@ -88,7 +97,7 @@ const animationRate = computed(
 const animationDurationMs = computed(
   () => 900 + (letters.value.length - 1) * animationRate.value
 );
-const animationSkipped = computed(() => game.animationSkipped);
+const animationSkipped = computed(() => effects.animationSkipped);
 const isScene = computed(
   () => !NON_ROUTING_PAGES.includes(game.currentSceneId)
 );
@@ -112,7 +121,7 @@ onMounted(() => {
   timeoutStore.set(
     game.currentSceneId,
     () => {
-      game.updateShowChoices(true);
+      effects.updateShowChoices(true);
     },
     animationDurationMs.value
   );

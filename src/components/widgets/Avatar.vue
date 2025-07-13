@@ -1,7 +1,12 @@
 <template>
   <transition name="slide-up">
     <div v-if="showUserAvatar" class="avatar-wrapper">
-      <img :src="userAvatar" alt="User avatar" class="avatar" />
+      <img
+        :src="userAvatar"
+        alt="User avatar"
+        class="avatar"
+        :class="{ grow: effects.stretchAvatar }"
+      />
     </div>
     <div
       v-else-if="hasDialog && currentCharacter"
@@ -25,6 +30,7 @@
 
 <script setup lang="ts">
 import userAvatar from "@/assets/images/avatars/player.png";
+import { useEffectsStore } from "@/stores/effects";
 import { Character } from "@/types/character";
 
 const props = defineProps<{
@@ -34,6 +40,8 @@ const props = defineProps<{
   dialogClicked: boolean;
   onAvatarClicked: () => void;
 }>();
+
+const effects = useEffectsStore();
 </script>
 
 <style scoped>
@@ -63,6 +71,12 @@ const props = defineProps<{
   height: 26vw;
   width: auto;
   display: block;
+  transition: height 10s ease;
+}
+
+.avatar.grow {
+  height: 100vw;
+  width: 26vw !important;
 }
 
 .avatar-right {

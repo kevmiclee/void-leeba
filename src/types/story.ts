@@ -2,9 +2,9 @@ import { CharacterId } from "./character";
 import { SceneId } from "@/data/story/story";
 import { DictionaryEntryId } from "./dictionary";
 import { DrawerView } from "./drawer-view";
-import { MiniGameId } from "./minigame";
-import { Aspect } from "./aspect";
-import { Stat, StatId } from "./stat";
+import { MiniGameId } from "./mini-game";
+import { AspectId } from "./aspect";
+import { StatId } from "./stat";
 import { Manners } from "./manners";
 
 export interface ScenePayload {
@@ -61,9 +61,9 @@ export interface SceneMetadata {
 }
 
 export interface SceneRouteMetadata {
-  label: string;
-  redirect: SceneId | "drawer";
-  aspect?: Aspect;
+  text: string;
+  next: SceneId | "drawer";
+  aspect?: AspectId;
   stat?: SceneRouteStat;
   manners?: Manners;
 }
