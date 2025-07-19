@@ -55,6 +55,7 @@ export interface EffectsState {
   isPsychedelic: boolean;
   psychedelicScenesRemaining: number;
   isZoomedOut: boolean;
+  isSpinning: boolean;
   blurChoices: boolean;
   stretchAvatar: boolean;
 }

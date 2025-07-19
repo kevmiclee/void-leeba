@@ -1,14 +1,12 @@
 import { Scene } from "@/types/story";
-import bgDefault from "@/assets/images/backgrounds/new-game.png";
+import bgForest from "@/assets/images/backgrounds/pine-forest.png";
+import bgTrees from "@/assets/images/backgrounds/in-the-trees.png";
 import fallingOutOfTreeSound from "@/assets/audio/story/sounds/falling-out-of-tree.mp3";
 import { useGameStore } from "@/stores/game";
 import { useCharacterStore } from "@/stores/character";
-import { fateContest } from "../helper-functions/roll-helper-functions";
-import { useAspectStore } from "@/stores/aspects";
 import { getFollowSquirrelText } from "../helper-functions/text-helper-functions";
 import { defineScene } from "../story";
 import { useAudioStore } from "@/stores/audio";
-import { getCatchSquirrelOutcome } from "../helper-functions/outcome-helper-functions";
 
 //TODO: MUSIC - squirrel
 
@@ -16,9 +14,9 @@ export const dreamSquirrelScenes = {
   "dream-squirrel": defineScene("dream-squirrel", function (payload): Scene {
     return {
       id: this.id,
-      background: bgDefault,
+      background: bgTrees,
       text:
-        `You lock in on a squirrel. Its grey body is a corkscrew streak around the trunk. It's time to give chase. ` +
+        `You lock in on a squirrel. Its brown body is a corkscrew streak around the trunk. It's time to give chase. ` +
         `You straddle the trunk, feeling the roughness of the bark tugging at your turtleneck as you shimmy up. Just a little closer... ` +
         `The squirrel is right there! Its little face, filled with alarm (or is it amusement?), fills you with determination.`,
       choices: () => [
@@ -57,7 +55,7 @@ export const dreamSquirrelScenes = {
     function (payload): Scene {
       return {
         id: this.id,
-        background: bgDefault,
+        background: bgTrees,
         text:
           `You reach for a nearby branch. It breaks, but your thighs remain firmly clenched on the trunk. ` +
           `{Keep shimmying up}.`,
@@ -87,7 +85,7 @@ export const dreamSquirrelScenes = {
     function (payload): Scene {
       return {
         id: this.id,
-        background: bgDefault,
+        background: bgTrees,
         text:
           `You keep shimmying up the trunk, past the first branch. Your arms and legs are ` +
           `giving out. The squirrel hasn't moved. The way it watches you, vacillating between ` +
@@ -141,7 +139,7 @@ export const dreamSquirrelScenes = {
   "dream-squirrel2": defineScene("dream-squirrel2", function (payload): Scene {
     return {
       id: this.id,
-      background: bgDefault,
+      background: bgTrees,
       text:
         `Atta boy! Quitters never win. Your brow is wet with dream sweat. ` +
         `Your hands and limbs are all scraped up from climbing. You feel sappy bits on your clothes and face. ` +
@@ -172,39 +170,41 @@ export const dreamSquirrelScenes = {
   "dream-squirrel3": defineScene("dream-squirrel3", function (payload): Scene {
     return {
       id: this.id,
-      background: bgDefault,
+      background: bgTrees,
       text:
         `The little vermin is taunting you!` +
         `^^In a last ditch effort, you dart your hand out to {snatch the furball}.`,
       buttonActions: () => [
         {
           action: () => {
-            const character = useCharacterStore();
             const game = useGameStore();
-            const squirrelAthletics = 2;
+            game.goToScene("dream-squirrel-game");
+            // const character = useCharacterStore();
+            // const game = useGameStore();
+            // const squirrelAthletics = 2;
 
-            const roll = fateContest(
-              character.athletics.value,
-              squirrelAthletics
-            );
+            // const roll = fateContest(
+            //   character.athletics.value,
+            //   squirrelAthletics
+            // );
 
-            if (roll <= 0) {
-              character.setFlag("fell-from-tree", true);
-            } else {
-              character.setFlag("fell-from-tree", false);
-            }
+            // if (roll <= 0) {
+            //   character.setFlag("fell-from-tree", true);
+            // } else {
+            //   character.setFlag("fell-from-tree", false);
+            // }
 
-            const outcome = getCatchSquirrelOutcome(roll);
+            // const outcome = getCatchSquirrelOutcome(roll);
 
-            if (outcome.success) {
-              character.setFlag("caught-squirrel", true);
-              game.goToScene("dream-squirrel4-success", {
-                filter: outcome.text,
-              });
-            } else {
-              character.setFlag("caught-squirrel", false);
-              game.goToScene("dream-squirrel4-fail", { filter: outcome.text });
-            }
+            // if (outcome.success) {
+            //   character.setFlag("caught-squirrel", true);
+            //   game.goToScene("dream-squirrel4-success", {
+            //     filter: outcome.text,
+            //   });
+            // } else {
+            //   character.setFlag("caught-squirrel", false);
+            //   game.goToScene("dream-squirrel4-fail", { filter: outcome.text });
+            // }
           },
         },
       ],
@@ -224,12 +224,37 @@ export const dreamSquirrelScenes = {
     };
   }),
 
+  "dream-squirrel-game": defineScene(
+    "dream-squirrel-game",
+    function (payload): Scene {
+      return {
+        id: this.id,
+        // background: bgForest,
+        text: "",
+        miniGameId: "squirrel",
+        metadata: {
+          sectionId: "dream-squirrel",
+          routes: [
+            {
+              text: `win`,
+              next: "dream-squirrel4-success",
+            },
+            {
+              text: `lose`,
+              next: "dream-squirrel4-fail",
+            },
+          ],
+        },
+      };
+    }
+  ),
+
   "dream-squirrel4-success": defineScene(
     "dream-squirrel4-success",
     function (payload): Scene {
       return {
         id: this.id,
-        background: bgDefault,
+        background: bgTrees,
         text: payload?.text ?? "",
         dialogSequence: () => [
           {
@@ -259,7 +284,7 @@ export const dreamSquirrelScenes = {
     function (payload): Scene {
       return {
         id: this.id,
-        background: bgDefault,
+        background: bgTrees,
         text: payload?.text ?? "",
         buttonActions: () => [
           {
@@ -300,7 +325,7 @@ export const dreamSquirrelScenes = {
   "dream-squirrel5": defineScene("dream-squirrel5", function (payload): Scene {
     return {
       id: this.id,
-      background: bgDefault,
+      background: bgForest,
       text:
         `As you follow the squirrel, it is obvious the creature is very excited about something. ` +
         `You faintly hear what might be voices in unison like a sing-song chant, growing louder as you progress. ` +
@@ -391,7 +416,7 @@ export const dreamSquirrelScenes = {
   "dream-squirrel6": defineScene("dream-squirrel6", function (payload): Scene {
     return {
       id: this.id,
-      background: bgDefault,
+      background: bgForest,
       text:
         getFollowSquirrelText(payload?.filter) +
         `^^All the while the chanting is growing louder. You're sure it's voices now. ` +
@@ -422,7 +447,7 @@ export const dreamSquirrelScenes = {
   "dream-squirrel7": defineScene("dream-squirrel7", function (payload): Scene {
     return {
       id: this.id,
-      background: bgDefault,
+      background: bgForest,
       text:
         `You arrive at a clearing. The {pine faeries} you saw earlier are all laying about on the ground, ` +
         `apparently unconscious.^^The squirrel is darting here and there, sniffing the hongatar and chittering ` +
@@ -457,7 +482,7 @@ export const dreamSquirrelScenes = {
   "dream-squirrel8": defineScene("dream-squirrel8", function (payload): Scene {
     return {
       id: this.id,
-      background: bgDefault,
+      background: bgForest,
       text:
         `The squirrel finds an eggcorn and begins to nibble it. Suddenly, its whiskers twitch a ` +
         `few times and it swoons until it falls to ground unconcsious, just like the hongatar.`,
@@ -494,7 +519,7 @@ export const dreamSquirrelScenes = {
   "dream-squirrel9": defineScene("dream-squirrel9", function (payload): Scene {
     return {
       id: this.id,
-      background: bgDefault,
+      background: bgForest,
       text:
         `${
           payload?.filter == "hongatar"
@@ -528,7 +553,7 @@ export const dreamSquirrelScenes = {
     function (payload): Scene {
       return {
         id: this.id,
-        background: bgDefault,
+        background: bgForest,
         text:
           `The eggcorn's skin is a luscious, lacquered brown. ` +
           `It has a neat little cap and a fine pointy bottom. In fact, you've never found an eggcorn to be so... ` +
@@ -567,7 +592,7 @@ export const dreamSquirrelScenes = {
     function (payload): Scene {
       return {
         id: this.id,
-        background: bgDefault,
+        background: bgForest,
         text:
           `The squirrel is right. You could never expect to be compete with its arboreal superiority. ` +
           `Better to slide back down the tree before you get hurt.`,
@@ -599,7 +624,7 @@ export const dreamSquirrelScenes = {
     function (payload): Scene {
       return {
         id: this.id,
-        background: bgDefault,
+        background: bgForest,
         text: `Dang squirrel! It's becoming aggressive, jumping on and off your head and yanking your hair.`,
 
         dialogSequence: () => [

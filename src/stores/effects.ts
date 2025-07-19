@@ -7,6 +7,7 @@ export const useEffectsStore = defineStore("effects", {
     isPsychedelic: false,
     psychedelicScenesRemaining: 0,
     isZoomedOut: false,
+    isSpinning: false,
     blurChoices: false,
     stretchAvatar: false,
     showChoices: false,
@@ -47,6 +48,10 @@ export const useEffectsStore = defineStore("effects", {
 
     toggleIsZoomedOut(value: boolean) {
       this.isZoomedOut = value;
+    },
+
+    toggleIsSpinning(value: boolean) {
+      this.isSpinning = value;
     },
 
     toggleBlurChoices(value: boolean) {

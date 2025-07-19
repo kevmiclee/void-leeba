@@ -30,21 +30,19 @@ body {
   font-family: "Courier New";
   margin: 0;
   padding: 0;
-  overflow-x: auto;
-  overflow-y: auto;
+  overflow: hidden;
   background-color: black;
   height: 100%;
-  /* overflow: hidden; */
 }
 
 button {
-  height: 3vw;
+  height: 2.8vw;
   font-size: 1.5em;
   font-family: "Courier New";
   font-weight: 700;
   border-color: black;
-  border-radius: 2px;
-  padding: 10px;
+  border-radius: 6px;
+  padding: 0.6vw;
   display: inline-flex;
   justify-content: center;
   align-items: center;

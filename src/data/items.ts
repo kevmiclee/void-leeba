@@ -5,7 +5,7 @@ export const itemCatalog: Record<ItemId, Item> = {
     id: "dragon-ring",
     label: "Dragon ring",
     description:
-      `The dragon is made of stainless steel with ruby red eyes, and in its claws, it holds ` +
+      `The dragon is made of stainless steel with ruby red eyes. In its claws, it holds ` +
       `a swirling planet of turquoise.`,
     actionText:
       "This ring always makes you feel connected to the Gurpy you never met.",

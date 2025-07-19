@@ -27,8 +27,8 @@ export function getSceneGraph(): {
         for (const route of scene.metadata.routes) {
           links.push({
             from: id as SceneId,
-            to: route.redirect,
-            label: route.label,
+            to: route.next,
+            label: route.text,
             aspect: route.aspect,
             manners: route.manners,
             stat: route.stat,

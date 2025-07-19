@@ -331,7 +331,7 @@ export const parkScenes = {
         const mannersText =
           manners == "rude"
             ? drunkChoice
-              ? "Woah. Easy man, that's my friend you're talking about!"
+              ? "Woah. Easy man, tha's my friend yer talkin' about!"
               : "Rude!"
             : manners == "depressing"
               ? "Depressing!"

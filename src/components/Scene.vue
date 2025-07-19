@@ -7,6 +7,7 @@
     :class="{
       psychedelic: effects.isPsychedelic,
       'zoom-out': effects.isZoomedOut,
+      spin: effects.isSpinning,
     }"
     :style="[backgroundStyle, alignmentStyle, backgroundColorFilter]"
     @click="finishAnimation"
@@ -147,10 +148,12 @@ watch(
 
 <style scoped>
 .scene-wrapper {
-  height: 100vh;
+  /* height: 100%; */
+  max-height: 100vh;
   width: 100vw;
   background-size: 100%;
   background-position: center !important;
+  /* background-color: white; */
   display: flex;
   flex-direction: column;
   aspect-ratio: 16/9;
@@ -158,11 +161,18 @@ watch(
   position: relative;
   background-repeat: no-repeat;
 
-  transition: background-size 15s ease-in-out;
+  transition:
+    background-size 15s ease-in-out,
+    transform 15s ease-in-out;
+  transform: rotate(0deg);
 }
 
 .scene-wrapper.zoom-out {
   background-size: 0.1%;
+}
+
+.scene-wrapper.spin {
+  transform: rotate(360deg);
 }
 
 .psychedelic {

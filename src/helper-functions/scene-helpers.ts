@@ -1,3 +1,4 @@
+import { story } from "@/data/story/story";
 import { useEffectsStore } from "@/stores/effects";
 import { useGameStore } from "@/stores/game";
 import { useTimeoutStore } from "@/stores/timeout";
@@ -33,13 +34,28 @@ export function useSceneHelpers() {
     const isNewScene = !game.scenes.includes(game.currentSceneId);
     const isIntroScene = ["intro", "intro1"].includes(game.currentSceneId);
 
+    const lastSceneId = game.scenes[game.scenes.length - 2];
+
+    let isNewBackground = game.scenes.length < 1;
+
+    if (lastSceneId) {
+      const lastSceneBackground = story[lastSceneId]().background;
+      const thisSceneBackground = story[game.currentSceneId]().background;
+      isNewBackground = lastSceneBackground != thisSceneBackground;
+    }
+
     if (isNewScene) {
       effects.updateAnimationSkipped(false);
       effects.updateShowChoices(false);
     }
+
     await nextTick();
     game.addSceneToHistory();
-    triggerFade();
+
+    if (isNewBackground) {
+      triggerFade();
+    }
+
     timeoutStore.set(
       game.currentSceneId,
       async () => {

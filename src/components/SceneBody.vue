@@ -1,6 +1,11 @@
 <template>
   <div class="wrapper">
-    <div class="animated-text">
+    <div
+      class="animated-text"
+      :class="{
+        psychedelic: effects.isPsychedelic,
+      }"
+    >
       <template v-for="(chunk, index) in chunks" :key="index">
         <span
           v-if="chunk.type === 'text'"
@@ -174,7 +179,7 @@ watch(
   font-weight: 500;
   width: fit-content;
   background-color: var(--background-color);
-  border-radius: 4px;
+  border-radius: 16px;
   padding: 16px;
   outline: 1px solid #9f3a27;
   outline-offset: -4px;
@@ -206,6 +211,37 @@ watch(
   }
   to {
     opacity: 1;
+  }
+}
+
+.psychedelic {
+  color: salmon;
+  animation:
+    pulse 1s infinite ease-in-out,
+    hue 2s infinite linear;
+
+  filter: contrast(150%) saturate(250%) blur(1px);
+  will-change: transform, filter;
+}
+
+@keyframes pulse {
+  0% {
+    transform: rotate(0.5deg);
+  }
+  50% {
+    transform: rotate(-0.5deg);
+  }
+  100% {
+    transform: rotate(0.5deg);
+  }
+}
+
+@keyframes hue {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
   }
 }
 </style>

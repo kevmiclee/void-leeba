@@ -1,6 +1,6 @@
 import { Scene } from "@/types/story";
 import bgDefault from "@/assets/images/backgrounds/new-game.png";
-import morningBirds from "@/assets/audio/story/background-themes/morning-birds.mp3";
+import bgBackyard from "@/assets/images/backgrounds/backyard.png";
 import homeSong from "@/assets/audio/story/background-themes/home.mp3";
 import { useGameStore } from "@/stores/game";
 import { useCharacterStore } from "@/stores/character";
@@ -11,15 +11,15 @@ export const homeScenes = {
   home: defineScene("home", function (payload): Scene {
     return {
       id: this.id,
-      background: bgDefault,
-      audio: morningBirds,
+      background: bgBackyard,
+      audio: homeSong,
       text:
         `You have just moved away from the countryside, finally. Endless evergreens, oceans and coves, silence and stars, and quiet. ` +
         `People knew you, but you only knew a few. You didn't grow up near the ocean. You're from away. Isolation multiplies where ` +
         `one doesn't belong. Your grandma died recently, removing your last obligation to stay.` +
         `^^Now you live in the suburbs of the city of Poetland. In the suburbs, you can choose to know your neighbors, or not. ` +
         `No one knows you unless you want them to know you.` +
-        `^^You have on your grandfather's dragon ring. The dragon is made of stainless steel with ruby red eyes, and in its claws, ` +
+        `^^You have on your grandfather's dragon ring. The dragon is made of stainless steel with ruby red eyes. In its claws, ` +
         `it holds a swirling planet of turquoise. You wear your grandmother's wool coat, with an intricately-hooked patch on its ` +
         `back that shows four images: an ancient windmill, an historic longship, a modern wind turbine, and a lobster boat. {Continue.}`,
       buttonActions: () => [
@@ -45,14 +45,14 @@ export const homeScenes = {
   home1: defineScene("home1", function (payload): Scene {
     return {
       id: this.id,
-      background: bgDefault,
+      background: bgBackyard,
       audio: homeSong,
       text:
-        `Daylight filters through the blinds of the bathroom window and spills onto the ceiling in stripes. ` +
+        `Daylight filters through the blinds of the living room window and spills onto the wall and ceiling in stripes. ` +
         `The view out your window shows a wild backyard with a copse of trees on the right and a forest at the ` +
-        `back of the field. A tree stump sits at the center of the mowed section of the lawn behind the house. ` +
-        `There is a clothesline and some bird feeders. In the field, seven turkeys walk, foraging in the bushes. ` +
-        `Their leader sits at the front of the formation, scanning the meadow ahead.` +
+        `back of a field half-covered with snow. A tree stump sits at the center of lawn. There is a clothesline ` +
+        `and some bird feeders. In the field, seven turkeys walk, foraging in the bushes. Their leader sits at the ` +
+        `front of the formation, scanning the meadow ahead.` +
         `^^You could go out and explore. Also, no one is home. You might enjoy some quiet time in your room.`,
       choices: () => [
         {
@@ -65,6 +65,7 @@ export const homeScenes = {
         },
         {
           text: "You can do anything! Look at your phone.",
+          //TODO: fuck with the turkeys
           drawerView: "phone",
           onChoose: () => {
             const character = useCharacterStore();
@@ -99,7 +100,7 @@ export const homeScenes = {
   home2: defineScene("home2", function (payload): Scene {
     return {
       id: this.id,
-      background: bgDefault,
+      background: bgBackyard,
       audio: homeSong,
       text: `Will you take anything with you?`,
       choices: () => [
@@ -219,7 +220,7 @@ export const homeScenes = {
     return {
       id: this.id,
       audio: homeSong,
-      background: bgDefault,
+      background: bgBackyard,
       text: payload?.text ?? "",
       buttonActions: () => [
         {
@@ -248,7 +249,7 @@ export const homeScenes = {
       background: bgDefault,
       text:
         `You trudge up the light green carpeted narrow stairs to your room. Your room is festooned with posters, ` +
-        `orderly piles of sorted odds and ends, and trinkets. Your bed may be a full, but its puffy yellow comforter ` +
+        `orderly piles of assorted odds and ends, and trinkets. Your bed may be a full, but its puffy yellow comforter ` +
         `looks inviting. {A nap sounds nice}.` +
         `^^A notebook sits on the little desk, a stiff chair next to it. Drawing utensils rest here. ` +
         `{Settle into the chair to make something}.` +
@@ -299,9 +300,9 @@ export const homeScenes = {
       id: this.id,
       background: bgDefault,
       audio: homeSong,
-      text:
-        `You get over to your bed, pull up the sheets, slip in and nestle into the blankets. You're not very tired, ` +
-        `but you're so unmotivated it hardly matters.`,
+      text: `You get over to your bed, pull up the sheets, slip in and nestle into the blankets.`,
+      // You're not very tired, ` +
+      // `but you're so unmotivated it hardly matters.`,
       choices: () => [
         { text: "Close your eyes.", next: "dream" },
         {

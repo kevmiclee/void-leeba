@@ -1,5 +1,5 @@
 import { ButtonAction, Scene } from "@/types/story";
-import bgDefault from "@/assets/images/backgrounds/new-game.png";
+import bgForest from "@/assets/images/backgrounds/pine-forest.png";
 import crunchyWalkingSound from "@/assets/audio/story/sounds/crunchy-walking.mp3";
 import { useGameStore } from "@/stores/game";
 import { useCharacterStore } from "@/stores/character";
@@ -15,7 +15,7 @@ export const dreamScenes = {
   dream: defineScene("dream", function (payload): Scene {
     return {
       id: this.id,
-      background: bgDefault,
+      background: bgForest,
       text:
         `"Ah, to sleep, perchance to dream."^^...^^A great forest towers over you. The ground is layered with pine needles. ` +
         `The stacked needles must be at least 40cm deep! It feels like this bed of needles is just barely supporting your weight and ` +
@@ -59,7 +59,7 @@ export const dreamScenes = {
 
     return {
       id: this.id,
-      background: bgDefault,
+      background: bgForest,
       text:
         `${
           didFaeries || didNap
@@ -183,7 +183,7 @@ export const dreamScenes = {
     function (payload): Scene {
       return {
         id: this.id,
-        background: bgDefault,
+        background: bgForest,
         text:
           `It's so serene and beautiful here. It would be funny if you could go to sleep again when you ` +
           `are already dreaming. You pick a spot to nap on the brain moss, sinking into it, supple and cozy.` +
@@ -231,7 +231,7 @@ export const dreamScenes = {
     function (payload): Scene {
       return {
         id: this.id,
-        background: bgDefault,
+        background: bgForest,
         text: `You fell asleep on some brain moss. Now you are dreaming twice.`,
         choices: () => [
           {
@@ -265,7 +265,7 @@ export const dreamScenes = {
     function (payload): Scene {
       return {
         id: this.id,
-        background: bgDefault,
+        background: bgForest,
         text:
           `The concept of dreaming twice is so scary! What if you don't wake up? ` +
           `^^Too late, you fell asleep anyway. Radiating anxiety, your raw nerves attack you.` +
@@ -310,7 +310,7 @@ export const dreamScenes = {
     function (payload): Scene {
       return {
         id: this.id,
-        background: bgDefault,
+        background: bgForest,
         text:
           `Completely serene, without a worry in your mind, you fall asleep in your dream. You breathe in.` +
           `^^A new dream! You notice that you are hugging a brightly colored mushroom! You can tell because ` +
@@ -353,7 +353,7 @@ export const dreamScenes = {
     function (payload): Scene {
       return {
         id: this.id,
-        background: bgDefault,
+        background: bgForest,
         text:
           `The landscape expands into a void panorama, filling every corner of the emptiness as you inhale deeper. ` +
           `Day, night, day, night. Seasons cycle and time dutifully carves the terrain with imperceptible changes.` +
@@ -391,7 +391,7 @@ export const dreamScenes = {
     function (payload): Scene {
       return {
         id: this.id,
-        background: bgDefault,
+        background: bgForest,
         text:
           `The hum intensifies until it almost becomes unbearable, making you wince. It reaches a cresecendo and ` +
           `slowly begins its ebb back into entropic silence, leaving a ghostly impression of its power in your memory.` +
@@ -424,7 +424,7 @@ export const dreamScenes = {
   "dream-chop": defineScene("dream-chop", function (payload): Scene {
     return {
       id: this.id,
-      background: bgDefault,
+      background: bgForest,
       //use tree-chase music
       text:
         `You have chosen to swing a dream ax at a dream tree.` +

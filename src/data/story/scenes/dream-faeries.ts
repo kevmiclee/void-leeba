@@ -1,5 +1,5 @@
 import { Choice, Scene } from "@/types/story";
-import bgDefault from "@/assets/images/backgrounds/new-game.png";
+import bgForest from "@/assets/images/backgrounds/pine-forest.png";
 import faeriesSong from "@/assets/audio/story/background-themes/faeries.mp3";
 import { useGameStore } from "@/stores/game";
 import { useCharacterStore } from "@/stores/character";
@@ -11,7 +11,7 @@ export const dreamFaeriesScenes = {
   "dream-faeries": defineScene("dream-faeries", function (payload): Scene {
     return {
       id: this.id,
-      background: bgDefault,
+      background: bgForest,
       audio: faeriesSong,
       text:
         `You follow after the {hongatar}. They all have the same dutch boy haircut and cro-magnon facial features. ` +
@@ -72,7 +72,7 @@ export const dreamFaeriesScenes = {
   "dream-faeries1": defineScene("dream-faeries1", function (payload): Scene {
     return {
       id: this.id,
-      background: bgDefault,
+      background: bgForest,
       audio: faeriesSong,
       text: "The group of {hongatar} turn to look at you.",
       buttonActions: () => [
@@ -131,7 +131,7 @@ export const dreamFaeriesScenes = {
   "dream-faeries2": defineScene("dream-faeries2", function (payload): Scene {
     return {
       id: this.id,
-      background: bgDefault,
+      background: bgForest,
       audio: faeriesSong,
       text:
         `${getNapFaeries2Text(payload?.filter)} ` +
@@ -173,7 +173,7 @@ export const dreamFaeriesScenes = {
   "dream-faeries3": defineScene("dream-faeries3", function (payload): Scene {
     return {
       id: this.id,
-      background: bgDefault,
+      background: bgForest,
       audio: faeriesSong,
       text: `The {hongatar} with the coolest outfit addresses you.`,
       buttonActions: () => [
@@ -219,7 +219,7 @@ export const dreamFaeriesScenes = {
   "dream-faeries4": defineScene("dream-faeries4", function (payload): Scene {
     return {
       id: this.id,
-      background: bgDefault,
+      background: bgForest,
       audio: faeriesSong,
       text:
         `You follow them into a clearing where the hongatar with the dullest outfit starts ` +
@@ -249,7 +249,7 @@ export const dreamFaeriesScenes = {
   "dream-faeries5": defineScene("dream-faeries5", function (payload): Scene {
     return {
       id: this.id,
-      background: bgDefault,
+      background: bgForest,
       audio: faeriesSong,
       text:
         `Whatever that means.^^The eggcorn's skin is a luscious, lacquered brown. ` +
@@ -281,7 +281,7 @@ export const dreamFaeriesScenes = {
     function (payload): Scene {
       return {
         id: this.id,
-        background: bgDefault,
+        background: bgForest,
         audio: faeriesSong,
         text: "",
         dialogSequence: () => [
@@ -340,7 +340,7 @@ export const dreamFaeriesScenes = {
     function (payload): Scene {
       return {
         id: this.id,
-        background: bgDefault,
+        background: bgForest,
         audio: faeriesSong,
         text: "The {hongatar} puff up, proud.",
         buttonActions: () => [{ dictionaryEntryId: "hongatar" }],
@@ -416,7 +416,7 @@ export const dreamFaeriesScenes = {
     function (payload): Scene {
       return {
         id: this.id,
-        background: bgDefault,
+        background: bgForest,
         audio: faeriesSong,
         text: "",
         dialogSequence: () => [
@@ -451,7 +451,7 @@ export const dreamFaeriesScenes = {
     function (payload): Scene {
       return {
         id: this.id,
-        background: bgDefault,
+        background: bgForest,
         audio: faeriesSong,
         text:
           `The {hongatar} now all seem to hold you in great reverence and awe, ` +
@@ -499,7 +499,7 @@ export const dreamFaeriesScenes = {
     function (payload): Scene {
       return {
         id: this.id,
-        background: bgDefault,
+        background: bgForest,
         audio: faeriesSong,
         text: `The {hongatar} all stare at you expectantly, like eager children.`,
         buttonActions: () => [
@@ -566,7 +566,7 @@ export const dreamFaeriesScenes = {
     function (payload): Scene {
       return {
         id: this.id,
-        background: bgDefault,
+        background: bgForest,
         audio: faeriesSong,
         text: ``,
         dialogSequence: () => [
@@ -616,7 +616,7 @@ export const dreamFaeriesScenes = {
     function (payload): Scene {
       return {
         id: this.id,
-        background: bgDefault,
+        background: bgForest,
         audio: faeriesSong,
         text: ``,
         dialogSequence: () => [
@@ -647,7 +647,7 @@ export const dreamFaeriesScenes = {
   "party-eggcorn": defineScene("party-eggcorn", function (payload): Scene {
     return {
       id: this.id,
-      background: bgDefault,
+      background: bgForest,
       audio: faeriesSong,
       text:
         `Yuck! It tastes like...^^You don't get a chance to finish the thought. ` +
@@ -686,7 +686,7 @@ export const dreamFaeriesScenes = {
     function (payload): Scene {
       return {
         id: this.id,
-        background: bgDefault,
+        background: bgForest,
         text: `But it's <i>so tantalizing!</i>`,
         choices: () => [
           {

@@ -1,5 +1,6 @@
 import { Scene } from "@/types/story";
 import bgDefault from "@/assets/images/backgrounds/new-game.png";
+import bgMemespace from "@/assets/images/backgrounds/memespace.png";
 import { useAspectStore } from "@/stores/aspects";
 import { useGameStore } from "@/stores/game";
 import { useCharacterStore } from "@/stores/character";
@@ -192,7 +193,7 @@ export const hypnoScenes = {
   hypno4: defineScene("hypno4", function (payload): Scene {
     return {
       id: this.id,
-      background: bgDefault,
+      background: bgMemespace,
       text:
         `You walk out onto a steel catwalk. You see an infinite maze of these catwalks in every direction, ` +
         `and figures in an endless array of wild and impossbile costumes of all shapes and sizes.`,
@@ -216,7 +217,7 @@ export const hypnoScenes = {
   hypno5: defineScene("hypno5", function (payload): Scene {
     return {
       id: this.id,
-      background: bgDefault,
+      background: bgMemespace,
       text:
         `He says <i>amateur</i> like he is trying to pronounce it in the language from which ` +
         `the word is originally derived, without actually knowing which language.`,
@@ -226,7 +227,7 @@ export const hypnoScenes = {
           text:
             `Here we are! Stage 2B, Leak Party. I'll let you take it from here. Break a leg! ` +
             `Figuratively, of course. If you were to actually break your leg... I knew we were forgetting something! ` +
-            `The waiver, I have it here somewhere.`,
+            `The liability waiver, I have it here somewhere.`,
           onClick: () => {
             const game = useGameStore();
             game.goToScene("hypno6");
@@ -243,7 +244,7 @@ export const hypnoScenes = {
   hypno6: defineScene("hypno6", function (payload): Scene {
     return {
       id: this.id,
-      background: bgDefault,
+      background: bgMemespace,
       text:
         `He pats his pockets and looks around beseechingly, presumably for someone to blame. ` +
         `A mechanical voice drawls from inside Stage 2B, "They're ready for you, boss."`,
@@ -283,7 +284,7 @@ export const hypnoScenes = {
     function (payload): Scene {
       return {
         id: this.id,
-        background: bgDefault,
+        background: bgMemespace,
         text: ``,
         dialogSequence: () => [
           {
@@ -323,7 +324,7 @@ export const hypnoScenes = {
   "hypno-ready": defineScene("hypno-ready", function (payload): Scene {
     return {
       id: this.id,
-      background: bgDefault,
+      background: bgMemespace,
       text: ``,
       dialogSequence: () => [
         {

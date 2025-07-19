@@ -13,14 +13,19 @@ const isMuted = ref<boolean>(false);
 const fadeDuration = 1000;
 
 export function useAudioStore() {
-  function playCharacterSound(src: string, speakerKey: CharacterId) {
+  function playCharacterSound(
+    src: string,
+    speakerKey: CharacterId | undefined = undefined
+  ) {
     if (!isMuted.value) {
-      const now = Date.now();
-      const lastPlay = characterCooldowns.get(speakerKey) || 0;
+      if (speakerKey) {
+        const now = Date.now();
+        const lastPlay = characterCooldowns.get(speakerKey) || 0;
 
-      if (now - lastPlay < COOLDOWN_MS) return;
+        if (now - lastPlay < COOLDOWN_MS) return;
 
-      characterCooldowns.set(speakerKey, now);
+        characterCooldowns.set(speakerKey, now);
+      }
 
       const audio = new Audio(src);
       audio.play().catch((e) => {

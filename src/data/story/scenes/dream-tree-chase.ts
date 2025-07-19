@@ -1,5 +1,5 @@
 import { Scene } from "@/types/story";
-import bgDefault from "@/assets/images/backgrounds/new-game.png";
+import bgForest from "@/assets/images/backgrounds/pine-forest.png";
 import treeFallingSound from "@/assets/audio/story/sounds/tree-falling.mp3";
 import { useGameStore } from "@/stores/game";
 import { useCharacterStore } from "@/stores/character";
@@ -18,7 +18,7 @@ export const dreamTreeChaseScenes = {
     function (payload): Scene {
       return {
         id: this.id,
-        background: bgDefault,
+        background: bgForest,
         text:
           getTreeChaseText(payload?.filter) +
           `As the dull sound resounds, it is joined by a chorus of snapping, cracking, creaking. ` +
@@ -78,7 +78,7 @@ export const dreamTreeChaseScenes = {
     function (payload): Scene {
       return {
         id: this.id,
-        background: bgDefault,
+        background: bgForest,
         text:
           (payload?.text ?? "") +
           "^^Trees are falling all around you. You have to {dodge them}.",
@@ -108,7 +108,7 @@ export const dreamTreeChaseScenes = {
     function (payload): Scene {
       return {
         id: this.id,
-        background: bgDefault,
+        background: bgForest,
         text: "",
         miniGameId: "tree-chase",
         metadata: {
@@ -135,7 +135,7 @@ export const dreamTreeChaseScenes = {
     function (payload): Scene {
       return {
         id: this.id,
-        background: bgDefault,
+        background: bgForest,
         text:
           `It suddenly occurs to you that your legs feel unprecedentedly supple. Like those little rubber poppers you ` +
           `used to get from the toy dispenser at the front of the grocery store. You'd put a quarter in the slot, twist the knob, ` +
@@ -172,7 +172,7 @@ export const dreamTreeChaseScenes = {
     function (payload): Scene {
       return {
         id: this.id,
-        background: bgDefault,
+        background: bgForest,
         text:
           `You feel yourself starting to sink. You try to run but you can't move your legs, like in a bad dream. ` +
           `You remember that you're dreaming and realize that's exactly what this is. A bad dream.` +
@@ -209,7 +209,7 @@ export const dreamTreeChaseScenes = {
     function (payload): Scene {
       return {
         id: this.id,
-        background: bgDefault,
+        background: bgForest, //TODO: forest viewed from above
         //TODO: speeding into space sound
         text:
           `As you vault above the canopy, a great bird grabs you by your turtleneck. It carries you high above the forest. ` +
@@ -247,7 +247,7 @@ export const dreamTreeChaseScenes = {
     function (payload): Scene {
       return {
         id: this.id,
-        background: bgDefault,
+        background: bgForest,
         //TODO: crashing back down to earth in an explosion sound -> explosion animation -> crater
         text:
           `Reaching its zenith, there is a moment of quiet, motionless stillness, then you're re-entering the atmosphere, careening faster and faster ` +
@@ -257,7 +257,8 @@ export const dreamTreeChaseScenes = {
           const effects = useEffectsStore();
           await new Promise((resolve) => setTimeout(resolve, 2000));
           effects.toggleIsZoomedOut(false);
-
+          effects.toggleIsSpinning(true);
+          //TODO: toggle spin off;
           const aspects = useAspectStore();
           aspects.addAspect("part-bird");
         },
@@ -270,7 +271,7 @@ export const dreamTreeChaseScenes = {
     function (payload): Scene {
       return {
         id: this.id,
-        background: bgDefault,
+        background: bgForest,
         text:
           `As you lay there motionless, in a mangled heap, conciousness slipping, what appears to be one of the faeries ` +
           `from before enters your vision.`,
@@ -295,7 +296,7 @@ export const dreamTreeChaseScenes = {
     function (payload): Scene {
       return {
         id: this.id,
-        background: bgDefault,
+        background: bgForest,
         text:
           `The faerie has something round and shiny in its hand, which it inserts into your mouth. ` +
           `You have no choice but to {swallow it}.`,
