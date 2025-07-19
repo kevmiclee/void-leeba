@@ -40,8 +40,8 @@ function startGame() {
 
 .box {
   background-color: #fff;
-  padding: 20px;
-  border-radius: 2px;
+  padding: 1vw;
+  border-radius: 1vw;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   text-align: center;
   max-width: 50vw;
@@ -51,6 +51,6 @@ function startGame() {
 .message {
   font-size: 18px;
   color: #333;
-  margin-bottom: 20px;
+  margin-bottom: 1.1vw;
 }
 </style>

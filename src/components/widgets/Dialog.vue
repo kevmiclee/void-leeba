@@ -81,7 +81,7 @@ function onDialogClick() {
   display: inline-block;
   width: fit-content;
   padding: 0.25em 0.5em;
-  border-radius: 4px;
+  border-radius: 0.2vw;
   outline: 0.1vw solid white;
   outline-offset: -0.2vw;
   box-shadow: 2px 0 8px rgba(0, 0, 0, 0.3);
@@ -103,7 +103,7 @@ function onDialogClick() {
 }
 
 .dialog-foreground {
-  border-radius: 4px;
+  border-radius: 0.3vw;
   padding: 1.2vw;
   outline: 0.15vw solid var(--secondary-color);
   outline-offset: -0.3vw;

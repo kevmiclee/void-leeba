@@ -22,7 +22,7 @@
         character.$reset();
         timeoutStore.$reset(); -->
   </ul>
-  <span style="bottom: 100px; position: absolute"
+  <span style="bottom: 5vw; position: absolute"
     >Current scene: {{ game.currentSceneId }}</span
   >
 </template>

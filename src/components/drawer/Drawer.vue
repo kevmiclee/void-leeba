@@ -69,7 +69,7 @@ watch(
   position: fixed;
   top: 0;
   left: 0;
-  width: 250px;
+  width: 16vw;
   height: 100vh;
   background: white;
   z-index: 1001;

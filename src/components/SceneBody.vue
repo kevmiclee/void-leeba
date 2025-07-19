@@ -179,10 +179,10 @@ watch(
   font-weight: 500;
   width: fit-content;
   background-color: var(--background-color);
-  border-radius: 16px;
-  padding: 16px;
-  outline: 1px solid #9f3a27;
-  outline-offset: -4px;
+  border-radius: 1vw;
+  padding: 1vw;
+  outline: 0.05vw solid #9f3a27;
+  outline-offset: -0.25vw;
   z-index: 1;
 }
 

@@ -41,7 +41,7 @@ const props = defineProps<{
 
 .eyes {
   display: flex;
-  gap: 16px;
+  gap: 1vw;
 }
 
 .eye {

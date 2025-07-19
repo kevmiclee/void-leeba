@@ -25,7 +25,7 @@ watch(
 );
 
 function onAfterLeave() {
-  effects.toggleDisappearingItem();
+  effects.toggleDisappearingItem(false);
 }
 </script>
 
@@ -34,7 +34,7 @@ function onAfterLeave() {
   background-color: rgba(0, 0, 0, 0.8);
   color: white;
   padding: 1rem;
-  border-radius: 6px;
+  border-radius: 0.3vw;
   text-align: center;
   max-width: 300px;
   margin: 1rem auto;

@@ -30,18 +30,19 @@ body {
   font-family: "Courier New";
   margin: 0;
   padding: 0;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   background-color: black;
   height: 100%;
 }
 
 button {
   height: 2.8vw;
-  font-size: 1.5em;
+  font-size: 1.5vw;
   font-family: "Courier New";
   font-weight: 700;
-  border-color: black;
-  border-radius: 6px;
+  border: 0.15vw solid black;
+  border-radius: 0.3vw;
   padding: 0.6vw;
   display: inline-flex;
   justify-content: center;
@@ -55,7 +56,7 @@ button {
 
 button:hover {
   background-color: var(--secondary-color);
-  border: 2px solid var(--primary-color);
+  border: 0.15vw solid var(--primary-color);
   color: white;
   cursor: pointer;
 }
