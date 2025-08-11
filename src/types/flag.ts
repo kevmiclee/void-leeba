@@ -8,7 +8,9 @@ export type FlagId =
   | "fell-from-tree" //TODO: they fell from the tree so something can happen later on
   | "did-nap" // they went through the nap branch and opted out. removes nap option from dream1 choices.
   | "did-faeries" // they went through the faeries branch and opted out. removes faeires option from dream1 choices.
-  | "pie-choice"; // TODO: which pie they smellled last dicates something later on
+  | "pie-choice" // TODO: which pie they smellled last dicates something later on
+  | "art-table-success-rate" // how well you're able to sell your art
+  | "asking-for-trouble"; // makes it more likely for 'bad' things to happen
 
 export type FlagValues = {
   "closer-to-black-dog": boolean;
@@ -21,6 +23,8 @@ export type FlagValues = {
   "did-nap": boolean;
   "did-faeries": boolean;
   "pie-choice": "pecan" | "key-lime" | "cherry";
+  "art-table-success-rate": number;
+  "asking-for-trouble": boolean;
 };
 
 export type Flags = {

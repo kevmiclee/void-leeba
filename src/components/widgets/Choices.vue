@@ -172,7 +172,7 @@ watch(
   background-color: var(--background-color);
   border-radius: 16px;
   padding: 1.2vw;
-  outline: 1px solid rgb(147, 145, 145);
+  outline: 1px solid var(--primary-color);
   outline-offset: -0.3vw;
   max-width: 45vw;
 }

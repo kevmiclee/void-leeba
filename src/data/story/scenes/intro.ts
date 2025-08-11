@@ -75,6 +75,24 @@ export const introScenes = {
     };
   }),
 
+  dungeon: defineScene("dungeon", function (payload): Scene {
+    return {
+      id: this.id,
+      text: "I stayed alive to find a way to grow",
+      audio: windTunnel,
+      // dungeonId: "forest",
+      metadata: {
+        sectionId: "intro",
+        routes: [
+          {
+            text: `trigger`,
+            next: "home",
+          },
+        ],
+      },
+    };
+  }),
+
   credits: defineScene("credits", function (payload): Scene {
     //TODO: MUSIC - credits music
     return {

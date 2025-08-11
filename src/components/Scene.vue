@@ -1,6 +1,8 @@
 <template>
   <MiniGame v-if="miniGameId" :miniGameId="miniGameId"></MiniGame>
+  <!-- <Dungeon v-else-if="dungeonId" :dungeonId="dungeonId"></Dungeon> -->
   <SceneGraph v-else-if="game.showSceneGraph"></SceneGraph>
+
   <div
     v-else
     class="scene-wrapper"
@@ -68,6 +70,8 @@ import Sidebar from "@/components/widgets/Sidebar.vue";
 import { Scene } from "@/types/story";
 import DisappearingItem from "./overlays/DisappearingItem.vue";
 import MiniGame from "./mini-game/MiniGame.vue";
+import Dungeon from "./dungeon/Dungeon.vue";
+
 import { useEffectsStore } from "@/stores/effects";
 
 const timeoutStore = useTimeoutStore();
@@ -104,6 +108,9 @@ const isScene = computed(
 );
 const miniGameId = computed(
   () => game.currentScene(game.currentScenePayload).miniGameId
+);
+const dungeonId = computed(
+  () => game.currentScene(game.currentScenePayload).dungeonId
 );
 const alignmentStyle = computed(() =>
   isScene.value ? "" : { alignItems: "center", justifyContent: "center" }

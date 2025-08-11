@@ -101,3 +101,11 @@ export function getCatchSquirrelOutcome(roll: number): FateOutcome {
     };
   }
 }
+
+export function getNonZeroRandomDecimal(max: number): number {
+  let num = 0;
+  while (num === 0) {
+    num = Math.random() * max;
+  }
+  return num;
+}

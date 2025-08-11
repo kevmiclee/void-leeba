@@ -6,6 +6,7 @@ import { MiniGameId } from "./mini-game";
 import { AspectId } from "./aspect";
 import { StatId } from "./stat";
 import { Manners } from "./manners";
+import { DungeonId } from "./dungeon";
 
 export interface ScenePayload {
   filter?: string;
@@ -46,6 +47,7 @@ export interface Scene {
   onPageLoad?: () => void;
   backgroundFilter?: string;
   miniGameId?: MiniGameId;
+  dungeonId?: DungeonId;
   metadata?: SceneMetadata;
 }
 

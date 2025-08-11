@@ -181,7 +181,7 @@ watch(
   background-color: var(--background-color);
   border-radius: 1vw;
   padding: 1vw;
-  outline: 0.05vw solid #9f3a27;
+  outline: 0.05vw solid var(--primary-color);
   outline-offset: -0.25vw;
   z-index: 1;
 }

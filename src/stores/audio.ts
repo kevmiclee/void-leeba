@@ -2,7 +2,7 @@ import { CharacterId } from "@/types/character";
 import { ref } from "vue";
 import clickSound from "@/assets/audio/story/sounds/click.mp3";
 
-let intervalId: number;
+let intervalId: NodeJS.Timeout;
 let intervalTime: number = 0;
 
 const characterCooldowns = new Map<CharacterId, number>();
@@ -28,6 +28,7 @@ export function useAudioStore() {
       }
 
       const audio = new Audio(src);
+      audio.preload = "auto";
       audio.play().catch((e) => {
         console.warn("Audio playback failed:", e);
       });
@@ -37,6 +38,7 @@ export function useAudioStore() {
   function playGenericSound(src: string) {
     if (!isMuted.value) {
       const audio = new Audio(src);
+      audio.preload = "auto";
       audio.play().catch((e) => {
         console.warn("Audio playback failed:", e);
       });
@@ -57,6 +59,7 @@ export function useAudioStore() {
     }
 
     const newAudio = new Audio(src);
+    newAudio.preload = "metadata";
     fadeOutAndReplace(newAudio, currentBgAudio.value);
   }
 
@@ -64,21 +67,21 @@ export function useAudioStore() {
     newAudio: HTMLAudioElement,
     oldAudio: HTMLAudioElement | null
   ) {
-    // need to make sure this completes
     if (oldAudio) {
       oldAudio.removeEventListener("loadedmetadata", () => {
-        updateInterval();
+        handleLoadedMetadata();
       });
       currentBgAudio.value = newAudio;
       const step = oldAudio.volume / (fadeDuration / 50);
       newAudio.volume = 0;
       fadeInAudio(newAudio);
       const fadeOut = setInterval(() => {
-        if (oldAudio.volume > 0.05) {
-          oldAudio.volume -= step;
+        if (oldAudio!.volume > 0.05) {
+          oldAudio!.volume -= step;
         } else {
           clearInterval(fadeOut);
-          oldAudio.pause();
+          oldAudio!.pause();
+          oldAudio.src = "";
         }
       }, 50);
     } else {
@@ -87,9 +90,8 @@ export function useAudioStore() {
       fadeInAudio(currentBgAudio.value);
     }
 
-    //before this code is called
     currentBgAudio.value?.addEventListener("loadedmetadata", () => {
-      updateInterval();
+      handleLoadedMetadata();
     });
   }
 
@@ -101,6 +103,7 @@ export function useAudioStore() {
       } else {
         clearInterval(fadeOut);
         audio.pause();
+        audio.src = "";
       }
     }, 50);
   }
@@ -155,4 +158,26 @@ function updateInterval() {
       updateInterval();
     }
   }, intervalTime * 1000);
+}
+
+function waitForDuration(callback: () => void) {
+  let attempts = 0;
+  const maxAttempts = 20;
+  const audio = currentBgAudio.value;
+
+  const check = () => {
+    if (audio && !isNaN(audio.duration) && audio.duration > 0) {
+      callback();
+    } else if (attempts++ < maxAttempts) {
+      setTimeout(check, 100);
+    } else {
+      console.warn("Duration never became available.");
+    }
+  };
+
+  check();
+}
+
+function handleLoadedMetadata() {
+  waitForDuration(updateInterval);
 }
