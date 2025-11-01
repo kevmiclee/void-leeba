@@ -1,7 +1,7 @@
 <template>
   <ul class="menu-list">
     <div class="sub-menu-header" @click.stop="drawer.resetDrawerView">
-      < Bag
+      < Items
     </div>
     <li
       class="sub"

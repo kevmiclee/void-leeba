@@ -339,7 +339,7 @@ export const dreamSquirrelScenes = {
             next: "dream-squirrel6",
             payload: { filter: "where" },
             onChoose: () => {
-              character.setManners("polite");
+              character.gainManners("polite", 1, this.id);
             },
           },
           {
@@ -347,7 +347,7 @@ export const dreamSquirrelScenes = {
             next: "dream-squirrel6",
             payload: { filter: "what" },
             onChoose: () => {
-              character.setManners("depressing");
+              character.gainManners("depressing", 1, this.id);
             },
           },
           {
@@ -355,7 +355,7 @@ export const dreamSquirrelScenes = {
             next: "dream-squirrel6",
             payload: { filter: "what" },
             onChoose: () => {
-              character.setManners("rude");
+              character.gainManners("rude", 1, this.id);
             },
           },
           {
@@ -363,14 +363,14 @@ export const dreamSquirrelScenes = {
             next: "dream-squirrel6",
             payload: { filter: "why" },
             onChoose: () => {
-              character.setManners("weird");
+              character.gainManners("weird", 1, this.id);
             },
           },
           {
             text: `Don't speak. Don't think. Just follow.`,
             next: "dream-squirrel6",
             onChoose: () => {
-              character.setManners("weird");
+              character.gainManners("weird", 1, this.id);
               character.gainStat("blueMagic", 1, this.id);
             },
           },

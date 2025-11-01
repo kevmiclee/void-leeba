@@ -209,7 +209,8 @@ export const dreamTreeChaseScenes = {
     function (payload): Scene {
       return {
         id: this.id,
-        background: bgForest, //TODO: forest viewed from above
+        background: bgForest,
+        //TODO: forest viewed from above
         //TODO: speeding into space sound
         text:
           `As you vault above the canopy, a great bird grabs you by your turtleneck. It carries you high above the forest. ` +

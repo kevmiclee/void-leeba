@@ -1,6 +1,5 @@
 import { Scene } from "@/types/story";
 import bgDefault from "@/assets/images/backgrounds/new-game.png";
-import bgBackyard from "@/assets/images/backgrounds/backyard.png";
 import homeSong from "@/assets/audio/story/background-themes/home.mp3";
 import { useGameStore } from "@/stores/game";
 import { useCharacterStore } from "@/stores/character";
@@ -11,7 +10,7 @@ export const homeScenes = {
   home: defineScene("home", function (payload): Scene {
     return {
       id: this.id,
-      background: bgBackyard,
+      background: bgDefault,
       audio: homeSong,
       text:
         `You have just moved away from the countryside, finally. Endless evergreens, oceans and coves, silence and stars, and quiet. ` +
@@ -45,7 +44,7 @@ export const homeScenes = {
   home1: defineScene("home1", function (payload): Scene {
     return {
       id: this.id,
-      background: bgBackyard,
+      background: bgDefault,
       audio: homeSong,
       text:
         `Daylight filters through the blinds of the living room window and spills onto the wall and ceiling in stripes. ` +
@@ -65,7 +64,6 @@ export const homeScenes = {
         },
         {
           text: "You can do anything! Look at your phone.",
-          //TODO: fuck with the turkeys
           drawerView: "phone",
           onChoose: () => {
             const character = useCharacterStore();
@@ -100,7 +98,7 @@ export const homeScenes = {
   home2: defineScene("home2", function (payload): Scene {
     return {
       id: this.id,
-      background: bgBackyard,
+      background: bgDefault,
       audio: homeSong,
       text: `Will you take anything with you?`,
       choices: () => [
@@ -220,7 +218,7 @@ export const homeScenes = {
     return {
       id: this.id,
       audio: homeSong,
-      background: bgBackyard,
+      background: bgDefault,
       text: payload?.text ?? "",
       buttonActions: () => [
         {

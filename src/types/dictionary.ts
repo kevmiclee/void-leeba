@@ -8,4 +8,6 @@ export type DictionaryEntryId =
   | "hongatar"
   | "dorgang"
   | "hyperleak"
-  | "whatever";
+  | "whatever"
+  | "leaks"
+  | "tangent";

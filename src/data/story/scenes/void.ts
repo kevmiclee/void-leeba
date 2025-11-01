@@ -34,21 +34,21 @@ export const voidScenes = {
             text: '"Not anymore!"',
             next: "void-not-alone",
             onChoose: () => {
-              character.setManners("weird");
+              character.gainManners("weird", 1, this.id);
             },
           },
           {
             text: "The Void will always be alone...",
             next: "void-alone",
             onChoose: () => {
-              character.setManners("depressing");
+              character.gainManners("depressing", 1, this.id);
             },
           },
           {
             text: "Whatever.",
             next: "void-whatever",
             onChoose: () => {
-              character.setManners("rude");
+              character.gainManners("rude", 1, this.id);
               const game = useGameStore();
             },
           },

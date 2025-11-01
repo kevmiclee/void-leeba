@@ -5,7 +5,7 @@ import { DrawerView } from "./drawer-view";
 import { MiniGameId } from "./mini-game";
 import { AspectId } from "./aspect";
 import { StatId } from "./stat";
-import { Manners } from "./manners";
+import { Manners, MannersId } from "./manners";
 import { DungeonId } from "./dungeon";
 
 export interface ScenePayload {
@@ -49,6 +49,8 @@ export interface Scene {
   miniGameId?: MiniGameId;
   dungeonId?: DungeonId;
   metadata?: SceneMetadata;
+  hasInput?: boolean;
+  onInputEntered?: () => void;
 }
 
 export interface FateOutcome {
@@ -67,7 +69,7 @@ export interface SceneRouteMetadata {
   next: SceneId | "drawer";
   aspect?: AspectId;
   stat?: SceneRouteStat;
-  manners?: Manners;
+  manners?: MannersId;
 }
 
 export interface SceneRouteStat {

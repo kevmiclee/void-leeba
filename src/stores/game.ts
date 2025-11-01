@@ -7,13 +7,7 @@ import { useSnackbarStore } from "./snackbar";
 import { useAspectStore } from "./aspects";
 import { useEffectsStore } from "./effects";
 
-export const NON_ROUTING_PAGES: SceneId[] = [
-  "intro",
-  "intro1",
-  "start",
-  "credits",
-  "preamble",
-];
+export const NON_ROUTING_PAGES: SceneId[] = ["start", "credits", "preamble"];
 
 export const useGameStore = defineStore("game", {
   state: (): GameState => ({

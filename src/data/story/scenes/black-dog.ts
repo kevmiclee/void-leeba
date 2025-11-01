@@ -1,5 +1,6 @@
 import { Choice, Scene } from "@/types/story";
 import bgDefault from "@/assets/images/backgrounds/new-game.png";
+import bgBurlyBush from "@/assets/images/backgrounds/burly-bush.png";
 import spookyMusic from "@/assets/audio/story/background-themes/spooky1.mp3";
 import { useGameStore } from "@/stores/game";
 import { useCharacterStore } from "@/stores/character";
@@ -22,7 +23,7 @@ export const blackDogScenes = {
   "black-dog": defineScene("black-dog", function (payload): Scene {
     return {
       id: this.id,
-      background: bgDefault,
+      background: bgBurlyBush,
       audio: spookyMusic,
       text:
         `They run past you to the skatepark. As they lope off, you turn around and lean against a tree.` +
@@ -76,21 +77,32 @@ export const blackDogScenes = {
   "black-dog1": defineScene("black-dog1", function (payload): Scene {
     return {
       id: this.id,
-      background: bgDefault,
+      background: bgBurlyBush,
       audio: spookyMusic,
       text:
         `Before you move a muscle, the dark star advances at a clip. As the distance closes, you notice rust red fur, ` +
         `interspersed with oily black. You feel riveted to the spot, unable to look away.` +
         `^^You recall the words of your sister the last time she read your fortune using those weird blocks and strings, ` +
         `"You must be careful! There is a Red Dog. And, there is a Black Dog." But...` +
-        `^^...this is both? ` +
-        `^^{You start acting careful.}`,
+        `^^...this is both? `,
       buttonActions: () => [
         {
           action: () => {
             const store = useGameStore();
             store.goToScene("black-dog2");
           },
+        },
+      ],
+      choices: () => [
+        {
+          text: "Start acting careful.",
+          next: "black-dog2",
+          //TODO: perks
+        },
+        {
+          text: `It was hogwash then, and it's hogwash now.`,
+          next: "black-dog2",
+          //TODO: perks
         },
       ],
       metadata: {
@@ -108,7 +120,7 @@ export const blackDogScenes = {
   "black-dog2": defineScene("black-dog2", function (payload): Scene {
     return {
       id: this.id,
-      background: bgDefault,
+      background: bgBurlyBush,
       audio: spookyMusic,
       text:
         `As the Redblack dog approaches, you observe with rising nausea that it has a humanlike face but with dog flesh, ` +
@@ -168,7 +180,7 @@ export const blackDogScenes = {
   "black-dog-good": defineScene("black-dog-good", function (payload): Scene {
     return {
       id: this.id,
-      background: bgDefault,
+      background: bgBurlyBush,
       audio: spookyMusic,
       text:
         `You remember back to your childhood, to a dog you had, Calla. Calla, so stinky, so sweet, so loyal. The contrast between ` +
@@ -200,7 +212,7 @@ export const blackDogScenes = {
   "black-dog-good1": defineScene("black-dog-good1", function (payload): Scene {
     return {
       id: this.id,
-      background: bgDefault,
+      background: bgBurlyBush,
       audio: spookyMusic,
       text:
         `Inside the locket is a dried bit of plant matter that smells of vanilla, and a taped lock of hair.` +
@@ -249,7 +261,7 @@ export const blackDogScenes = {
     function (payload): Scene {
       return {
         id: this.id,
-        background: bgDefault,
+        background: bgBurlyBush,
         audio: spookyMusic,
         text:
           `The creature's body seems to glow blue. Its human features morph and melt into the shape of a ` +
@@ -267,7 +279,7 @@ export const blackDogScenes = {
               onChoose: () => {
                 character.setFlag("gave-dog-food", true);
                 character.removeFromInventory("dog-food");
-                character.setManners("polite");
+                character.gainManners("polite", 1, this.id);
               },
               next: "black-dog-done",
               payload: { filter: "food-dog" },
@@ -279,7 +291,7 @@ export const blackDogScenes = {
               text: "Give it some pets.",
               next: "black-dog-done",
               onChoose: () => {
-                character.setManners("polite");
+                character.gainManners("polite", 1, this.id);
               },
               payload: { filter: "pets-dog" },
             },
@@ -287,7 +299,7 @@ export const blackDogScenes = {
               text: "Do nothing.",
               next: "black-dog-done",
               onChoose: () => {
-                character.setManners("depressing");
+                character.gainManners("depressing", 1, this.id);
               },
               payload: { filter: "nothing-dog" },
             }
@@ -324,7 +336,7 @@ export const blackDogScenes = {
     function (payload): Scene {
       return {
         id: this.id,
-        background: bgDefault,
+        background: bgBurlyBush,
         audio: spookyMusic,
         text:
           `The creature's body glows pink. Its dog features seem to morph and melt into the shape ` +
@@ -341,7 +353,7 @@ export const blackDogScenes = {
               text: "Give it some dog food.",
               onChoose: () => {
                 character.gainStat("shitheadedness", 1, this.id);
-                character.setManners("rude");
+                character.gainManners("rude", 1, this.id);
                 character.setFlag("gave-human-dog-food", true);
                 character.removeFromInventory("dog-food");
               },
@@ -354,7 +366,7 @@ export const blackDogScenes = {
             {
               text: "Give it some pets.",
               onChoose: () => {
-                character.setManners("weird");
+                character.gainManners("weird", 1, this.id);
               },
               next: "black-dog-done",
               payload: { filter: "pets-human" },
@@ -362,7 +374,7 @@ export const blackDogScenes = {
             {
               text: "Do nothing.",
               onChoose: () => {
-                character.setManners("polite");
+                character.gainManners("polite", 1, this.id);
               },
               next: "black-dog-done",
               payload: { filter: "nothing-human" },
@@ -426,7 +438,7 @@ export const blackDogScenes = {
   "black-dog-bad": defineScene("black-dog-bad", function (payload): Scene {
     return {
       id: this.id,
-      background: bgDefault,
+      background: bgBurlyBush,
       audio: spookyMusic,
 
       text:
@@ -483,7 +495,7 @@ export const blackDogScenes = {
     function (payload): Scene {
       return {
         id: this.id,
-        background: bgDefault,
+        background: bgBurlyBush,
         audio: spookyMusic,
         text: payload?.text ?? "",
         buttonActions: () => [
@@ -515,7 +527,7 @@ export const blackDogScenes = {
     function (payload): Scene {
       return {
         id: this.id,
-        background: bgDefault,
+        background: bgBurlyBush,
         audio: spookyMusic,
         text: payload?.text ?? "",
         buttonActions: () => [
@@ -560,7 +572,7 @@ export const blackDogScenes = {
     function (payload): Scene {
       return {
         id: this.id,
-        background: bgDefault,
+        background: bgBurlyBush,
         audio: spookyMusic,
         text:
           `...^^But wait! You're still here... You open your eyes. The redblack dog is harmlessly sniffing ` +
@@ -594,7 +606,7 @@ export const blackDogScenes = {
     function (payload): Scene {
       return {
         id: this.id,
-        background: bgDefault,
+        background: bgBurlyBush,
         audio: spookyMusic,
         text: getDrunkRescueText(payload?.filter),
         dialogSequence: () => {
@@ -615,7 +627,7 @@ export const blackDogScenes = {
             ];
           } else {
             const character = useCharacterStore();
-            const manners = character.manners;
+            const manners = character.getManners();
             return [
               {
                 characterId: "drunk2",
@@ -667,7 +679,7 @@ export const blackDogScenes = {
     function (payload): Scene {
       return {
         id: this.id,
-        background: bgDefault,
+        background: bgBurlyBush,
         audio: spookyMusic,
         text:
           `The ${payload?.filter ? "drunk sets" : "drunks set"}  a can of dog food on the ground. The redblack dog retreats ` +
@@ -680,44 +692,43 @@ export const blackDogScenes = {
             text: `Now you owe <i>${payload?.filter ? "me" : "us"}</i> one!`,
           },
         ],
-        choices: () => [
-          {
-            text: `"Thanks a lot!"`,
-            next: "black-dog-done-drunks",
-            payload: { filter: payload?.filter },
-            onChoose: () => {
-              const character = useCharacterStore();
-              character.setManners("polite");
+        choices: () => {
+          const character = useCharacterStore();
+          return [
+            {
+              text: `"Thanks a lot!"`,
+              next: "black-dog-done-drunks",
+              payload: { filter: payload?.filter },
+              onChoose: () => {
+                character.gainManners("polite", 1, this.id);
+              },
             },
-          },
-          {
-            text: `"I didn't ask for your help..."`,
-            next: "black-dog-done-drunks",
-            payload: { filter: payload?.filter },
-            onChoose: () => {
-              const character = useCharacterStore();
-              character.setManners("rude");
+            {
+              text: `"I didn't ask for your help..."`,
+              next: "black-dog-done-drunks",
+              payload: { filter: payload?.filter },
+              onChoose: () => {
+                character.gainManners("rude", 1, this.id);
+              },
             },
-          },
-          {
-            text: `"I wish you had just let it have me..."`,
-            next: "black-dog-done-drunks",
-            payload: { filter: payload?.filter },
-            onChoose: () => {
-              const character = useCharacterStore();
-              character.setManners("depressing");
+            {
+              text: `"I wish you had just let it have me..."`,
+              next: "black-dog-done-drunks",
+              payload: { filter: payload?.filter },
+              onChoose: () => {
+                character.gainManners("depressing", 1, this.id);
+              },
             },
-          },
-          {
-            text: `Go in for a hug.`,
-            next: "black-dog-done-drunks",
-            payload: { filter: payload?.filter },
-            onChoose: () => {
-              const character = useCharacterStore();
-              character.setManners("weird");
+            {
+              text: `Go in for a hug.`,
+              next: "black-dog-done-drunks",
+              payload: { filter: payload?.filter },
+              onChoose: () => {
+                character.gainManners("weird", 1, this.id);
+              },
             },
-          },
-        ],
+          ];
+        },
         metadata: {
           sectionId: "black-dog",
           routes: [
@@ -752,7 +763,7 @@ export const blackDogScenes = {
     function (payload): Scene {
       return {
         id: this.id,
-        background: bgDefault,
+        background: bgBurlyBush,
         audio: spookyMusic,
         text:
           `They leave. And miracualously, so does the redblack dog. It seems to recognize the drunks, ` +
@@ -784,7 +795,7 @@ export const blackDogScenes = {
     function (payload): Scene {
       return {
         id: this.id,
-        background: bgDefault,
+        background: bgBurlyBush,
         audio: spookyMusic,
         dialogSequence: () => {
           const character = useCharacterStore();
@@ -820,7 +831,7 @@ export const blackDogScenes = {
     function (payload): Scene {
       return {
         id: this.id,
-        background: bgDefault,
+        background: bgBurlyBush,
         audio: spookyMusic,
         text:
           `But...its face is human, you say. Does that make it okay?` +
@@ -851,7 +862,7 @@ export const blackDogScenes = {
   "black-dog-viral": defineScene("black-dog-viral", function (payload): Scene {
     return {
       id: this.id,
-      background: bgDefault,
+      background: bgBurlyBush,
       audio: spookyMusic,
       text:
         `It doesn't matter how you spin it. One of the drunks recorded it all on their phone, ` +
@@ -887,7 +898,7 @@ export const blackDogScenes = {
     function (payload): Scene {
       return {
         id: this.id,
-        background: bgDefault,
+        background: bgBurlyBush,
         audio: spookyMusic,
         text:
           `Brutal... you try to console yourself with the Oscar Wilde quip you conveniently memorized.` +
@@ -941,12 +952,12 @@ export const blackDogScenes = {
     function (payload): Scene {
       return {
         id: this.id,
-        background: bgDefault,
+        background: bgBurlyBush,
         audio: spookyMusic,
         text: getBlackDogDoneText(payload?.filter ?? ""),
         dialogSequence: () => {
           const character = useCharacterStore();
-          const manners = character.manners;
+          const manners = character.getManners();
 
           const mannersText =
             manners == "rude"
@@ -1016,7 +1027,7 @@ export const blackDogScenes = {
   "black-dog-done": defineScene("black-dog-done", function (payload): Scene {
     return {
       id: this.id,
-      background: bgDefault,
+      background: bgBurlyBush,
       audio: spookyMusic,
       text: getBlackDogDoneText(payload?.filter ?? ""),
       choices: () => [

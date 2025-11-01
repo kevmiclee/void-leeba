@@ -32,13 +32,13 @@
 
     <Credits v-if="game.currentSceneId === 'credits'"></Credits>
 
-    <IntroBody
+    <!-- <IntroBody
       v-if="game.currentSceneId == 'intro' || game.currentSceneId == 'intro1'"
       :key="game.currentSceneId"
       :letters="letters"
       :animationSkipped="animationSkipped"
       :eyeIsOpened="game.currentSceneId == 'intro1'"
-    />
+    /> -->
 
     <SceneBody
       v-if="isScene && letters.length > 0"
@@ -50,6 +50,8 @@
     <DisappearingItem></DisappearingItem>
 
     <Choices />
+
+    <TextInput />
   </div>
 </template>
 
@@ -61,11 +63,11 @@ import { useSceneHelpers } from "@/helper-functions/scene-helpers";
 import { computed, onMounted, ref, watch } from "vue";
 import StartBody from "@/components/intro/StartBody.vue";
 import Credits from "@/components/intro/Credits.vue";
-import IntroBody from "@/components/intro/IntroBody.vue";
 import SceneBody from "@/components/SceneBody.vue";
 import SceneGraph from "@/components/SceneGraph.vue";
 import Choices from "@/components/widgets/Choices.vue";
 import FadeInOverlay from "@/components/overlays/FadeInOverlay.vue";
+import Fog from "@/components/overlays/Fog.vue";
 import Sidebar from "@/components/widgets/Sidebar.vue";
 import { Scene } from "@/types/story";
 import DisappearingItem from "./overlays/DisappearingItem.vue";
@@ -73,6 +75,7 @@ import MiniGame from "./mini-game/MiniGame.vue";
 import Dungeon from "./dungeon/Dungeon.vue";
 
 import { useEffectsStore } from "@/stores/effects";
+import TextInput from "./widgets/TextInput.vue";
 
 const timeoutStore = useTimeoutStore();
 const game = useGameStore();

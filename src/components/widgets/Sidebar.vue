@@ -1,14 +1,19 @@
 <template>
   <div class="sidebar">
     <button
-      v-if="scenes.length > 1 && currentSceneIndex > 0"
+      v-if="
+        scenes.length > 1 &&
+        currentSceneIndex > 0 &&
+        !game.currentSceneId.includes('intro')
+      "
       @click.stop="goBack"
     >
       <
     </button>
     <button v-if="canGoForward" @click.stop="goForward">></button>
-    <button @click.stop="toggleDrawer">
-      ☰
+
+    <div class="survtek-button">
+      <img :src="survtekLogo" class="icon" @click.stop="toggleDrawer" />
       <span
         v-if="animatedCount > 0"
         class="notification-bubble"
@@ -23,7 +28,7 @@
       >
         {{ animatedCount == 100 ? "∞" : animatedCount }}
       </span>
-    </button>
+    </div>
   </div>
 
   <transition name="fade">
@@ -43,6 +48,7 @@ import Drawer from "@/components/drawer/Drawer.vue";
 import { computed, ref, watch } from "vue";
 import { useDrawerStore } from "@/stores/drawer";
 import { useAudioStore } from "@/stores/audio";
+import survtekLogo from "@/assets/images/logos/survtek.png";
 
 const game = useGameStore();
 const phone = usePhoneStore();
@@ -57,11 +63,14 @@ const canGoForward = computed(
   () => currentSceneIndex.value < scenes.value.length - 1
 );
 const numberOfPhoneItems = computed(() => {
-  const distinctScenes = Array.from(new Set(scenes.value));
+  const distinctScenes = Array.from(new Set(scenes.value)).filter(
+    (s) => !s.includes("intro")
+  );
   return Math.floor(distinctScenes.length / 4);
 });
+const notificationCount = computed(() => drawer.notificationCount);
 
-const animatedCount = ref(drawer.notificationCount);
+const animatedCount = ref(notificationCount.value);
 let stop = false;
 
 function animateToThousand(start: number, target = 100) {
@@ -117,11 +126,13 @@ watch(
     phone: phone.$state,
     scene: game.currentSceneId,
     isDrawerOpen: drawer.isDrawerOpen,
+    numberOfPhoneItems: numberOfPhoneItems.value,
   }),
   () => {
     const newCount =
       numberOfPhoneItems.value - phone.$state.filter((e) => e.isRead).length;
     drawer.updateNotificationCount(newCount);
+    animatedCount.value = newCount;
   },
   { deep: true }
 );
@@ -136,6 +147,20 @@ watch(
   display: flex;
   flex-direction: column;
   gap: 0.7vw;
+}
+
+.survtek-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.survtek-button:hover {
+  cursor: pointer;
+}
+
+.icon {
+  height: 2.8vw;
 }
 
 .fade-enter-active,

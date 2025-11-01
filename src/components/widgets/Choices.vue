@@ -1,7 +1,11 @@
 <template>
   <Avatar
     :showUserAvatar="
-      (isScene && showChoices && visibleChoices.length > 0 && !dialogClicked) ||
+      (isScene &&
+        showChoices &&
+        visibleChoices.length > 0 &&
+        !dialogClicked &&
+        !isIntro) ||
       effects.stretchAvatar
     "
     :currentCharacter="currentCharacter"
@@ -47,6 +51,7 @@ import { useDrawerStore } from "@/stores/drawer";
 import { DrawerView } from "@/types/drawer-view";
 import { Choice } from "@/types/story";
 import { useEffectsStore } from "@/stores/effects";
+import vis from "vis-network/declarations/index-legacy-bundle";
 
 const game = useGameStore();
 const audioStore = useAudioStore();
@@ -73,6 +78,7 @@ const currentDialog = computed(() => {
 const currentCharacter = computed(() =>
   currentDialog.value ? characters[currentDialog.value.characterId] : null
 );
+
 const showChoices = computed(() => {
   return (
     (!hasDialog.value ||
@@ -89,12 +95,9 @@ const visibleChoices = computed(() => {
   }
   return [];
 });
-const isScene = computed(
-  () =>
-    game.currentSceneId !== "intro" &&
-    game.currentSceneId !== "intro1" &&
-    game.currentSceneId !== "start"
-);
+const isScene = computed(() => game.currentSceneId !== "start");
+
+const isIntro = computed(() => game.currentSceneId.includes("intro"));
 
 function playSpeakerSound(characterId: CharacterId) {
   const character = characters[characterId];
@@ -141,6 +144,18 @@ function onChoiceClicked(choice: Choice) {
 }
 
 const rotationDeg = ref("0");
+
+// isScene &&
+//         showChoices &&
+//         visibleChoices.length > 0 &&
+//         !dialogClicked &&
+//         !isIntro
+
+console.log(isScene.value);
+console.log(showChoices.value);
+console.log(visibleChoices.value.length);
+console.log(dialogClicked.value);
+console.log(isIntro.value);
 
 watch(
   () => ({ currentDialog, hasDialog }),

@@ -1,7 +1,7 @@
 <template>
   <ul v-if="isViral" class="list">
     <div class="sub-menu-header" @click.stop="drawer.resetDrawerView">
-      < Phone
+      < Notifications
     </div>
     <TransitionGroup name="comment">
       <li v-for="(item, index) in visibleComments" :key="item">
@@ -13,7 +13,11 @@
     <div class="sub-menu-header" @click.stop="drawer.resetDrawerView">
       < Phone
     </div>
+    <div style="padding: 1vw" v-if="items.length === 0">
+      You're looking at your phone. Some stuff is happening. This is an example.
+    </div>
     <li
+      v-else
       v-for="(item, index) in items"
       :key="index"
       :class="{ highlight: !item.isRead }"
@@ -32,12 +36,17 @@ import { useDrawerStore } from "@/stores/drawer";
 const game = useGameStore();
 const drawer = useDrawerStore();
 
-const scenes = computed(() => game.scenes);
+const scenes = computed(() =>
+  game.scenes.filter((sc) => !sc.includes("intro"))
+);
 
 const numberOfPhoneItems = computed(() => {
   const distinctScenes = Array.from(new Set(scenes.value));
   return Math.floor(distinctScenes.length / 4);
 });
+
+console.log(phoneItems);
+console.log(numberOfPhoneItems.value);
 
 const items = computed(() => {
   return phoneItems.length <= numberOfPhoneItems.value

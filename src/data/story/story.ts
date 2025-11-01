@@ -1,4 +1,5 @@
 import { introScenes } from "./scenes/intro";
+import { bedroomScenes } from "./scenes/bedroom";
 import { homeScenes } from "./scenes/home";
 import { parkScenes } from "./scenes/park";
 import { blackDogScenes } from "./scenes/black-dog";
@@ -15,6 +16,7 @@ import { voidScenes } from "./scenes/void";
 import { paintScenes } from "./scenes/paint";
 
 type AllScenes = typeof introScenes &
+  typeof bedroomScenes &
   typeof homeScenes &
   typeof parkScenes &
   typeof blackDogScenes &
@@ -31,6 +33,7 @@ type AllScenes = typeof introScenes &
 
 export const story: AllScenes = {
   ...introScenes,
+  ...bedroomScenes,
   ...homeScenes,
   ...parkScenes,
   ...blackDogScenes,

@@ -26,7 +26,10 @@ export interface CharacterState {
   athletics: Stat;
   inventory: Item[];
   flags: Flags;
-  manners: Manners | undefined;
+  rude: Manners;
+  depressing: Manners;
+  polite: Manners;
+  weird: Manners;
 }
 
 export interface DrawerState {

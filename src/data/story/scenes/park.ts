@@ -1,5 +1,7 @@
-import { Scene, ScenePayload } from "@/types/story";
+import { Scene } from "@/types/story";
 import bgDefault from "@/assets/images/backgrounds/new-game.png";
+import bgPark from "@/assets/images/backgrounds/park.png";
+import bgParkNight from "@/assets/images/backgrounds/park-night.png";
 import parkMusic from "@/assets/audio/story/background-themes/walk-in-the-park.mp3";
 import { useGameStore } from "@/stores/game";
 import { useCharacterStore } from "@/stores/character";
@@ -12,12 +14,12 @@ export const parkScenes = {
   park: defineScene("park", function (payload): Scene {
     return {
       id: this.id,
-      background: bgDefault,
+      background: bgPark,
       audio: parkMusic,
       text:
-        `You are in the park. In the distance, a children's play structure. ` +
-        `Behind the play structure, an empty public pool in yellow and light blue. ` +
-        `Behind you, a soccer field, basketball court, and extensive skatepark. To your side, a huge snow pile.`,
+        `You are in the park. In the distance, a rusted children's play structure. ` +
+        `Behind the play structure, an empty public pool, long disused in bleached yellow and blue. ` +
+        `Behind you, a derelict soccer field, basketball court, and extensive skatepark. To your side, a huge snow pile.`,
       choices: () => [
         {
           text: "Still yourself and listen to the sounds.",
@@ -55,7 +57,7 @@ export const parkScenes = {
   "park-drunks": defineScene("park-drunks", function (payload): Scene {
     return {
       id: this.id,
-      background: bgDefault,
+      background: bgParkNight,
       audio: parkMusic,
       text:
         `The sun sets over the park. A few stars resist the city's lights. The playground and fences now set into silhouettes. ` +
@@ -88,7 +90,7 @@ export const parkScenes = {
   "park-drunks1": defineScene("park-drunks1", function (payload): Scene {
     return {
       id: this.id,
-      background: bgDefault,
+      background: bgParkNight,
       audio: parkMusic,
       text:
         `In loopy diagonals from either direction, they come up to you.` +
@@ -151,7 +153,7 @@ export const parkScenes = {
   "park-drunks2a": defineScene("park-drunks2a", function (payload): Scene {
     return {
       id: this.id,
-      background: bgDefault,
+      background: bgParkNight,
       audio: parkMusic,
       text: "",
       dialogSequence: () => [
@@ -167,7 +169,7 @@ export const parkScenes = {
           next: "park-drunks3",
           onChoose: () => {
             const character = useCharacterStore();
-            character.setManners("rude");
+            character.gainManners("rude", 1, this.id);
           },
         },
         {
@@ -175,7 +177,7 @@ export const parkScenes = {
           next: "park-drunks3",
           onChoose: () => {
             const character = useCharacterStore();
-            character.setManners("depressing");
+            character.gainManners("depressing", 1, this.id);
           },
         },
         {
@@ -183,7 +185,7 @@ export const parkScenes = {
           next: "park-drunks3",
           onChoose: () => {
             const character = useCharacterStore();
-            character.setManners("polite");
+            character.gainManners("polite", 1, this.id);
           },
         },
       ],
@@ -213,7 +215,7 @@ export const parkScenes = {
   "park-drunks2b": defineScene("park-drunks2b", function (payload): Scene {
     return {
       id: this.id,
-      background: bgDefault,
+      background: bgParkNight,
       audio: parkMusic,
       text: "",
       dialogSequence: () => {
@@ -254,7 +256,7 @@ export const parkScenes = {
   "park-drunks2c": defineScene("park-drunks2c", function (payload): Scene {
     return {
       id: this.id,
-      background: bgDefault,
+      background: bgParkNight,
       audio: parkMusic,
       text: "The one celebrates to the other.",
       dialogSequence: () => {
@@ -273,7 +275,7 @@ export const parkScenes = {
           next: "park-drunks3",
           onChoose: () => {
             const character = useCharacterStore();
-            character.setManners("depressing");
+            character.gainManners("depressing", 1, this.id);
           },
         },
         {
@@ -281,7 +283,7 @@ export const parkScenes = {
           next: "park-drunks3",
           onChoose: () => {
             const character = useCharacterStore();
-            character.setManners("rude");
+            character.gainManners("rude", 1, this.id);
           },
         },
         {
@@ -289,7 +291,7 @@ export const parkScenes = {
           next: "park-drunks3",
           onChoose: () => {
             const character = useCharacterStore();
-            character.setManners("polite");
+            character.gainManners("polite", 1, this.id);
           },
         },
       ],
@@ -319,13 +321,13 @@ export const parkScenes = {
   "park-drunks3": defineScene("park-drunks3", function (payload): Scene {
     return {
       id: this.id,
-      background: bgDefault,
+      background: bgParkNight,
       audio: parkMusic,
       text: "",
 
       dialogSequence: () => {
         const character = useCharacterStore();
-        const manners = character.manners;
+        const manners = character.getManners();
         const drunkChoice = character.flags["drunk-choice"];
 
         const mannersText =

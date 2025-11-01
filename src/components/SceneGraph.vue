@@ -357,8 +357,8 @@ function wrapText(text: string, maxLength: number): string {
 
 .key {
   position: absolute;
-  bottom: 0;
-  right: 0;
+  bottom: 2vw;
+  right: 3vw;
   background: rgba(255, 255, 255, 0.9); /* optional for contrast */
   padding: 10px;
   z-index: 10;

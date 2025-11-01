@@ -6,6 +6,7 @@ import { useCharacterStore } from "@/stores/character";
 import { getNapFaeries2Text } from "../helper-functions/text-helper-functions";
 import { useAspectStore } from "@/stores/aspects";
 import { defineScene } from "../story";
+import { useDictionaryStore } from "@/stores/dictionary";
 
 export const dreamFaeriesScenes = {
   "dream-faeries": defineScene("dream-faeries", function (payload): Scene {
@@ -57,6 +58,10 @@ export const dreamFaeriesScenes = {
           },
         },
       ],
+      onPageLoad: () => {
+        const dict = useDictionaryStore();
+        dict.addEntry("hongatar");
+      },
       metadata: {
         sectionId: "dream-faeries",
         routes: [
@@ -361,7 +366,7 @@ export const dreamFaeriesScenes = {
               next: "dream-faeries2",
               payload: { filter: "accuse" },
               onChoose: () => {
-                character.setManners("depressing");
+                character.gainManners("depressing", 1, this.id);
               },
             },
             {
@@ -369,7 +374,7 @@ export const dreamFaeriesScenes = {
               next: "dream-faeries2",
               payload: { filter: "flatter" },
               onChoose: () => {
-                character.setManners("polite");
+                character.gainManners("polite", 1, this.id);
                 character.gainStat("shitheadedness", 1, this.id);
               },
             },
@@ -378,7 +383,7 @@ export const dreamFaeriesScenes = {
               next: "dream-faeries2",
               payload: { filter: "insult" },
               onChoose: () => {
-                character.setManners("rude");
+                character.gainManners("rude", 1, this.id);
               },
             },
           ];
@@ -516,7 +521,7 @@ export const dreamFaeriesScenes = {
               next: "dream-faeries2",
               payload: { filter: "lesson" },
               onChoose: () => {
-                character.setManners("depressing");
+                character.gainManners("depressing", 1, this.id);
               },
             },
             {
@@ -524,7 +529,7 @@ export const dreamFaeriesScenes = {
               next: "dream-faeries2",
               payload: { filter: "thanks" },
               onChoose: () => {
-                character.setManners("polite");
+                character.gainManners("polite", 1, this.id);
               },
             },
             {
@@ -532,7 +537,7 @@ export const dreamFaeriesScenes = {
               next: "dream-faeries2",
               payload: { filter: "wink" },
               onChoose: () => {
-                character.setManners("weird");
+                character.gainManners("weird", 1, this.id);
               },
             },
           ];

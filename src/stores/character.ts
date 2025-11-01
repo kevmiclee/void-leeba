@@ -4,19 +4,18 @@ import { defineStore } from "pinia";
 import { useSnackbarStore } from "./snackbar";
 import { ItemId } from "@/types/item";
 import { SceneId } from "@/data/story/story";
-import { useGameStore } from "./game";
 import { FlagId, FlagValues } from "@/types/flag";
 import { Stat, StatId } from "@/types/stat";
-import { Manners } from "@/types/manners";
 import { useAudioStore } from "./audio";
 import pickUpItemSound from "@/assets/audio/story/sounds/pick-up-item.mp3";
 import { useEffectsStore } from "./effects";
+import { Manners, MANNERS_KEYS, MannersId } from "@/types/manners";
 
 export type CharacterStore = ReturnType<typeof useCharacterStore>;
 
 export const useCharacterStore = defineStore("character", {
   state: (): CharacterState => ({
-    name: "Adventurer",
+    name: "",
     health: 100,
     blueMagic: {
       id: "blueMagic",
@@ -44,7 +43,30 @@ export const useCharacterStore = defineStore("character", {
     },
     inventory: [...defaultItems],
     flags: {},
-    manners: undefined,
+    rude: {
+      id: "rude",
+      value: 0,
+      scenesGained: [],
+      scenesLost: [],
+    },
+    depressing: {
+      id: "depressing",
+      value: 0,
+      scenesGained: [],
+      scenesLost: [],
+    },
+    polite: {
+      id: "polite",
+      value: 0,
+      scenesGained: [],
+      scenesLost: [],
+    },
+    weird: {
+      id: "weird",
+      value: 0,
+      scenesGained: [],
+      scenesLost: [],
+    },
   }),
   // persist: true,
   actions: {
@@ -152,8 +174,49 @@ export const useCharacterStore = defineStore("character", {
       return this.inventory.some((item) => item.id == id);
     },
 
-    setManners(value: Manners) {
-      this.manners = value;
+    gainManners(manners: MannersId, value: number, sceneId: SceneId) {
+      //remove any stats previously gained on the scene
+      if (this.rude.scenesGained.includes(sceneId)) {
+        this.rude.value -= 1;
+      }
+      if (this.depressing.scenesGained.includes(sceneId)) {
+        this.depressing.value -= 1;
+      }
+      if (this.polite.scenesGained.includes(sceneId)) {
+        this.shitheadedness.value -= 1;
+      }
+      if (this.polite.scenesGained.includes(sceneId)) {
+        this.athletics.value -= 1;
+      }
+
+      const mannersObj = this[manners] as Manners;
+      mannersObj.value += value;
+      mannersObj.scenesGained.push(sceneId);
+    },
+
+    loseManners(manners: MannersId, value: number, sceneId: SceneId) {
+      //restore any stats previously lost on the scene
+      if (this.rude.scenesLost.includes(sceneId)) {
+        this.rude.value += 1;
+      }
+      if (this.depressing.scenesLost.includes(sceneId)) {
+        this.depressing.value += 1;
+      }
+      if (this.polite.scenesLost.includes(sceneId)) {
+        this.polite.value += 1;
+      }
+      if (this.weird.scenesLost.includes(sceneId)) {
+        this.weird.value += 1;
+      }
+
+      const mannersObj = this[manners] as Manners;
+      mannersObj.value -= value;
+      mannersObj.scenesLost.push(sceneId);
+    },
+
+    getManners() {
+      const max = Math.max(...MANNERS_KEYS.map((k) => this[k].value));
+      return MANNERS_KEYS.find((k) => this[k].value === max)!;
     },
   },
 });

@@ -1,10 +1,18 @@
 <template>
   <ul class="menu-list">
-    <li @click.stop="closeDrawer"><</li>
+    <li @click.stop="closeDrawer">< SURVTEK SmartBag®</li>
 
-    <li @click.stop="setDrawerView('bag')">Bag</li>
-    <li @click.stop="setDrawerView('phone')">
-      Phone
+    <li
+      v-if="!game.currentSceneId.includes('intro')"
+      @click.stop="setDrawerView('bag')"
+    >
+      Items
+    </li>
+    <li
+      v-if="!game.currentSceneId.includes('intro')"
+      @click.stop="setDrawerView('phone')"
+    >
+      Notifications
       <span
         v-if="drawer.notificationCount > 0 || drawer.phoneIsCrazy"
         class="notification-bubble"
@@ -13,7 +21,12 @@
       >
     </li>
     <li @click.stop="setDrawerView('dictionary')">Dictionary</li>
-    <li @click.stop="setDrawerView('stats')">Stats</li>
+    <li
+      v-if="!game.currentSceneId.includes('intro')"
+      @click.stop="setDrawerView('stats')"
+    >
+      Stats
+    </li>
     <li @click.stop="setDrawerView('scenes')">Scenes</li>
     <li @click.stop="goToSceneGraph">Scene Graph</li>
     <li @click.stop="restart">Restart</li>
@@ -22,7 +35,17 @@
         character.$reset();
         timeoutStore.$reset(); -->
   </ul>
-  <span style="bottom: 5vw; position: absolute"
+  <img
+    :src="survtekLogo"
+    style="
+      height: 5vw;
+      position: absolute;
+      left: calc(50% - 2.5vw);
+      top: calc(50% - 2.5vw);
+    "
+  />
+
+  <span style="bottom: 5vw; left: 0vw; position: absolute"
     >Current scene: {{ game.currentSceneId }}</span
   >
 </template>
@@ -32,6 +55,7 @@ import { useAudioStore } from "@/stores/audio";
 import { useDrawerStore } from "@/stores/drawer";
 import { useGameStore } from "@/stores/game";
 import { DrawerView } from "@/types/drawer-view";
+import survtekLogo from "@/assets/images/logos/survtek.png";
 
 const game = useGameStore();
 const drawer = useDrawerStore();

@@ -17,6 +17,10 @@ import squirrelSound from "@/assets/audio/characters/squirrel.mp3";
 import buzzAvatar from "@/assets/images/avatars/buzz.png";
 import buzzSound from "@/assets/audio/characters/buzz.mp3";
 import pinkSnakeAvatar from "@/assets/images/avatars/pink-snake.png";
+import mudmanAvatar from "@/assets/images/avatars/mud-man.png";
+import mudmanSound from "@/assets/audio/characters/mudman.mp3";
+import carlAvatar from "@/assets/images/avatars/carl.png";
+import shibAvatar from "@/assets/images/avatars/shib.png";
 
 export const characters: Record<CharacterId, Character> = {
   drunk1: {
@@ -82,10 +86,38 @@ export const characters: Record<CharacterId, Character> = {
     sound: buzzSound,
   },
 
+  kioskman: {
+    id: "kioskman",
+    name: "Kioskman",
+    avatar: buzzAvatar,
+    sound: buzzSound,
+  },
+
   "pink-snake": {
     id: "pink-snake",
     name: "Pink Snake",
     avatar: pinkSnakeAvatar,
     //TOOD: pink snake sound
+  },
+
+  mudman: {
+    id: "mudman",
+    name: "Mudman",
+    avatar: mudmanAvatar,
+    sound: mudmanSound,
+  },
+
+  "mr-ebeneezer": {
+    id: "mr-ebeneezer",
+    name: "Mr. Ebenenezer",
+    avatar: carlAvatar,
+    //TODO: carl sound
+  },
+
+  shib: {
+    id: "shib",
+    name: "Flatmate Shib",
+    avatar: shibAvatar,
+    //TODO: shib sound
   },
 };
