@@ -77,7 +77,6 @@ export const bedroomScenes = {
   }),
 
   bedroom2: defineScene("bedroom2", function (payload): Scene {
-    console.log(`PAYLOAD: ${payload}`);
     return {
       id: this.id,
       text: payload?.text ?? "",
@@ -194,12 +193,10 @@ export const bedroomScenes = {
 };
 
 function getBookChoices(filter: string, nextScene: SceneId): Choice[] {
-  console.log(nextScene);
   const choices = [
     {
       text: `Don't Make Me Think by Paul Krugman`,
       onChoose: () => {
-        console.log("CHOSE 0");
         const game = useGameStore();
         game.goToScene(nextScene, {
           filter: `${filter},0`,
@@ -210,8 +207,6 @@ function getBookChoices(filter: string, nextScene: SceneId): Choice[] {
     {
       text: `Shift by Aaron Thom`,
       onChoose: () => {
-        console.log("CHOSE 1");
-
         const game = useGameStore();
         game.goToScene(nextScene, {
           filter: `${filter},1`,
@@ -222,8 +217,6 @@ function getBookChoices(filter: string, nextScene: SceneId): Choice[] {
     {
       text: `Harsh Mellow by Sherwan Milliams`,
       onChoose: () => {
-        console.log("CHOSE 2");
-
         const game = useGameStore();
         game.goToScene("bedroom-time-fly", {
           filter: `${filter},2`,
@@ -234,7 +227,6 @@ function getBookChoices(filter: string, nextScene: SceneId): Choice[] {
     {
       text: `The Inkwell by Jody Rowsky`,
       onChoose: () => {
-        console.log("CHOSE 3");
         const game = useGameStore();
         game.goToScene(nextScene, {
           filter: `${filter},3`,
@@ -247,7 +239,7 @@ function getBookChoices(filter: string, nextScene: SceneId): Choice[] {
   const indicesToRemove = filter
     .split(",")
     .map((str) => parseInt(str.trim()))
-    .filter((num) => !isNaN(num));
+    .filter((num) => num !== 2 && !isNaN(num));
 
   const filteredChoices = choices.filter(
     (_, index) => !indicesToRemove.includes(index)

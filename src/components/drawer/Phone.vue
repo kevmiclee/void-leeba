@@ -45,9 +45,6 @@ const numberOfPhoneItems = computed(() => {
   return Math.floor(distinctScenes.length / 4);
 });
 
-console.log(phoneItems);
-console.log(numberOfPhoneItems.value);
-
 const items = computed(() => {
   return phoneItems.length <= numberOfPhoneItems.value
     ? phoneItems

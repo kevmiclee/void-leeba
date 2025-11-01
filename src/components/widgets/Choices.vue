@@ -145,18 +145,6 @@ function onChoiceClicked(choice: Choice) {
 
 const rotationDeg = ref("0");
 
-// isScene &&
-//         showChoices &&
-//         visibleChoices.length > 0 &&
-//         !dialogClicked &&
-//         !isIntro
-
-console.log(isScene.value);
-console.log(showChoices.value);
-console.log(visibleChoices.value.length);
-console.log(dialogClicked.value);
-console.log(isIntro.value);
-
 watch(
   () => ({ currentDialog, hasDialog }),
   () => {
