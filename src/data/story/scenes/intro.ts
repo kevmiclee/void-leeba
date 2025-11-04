@@ -179,7 +179,7 @@ export const introScenes = {
   intro3: defineScene("intro3", function (payload): Scene {
     return {
       id: this.id,
-      text: `Since you are so ignorant as not to know me, I am the Supreme Hegemon of Tangential Realities. 
+      text: `Quaint organism, IT IS I! The Supreme Hegemon of Tangential Reality. 
       It's true! I have the talent of Tangents—the power to spring {Leaks} to my liking. So get on my good side. 
       Entertain me. Make me laugh...{You won't}!`,
       audio: windTunnel,
