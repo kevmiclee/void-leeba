@@ -12,6 +12,7 @@
     :hasDialog="hasDialog ?? false"
     :dialogClicked="dialogClicked ?? false"
     :onAvatarClicked="onAvatarClicked"
+    :persist="game.persistAvatar"
   ></Avatar>
 
   <transition name="slide-in-left">
@@ -51,7 +52,6 @@ import { useDrawerStore } from "@/stores/drawer";
 import { DrawerView } from "@/types/drawer-view";
 import { Choice } from "@/types/story";
 import { useEffectsStore } from "@/stores/effects";
-import vis from "vis-network/declarations/index-legacy-bundle";
 
 const game = useGameStore();
 const audioStore = useAudioStore();
@@ -97,7 +97,7 @@ const visibleChoices = computed(() => {
 });
 const isScene = computed(() => game.currentSceneId !== "start");
 
-const isIntro = computed(() => game.currentSceneId.includes("intro"));
+const isIntro = computed(() => game.currentSceneId === "intro");
 
 function playSpeakerSound(characterId: CharacterId) {
   const character = characters[characterId];

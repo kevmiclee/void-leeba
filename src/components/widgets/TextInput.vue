@@ -1,4 +1,10 @@
 <template>
+  <Avatar
+    v-if="showInput"
+    :showUserAvatar="true"
+    :hasDialog="false"
+    :dialogClicked="false"
+  ></Avatar>
   <transition name="slide-in-left">
     <div v-if="showInput" class="input-wrapper">
       <label for="name">Enter your name: </label>
@@ -19,6 +25,7 @@ import { useEffectsStore } from "@/stores/effects";
 import { useGameStore } from "@/stores/game";
 import { storeToRefs } from "pinia";
 import { computed } from "vue";
+import Avatar from "./Avatar.vue";
 
 const game = useGameStore();
 const character = useCharacterStore();
@@ -61,6 +68,7 @@ function handleEnter() {
   font-size: 1.5vw;
   font-weight: bold;
   outline: none;
+  font-family: "Courier New";
 }
 
 input:focus {

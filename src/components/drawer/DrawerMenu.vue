@@ -1,6 +1,6 @@
 <template>
   <ul class="menu-list">
-    <li @click.stop="closeDrawer">< SURVTEK SmartBag®</li>
+    <li @click.stop="closeDrawer">< {{ character.name }}'s SmartBag®</li>
 
     <li
       v-if="!game.currentSceneId.includes('intro')"
@@ -56,10 +56,12 @@ import { useDrawerStore } from "@/stores/drawer";
 import { useGameStore } from "@/stores/game";
 import { DrawerView } from "@/types/drawer-view";
 import survtekLogo from "@/assets/images/logos/survtek.png";
+import { useCharacterStore } from "@/stores/character";
 
 const game = useGameStore();
 const drawer = useDrawerStore();
 const audioStore = useAudioStore();
+const character = useCharacterStore();
 
 function restart() {
   window.location.reload();

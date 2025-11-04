@@ -15,6 +15,7 @@ export interface GameState {
   started: boolean;
   scenes: SceneId[];
   showSceneGraph: boolean;
+  persistAvatar: boolean;
 }
 
 export interface CharacterState {

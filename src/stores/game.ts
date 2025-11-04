@@ -17,6 +17,7 @@ export const useGameStore = defineStore("game", {
     started: false,
     scenes: [],
     showSceneGraph: false,
+    persistAvatar: false,
   }),
   // persist: true,
   getters: {
@@ -100,6 +101,10 @@ export const useGameStore = defineStore("game", {
 
     toggleShowSceneGraph() {
       this.showSceneGraph = !this.showSceneGraph;
+    },
+
+    setPersistAvatar(val: boolean) {
+      this.persistAvatar = val;
     },
   },
 });

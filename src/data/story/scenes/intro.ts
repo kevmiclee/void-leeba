@@ -9,6 +9,8 @@ import bgMudsplosion from "@/assets/images/backgrounds/Mudman-Crawfish-Mudsplosi
 import introAudio from "@/assets/audio/story/background-themes/intro.mp3";
 import windTunnel from "@/assets/audio/story/background-themes/wind-tunnel.mp3";
 import mudmanTheme from "@/assets/audio/story/background-themes/mudman-theme.mp3";
+import serverFarmTheme from "@/assets/audio/story/background-themes/server-farm2.mp3";
+import poundingSound from "@/assets/audio/story/sounds/pounding.mp3";
 
 import { defineScene } from "../story";
 import { useGameStore } from "@/stores/game";
@@ -122,17 +124,64 @@ export const introScenes = {
     return {
       id: this.id,
       text: `${payload?.text} I paid for this dream, don't try to screw this up for me. 
-      Remember this: I chose you, a splashing hapless clownfish, because I see something 
-      special in you. So pay attention!^^Philosophically, you are an amalgam of choices 
-      dissolved in squishy watery body-stuff. Your choices will lead you this way or that. 
-      Or maybe nowhere fast. Either way, they will affect how you turn out. Do what you will, 
-      but take responsibility!^^Since you are so ignorant as not to know me, I am the Supreme 
-      Hegemon of Tangential Realities. It's true! I have the talent of Tangents--the power to 
-      spring {Leaks} to my liking. So get on my good side. Entertain me. Make me laugh...You won't!
-      ^^The dream you are about to see will help you...and me. It's a premonitory one 
-      that Dirtgirl potted. All her dreams are good soil. So grow! I bartered real good for it 
-      too—Sandperson told me about this dream the Giant Sand Worm had the other night. So funny, 
-      it had me in tears...whoops! Off on a {Tangent}.^^Anyway, {enjoy the dream!}`,
+      Remember: I chose you, a splashing hapless clownfish, because I see something 
+      special in you. So {pay attention}!`,
+      audio: windTunnel,
+      background: bgFog,
+      buttonActions: () => [
+        {
+          action: () => {
+            const game = useGameStore();
+            game.goToScene("intro2");
+          },
+        },
+      ],
+      metadata: {
+        sectionId: this.id,
+        routes: [
+          {
+            text: `pay attention`,
+            next: "intro2",
+          },
+        ],
+      },
+    };
+  }),
+
+  intro2: defineScene("intro2", function (payload): Scene {
+    return {
+      id: this.id,
+      text: `Philosophically, you are an amalgam of choices dissolved in squishy, watery body-stuff. 
+      Your choices will lead you this way or that. Or maybe nowhere fast. Either way, they will affect 
+      how you turn out. Do what you will, but {take responsibility}!`,
+      audio: windTunnel,
+      background: bgFog,
+      buttonActions: () => [
+        {
+          action: () => {
+            const game = useGameStore();
+            game.goToScene("intro3");
+          },
+        },
+      ],
+      metadata: {
+        sectionId: this.id,
+        routes: [
+          {
+            text: `take responsibility`,
+            next: "intro3",
+          },
+        ],
+      },
+    };
+  }),
+
+  intro3: defineScene("intro3", function (payload): Scene {
+    return {
+      id: this.id,
+      text: `Since you are so ignorant as not to know me, I am the Supreme Hegemon of Tangential Realities. 
+      It's true! I have the talent of Tangents—the power to spring {Leaks} to my liking. So get on my good side. 
+      Entertain me. Make me laugh...{You won't}!`,
       audio: windTunnel,
       background: bgFog,
       buttonActions: () => [
@@ -140,12 +189,9 @@ export const introScenes = {
           dictionaryEntryId: "leaks",
         },
         {
-          dictionaryEntryId: "tangent",
-        },
-        {
           action: () => {
             const game = useGameStore();
-            game.goToScene("intro2");
+            game.goToScene("intro4");
           },
         },
       ],
@@ -157,15 +203,51 @@ export const introScenes = {
         sectionId: this.id,
         routes: [
           {
-            text: `enjoy the dream`,
-            next: "intro2",
+            text: `You won't`,
+            next: "intro4",
           },
         ],
       },
     };
   }),
 
-  intro2: defineScene("intro2", function (payload): Scene {
+  intro4: defineScene("intro4", function (payload): Scene {
+    return {
+      id: this.id,
+      text: `The dream you are about to see will help you...and me. It's a premonitory one 
+      that Dirtgirl potted. All her dreams are good soil. So grow! I bartered real good for it 
+      too—Sandperson told me about this dream the Giant Sand Worm had the other night. So funny, 
+      it had me in tears...whoops! Off on a {Tangent}.^^Anyway, {enjoy the dream!}`,
+      audio: windTunnel,
+      background: bgFog,
+      buttonActions: () => [
+        {
+          dictionaryEntryId: "tangent",
+        },
+        {
+          action: () => {
+            const game = useGameStore();
+            game.goToScene("intro5");
+          },
+        },
+      ],
+      onPageLoad: () => {
+        const dict = useDictionaryStore();
+        dict.addEntry("tangent");
+      },
+      metadata: {
+        sectionId: this.id,
+        routes: [
+          {
+            text: `enjoy the dream`,
+            next: "intro5",
+          },
+        ],
+      },
+    };
+  }),
+
+  intro5: defineScene("intro5", function (payload): Scene {
     return {
       id: this.id,
       text: `Enter Mudman...^^The sound of the squishy, sludgy slop as he schlepps 
@@ -178,7 +260,8 @@ export const introScenes = {
           text: `What's that in your pocket? Are you happy to see me?`,
           onClick: () => {
             const game = useGameStore();
-            game.goToScene("intro3");
+            game.goToScene("intro6");
+            game.setPersistAvatar(true);
           },
         },
       ],
@@ -191,14 +274,14 @@ export const introScenes = {
         routes: [
           {
             text: "mudman dialog",
-            next: "intro3",
+            next: "intro6",
           },
         ],
       },
     };
   }),
 
-  intro3: defineScene("intro3", function (payload): Scene {
+  intro6: defineScene("intro6", function (payload): Scene {
     return {
       id: this.id,
       text: `Mudman's slimy mud-hand creeps into your pocket.`,
@@ -210,7 +293,7 @@ export const introScenes = {
           text: `Not happy to see me? What are you some kinda prude?`,
           onClick: () => {
             const game = useGameStore();
-            game.goToScene("intro4");
+            game.goToScene("intro7");
           },
         },
       ],
@@ -219,14 +302,14 @@ export const introScenes = {
         routes: [
           {
             text: "mudman dialog",
-            next: "intro4",
+            next: "intro7",
           },
         ],
       },
     };
   }),
 
-  intro4: defineScene("intro4", function (payload): Scene {
+  intro7: defineScene("intro7", function (payload): Scene {
     return {
       id: this.id,
       text: `The hand slips out of your pocket and out of view. Whatever he has, 
@@ -239,8 +322,11 @@ export const introScenes = {
           text: `Lovely. Just lovely. Lovely weather for ducks all in a row row row your 
           boat gently into that good night, good night! Parting is such a sweaty sheet...`,
           onClick: () => {
+            const audioStore = useAudioStore();
+            audioStore.playGenericSound(serverFarmTheme);
             const game = useGameStore();
-            game.goToScene("intro5");
+            game.goToScene("intro8");
+            game.setPersistAvatar(false);
           },
         },
       ],
@@ -249,14 +335,14 @@ export const introScenes = {
         routes: [
           {
             text: "mudman dialog",
-            next: "intro5",
+            next: "intro8",
           },
         ],
       },
     };
   }),
 
-  intro5: defineScene("intro5", function (payload): Scene {
+  intro8: defineScene("intro8", function (payload): Scene {
     //TODO: mudman laugh
     return {
       id: this.id,
@@ -271,7 +357,7 @@ export const introScenes = {
         {
           action: () => {
             const game = useGameStore();
-            game.goToScene("intro6");
+            game.goToScene("intro9");
           },
         },
       ],
@@ -280,14 +366,104 @@ export const introScenes = {
         routes: [
           {
             text: "emits from them",
-            next: "intro6",
+            next: "intro9",
           },
         ],
       },
     };
   }),
 
-  intro6: defineScene("intro6", function (payload): Scene {
+  intro9: defineScene("intro9", function (payload): Scene {
+    return {
+      id: this.id,
+      text: `In the next instant, you observe Mudman standing in line at a kiosk along 
+      the server farm fences accompanied by a horse-sized crawfish. He is still cradling 
+      the glowing object he stole from you.^^He plops it down on the counter.^^Kioskman 
+      recognizes Mudman, and knocks on the backroom door of the kiosk.`,
+      audio: windTunnel,
+      background: bgDataPurchaseKiosk,
+      dialogSequence: () => [
+        {
+          characterId: "kioskman",
+          text: `Oh, Mr. Ebenenezer! Mr. Mudman is here.`,
+          onClick: () => {
+            const game = useGameStore();
+            game.goToScene("intro10");
+          },
+        },
+      ],
+      metadata: {
+        sectionId: this.id,
+        routes: [
+          {
+            text: "dialog click",
+            next: "intro10",
+          },
+        ],
+      },
+    };
+  }),
+
+  intro10: defineScene("intro10", function (payload): Scene {
+    return {
+      id: this.id,
+      text: `Mr. Ebeneezer comes out, an unctuous look in his eyes.`,
+      audio: windTunnel,
+      background: bgDataPurchaseKiosk,
+      dialogSequence: () => [
+        {
+          characterId: "mr-ebeneezer",
+          text: `Ah Mudman! What good fortune! You kept your word. At this rate we'll exceed 
+          our Q3 earnings by 1%! Survtek recognizes loyalty. As agreed, here, five 
+          Leak Drops. Kindly deposit your loot.`,
+          onClick: () => {
+            const game = useGameStore();
+            game.goToScene("intro11");
+          },
+        },
+      ],
+      metadata: {
+        sectionId: this.id,
+        routes: [
+          {
+            text: "dialog click",
+            next: "intro11",
+          },
+        ],
+      },
+    };
+  }),
+
+  intro11: defineScene("intro11", function (payload): Scene {
+    return {
+      id: this.id,
+      text: `Mudman raises the glowing object above his head. The earth below him turns to mud. The mud ripples 
+      slowly at first, building up power, until he releases the glowing object and the mud explodes upward in a
+      geyser. You watch it disappear {into the sky}.`,
+      audio: windTunnel,
+      background: bgMudsplosion,
+      buttonActions: () => [
+        {
+          action: () => {
+            const game = useGameStore();
+            game.goToScene("intro12");
+          },
+        },
+      ],
+
+      metadata: {
+        sectionId: this.id,
+        routes: [
+          {
+            text: "into the sky",
+            next: "intro12",
+          },
+        ],
+      },
+    };
+  }),
+
+  intro12: defineScene("intro12", function (payload): Scene {
     return {
       id: this.id,
       text: `Straining to see, your will pulls you like a telescope. You enter a shiny concrete 
@@ -305,7 +481,7 @@ export const introScenes = {
         {
           action: () => {
             const game = useGameStore();
-            game.goToScene("intro7");
+            game.goToScene("intro13");
           },
         },
       ],
@@ -314,104 +490,14 @@ export const introScenes = {
         routes: [
           {
             text: "no noobs allowed",
-            next: "intro7",
+            next: "intro13",
           },
         ],
       },
     };
   }),
 
-  intro7: defineScene("intro7", function (payload): Scene {
-    return {
-      id: this.id,
-      text: `In the next instant, you observe Mudman standing in line at a kiosk along 
-      the server farm fences accompanied by a horse-sized crawfish. He is still cradling 
-      the glowing object he stole from you.^^He plops it down on the counter.^^Kioskman 
-      recognizes Mudman, and knocks on the backroom door of the kiosk.`,
-      audio: windTunnel,
-      background: bgDataPurchaseKiosk,
-      dialogSequence: () => [
-        {
-          characterId: "kioskman",
-          text: `Oh, Mr. Ebenenezer! Mr. Mudman is here.`,
-          onClick: () => {
-            const game = useGameStore();
-            game.goToScene("intro8");
-          },
-        },
-      ],
-      metadata: {
-        sectionId: this.id,
-        routes: [
-          {
-            text: "dialog click",
-            next: "intro8",
-          },
-        ],
-      },
-    };
-  }),
-
-  intro8: defineScene("intro8", function (payload): Scene {
-    return {
-      id: this.id,
-      text: `Mr. Ebeneezer comes out, an unctuous look in his eyes.`,
-      audio: windTunnel,
-      background: bgDataPurchaseKiosk,
-      dialogSequence: () => [
-        {
-          characterId: "mr-ebeneezer",
-          text: `Ah Mudman! What good fortune! You kept your word. At this rate we'll exceed 
-          our Q3 earnings by 1%! Survtek recognizes loyalty. As agreed, here, five 
-          Leak Drops. Kindly deposit your loot.`,
-          onClick: () => {
-            const game = useGameStore();
-            game.goToScene("intro9");
-          },
-        },
-      ],
-      metadata: {
-        sectionId: this.id,
-        routes: [
-          {
-            text: "dialog click",
-            next: "intro9",
-          },
-        ],
-      },
-    };
-  }),
-
-  intro9: defineScene("intro9", function (payload): Scene {
-    return {
-      id: this.id,
-      text: `Mudman raises the glowing object above his head. The earth below him turns to mud. The mud ripples 
-      slowly at first, building up power, until he releases the glowing object and the mud explodes upward in a
-      geyser. You watch the glowing object disappear {into the sky}.`,
-      audio: windTunnel,
-      background: bgMudsplosion,
-      buttonActions: () => [
-        {
-          action: () => {
-            const game = useGameStore();
-            game.goToScene("intro10");
-          },
-        },
-      ],
-
-      metadata: {
-        sectionId: this.id,
-        routes: [
-          {
-            text: "into the sky",
-            next: "intro10",
-          },
-        ],
-      },
-    };
-  }),
-
-  intro10: defineScene("intro10", function (payload): Scene {
+  intro13: defineScene("intro13", function (payload): Scene {
     return {
       id: this.id,
       text: `Server farms, Leaks, Leak Drops...what kind of dream is this? The Supreme Hegemon of Tangential 
@@ -423,29 +509,53 @@ export const introScenes = {
       onInputEntered: () => {
         const game = useGameStore();
         const character = useCharacterStore();
-        game.goToScene("intro11", { text: character.name });
+        game.goToScene("intro14", { text: character.name });
       },
       metadata: {
         sectionId: this.id,
         routes: [
           {
             text: "name input enetered",
-            next: "intro11",
+            next: "intro14",
           },
         ],
       },
     };
   }),
 
-  intro11: defineScene("intro11", function (payload): Scene {
-    //TODO: pounding sound
+  intro14: defineScene("intro14", function (payload): Scene {
     return {
       id: this.id,
       text: `Oh, that's right, ${payload?.text}! Well at least you still have your name.^^
-      Still...what's missing? You can feel the hole, but not the shape of what fit there. Was it your courage? 
-      Your heart? No — something deeper, older. A promise you made before you were born, maybe...^^You start
-      to hear a dull rhythmic pounding, like someone hammering shut a chest. Each thud resonates through you,
-      sealing something away, while also filling the mysterious gap, as if {trying to replace it}.`,
+      And yet...what's missing? You can feel the hole, but not the shape of what fit there. Was it your courage? 
+      Your heart? No — something deeper, older. {A promise you made before you were born, maybe}...`,
+      audio: windTunnel,
+      background: bgFog,
+      buttonActions: () => [
+        {
+          action: () => {
+            const game = useGameStore();
+            game.goToScene("intro15");
+          },
+        },
+      ],
+      metadata: {
+        sectionId: this.id,
+        routes: [
+          {
+            text: "A promise made before you were born",
+            next: "intro15",
+          },
+        ],
+      },
+    };
+  }),
+
+  intro15: defineScene("intro15", function (payload): Scene {
+    return {
+      id: this.id,
+      text: `You start to hear a dull rhythmic pounding, like someone hammering shut a chest. Each thud 
+      resonates through you, sealing something away, while also filling the mysterious gap, as if {trying to replace it}.`,
       audio: windTunnel,
       background: bgFog,
       buttonActions: () => [
@@ -456,6 +566,10 @@ export const introScenes = {
           },
         },
       ],
+      onPageLoad: () => {
+        const audioStore = useAudioStore();
+        audioStore.playGenericSound(poundingSound);
+      },
       metadata: {
         sectionId: this.id,
         routes: [
@@ -465,6 +579,39 @@ export const introScenes = {
           },
         ],
       },
+    };
+  }),
+
+  dungeon: defineScene("dungeon", function (payload): Scene {
+    return {
+      id: this.id,
+      text: "",
+      dungeonId: "forest",
+      metadata: {
+        sectionId: "intro",
+        routes: [
+          {
+            text: `trigger`,
+            next: "home",
+          },
+        ],
+      },
+    };
+  }),
+
+  credits: defineScene("credits", function (payload): Scene {
+    //TODO: MUSIC - credits music
+    return {
+      id: this.id,
+      text: "credits",
+      //TODO: credits
+    };
+  }),
+
+  preamble: defineScene("preamble", function (payload): Scene {
+    return {
+      id: this.id,
+      text: "",
     };
   }),
 };

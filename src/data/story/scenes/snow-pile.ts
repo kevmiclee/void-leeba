@@ -8,9 +8,9 @@ export const snowPileScenes = {
   "snow-pile": defineScene("snow-pile", function (payload): Scene {
     return {
       id: this.id,
-      text: "snow pile",
+      text: `It's a snow pile.`,
       background: bgDefault,
-      //TODO: snowpile -- do we really want/need this branch?
+      //TODO: are the drunks here? Have you already met them?
       metadata: {
         sectionId: "snow-pile",
       },

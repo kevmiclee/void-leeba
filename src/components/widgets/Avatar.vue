@@ -1,6 +1,9 @@
 <template>
   <transition name="slide-up">
-    <div v-if="showUserAvatar" class="avatar-wrapper">
+    <div
+      v-if="showUserAvatar || (persist && !currentCharacter)"
+      class="avatar-wrapper"
+    >
       <img
         :src="userAvatar"
         alt="User avatar"
@@ -9,7 +12,7 @@
       />
     </div>
     <div
-      v-else-if="hasDialog && currentCharacter"
+      v-else-if="(hasDialog || persist) && currentCharacter"
       class="avatar-wrapper"
       :key="currentCharacter.id"
       @click.stop="onAvatarClicked"
@@ -35,10 +38,11 @@ import { Character } from "@/types/character";
 
 const props = defineProps<{
   showUserAvatar: boolean;
-  currentCharacter: Character | null;
+  currentCharacter?: Character | null;
   hasDialog: boolean;
   dialogClicked: boolean;
-  onAvatarClicked: () => void;
+  onAvatarClicked?: () => void;
+  persist?: boolean;
 }>();
 
 const effects = useEffectsStore();
