@@ -144,3 +144,14 @@ export function getBlackDogDoneText(filter: string): string {
       return "";
   }
 }
+
+export function getShibHonestAnswer(choice: "kill" | "free" | "keep"): string {
+  switch (choice) {
+    case "kill":
+      return `"I killed it."`;
+    case "free":
+      return `"I let it out the window."`;
+    case "keep":
+      return `"I kept it for my collection."`;
+  }
+}

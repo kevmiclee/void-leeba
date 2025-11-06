@@ -217,13 +217,10 @@ export const introScenes = {
       text: `The dream you are about to see will help you...and me. It's a premonitory one 
       that Dirtgirl potted. All her dreams are good soil. So grow! I bartered real good for it 
       too—Sandperson told me about this dream the Giant Sand Worm had the other night. So funny, 
-      it had me in tears...whoops! Off on a {Tangent}.^^Anyway, {enjoy the dream!}`,
+      it had me in tears...whoops! Off on a tangent.^^Anyway, {enjoy the dream!}`,
       audio: windTunnel,
       background: bgFog,
       buttonActions: () => [
-        {
-          dictionaryEntryId: "tangent",
-        },
         {
           action: () => {
             const game = useGameStore();
@@ -231,10 +228,6 @@ export const introScenes = {
           },
         },
       ],
-      onPageLoad: () => {
-        const dict = useDictionaryStore();
-        dict.addEntry("tangent");
-      },
       metadata: {
         sectionId: this.id,
         routes: [
@@ -343,7 +336,7 @@ export const introScenes = {
   }),
 
   intro8: defineScene("intro8", function (payload): Scene {
-    //TODO: mudman laugh
+    //TODO: mudman laugh, loud, echo-y, glurpy
     return {
       id: this.id,
       text: `Aw man. What did he take?^^Mudman departs, gurgling his slimy gulp of a snicker 
@@ -377,7 +370,7 @@ export const introScenes = {
     return {
       id: this.id,
       text: `In the next instant, you observe Mudman standing in line at a kiosk along 
-      the server farm fences accompanied by a horse-sized crawfish. He is still cradling 
+      the server farm fences accompanied by a hog-sized crawfish. He is still cradling 
       the glowing object he stole from you.^^He plops it down on the counter.^^Kioskman 
       recognizes Mudman, and knocks on the backroom door of the kiosk.`,
       audio: windTunnel,
@@ -414,8 +407,8 @@ export const introScenes = {
         {
           characterId: "mr-ebeneezer",
           text: `Ah Mudman! What good fortune! You kept your word. At this rate we'll exceed 
-          our Q3 earnings by 1%! Survtek recognizes loyalty. As agreed, here, five 
-          Leak Drops. Kindly deposit your loot.`,
+          our Q3 earnings by 1%! Survtek recognizes loyalty. As agreed, here, one 
+          Leak Drop. Kindly deposit your loot.`,
           onClick: () => {
             const game = useGameStore();
             game.goToScene("intro11");

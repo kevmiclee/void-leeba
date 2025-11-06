@@ -84,18 +84,13 @@ export const useGameStore = defineStore("game", {
     },
 
     chooseOption(choice: Choice) {
-      if (choice.next || choice.onChoose) {
-        this.currentScenePayload = choice.payload || undefined;
+      this.currentScenePayload = choice.payload || undefined;
 
-        if (choice.onChoose) {
-          choice.onChoose();
-        }
-        if (choice.next) {
-          this.goToScene(choice.next);
-        }
-      } else {
-        const snackbar = useSnackbarStore();
-        snackbar.show("This path has not been built yet");
+      if (choice.onChoose) {
+        choice.onChoose();
+      }
+      if (choice.next) {
+        this.goToScene(choice.next);
       }
     },
 

@@ -24,22 +24,9 @@ export const dictionaryEntries: Record<DictionaryEntryId, DictionaryEntry> = {
   leaks: {
     id: "leaks",
     name: "Leaks",
-    description: `Leaks are linked together through computers, phones, reflections and mirrors. 
-    These portals are called "Leaks". They can be connecting any realities, but usually there's 
-    a reason. That reason could be puns, strong emotional stresses, obsessions. These Leaks are 
-    like dimensional conduits to pockets of those realities that contain the denizens of that 
-    reality. Leaks don't "suck things up", they are like stitched locational portals from one 
-    reality to another. The space around a leak buzzes like white noise, it smells like burning 
-    leather and the lines and shapes around it are stressed, blurred, put under great strain. 
-    These distortions also affect every living thing around the Leak itself. Five-meter circle 
-    around the Leak causes them to suffer negative consequences for any clear thinking, 
-    understanding or feeling.`,
-  },
-
-  tangent: {
-    id: "tangent",
-    name: "Tangent",
-    description: "A temporary path connecting two Leaks",
+    description: `Leaks are the portals between tangetial realities. These portals can take the 
+    form of computers, phones, reflections and mirrors. They can be connecting any realities, 
+    but usually there's a reason. For example, a pun, a strong emotional stress or an obsession.`,
   },
 
   dorgang: {

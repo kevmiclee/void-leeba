@@ -138,9 +138,13 @@ function openDrawerToView(value: DrawerView) {
 
 function onChoiceClicked(choice: Choice) {
   audioStore.click();
-  choice.drawerView
-    ? openDrawerToView(choice.drawerView)
-    : game.chooseOption(choice);
+  if (choice.drawerView) {
+    openDrawerToView(choice.drawerView);
+  }
+  if (choice.next || choice.onChoose) {
+    game.chooseOption(choice);
+  }
+  updateDialogIndex(0);
 }
 
 const rotationDeg = ref("0");

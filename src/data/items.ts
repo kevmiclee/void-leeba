@@ -1,32 +1,32 @@
 import { Item, ItemId } from "@/types/item";
 
 export const itemCatalog: Record<ItemId, Item> = {
-  "dragon-ring": {
-    id: "dragon-ring",
-    label: "Dragon ring",
-    description:
-      `The dragon is made of stainless steel with ruby red eyes. In its claws, it holds ` +
-      `a swirling planet of turquoise.`,
-    actionText:
-      "This ring always makes you feel connected to the Gurpy you never met.",
-    value: 0,
-    weight: 0,
-    permanent: true,
-    usable: false,
-  },
+  // "dragon-ring": {
+  //   id: "dragon-ring",
+  //   label: "Dragon ring",
+  //   description:
+  //     `The dragon is made of stainless steel with ruby red eyes. In its claws, it holds ` +
+  //     `a swirling planet of turquoise.`,
+  //   actionText:
+  //     "This ring always makes you feel connected to the Gurpy you never met.",
+  //   value: 0,
+  //   weight: 0,
+  //   permanent: true,
+  //   usable: false,
+  // },
 
-  "patched-coat": {
-    id: "patched-coat",
-    label: "Patched coat",
-    description:
-      `There is an intricately-hooked patch on its back that shows four images: ` +
-      `an ancient windmill, an historic longship, a modern wind turbine, and a lobster boat.`,
-    actionText: "Smells like Mormor.",
-    value: 0,
-    weight: 0,
-    permanent: true,
-    usable: false,
-  },
+  // "patched-coat": {
+  //   id: "patched-coat",
+  //   label: "Patched coat",
+  //   description:
+  //     `There is an intricately-hooked patch on its back that shows four images: ` +
+  //     `an ancient windmill, an historic longship, a modern wind turbine, and a lobster boat.`,
+  //   actionText: "Smells like Mormor.",
+  //   value: 0,
+  //   weight: 0,
+  //   permanent: true,
+  //   usable: false,
+  // },
 
   pinecone: {
     id: "pinecone",
@@ -152,6 +152,6 @@ export const itemCatalog: Record<ItemId, Item> = {
 //TODO: More items
 
 export const defaultItems: Item[] = [
-  itemCatalog["dragon-ring"],
-  itemCatalog["patched-coat"],
+  // itemCatalog["dragon-ring"],
+  // itemCatalog["patched-coat"],
 ];

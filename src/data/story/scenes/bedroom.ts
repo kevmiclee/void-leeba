@@ -3,13 +3,15 @@ import bgTimeFly from "@/assets/images/backgrounds/time-fly.png";
 import bgLivingRoom from "@/assets/images/backgrounds/living-room.png";
 import bgWindowsill from "@/assets/images/backgrounds/windowsill.png";
 
-import { Choice, Scene } from "@/types/story";
+import { Choice, Dialog, Scene } from "@/types/story";
 
 import homeSong from "@/assets/audio/story/background-themes/home.mp3";
 
 import { useCharacterStore } from "@/stores/character";
 import { useGameStore } from "@/stores/game";
 import { defineScene, SceneId } from "../story";
+import { getShibHonestAnswer } from "../helper-functions/text-helper-functions";
+import { on } from "events";
 
 export const bedroomScenes = {
   bedroom: defineScene("bedroom", function (payload): Scene {
@@ -26,7 +28,11 @@ export const bedroomScenes = {
           {
             characterId: "shib",
             text: `${playerName}! Please get up and help me. There is a Time Fly on my windowsill. You said you 
-            would take care of them for me in exchange for bagels, right? Now's your time to shine! I'm trying 
+            would take care of them for me in exchange for bagels, right?`,
+          },
+          {
+            characterId: "shib",
+            text: `Now's your time to shine! I'm trying 
             not to imagine that little ticker whizzing around my room.`,
             onClick: () => {
               const game = useGameStore();
@@ -50,7 +56,7 @@ export const bedroomScenes = {
   bedroom1: defineScene("bedroom1", function (payload): Scene {
     return {
       id: this.id,
-      text: `It's your flatmate, Shib. You promised you would help them with their temporomuscaphobia by dispelling 
+      text: `It's your flatmate, Shib. You promised you would help him with his temporomuscaphobia by dispelling 
       any Time Flies from the apartment. The best remedy for Time Flies is to feed them a book.^^Pick a book to 
       feed the Time Fly.`,
       audio: homeSong,
@@ -182,8 +188,7 @@ export const bedroomScenes = {
       return {
         id: this.id,
         text: `You walk into Shib's room with the book. There's the Time Fly on the windowsill. Seems like more of 
-        these things appear everyday. No wonder Shib is on edge recently.^^{You set the book down next to the insect 
-        and crack open the window}.`,
+        these things appear everyday. No wonder Shib is on edge recently.^^{You set the book down next to the insect}.`,
         audio: homeSong,
         background: bgTimeFly,
         buttonActions: () => [
@@ -213,7 +218,8 @@ export const bedroomScenes = {
       return {
         id: this.id,
         text: `Presently, it crawls onto the book. Its legs rub the bookcover with mechanical scrutiny. 
-        Its wings twitch their approval, then it hoists the book and flies away {through the opened window}.`,
+        Its wings twitch their approval. It issues a slimy probiscis and begins its meal. You use this 
+        opportunity to {catch the Time Fly}.`,
         audio: homeSong,
         background: bgTimeFly,
         buttonActions: () => [
@@ -242,23 +248,55 @@ export const bedroomScenes = {
     function (payload): Scene {
       return {
         id: this.id,
-        text: `Better tell Shib to {put their mind at ease}.`,
+        text: `You swoop a Bell jar over the Time Fly and carefully scoot a piece of paper underneath. Now what?`,
         audio: homeSong,
         background: bgWindowsill,
-        buttonActions: () => [
-          {
-            action: () => {
-              const game = useGameStore();
-              game.goToScene("bedroom-time-fly4");
+        choices: () => {
+          const character = useCharacterStore();
+          return [
+            {
+              text: `Bring it to your your room to add to your collection.`,
+              next: "bedroom-time-fly4",
+              onChoose: () => {
+                character.gainManners("weird", 1, this.id);
+                character.setFlag("time-fly-choice", "keep");
+              },
             },
-          },
-        ],
+            {
+              text: `Let it out the window.`,
+              next: "bedroom-time-fly4",
+              onChoose: () => {
+                character.gainManners("polite", 1, this.id);
+                character.setFlag("time-fly-choice", "free");
+              },
+            },
+            {
+              text: `Kill it.`,
+              next: "bedroom-time-fly4",
+              onChoose: () => {
+                character.gainManners("rude", 1, this.id);
+                character.setFlag("time-fly-choice", "kill");
+              },
+            },
+          ];
+        },
         metadata: {
           sectionId: this.id,
           routes: [
             {
-              text: "put their mind at ease",
+              text: `Bring it to your your room to add to your collection.`,
               next: "bedroom-time-fly4",
+              manners: "weird",
+            },
+            {
+              text: `Let it out the window.`,
+              next: "bedroom-time-fly4",
+              manners: "polite",
+            },
+            {
+              text: `Kill it.`,
+              next: "bedroom-time-fly4",
+              manners: "rude",
             },
           ],
         },
@@ -269,14 +307,135 @@ export const bedroomScenes = {
   "bedroom-time-fly4": defineScene(
     "bedroom-time-fly4",
     function (payload): Scene {
-      //TODO: you get some choices to lie to Shib or brag
       return {
         id: this.id,
-        text: `TO DO: Shib asks you how it went, you get some choices where you can lie, brag, be honest or humble. 
-        Then Shib asks if you've heard what's been going on in the news and says you should be up to date on 
-        everything because of your fancy new SmartBag. Shib hints at strange things they've noticed happening in the city`,
+        text: `It's done. Better tell Shib so he can {put his mind at ease}.`,
+        audio: homeSong,
+        background: bgWindowsill,
+        buttonActions: () => [
+          {
+            action: () => {
+              const game = useGameStore();
+              game.goToScene("bedroom-time-fly5");
+            },
+          },
+        ],
+        metadata: {
+          sectionId: this.id,
+          routes: [
+            {
+              text: "put his mind at ease",
+              next: "bedroom-time-fly5",
+            },
+          ],
+        },
+      };
+    }
+  ),
+
+  "bedroom-time-fly5": defineScene(
+    "bedroom-time-fly5",
+    function (payload): Scene {
+      return {
+        id: this.id,
+        text: "You return to Shib to calm him down.",
         audio: homeSong,
         background: bgLivingRoom,
+        dialogSequence: () => {
+          const character = useCharacterStore();
+          const shibSequenceCount = character.flags["shib-sequence-count"] ?? 0;
+
+          const dialog: Dialog[] = [
+            {
+              characterId: "shib",
+              text: `${shibSequenceCount > 0 ? `You're not listening! ` : ""}So, you gotta just kill them, you do that for me right? You said once that you would prefer to
+            capture them and let them go. But you remember you can't living with me, right? Cause they are going to
+            come right back in.`,
+              onClick: () => {
+                const game = useGameStore();
+                game.setPersistAvatar(true);
+              },
+            },
+            {
+              characterId: "shib",
+              text: `I don't know if you remember but they are attracted to my fear! They'll just home right back in
+            on me...and you know I have a phobia of them, they make me even more afraid, which attracts even more
+            time flies to me.`,
+            },
+          ];
+
+          if (shibSequenceCount == 2) {
+            dialog.unshift({
+              characterId: "shib",
+              text: `${character.name}, don't tell me to relax, that makes me even more agitated! I hate when people tell me to relax! I am serious about this.`,
+            });
+          }
+
+          return dialog;
+        },
+        choices: () => {
+          const game = useGameStore();
+          const character = useCharacterStore();
+          const timeFlyChoice = character.flags["time-fly-choice"]!;
+          const killedTimeFly = timeFlyChoice == "kill";
+          const shibSequenceCount = character.flags["shib-sequence-count"] ?? 0;
+          return shibSequenceCount == 0
+            ? [
+                {
+                  text: killedTimeFly
+                    ? `"I let it go, of course."`
+                    : `"I killed it, of course."`,
+                  onChoose: () => {
+                    character.gainStat("shitheadedness", 1, this.id);
+                    character.setFlag("shib-sequence-count", 1);
+                    game.goToScene("bedroom-time-fly5");
+                  },
+                },
+                {
+                  text: `<i>Flex your muscles.</i> "Those scum are no match for me!"`,
+                  onChoose: () => {
+                    character.gainStat("blueMagic", 1, this.id);
+                    character.setFlag("shib-sequence-count", 1);
+                    game.goToScene("bedroom-time-fly5");
+                  },
+                },
+                {
+                  text: getShibHonestAnswer(timeFlyChoice),
+                  onChoose: () => {
+                    character.gainStat("will", 1, this.id);
+                    character.setFlag("shib-sequence-count", 1);
+                    game.goToScene("bedroom-time-fly5");
+                  },
+                },
+                {
+                  text: `"Glad to be of service."`,
+                  onChoose: () => {
+                    character.gainStat("athletics", 1, this.id);
+                    character.setFlag("shib-sequence-count", 1);
+                    game.goToScene("bedroom-time-fly5");
+                  },
+                },
+              ]
+            : [
+                {
+                  text: `Try to reason with him. "Relax, don't worry."`,
+                  onChoose: () => {
+                    character.setFlag(
+                      "shib-sequence-count",
+                      shibSequenceCount + 1
+                    );
+                    game.goToScene("bedroom-time-fly5");
+                  },
+                },
+                {
+                  text: `Look at your Drip.`,
+                  drawerView: "main",
+                  onChoose: () => {
+                    game.goToScene("bedroom-time-fly6");
+                  },
+                },
+              ];
+        },
         metadata: {
           sectionId: this.id,
           routes: [],
@@ -284,12 +443,51 @@ export const bedroomScenes = {
       };
     }
   ),
+
+  "bedroom-time-fly6": defineScene(
+    "bedroom-time-fly6",
+    function (payload): Scene {
+      return {
+        id: this.id,
+        text: ``,
+        audio: homeSong,
+        background: bgLivingRoom,
+        dialogSequence: () => {
+          const character = useCharacterStore();
+          return [
+            {
+              characterId: "shib",
+              text: `${character.name}, I am serious about this. You're just gonna ignore me and look at your Drip? 
+              You don't even care how I feel. Maybe you are not such a good room mate.`,
+            },
+            {
+              characterId: "shib",
+              text: `I need to live with someone who validates my emotions. That means even during a cyclical 
+              trauma-dump, ${character.name}.`,
+            },
+          ];
+        },
+        metadata: {
+          sectionId: this.id,
+          routes: [
+            {
+              text: "put his mind at ease",
+              next: "bedroom-time-fly5",
+            },
+          ],
+        },
+      };
+    }
+  ),
 };
+
+// TODO: Shib hints at strange things they've noticed happening in the city,
+// TODO: flag management when going forward and back
 
 function getBookChoices(filter: string, nextScene: SceneId): Choice[] {
   const choices = [
     {
-      text: `Don't Make Me Think by Paul Krugman`,
+      text: `Harsh Mellow by Sherwan Milliams`,
       onChoose: () => {
         const game = useGameStore();
         game.setPersistAvatar(true);
@@ -306,12 +504,12 @@ function getBookChoices(filter: string, nextScene: SceneId): Choice[] {
         game.setPersistAvatar(true);
         game.goToScene(nextScene, {
           filter: `${filter},1`,
-          text: `You don't even like this book, but it reminds you of the person you were when you thought you’d like books like this. You can't get rid of it.`,
+          text: `You don't even like this book, but it reminds you of the person you were when you thought you'd like books like this. You can't get rid of it.`,
         });
       },
     },
     {
-      text: `Harsh Mellow by Sherwan Milliams`,
+      text: `Don't Make Me Think by Paul Krugman`,
       onChoose: () => {
         const game = useGameStore();
         game.setPersistAvatar(false);

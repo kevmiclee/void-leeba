@@ -1,6 +1,8 @@
 <template>
   <ul class="menu-list">
-    <li @click.stop="closeDrawer">< {{ character.name }}'s SmartBag®</li>
+    <li @click.stop="closeDrawer">
+      < {{ character.name ? `${character.name}'s '` : "" }}Drip💧
+    </li>
 
     <li
       v-if="!game.currentSceneId.includes('intro')"

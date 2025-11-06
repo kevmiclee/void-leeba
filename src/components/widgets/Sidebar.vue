@@ -1,11 +1,7 @@
 <template>
   <div class="sidebar">
     <button
-      v-if="
-        scenes.length > 1 &&
-        currentSceneIndex > 0 &&
-        !game.currentSceneId.includes('intro')
-      "
+      v-if="scenes.length > 1 && currentSceneIndex > 0"
       @click.stop="goBack"
     >
       <

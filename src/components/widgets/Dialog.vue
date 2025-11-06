@@ -41,6 +41,7 @@ function advanceDialog() {
     emit("update-dialog-index", props.dialogIndex + 1);
   } else {
     effects.updateShowChoices(true);
+    emit("update-dialog-index", 0);
   }
 }
 

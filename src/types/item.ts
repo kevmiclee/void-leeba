@@ -15,13 +15,14 @@ export interface Item {
 }
 
 export const defaultItems: Item[] = [
-  itemCatalog["dragon-ring"],
-  itemCatalog["patched-coat"],
+  // itemCatalog["dragon-ring"],
+  // itemCatalog["patched-coat"],
 ];
 
 export type ItemId =
-  | "dragon-ring"
-  | "patched-coat"
+  // | "dragon-ring"
+  // | "patched-coat"
+  // |
   | "pinecone"
   | "pine-needles"
   | "mushroom"

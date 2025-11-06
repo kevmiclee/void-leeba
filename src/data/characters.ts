@@ -21,6 +21,7 @@ import mudmanAvatar from "@/assets/images/avatars/mud-man.png";
 import mudmanSound from "@/assets/audio/characters/mudman.mp3";
 import carlAvatar from "@/assets/images/avatars/carl.png";
 import shibAvatar from "@/assets/images/avatars/shib.png";
+import shibSound from "@/assets/audio/characters/shib.mp3";
 
 export const characters: Record<CharacterId, Character> = {
   drunk1: {
@@ -118,6 +119,6 @@ export const characters: Record<CharacterId, Character> = {
     id: "shib",
     name: "Flatmate Shib",
     avatar: shibAvatar,
-    //TODO: shib sound
+    sound: shibSound,
   },
 };

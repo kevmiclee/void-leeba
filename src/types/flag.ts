@@ -1,5 +1,4 @@
 export type FlagId =
-  //TODO: flag affects
   | "closer-to-black-dog" // influences the outcome of the redblack dog attack
   | "healed-dog" // what they heal them into dictates something -- the redux, the chracter comes back to help them
   | "gave-dog-food" // the dog comes back to help
@@ -11,7 +10,9 @@ export type FlagId =
   | "did-faeries" // they went through the faeries branch and opted out. removes faeires option from dream1 choices.
   | "pie-choice" //  which pie they smellled last dicates something later on
   | "art-table-success-rate" // how well you're able to sell your art
-  | "asking-for-trouble"; // makes it more likely for 'bad' things to happen
+  | "asking-for-trouble" // makes it more likely for 'bad' things to happen
+  | "time-fly-choice"
+  | "shib-sequence-count";
 
 export type FlagValues = {
   "closer-to-black-dog": boolean;
@@ -26,6 +27,8 @@ export type FlagValues = {
   "pie-choice": "pecan" | "key-lime" | "cherry";
   "art-table-success-rate": number;
   "asking-for-trouble": boolean;
+  "time-fly-choice": "kill" | "free" | "keep";
+  "shib-sequence-count": number;
 };
 
 export type Flags = {
