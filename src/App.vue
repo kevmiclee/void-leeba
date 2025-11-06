@@ -78,6 +78,7 @@ button:focus {
   padding: 0.75rem 0.75rem;
   cursor: pointer;
   font-weight: 600;
+  font-size: 1.8vw;
 }
 
 .menu-list li:hover {

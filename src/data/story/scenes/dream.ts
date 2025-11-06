@@ -266,15 +266,70 @@ export const dreamScenes = {
       return {
         id: this.id,
         background: bgForest,
+        text: `The concept of dreaming twice is so scary! {What if you don't wake up?}`,
+        buttonActions: () => [
+          {
+            action: () => {
+              const game = useGameStore();
+              game.goToScene("dream-within-a-dream-refuse1");
+            },
+          },
+        ],
+        metadata: {
+          sectionId: "dream",
+          routes: [
+            {
+              text: `WHat if you don't wake up?`,
+              next: "dream-within-a-dream-refuse1",
+            },
+          ],
+        },
+      };
+    }
+  ),
+
+  "dream-within-a-dream-refuse1": defineScene(
+    "dream-within-a-dream-refuse1",
+    function (payload): Scene {
+      return {
+        id: this.id,
+        background: bgForest,
+        text: `Too late! You fell asleep anyway. Radiating anxiety, your raw nerves attack you. 
+          After a spiral of overthinking, you notice that you are hugging a brightly colored mushroom. 
+          You can tell because your face is right up against it and your arms are surrounding it. 
+          The mushroom smells like marshmallows, pencil shavings, sad carnivals and tests. Its flesh is soft, 
+          like a rotting orange. You recoil. {What a gross mushroom!}`,
+        buttonActions: () => [
+          {
+            action: () => {
+              const game = useGameStore();
+              game.goToScene("dream-within-a-dream-refuse2");
+            },
+          },
+        ],
+        metadata: {
+          sectionId: "dream",
+          routes: [
+            {
+              text: `What a gross mushroom!`,
+              next: "dream-within-a-dream-refuse2",
+            },
+          ],
+        },
+      };
+    }
+  ),
+
+  "dream-within-a-dream-refuse2": defineScene(
+    "dream-within-a-dream-refuse2",
+    function (payload): Scene {
+      return {
+        id: this.id,
+        background: bgForest,
         text:
-          `The concept of dreaming twice is so scary! What if you don't wake up? ` +
-          `^^Too late, you fell asleep anyway. Radiating anxiety, your raw nerves attack you.` +
-          `^^After a spiral of overthinking, you notice that you are hugging a brightly colored mushroom. ` +
-          `You can tell because your face is right up against it and your arms are surrounding it. ` +
-          `The mushroom smells like marshmallows, pencil shavings, sad carnivals and tests. Its flesh is soft, like a rotting orange. ` +
-          `You recoil. What a gross mushroom! What a cruddy day! You feel off.^^You hear yourself say aloud, "Eugh! What a wash."` +
+          `What a cruddy day! You feel off.^^You hear yourself say aloud, "Eugh! What a wash."` +
           `^^You lean back for a while just admiring the mushroom's disgustingness, worrying that you'll never wake up again.` +
-          `^^{Grab up a handful of the mushroom's flesh.}^^You begin to hear a faint thudding noise like the labored heartbeat of ` +
+          `^^You begin to hear a faint thudding noise like the labored heartbeat of ` +
           `some distant goliath. Oh no. Your dreaming was weak, filled with worry. A foreboding sense of doom cuts forces ` +
           `you to {awaken back into the first dream}.`,
         buttonActions: () => [
@@ -311,6 +366,7 @@ export const dreamScenes = {
       return {
         id: this.id,
         background: bgForest,
+        //TODO: break this up
         text:
           `Completely serene, without a worry in your mind, you fall asleep in your dream. You breathe in.` +
           `^^A new dream! You notice that you are hugging a brightly colored mushroom! You can tell because ` +
@@ -354,6 +410,7 @@ export const dreamScenes = {
       return {
         id: this.id,
         background: bgForest,
+        //TODO: break this up
         text:
           `The landscape expands into a void panorama, filling every corner of the emptiness as you inhale deeper. ` +
           `Day, night, day, night. Seasons cycle and time dutifully carves the terrain with imperceptible changes.` +
@@ -392,6 +449,7 @@ export const dreamScenes = {
       return {
         id: this.id,
         background: bgForest,
+        //TODO: break this up
         text:
           `The hum intensifies until it almost becomes unbearable, making you wince. It reaches a cresecendo and ` +
           `slowly begins its ebb back into entropic silence, leaving a ghostly impression of its power in your memory.` +
@@ -426,6 +484,7 @@ export const dreamScenes = {
       id: this.id,
       background: bgForest,
       //use tree-chase music
+      //TODO: break this up
       text:
         `You have chosen to swing a dream ax at a dream tree.` +
         `^^Looking down, you see a single-headed carbon-fiber ax in your left hand. Heh. Hefty!` +

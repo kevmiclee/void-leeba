@@ -19,9 +19,10 @@ import buzzSound from "@/assets/audio/characters/buzz.mp3";
 import pinkSnakeAvatar from "@/assets/images/avatars/pink-snake.png";
 import mudmanAvatar from "@/assets/images/avatars/mud-man.png";
 import mudmanSound from "@/assets/audio/characters/mudman.mp3";
-import carlAvatar from "@/assets/images/avatars/carl.png";
+import ezeneeberAvatar from "@/assets/images/avatars/carl.png";
+import ezeneeberSound from "@/assets/audio/characters/ezeneeber.wav";
 import shibAvatar from "@/assets/images/avatars/shib.png";
-import shibSound from "@/assets/audio/characters/shib.mp3";
+import shibSound from "@/assets/audio/characters/shib.wav";
 
 export const characters: Record<CharacterId, Character> = {
   drunk1: {
@@ -111,8 +112,8 @@ export const characters: Record<CharacterId, Character> = {
   "mr-ebeneezer": {
     id: "mr-ebeneezer",
     name: "Mr. Ebenenezer",
-    avatar: carlAvatar,
-    //TODO: carl sound
+    avatar: ezeneeberAvatar,
+    sound: ezeneeberSound,
   },
 
   shib: {

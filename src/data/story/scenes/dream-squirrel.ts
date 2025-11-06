@@ -15,10 +15,58 @@ export const dreamSquirrelScenes = {
     return {
       id: this.id,
       background: bgTrees,
-      text:
-        `You lock in on a squirrel. Its brown body is a corkscrew streak around the trunk. It's time to give chase. ` +
-        `You straddle the trunk, feeling the roughness of the bark tugging at your turtleneck as you shimmy up. Just a little closer... ` +
-        `The squirrel is right there! Its little face, filled with alarm (or is it amusement?), fills you with determination.`,
+      text: `You lock in on a squirrel. Its brown body is a corkscrew streak around the trunk. {It's time to give chase}.`,
+      buttonActions: () => [
+        {
+          action: () => {
+            const game = useGameStore();
+            game.goToScene("dream-squirrel0");
+          },
+        },
+      ],
+      metadata: {
+        sectionId: "dream-squirrel",
+        routes: [
+          {
+            text: `It's time to give chase`,
+            next: "dream-squirrel0",
+          },
+        ],
+      },
+    };
+  }),
+
+  "dream-squirrel0": defineScene("dream-squirrel0", function (payload): Scene {
+    return {
+      id: this.id,
+      background: bgTrees,
+      text: `You straddle the trunk, feeling the roughness of the bark tugging at your turtleneck as you shimmy up. 
+        {Just a little closer...} `,
+      buttonActions: () => [
+        {
+          action: () => {
+            const game = useGameStore();
+            game.goToScene("dream-squirrel1");
+          },
+        },
+      ],
+      metadata: {
+        sectionId: "dream-squirrel",
+        routes: [
+          {
+            text: `Just a little closer...`,
+            next: "dream-squirrel1",
+          },
+        ],
+      },
+    };
+  }),
+
+  "dream-squirrel1": defineScene("dream-squirrel1", function (payload): Scene {
+    return {
+      id: this.id,
+      background: bgTrees,
+      text: `The squirrel is right there! Its little face, filled with alarm (or is it amusement?), fills you with determination.`,
       choices: () => [
         { text: "Reach for the closest branch.", next: "dream-squirrel1a" },
         {
@@ -86,11 +134,9 @@ export const dreamSquirrelScenes = {
       return {
         id: this.id,
         background: bgTrees,
-        text:
-          `You keep shimmying up the trunk, past the first branch. Your arms and legs are ` +
-          `giving out. The squirrel hasn't moved. The way it watches you, vacillating between ` +
-          `tepid curiosity and utter indifference, suggests the thought of you as a threat could ` +
-          `not be further from its mind.`,
+        text: `You keep shimmying up the trunk, past the first branch. Your arms and legs are giving out. 
+          The squirrel hasn't moved. The way it watches you, vacillating between tepid curiosity and 
+          utter indifference, suggests the thought of you as a threat could not be further from its mind.`,
         choices: () => {
           const character = useCharacterStore();
 
@@ -140,11 +186,9 @@ export const dreamSquirrelScenes = {
     return {
       id: this.id,
       background: bgTrees,
-      text:
-        `Atta boy! Quitters never win. Your brow is wet with dream sweat. ` +
-        `Your hands and limbs are all scraped up from climbing. You feel sappy bits on your clothes and face. ` +
-        `The squirrel comes a little closer to you.` +
-        `^^Your muscles start to tremble. The squirrel gets up in your grill.`,
+      text: `Atta boy! Quitters never win. Your brow is wet with dream sweat. Your hands and limbs are 
+        all scraped up from climbing. You feel sappy bits on your clothes and face. The squirrel comes 
+        a little closer to you.^^Your muscles start to tremble. The squirrel gets up in your grill.`,
       dialogSequence: () => [
         {
           characterId: "squirrel",
@@ -179,32 +223,6 @@ export const dreamSquirrelScenes = {
           action: () => {
             const game = useGameStore();
             game.goToScene("dream-squirrel-game");
-            // const character = useCharacterStore();
-            // const game = useGameStore();
-            // const squirrelAthletics = 2;
-
-            // const roll = fateContest(
-            //   character.athletics.value,
-            //   squirrelAthletics
-            // );
-
-            // if (roll <= 0) {
-            //   character.setFlag("fell-from-tree", true);
-            // } else {
-            //   character.setFlag("fell-from-tree", false);
-            // }
-
-            // const outcome = getCatchSquirrelOutcome(roll);
-
-            // if (outcome.success) {
-            //   character.setFlag("caught-squirrel", true);
-            //   game.goToScene("dream-squirrel4-success", {
-            //     filter: outcome.text,
-            //   });
-            // } else {
-            //   character.setFlag("caught-squirrel", false);
-            //   game.goToScene("dream-squirrel4-fail", { filter: outcome.text });
-            // }
           },
         },
       ],
@@ -212,12 +230,8 @@ export const dreamSquirrelScenes = {
         sectionId: "dream-squirrel",
         routes: [
           {
-            text: `snatch the furball success`,
-            next: "dream-squirrel4-success",
-          },
-          {
-            text: `snatch the furball fail`,
-            next: "dream-squirrel4-fail",
+            text: `snatch the furball`,
+            next: "dream-squirrel-game",
           },
         ],
       },
@@ -229,7 +243,6 @@ export const dreamSquirrelScenes = {
     function (payload): Scene {
       return {
         id: this.id,
-        // background: bgForest,
         text: "",
         miniGameId: "squirrel",
         metadata: {

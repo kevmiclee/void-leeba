@@ -60,9 +60,9 @@ export const parkScenes = {
       background: bgParkNight,
       audio: parkMusic,
       text:
-        `The sun sets over the park. A few stars resist the city's lights. The playground and fences now set into silhouettes. ` +
-        `As your eyes adjust, the park takes on a dark grey black clarity. The stars and a white crescent illuminate it with a soft ` +
-        `whiteness devoid of color.` +
+        `The sun sets over the park. A few stars resist the city's lights. The playground and fences now 
+        set into silhouettes. As your eyes adjust, the park takes on a dark grey black clarity. The stars 
+        and a white crescent illuminate it with a soft whiteness devoid of color.` +
         `^^You hear two drunks arguing as they walk along, looking up and pointing.`,
       dialogSequence: () => [
         { characterId: "drunk1", text: `That's not the Moon! It's the Sun!` },

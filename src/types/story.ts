@@ -5,8 +5,9 @@ import { DrawerView } from "./drawer-view";
 import { MiniGameId } from "./mini-game";
 import { AspectId } from "./aspect";
 import { StatId } from "./stat";
-import { Manners, MannersId } from "./manners";
+import { MannersId } from "./manners";
 import { DungeonId } from "./dungeon";
+import { ItemId } from "./item";
 
 export interface ScenePayload {
   filter?: string;
@@ -19,6 +20,7 @@ export interface Choice {
   onChoose?: () => void;
   payload?: ScenePayload;
   drawerView?: DrawerView;
+  itemId?: ItemId;
 }
 
 export interface Dialog {

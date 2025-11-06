@@ -5,15 +5,22 @@
       class="drawer"
       @click.self="drawer.toggleDrawer"
     >
-      <DrawerMenu v-if="drawer.drawerView === 'main'"> </DrawerMenu>
-      <DrawerSelectedItem v-else-if="drawer.selectedItem"> </DrawerSelectedItem>
-      <DrawerSelectedDictionaryEntry v-else-if="drawer.selectedDictionaryEntry">
-      </DrawerSelectedDictionaryEntry>
-      <Bag v-else-if="drawer.drawerView === 'bag'"> </Bag>
-      <Phone v-else-if="drawer.drawerView === 'phone'"> </Phone>
-      <Dictionary v-else-if="drawer.drawerView === 'dictionary'"></Dictionary>
-      <Stats v-else-if="drawer.drawerView === 'stats'"> </Stats>
-      <Scenes v-else-if="drawer.drawerView === 'scenes'"> </Scenes>
+      <!-- Background image that defines the drawer's width -->
+      <img class="drawer-bg" :src="drawerBg" alt="" />
+
+      <!-- Overlay content -->
+      <div class="drawer-content">
+        <DrawerMenu v-if="drawer.drawerView === 'main'" />
+        <DrawerSelectedItem v-else-if="drawer.selectedItem" />
+        <DrawerSelectedDictionaryEntry
+          v-else-if="drawer.selectedDictionaryEntry"
+        />
+        <Bag v-else-if="drawer.drawerView === 'bag'" />
+        <Phone v-else-if="drawer.drawerView === 'phone'" />
+        <Dictionary v-else-if="drawer.drawerView === 'dictionary'" />
+        <Stats v-else-if="drawer.drawerView === 'stats'" />
+        <Scenes v-else-if="drawer.drawerView === 'scenes'" />
+      </div>
     </div>
   </transition>
 </template>
@@ -28,6 +35,7 @@ import Dictionary from "./Dictionary.vue";
 import Phone from "./Phone.vue";
 import Stats from "./Stats.vue";
 import Scenes from "./Scenes.vue";
+import drawerBg from "@/assets/images/items/bag.png";
 
 import { useDrawerStore } from "./../../stores/drawer";
 
@@ -56,6 +64,25 @@ watch(
   color: #b56d3c;
 }
 
+.drawer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--drawer-bg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover; /* or "contain" if you need exact aspect */
+  z-index: 0;
+  /* optional: add a tint to improve contrast with text */
+  /* background: linear-gradient(to bottom, rgba(0,0,0,.2), rgba(0,0,0,.2)), var(--drawer-bg); */
+}
+
+/* ensure children render above the background */
+.drawer > * {
+  position: relative;
+  z-index: 1;
+}
+
 .slide-enter-active,
 .slide-leave-active {
   transition: transform 0.3s ease;
@@ -69,12 +96,37 @@ watch(
   position: fixed;
   top: 0;
   left: 0;
-  width: 20vw;
-  height: 100vh;
-  background: white;
+  width: 100vw;
+  height: auto;
   z-index: 1001;
-  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.3);
   padding-top: 1.2vw;
-  overflow-y: auto; /* enables vertical scrolling */
+  overflow-y: auto;
+}
+
+.drawer-bg {
+  display: block; /* remove inline gaps */
+  height: auto; /* full height */
+  width: 100vw; /* maintain aspect ratio */
+}
+
+/* Content overlays on top of the image and can scroll */
+.drawer-content {
+  position: absolute;
+  inset: 0; /* fill drawer */
+  padding-top: 1.2vw;
+  height: clamp(220px, 24vw, 600px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  left: 19vw;
+  top: 25vw;
+  width: 31vw;
+}
+
+.drawer-content > * {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 0.6em;
+
+  font-size: clamp(16px, 1.6vw, 24px);
 }
 </style>

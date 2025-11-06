@@ -75,7 +75,7 @@ function updateSelectedDictionaryEntry(entry: DictionaryEntry) {
 
 <style scoped>
 .item-desc {
-  margin: 1vw;
+  padding-left: 1vw;
   padding-bottom: 2vw;
 }
 

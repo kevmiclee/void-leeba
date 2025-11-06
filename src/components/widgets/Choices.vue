@@ -52,11 +52,13 @@ import { useDrawerStore } from "@/stores/drawer";
 import { DrawerView } from "@/types/drawer-view";
 import { Choice } from "@/types/story";
 import { useEffectsStore } from "@/stores/effects";
+import { useCharacterStore } from "@/stores/character";
 
 const game = useGameStore();
 const audioStore = useAudioStore();
 const drawer = useDrawerStore();
 const effects = useEffectsStore();
+const characterStore = useCharacterStore();
 
 const dialogIndex = ref(0);
 const dialogClicked = ref(false);
@@ -90,8 +92,14 @@ const showChoices = computed(() => {
 });
 const visibleChoices = computed(() => {
   const currentScene = game.currentScene(game.currentScenePayload);
+  const inventory = characterStore.inventory;
+  const itemsForScene = inventory
+    .filter((i) => i.pageAcquired == currentScene.id)
+    .map((i) => i.id);
   if (currentScene.choices) {
-    return currentScene.choices();
+    return currentScene
+      .choices()
+      .filter((ch) => !ch.itemId || !itemsForScene.includes(ch.itemId));
   }
   return [];
 });

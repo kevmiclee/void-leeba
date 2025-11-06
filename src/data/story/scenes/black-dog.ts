@@ -27,8 +27,34 @@ export const blackDogScenes = {
       audio: spookyMusic,
       text:
         `They run past you to the skatepark. As they lope off, you turn around and lean against a tree.` +
-        `^^Your attention shifts to the field as the distant lights of the highway pull your gaze, like shooting stars.` +
-        `^^Below your gaze, you think you can see a form hunched across the field from you. Like a dark and burly bush, ` +
+        `^^Your attention shifts to the field as the distant lights of the highway pull your gaze, {like shooting stars}.`,
+      buttonActions: () => [
+        {
+          action: () => {
+            const game = useGameStore();
+            game.goToScene("black-dog0");
+          },
+        },
+      ],
+      metadata: {
+        sectionId: "black-dog",
+        routes: [
+          {
+            text: "like shooting stars",
+            next: "black-dog0",
+          },
+        ],
+      },
+    };
+  }),
+
+  "black-dog0": defineScene("black-dog0", function (payload): Scene {
+    return {
+      id: this.id,
+      background: bgBurlyBush,
+      audio: spookyMusic,
+      text:
+        `^Below your gaze, you think you can see a form hunched across the field from you. Like a dark and burly bush, ` +
         `you can't make out its features. You are sure that was not there a minute ago.`,
       choices: () => [
         {
@@ -81,18 +107,36 @@ export const blackDogScenes = {
       audio: spookyMusic,
       text:
         `Before you move a muscle, the dark star advances at a clip. As the distance closes, you notice rust red fur, ` +
-        `interspersed with oily black. You feel riveted to the spot, unable to look away.` +
-        `^^You recall the words of your sister the last time she read your fortune using those weird blocks and strings, ` +
-        `"You must be careful! There is a Red Dog. And, there is a Black Dog." But...` +
-        `^^...this is both? `,
+        `interspersed with oily black. You feel riveted to the spot, {unable to look away}.`,
       buttonActions: () => [
         {
           action: () => {
             const store = useGameStore();
-            store.goToScene("black-dog2");
+            store.goToScene("black-dog1a");
           },
         },
       ],
+      metadata: {
+        sectionId: "black-dog",
+        routes: [
+          {
+            text: "Unable to look away",
+            next: "black-dog1a",
+          },
+        ],
+      },
+    };
+  }),
+
+  "black-dog1a": defineScene("black-dog1a", function (payload): Scene {
+    return {
+      id: this.id,
+      background: bgBurlyBush,
+      audio: spookyMusic,
+      text:
+        `You recall the words of your sister the last time she read your fortune using those weird blocks and strings, ` +
+        `"You must be careful! There is a Red Dog. And, there is a Black Dog." But...` +
+        `^^...this is both? `,
       choices: () => [
         {
           text: "Start acting careful.",
@@ -109,8 +153,14 @@ export const blackDogScenes = {
         sectionId: "black-dog",
         routes: [
           {
-            text: "You start acting careful.",
+            text: "Start acting careful.",
             next: "black-dog2",
+            //TODO: perks
+          },
+          {
+            text: `It was hogwash then, and it's hogwash now.`,
+            next: "black-dog2",
+            //TODO: perks
           },
         ],
       },
@@ -123,11 +173,37 @@ export const blackDogScenes = {
       background: bgBurlyBush,
       audio: spookyMusic,
       text:
-        `As the Redblack dog approaches, you observe with rising nausea that it has a humanlike face but with dog flesh, ` +
+        `As the Redblack dog approaches, you observe with burgeoning nausea that it has a humanlike face but with dog flesh, ` +
         `and full dark eyes. The dog snarls, and it sounds like a hungry snarl. As it closes the distance to you, you see ` +
-        `that its hair is caught in snarls too. Ungroomed...^^The human-faced dog circles you, growling, barking, with ` +
-        `human-like lips that reveal its strong jaw and saliva-wet teeth. The redblack dog lunges at your ankles, its teeth ` +
-        `snapping around your heels as you leap back.`,
+        `that its hair is caught in snarls too.{ Ungroomed...}`,
+      buttonActions: () => [
+        {
+          action: () => {
+            const game = useGameStore();
+            game.goToScene("black-dog2a");
+          },
+        },
+      ],
+      metadata: {
+        sectionId: "black-dog",
+        routes: [
+          {
+            text: "Ungroomed...",
+            next: "black-dog2a",
+          },
+        ],
+      },
+    };
+  }),
+
+  "black-dog2a": defineScene("black-dog2a", function (payload): Scene {
+    return {
+      id: this.id,
+      background: bgBurlyBush,
+      audio: spookyMusic,
+      text: `The human-faced dog circles you, growling, barking, with human-like lips that reveal its strong 
+        jaw and saliva-wet teeth. The redblack dog lunges at your ankles, its teeth snapping around your heels 
+        as you leap back.`,
       dialogSequence: () => [
         {
           characterId: "black-dog",
@@ -182,13 +258,38 @@ export const blackDogScenes = {
       id: this.id,
       background: bgBurlyBush,
       audio: spookyMusic,
-      text:
-        `You remember back to your childhood, to a dog you had, Calla. Calla, so stinky, so sweet, so loyal. The contrast between ` +
-        `your childhood pet and this creature is striking. You feel few of the same feelings, despite the bodily similarity. ` +
-        `And yet, you just love dogs, and you know that if you follow certain procedures, a mean-seeming dog may flip onto its back.` +
-        `^^The dog submits to your touch, and leans against you. You find a collar with a locket wrapped around its neck. ` +
-        `The locket is glowing faintly with a sigul of a crescent moon. The dog does not react to you touching the locket, and you ` +
-        `think to {open it}.`,
+      text: `You remember back to your childhood, to a dog you had, Calla. Calla, so stinky, so sweet, so loyal. 
+        The contrast between your childhood pet and this creature is striking. You feel few of the same feelings, 
+        despite the bodily similarity. And yet, you just love dogs, and you know that if you follow certain procedures, 
+        a mean-seeming dog may {flip onto its back}.`,
+      buttonActions: () => [
+        {
+          action: () => {
+            const game = useGameStore();
+            game.goToScene("black-dog-good0");
+          },
+        },
+      ],
+      metadata: {
+        sectionId: "black-dog",
+        routes: [
+          {
+            text: "flip onto its back",
+            next: "black-dog-good0",
+          },
+        ],
+      },
+    };
+  }),
+
+  "black-dog-good0": defineScene("black-dog-good0", function (payload): Scene {
+    return {
+      id: this.id,
+      background: bgBurlyBush,
+      audio: spookyMusic,
+      text: `The dog submits to your touch, and leans against you. You find a collar with a locket wrapped around 
+        its neck. The locket is glowing faintly with a sigul of a crescent moon. The dog does not react to you 
+        touching the locket, and you think to {open it}.`,
       buttonActions: () => [
         {
           action: () => {
@@ -443,8 +544,37 @@ export const blackDogScenes = {
 
       text:
         `Its bloodshot eyes stare into yours with shameless hunger. The smell of stale smoke like the stench of clothing bathed ` +
-        `in campfire fills your nostrils. It begins to howl. The sound is eerily human, distincly <i>evil</i> in its gleeful exuberance. ` +
-        `Its lips purse, and its cheeks tighen around its jaw, baring a mouth filled with human teeth. A stomach-seizing terror builds in you and you know...` +
+        `in campfire fills your nostrils. {It begins to howl}.`,
+      buttonActions: () => [
+        {
+          action: () => {
+            const game = useGameStore();
+            game.goToScene("black-dog-bad1");
+          },
+        },
+      ],
+      metadata: {
+        sectionId: "black-dog",
+        routes: [
+          {
+            text: "it begins to howl",
+            next: "black-dog-bad1",
+          },
+        ],
+      },
+    };
+  }),
+
+  "black-dog-bad1": defineScene("black-dog-bad1", function (payload): Scene {
+    return {
+      id: this.id,
+      background: bgBurlyBush,
+      audio: spookyMusic,
+
+      text:
+        `The sound is eerily human, distincly <i>evil</i> in its gleeful exuberance. ` +
+        `Its lips purse, and its cheeks tighen around its jaw, baring a mouth filled with human teeth. ` +
+        `A stomach-seizing terror builds in you and you know...` +
         `^^<i>This kind of creature feeds on fear.</i>` +
         `^^You shall try a gambit, or it may best ye. You must latch onto a solid wavelength, to stabilize, secure your base.`,
       dialogSequence: () => [
@@ -576,7 +706,7 @@ export const blackDogScenes = {
         audio: spookyMusic,
         text:
           `...^^But wait! You're still here... You open your eyes. The redblack dog is harmlessly sniffing ` +
-          `around your pack. That's when you remember -- the dog food! Sweet serendiptity! Cautiously, you ` +
+          `around your pack. That's when you remember--the dog food! Sweet serendiptity! Cautiously, you ` +
           `open your pack and {let the creature take the food}.`,
         buttonActions: () => [
           {
@@ -903,7 +1033,37 @@ export const blackDogScenes = {
         text:
           `Brutal... you try to console yourself with the Oscar Wilde quip you conveniently memorized.` +
           `^^<i>“There's only one thing in the world worse than being talked about, and that is not being talked about."</i>` +
-          `^^It's not helping... You're done with this park. Part of you wishes you could find those drunks to give them a piece of your mind. ` +
+          `^^{It's not helping...}`,
+        buttonActions: () => [
+          {
+            action: () => {
+              const game = useGameStore();
+              game.goToScene("black-dog-viral2");
+            },
+          },
+        ],
+        metadata: {
+          sectionId: "black-dog",
+          routes: [
+            {
+              text: "It's not helping",
+              next: "black-dog-viral2",
+            },
+          ],
+        },
+      };
+    }
+  ),
+
+  "black-dog-viral2": defineScene(
+    "black-dog-viral2",
+    function (payload): Scene {
+      return {
+        id: this.id,
+        background: bgBurlyBush,
+        audio: spookyMusic,
+        text:
+          `You're done with this park. Part of you wishes you could find those drunks to give them a piece of your mind. ` +
           `Maybe they went {into the neighborhood}. Or you could {check by that snow pile}.` +
           `^^Another part of you just wants to {go home to your room} and forget about today.`,
         buttonActions: () => [

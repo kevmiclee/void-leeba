@@ -256,11 +256,10 @@ export const dreamFaeriesScenes = {
       id: this.id,
       background: bgForest,
       audio: faeriesSong,
-      text:
-        `Whatever that means.^^The eggcorn's skin is a luscious, lacquered brown. ` +
-        `It has a neat little cap and a fine pointy bottom. In fact, you've never found an eggcorn to be so... ` +
-        `tantalizing. Definitely something odd about these eggcorns. You notice that after eating an eggcorn, ` +
-        `the hongatar fall to the ground unconscious. Soon you're the only one left standing.`,
+      text: `The eggcorn's skin is a luscious, lacquered brown. It has a neat little cap and a fine pointy bottom. 
+        In fact, you've never found an eggcorn to be so...tantalizing. Definitely something odd about these eggcorns. 
+        You notice that after eating an eggcorn, the hongatar fall to the ground unconscious. Soon you're the only 
+        one left standing.`,
       choices: () => [
         { text: "YOLO! Eat the eggcorn.", next: `party-eggcorn` },
         { text: "On second thought...", next: "party-eggcorn-check" },
@@ -458,9 +457,8 @@ export const dreamFaeriesScenes = {
         id: this.id,
         background: bgForest,
         audio: faeriesSong,
-        text:
-          `The {hongatar} now all seem to hold you in great reverence and awe, ` +
-          `as if you were a god of the whole forest.`,
+        text: `The {hongatar} now all seem to hold you in great reverence and awe, 
+          as if you were a god of the whole forest.`,
         buttonActions: () => [
           {
             dictionaryEntryId: "hongatar",

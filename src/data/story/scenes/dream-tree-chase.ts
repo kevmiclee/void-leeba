@@ -22,40 +22,74 @@ export const dreamTreeChaseScenes = {
         text:
           getTreeChaseText(payload?.filter) +
           `As the dull sound resounds, it is joined by a chorus of snapping, cracking, creaking. ` +
-          `Soft at first, the din grows louder and louder.^^A tree slams as it splinters and crashes ` +
-          `into the ground behind you, making you jump. Another tree falls, narrowly missing ` +
-          `your shoulder. A tree that wasn't even there before begins to fall directly overhead. ` +
-          `You dive out of the way at the last moment.` +
-          `^^The trees are chasing you!` +
-          `^^You {run} forward through the forest.` +
-          `^^{Pick up a handful of pine needles.}`,
+          `Soft at first, {the din grows louder and louder}.`,
         buttonActions: () => [
           {
             action: () => {
               const game = useGameStore();
-              const character = useCharacterStore();
-              const itemWeight = character.inventory.reduce(
-                (sum, item) => sum + item.weight,
-                0
-              );
-              game.goToScene("dream-tree-chase-game-intro", {
-                text:
-                  itemWeight < 4
-                    ? "You feel unencumbered and are able to move nimbly."
-                    : itemWeight < 7
-                      ? "You feel somewhat burdened by the weight of your bag. Your agility is limited."
-                      : "Why did you pick up so much stuff? You can barely move to save your life.",
-              });
-            },
-          },
-          {
-            isItem: true,
-            action: () => {
-              const character = useCharacterStore();
-              character.addToInventory("pine-needles", this.id);
+              game.goToScene("dream-tree-chase1");
             },
           },
         ],
+        onPageLoad: () => {
+          const audioStore = useAudioStore();
+          audioStore.playGenericSound(treeFallingSound);
+        },
+        metadata: {
+          sectionId: "dream-tree-chase",
+          routes: [
+            {
+              text: `the din grows louder and louder`,
+              next: "dream-tree-chase1",
+            },
+          ],
+        },
+      };
+    }
+  ),
+
+  "dream-tree-chase1": defineScene(
+    "dream-tree-chase1",
+    function (payload): Scene {
+      return {
+        id: this.id,
+        background: bgForest,
+        text:
+          getTreeChaseText(payload?.filter) +
+          `A tree slams as it splinters and crashes into the ground behind you, making you jump. 
+          Another tree falls, narrowly missing your shoulder. A tree that wasn't even there before 
+          begins to fall directly overhead. You dive out of the way at the last moment.^^The trees are chasing you!`,
+        choices: () => {
+          const game = useGameStore();
+          const character = useCharacterStore();
+
+          return [
+            {
+              text: "Run.",
+              onChoose: () => {
+                const itemWeight = character.inventory.reduce(
+                  (sum, item) => sum + item.weight,
+                  0
+                );
+                game.goToScene("dream-tree-chase-game-intro", {
+                  text:
+                    itemWeight < 4
+                      ? "You feel unencumbered and are able to move nimbly."
+                      : itemWeight < 7
+                        ? "You feel somewhat burdened by the weight of your bag. Your agility is limited."
+                        : "Why did you pick up so much stuff? You can barely move to save your life.",
+                });
+              },
+            },
+            {
+              text: "Pick up a handful of pine needles",
+              itemId: "pine-needles",
+              onChoose: () => {
+                character.addToInventory("pine-needles", this.id);
+              },
+            },
+          ];
+        },
         onPageLoad: () => {
           const audioStore = useAudioStore();
           audioStore.playGenericSound(treeFallingSound);
@@ -213,11 +247,11 @@ export const dreamTreeChaseScenes = {
         //TODO: forest viewed from above
         //TODO: speeding into space sound
         text:
-          `As you vault above the canopy, a great bird grabs you by your turtleneck. It carries you high above the forest. ` +
+          `As you vault above the canopy, a great bird grabs you by your turtleneck. It carries you {high above the forest}. ` +
           `You can see the tree line and a sprawling countryside beyond it. Before long, you feel a sudden shift in trajectory and you ` +
           `and the bird shooting up, up, up at a very high speed. Craning your neck back, you see a pair of huge tatooed arms that ` +
-          `have latched on to the bird. The arms are attached to a rocket. The tattoo-armed rocket propels you and the bird into space, just beyond the atmosphere. ` +
-          `{Continue.}`,
+          `have latched on to the bird. The arms are attached to a rocket. The tattoo-armed rocket propels you and the bird into space, 
+          {just beyond the atmosphere}.`,
         onPageLoad: () => {
           const effects = useEffectsStore();
           effects.toggleIsZoomedOut(true);

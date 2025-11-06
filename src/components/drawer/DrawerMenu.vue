@@ -37,15 +37,6 @@
         character.$reset();
         timeoutStore.$reset(); -->
   </ul>
-  <img
-    :src="survtekLogo"
-    style="
-      height: 5vw;
-      position: absolute;
-      left: calc(50% - 2.5vw);
-      top: calc(50% - 2.5vw);
-    "
-  />
 
   <span style="bottom: 5vw; left: 0vw; position: absolute"
     >Current scene: {{ game.currentSceneId }}</span
@@ -57,7 +48,6 @@ import { useAudioStore } from "@/stores/audio";
 import { useDrawerStore } from "@/stores/drawer";
 import { useGameStore } from "@/stores/game";
 import { DrawerView } from "@/types/drawer-view";
-import survtekLogo from "@/assets/images/logos/survtek.png";
 import { useCharacterStore } from "@/stores/character";
 
 const game = useGameStore();
