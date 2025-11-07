@@ -6,11 +6,8 @@ const characterCooldowns = new Map<CharacterId, number>();
 const COOLDOWN_MS = 15000;
 
 const isMuted = ref<boolean>(false);
-const fadeDuration = 1000; // ms
+const fadeDuration = 1000;
 
-// ---------------------------
-// Web Audio API (background)
-// ---------------------------
 const audioCtx = new (window.AudioContext ||
   (window as any).webkitAudioContext)();
 const masterGain = audioCtx.createGain();
@@ -29,7 +26,6 @@ const bufferCache = new Map<string, AudioBuffer>();
 
 function ensureContext() {
   if (audioCtx.state === "suspended") {
-    // resume on user gesture elsewhere; this is safe to call
     audioCtx.resume().catch(() => {});
   }
 }
@@ -62,7 +58,6 @@ function startLoop(
   src.connect(gain).connect(masterGain);
   src.start();
 
-  // fade in
   const now = audioCtx.currentTime;
   gain.gain.cancelScheduledValues(now);
   gain.gain.setValueAtTime(0, now);
@@ -81,7 +76,6 @@ function crossfadeTo(
   const fadeS = fadeMs / 1000;
 
   if (currentLoop) {
-    // fade out current, stop when silent
     currentLoop.gain.gain.cancelScheduledValues(now);
     currentLoop.gain.gain.setValueAtTime(currentLoop.gain.gain.value, now);
     currentLoop.gain.gain.linearRampToValueAtTime(0, now + fadeS);
@@ -90,15 +84,11 @@ function crossfadeTo(
 
   currentLoop = { src: srcUrl, buffer, ...next };
 
-  // respect current mute state
   if (isMuted.value) {
     masterGain.gain.setValueAtTime(0, now);
   }
 }
 
-// ---------------------------
-// Your existing store API
-// ---------------------------
 const currentGenericAudio = ref<HTMLAudioElement | null>(null);
 
 export function useAudioStore() {
@@ -129,13 +119,9 @@ export function useAudioStore() {
     }
   }
 
-  // ---------------------------
-  // REWRITTEN: background music
-  // ---------------------------
   async function playBackgroundAudio(src: string | undefined) {
     ensureContext();
 
-    // stop background if no src
     if (!src) {
       if (currentLoop) {
         const now = audioCtx.currentTime;
@@ -155,8 +141,8 @@ export function useAudioStore() {
     // decode & crossfade
     const buffer = await loadBuffer(src);
     // Optional: set seamless loop region if your file has non-zero padding
-    const loopStart = 0; // seconds
-    const loopEnd = buffer.duration; // or a trimmed value you detect/know
+    // const loopStart = 0; // seconds
+    // const loopEnd = buffer.duration; // or a trimmed value you detect/know
     crossfadeTo(buffer, src, fadeDuration);
     // If you want to enforce a loop segment:
     // const next = startLoop(buffer, fadeDuration, loopStart, loopEnd); (and handle crossfade manually)
@@ -169,13 +155,11 @@ export function useAudioStore() {
   function mute() {
     isMuted.value = !isMuted.value;
 
-    // Background (Web Audio)
     const now = audioCtx.currentTime;
     masterGain.gain.cancelScheduledValues(now);
     masterGain.gain.setValueAtTime(masterGain.gain.value, now);
     masterGain.gain.linearRampToValueAtTime(isMuted.value ? 0 : 1, now + 0.15); // small ramp to avoid clicks
 
-    // One-shots (HTMLAudio)
     if (currentGenericAudio.value) {
       currentGenericAudio.value.muted = isMuted.value;
     }

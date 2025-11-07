@@ -9,7 +9,8 @@ import { defineScene } from "../story";
 import hypnoSong from "@/assets/audio/story/background-themes/ophelia.mp3";
 
 //TODO: player has to recite their lines and earns stats/items/aspects/something for getting it right/wrong
-//TODO: meta
+
+const sectionId = "hypno";
 
 export const hypnoScenes = {
   hypno: defineScene("hypno", function (payload): Scene {
@@ -29,7 +30,7 @@ export const hypnoScenes = {
         },
       ],
       metadata: {
-        sectionId: "hypno",
+        sectionId: sectionId,
         routes: [{ text: "...", next: "hypno1" }],
       },
     };
@@ -52,7 +53,7 @@ export const hypnoScenes = {
         },
       ],
       metadata: {
-        sectionId: "hypno",
+        sectionId: sectionId,
         routes: [
           { text: "Keep practicing.", next: "hypno-practice" },
           { text: "...", next: "hypno2" },
@@ -78,7 +79,7 @@ export const hypnoScenes = {
         },
       ],
       metadata: {
-        sectionId: "hypno",
+        sectionId: sectionId,
         routes: [{ text: "...", next: "hypno3" }],
       },
     };
@@ -96,7 +97,7 @@ export const hypnoScenes = {
         { text: "Finish.", next: "hypno4" },
       ],
       metadata: {
-        sectionId: "hypno",
+        sectionId: sectionId,
         routes: [
           { text: "Keep practicing.", next: "hypno-practice" },
           { text: "Finish.", next: "hypno4" },
@@ -119,7 +120,7 @@ export const hypnoScenes = {
         { text: "Finish.", next: "hypno4" },
       ],
       metadata: {
-        sectionId: "hypno",
+        sectionId: sectionId,
         routes: [
           { text: "Keep practicing.", next: "hypno-practice1" },
           { text: "Finish.", next: "hypno4" },
@@ -146,7 +147,7 @@ export const hypnoScenes = {
         },
       ],
       metadata: {
-        sectionId: "hypno",
+        sectionId: sectionId,
         routes: [{ text: "Finish.", next: "hypno4", aspect: "well-versed" }],
       },
     };
@@ -186,7 +187,7 @@ export const hypnoScenes = {
         },
       ],
       metadata: {
-        sectionId: "hypno",
+        sectionId: sectionId,
         routes: [
           {
             text: `"I don't think I'm cut out for this."`,
@@ -230,7 +231,7 @@ export const hypnoScenes = {
         },
       ],
       metadata: {
-        sectionId: "hypno",
+        sectionId: sectionId,
         routes: [{ text: "buzz dialog click.", next: "hypno6" }],
       },
     };
@@ -254,7 +255,7 @@ export const hypnoScenes = {
         },
       ],
       metadata: {
-        sectionId: "hypno",
+        sectionId: sectionId,
         routes: [{ text: "keg", next: "hypno7" }],
       },
     };
@@ -279,7 +280,7 @@ export const hypnoScenes = {
         },
       ],
       metadata: {
-        sectionId: "hypno",
+        sectionId: sectionId,
         routes: [{ text: "buzz dialog click.", next: "hypno8" }],
       },
     };
@@ -307,7 +308,7 @@ export const hypnoScenes = {
         },
       ],
       metadata: {
-        sectionId: "hypno",
+        sectionId: sectionId,
         routes: [{ text: "buzz dialog click.", next: "hypno9" }],
       },
     };
@@ -340,7 +341,7 @@ export const hypnoScenes = {
         },
       ],
       metadata: {
-        sectionId: "hypno",
+        sectionId: sectionId,
         routes: [
           {
             text: "I'm not doing this! Will yourself awake",
@@ -382,7 +383,7 @@ export const hypnoScenes = {
           },
         ],
         metadata: {
-          sectionId: "hypno",
+          sectionId: sectionId,
           routes: [
             { text: "I said no", next: "dream1" },
             {
@@ -412,7 +413,7 @@ export const hypnoScenes = {
         },
       ],
       metadata: {
-        sectionId: "hypno",
+        sectionId: sectionId,
         routes: [{ text: "buzz dialog click", next: "hypno-ready1" }],
       },
     };
@@ -437,7 +438,7 @@ export const hypnoScenes = {
         },
       ],
       metadata: {
-        sectionId: "hypno",
+        sectionId: sectionId,
         routes: [
           {
             text: "Act like a keg",

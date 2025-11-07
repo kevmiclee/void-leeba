@@ -13,7 +13,7 @@ import { defineScene, SceneId } from "../story";
 import { getShibHonestAnswer } from "../helper-functions/text-helper-functions";
 import { useAspectStore } from "@/stores/aspects";
 
-//TODO: Meta
+const sectionId = "bedroom";
 
 export const bedroomScenes = {
   bedroom: defineScene("bedroom", function (payload): Scene {
@@ -44,7 +44,7 @@ export const bedroomScenes = {
         ];
       },
       metadata: {
-        sectionId: "bedroom",
+        sectionId: sectionId,
         routes: [
           {
             text: "dialog click",
@@ -73,7 +73,7 @@ export const bedroomScenes = {
         return getBookChoices("", "bedroom2");
       },
       metadata: {
-        sectionId: "bedroom",
+        sectionId: sectionId,
         routes: [
           {
             text: "choose wrong book",
@@ -96,7 +96,7 @@ export const bedroomScenes = {
       audio: homeSong,
       background: bgBedroom,
       metadata: {
-        sectionId: "bedroom",
+        sectionId: sectionId,
         routes: [
           {
             text: "choose wrong book",
@@ -119,7 +119,7 @@ export const bedroomScenes = {
       audio: homeSong,
       background: bgBedroom,
       metadata: {
-        sectionId: "bedroom",
+        sectionId: sectionId,
         routes: [
           {
             text: "choose wrong book",
@@ -142,7 +142,7 @@ export const bedroomScenes = {
       audio: homeSong,
       background: bgBedroom,
       metadata: {
-        sectionId: "bedroom",
+        sectionId: sectionId,
         routes: [
           {
             text: "choose right book",
@@ -172,7 +172,7 @@ export const bedroomScenes = {
           },
         ],
         metadata: {
-          sectionId: "bedroom",
+          sectionId: sectionId,
           routes: [
             {
               text: "dialog click",
@@ -202,7 +202,7 @@ export const bedroomScenes = {
           },
         ],
         metadata: {
-          sectionId: "bedroom",
+          sectionId: sectionId,
           routes: [
             {
               text: "You set the book down next to the insect",
@@ -233,7 +233,7 @@ export const bedroomScenes = {
           },
         ],
         metadata: {
-          sectionId: "bedroom",
+          sectionId: sectionId,
           routes: [
             {
               text: "catch the Time Fly",
@@ -283,7 +283,7 @@ export const bedroomScenes = {
           ];
         },
         metadata: {
-          sectionId: "bedroom",
+          sectionId: sectionId,
           routes: [
             {
               text: `Bring it to your your room to add to your collection.`,
@@ -323,7 +323,7 @@ export const bedroomScenes = {
           },
         ],
         metadata: {
-          sectionId: "bedroom",
+          sectionId: sectionId,
           routes: [
             {
               text: "put his mind at ease",
@@ -436,7 +436,7 @@ export const bedroomScenes = {
               ];
         },
         metadata: {
-          sectionId: "bedroom",
+          sectionId: sectionId,
           routes: [
             {
               text: "Lie",
@@ -463,7 +463,7 @@ export const bedroomScenes = {
               next: "bedroom-time-fly5",
             },
             {
-              text: `Look at your drip`,
+              text: `Look at your Drip`,
               next: "bedroom-time-fly6",
             },
           ],
@@ -510,7 +510,7 @@ export const bedroomScenes = {
           },
         ],
         metadata: {
-          sectionId: "bedroom",
+          sectionId: sectionId,
           routes: [
             {
               text: `"Um..."`,
@@ -551,7 +551,7 @@ export const bedroomScenes = {
           ];
         },
         metadata: {
-          sectionId: "bedroom",
+          sectionId: sectionId,
           routes: [
             {
               text: "dialog click",
@@ -581,7 +581,7 @@ export const bedroomScenes = {
         },
       ],
       metadata: {
-        sectionId: "bedroom",
+        sectionId: sectionId,
         routes: [
           {
             text: "Go out and explore.",
@@ -667,7 +667,7 @@ export const bedroomScenes = {
         },
       ],
       metadata: {
-        sectionId: "home",
+        sectionId: sectionId,
         routes: [
           {
             text: `Dog food can`,
@@ -730,7 +730,7 @@ export const bedroomScenes = {
         },
       ],
       metadata: {
-        sectionId: "home",
+        sectionId: sectionId,
         routes: [
           {
             text: `Continue`,
@@ -773,7 +773,7 @@ export const bedroomScenes = {
         },
       ],
       metadata: {
-        sectionId: "home",
+        sectionId: sectionId,
         routes: [
           {
             text: `A nap sounds nice`,
@@ -806,7 +806,7 @@ export const bedroomScenes = {
         },
       ],
       metadata: {
-        sectionId: "home",
+        sectionId: sectionId,
         routes: [
           {
             text: `Close your eyes`,
@@ -856,7 +856,7 @@ export const bedroomScenes = {
         },
       ],
       metadata: {
-        sectionId: "home",
+        sectionId: sectionId,
         routes: [
           {
             text: `into the void`,

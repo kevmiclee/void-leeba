@@ -8,6 +8,8 @@ import { useAspectStore } from "@/stores/aspects";
 import { defineScene } from "../story";
 import { useDictionaryStore } from "@/stores/dictionary";
 
+const sectionId = "dream-faeries";
+
 export const dreamFaeriesScenes = {
   "dream-faeries": defineScene("dream-faeries", function (payload): Scene {
     return {
@@ -63,7 +65,7 @@ export const dreamFaeriesScenes = {
         dict.addEntry("hongatar");
       },
       metadata: {
-        sectionId: "dream-faeries",
+        sectionId: sectionId,
         routes: [
           {
             text: "faerie dialog click",
@@ -109,7 +111,7 @@ export const dreamFaeriesScenes = {
         },
       ],
       metadata: {
-        sectionId: "dream-faeries",
+        sectionId: sectionId,
         routes: [
           {
             text: `Bow graciously. "Thanks for spitting in my nostril holes."`,
@@ -164,7 +166,7 @@ export const dreamFaeriesScenes = {
         },
       ],
       metadata: {
-        sectionId: "dream-faeries",
+        sectionId: sectionId,
         routes: [
           {
             text: `faerie dialog click`,
@@ -206,7 +208,7 @@ export const dreamFaeriesScenes = {
         },
       ],
       metadata: {
-        sectionId: "dream-faeries",
+        sectionId: sectionId,
         routes: [
           {
             text: `"Um..."`,
@@ -240,7 +242,7 @@ export const dreamFaeriesScenes = {
         },
       ],
       metadata: {
-        sectionId: "dream-faeries",
+        sectionId: sectionId,
         routes: [
           {
             text: `faerie dialog clicks`,
@@ -265,7 +267,7 @@ export const dreamFaeriesScenes = {
         { text: "On second thought...", next: "party-eggcorn-check" },
       ],
       metadata: {
-        sectionId: "dream-faeries",
+        sectionId: sectionId,
         routes: [
           {
             text: `YOLO! Eat the eggcorn.`,
@@ -319,7 +321,7 @@ export const dreamFaeriesScenes = {
           return choices;
         },
         metadata: {
-          sectionId: "dream-faeries",
+          sectionId: sectionId,
           routes: [
             {
               text: `"Oh I see, you were planting snail trees! The Hongatar truly are a noble breed.`,
@@ -388,7 +390,7 @@ export const dreamFaeriesScenes = {
           ];
         },
         metadata: {
-          sectionId: "dream-faeries",
+          sectionId: sectionId,
           routes: [
             {
               text: `"You're lying. I saw you eating the snails!"`,
@@ -438,7 +440,7 @@ export const dreamFaeriesScenes = {
           },
         ],
         metadata: {
-          sectionId: "dream-faeries",
+          sectionId: sectionId,
           routes: [
             {
               text: `faerie dialog click`,
@@ -485,7 +487,7 @@ export const dreamFaeriesScenes = {
           },
         ],
         metadata: {
-          sectionId: "dream-faeries",
+          sectionId: sectionId,
           routes: [
             {
               text: `faerie dialog click`,
@@ -541,7 +543,7 @@ export const dreamFaeriesScenes = {
           ];
         },
         metadata: {
-          sectionId: "dream-faeries",
+          sectionId: sectionId,
           routes: [
             {
               text: `"Let that be a lesson to you."`,
@@ -594,7 +596,7 @@ export const dreamFaeriesScenes = {
           },
         ],
         metadata: {
-          sectionId: "dream-faeries",
+          sectionId: sectionId,
           routes: [
             {
               text: `"I'm good. Thanks"`,
@@ -635,7 +637,7 @@ export const dreamFaeriesScenes = {
           },
         ],
         metadata: {
-          sectionId: "dream-faeries",
+          sectionId: sectionId,
           routes: [
             {
               text: `fearie dialog click`,
@@ -669,7 +671,7 @@ export const dreamFaeriesScenes = {
         },
       ],
       metadata: {
-        sectionId: "dream-faeries",
+        sectionId: sectionId,
         routes: [
           {
             text: `everything goes dark`,
@@ -709,7 +711,7 @@ export const dreamFaeriesScenes = {
           },
         ],
         metadata: {
-          sectionId: "dream-faeries",
+          sectionId: sectionId,
           routes: [
             {
               text: `No. Seriously. I'm not eating it`,

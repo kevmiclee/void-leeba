@@ -10,6 +10,8 @@ import { defineScene } from "../story";
 
 //TODO: MUSIC - park - add egg-shaker sound, and like fun guttural burpy percussive noises, crickets
 
+const sectionId = "park";
+
 export const parkScenes = {
   park: defineScene("park", function (payload): Scene {
     return {
@@ -35,7 +37,7 @@ export const parkScenes = {
         },
       ],
       metadata: {
-        sectionId: "park",
+        sectionId: sectionId,
         routes: [
           {
             text: `Still yourself and listen to the sounds.`,
@@ -76,7 +78,7 @@ export const parkScenes = {
         },
       ],
       metadata: {
-        sectionId: "park",
+        sectionId: sectionId,
         routes: [
           {
             text: `drunk dialog click`,
@@ -131,7 +133,7 @@ export const parkScenes = {
         },
       ],
       metadata: {
-        sectionId: "park",
+        sectionId: sectionId,
         routes: [
           {
             text: `I'm sorry, I'm not from around here.`,
@@ -190,7 +192,7 @@ export const parkScenes = {
         },
       ],
       metadata: {
-        sectionId: "park",
+        sectionId: sectionId,
         routes: [
           {
             text: `I dont have time for this`,
@@ -242,7 +244,7 @@ export const parkScenes = {
         ];
       },
       metadata: {
-        sectionId: "park",
+        sectionId: sectionId,
         routes: [
           {
             text: `drunk dialog click`,
@@ -296,7 +298,7 @@ export const parkScenes = {
         },
       ],
       metadata: {
-        sectionId: "park",
+        sectionId: sectionId,
         routes: [
           {
             text: `Not cool`,
@@ -360,7 +362,7 @@ export const parkScenes = {
         return dialogs;
       },
       metadata: {
-        sectionId: "park",
+        sectionId: sectionId,
         routes: [
           {
             text: `drunk dialog click`,

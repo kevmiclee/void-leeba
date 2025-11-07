@@ -4,6 +4,8 @@ import { defineScene } from "../story";
 
 //TODO: MUSIC - snow pile
 
+const sectionId = "snow-pile";
+
 export const snowPileScenes = {
   "snow-pile": defineScene("snow-pile", function (payload): Scene {
     return {
@@ -12,7 +14,7 @@ export const snowPileScenes = {
       background: bgDefault,
       //TODO: are the drunks here? Have you already met them?
       metadata: {
-        sectionId: "snow-pile",
+        sectionId: sectionId,
       },
     };
   }),

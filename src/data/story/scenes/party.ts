@@ -3,6 +3,9 @@ import bgDefault from "@/assets/images/backgrounds/new-game.png";
 import partySong from "@/assets/audio/story/background-themes/party.mp3";
 import { defineScene } from "../story";
 
+const sectionId = "party";
+//TODO: meta
+
 export const partyScenes = {
   "party-keg": defineScene("party-keg", function (payload): Scene {
     return {
@@ -16,7 +19,7 @@ export const partyScenes = {
         { characterId: "squirrel", text: "JOOOOOOOO!" },
       ],
       metadata: {
-        sectionId: "party",
+        sectionId: sectionId,
       },
     };
   }),
@@ -41,7 +44,7 @@ export const partyScenes = {
         { text: "Just try to blend in." },
       ],
       metadata: {
-        sectionId: "party",
+        sectionId: sectionId,
       },
     };
   }),
@@ -66,7 +69,7 @@ export const partyScenes = {
         { text: "Just try to blend in." },
       ],
       metadata: {
-        sectionId: "party",
+        sectionId: sectionId,
       },
     };
   }),

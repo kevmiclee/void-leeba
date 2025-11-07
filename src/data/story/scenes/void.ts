@@ -10,6 +10,8 @@ import { useEffectsStore } from "@/stores/effects";
 //TODO: stats?
 //TODO: items?
 
+const sectionId = "void";
+
 export const voidScenes = {
   void: defineScene("void", function (payload): Scene {
     return {
@@ -55,7 +57,7 @@ export const voidScenes = {
         ];
       },
       metadata: {
-        sectionId: "void",
+        sectionId: sectionId,
         routes: [
           {
             text: "Not anymore!",
@@ -105,7 +107,7 @@ export const voidScenes = {
         //TODO: a web of thoughts zooming out
       },
       metadata: {
-        sectionId: "void",
+        sectionId: sectionId,
         routes: [
           {
             text: "a set of questions appears",
@@ -162,7 +164,7 @@ export const voidScenes = {
         effects.toggleBlurChoices(true);
       },
       metadata: {
-        sectionId: "void",
+        sectionId: sectionId,
         routes: [
           {
             text: "Do you believe in lice after lunch?",
@@ -209,7 +211,7 @@ export const voidScenes = {
           effects.toggleStretchAvatar(true);
         },
         metadata: {
-          sectionId: "void",
+          sectionId: sectionId,
           routes: [
             {
               text: "Cry openly.",
@@ -235,7 +237,7 @@ export const voidScenes = {
         text: ``,
         choices: () => [],
         metadata: {
-          sectionId: "void",
+          sectionId: sectionId,
           routes: [],
         },
       };
@@ -279,7 +281,7 @@ export const voidScenes = {
           },
         ],
         metadata: {
-          sectionId: "void",
+          sectionId: sectionId,
           routes: [
             {
               text: "Pecan.",
@@ -310,7 +312,7 @@ export const voidScenes = {
           //TODO: choices
         ],
         metadata: {
-          sectionId: "void",
+          sectionId: sectionId,
           routes: [],
         },
       };
@@ -338,7 +340,7 @@ export const voidScenes = {
           },
         ],
         metadata: {
-          sectionId: "void",
+          sectionId: sectionId,
           routes: [
             {
               text: `"Sometimes survival is the only moral choice." ...wasn't it?`,
@@ -376,7 +378,7 @@ export const voidScenes = {
           },
         ],
         metadata: {
-          sectionId: "void",
+          sectionId: sectionId,
           routes: [
             {
               text: `Get out there an' show 'em!`,
@@ -411,7 +413,7 @@ export const voidScenes = {
           },
         ],
         metadata: {
-          sectionId: "void",
+          sectionId: sectionId,
           routes: [
             {
               text: "Give it your soul.",
@@ -442,7 +444,7 @@ export const voidScenes = {
           snackbar.show(`-1 ${payload?.filter}`);
         },
         metadata: {
-          sectionId: "void",
+          sectionId: sectionId,
           routes: [],
         },
       };
@@ -487,7 +489,7 @@ export const voidScenes = {
           ];
         },
         metadata: {
-          sectionId: "void",
+          sectionId: sectionId,
           routes: [],
         },
       };
@@ -502,7 +504,7 @@ export const voidScenes = {
       //TODO: void-alone
       choices: () => [],
       metadata: {
-        sectionId: "void",
+        sectionId: sectionId,
         routes: [],
       },
     };
@@ -516,7 +518,7 @@ export const voidScenes = {
       //TODO: void whatever
       choices: () => [],
       metadata: {
-        sectionId: "void",
+        sectionId: sectionId,
         routes: [],
       },
     };

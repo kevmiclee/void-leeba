@@ -8,7 +8,7 @@
     </button>
     <button v-if="canGoForward" @click.stop="goForward">></button>
 
-    <div class="survtek-button">
+    <div v-if="!drawer.isDrawerOpen" class="survtek-button">
       <img :src="survtekLogo" class="icon" @click.stop="toggleDrawer" />
       <span
         v-if="animatedCount > 0"

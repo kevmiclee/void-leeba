@@ -4,6 +4,8 @@ import { defineScene } from "../story";
 
 //TODO: MUSIC - paint
 
+const sectionId = "paint";
+
 export const paintScenes = {
   paint: defineScene("paint", function (payload): Scene {
     return {
@@ -12,7 +14,7 @@ export const paintScenes = {
       background: bgDefault,
       //TODO: paint
       metadata: {
-        sectionId: "paint",
+        sectionId: sectionId,
       },
     };
   }),

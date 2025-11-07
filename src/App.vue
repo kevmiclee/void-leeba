@@ -75,7 +75,7 @@ button:focus {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.75rem 0.75rem;
+  padding: 0.75vw 0.75vw;
   cursor: pointer;
   font-weight: 600;
   font-size: 1.8vw;

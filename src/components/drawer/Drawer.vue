@@ -1,21 +1,19 @@
 <template>
   <transition name="slide">
-    <div
-      v-if="drawer.isDrawerOpen"
-      class="drawer"
-      @click.self="drawer.toggleDrawer"
-    >
-      <!-- Background image that defines the drawer's width -->
-      <img class="drawer-bg" :src="drawerBg" alt="" />
-
-      <!-- Overlay content -->
+    <div v-if="drawer.isDrawerOpen" class="drawer">
+      <img
+        class="drawer-bg"
+        :src="drawerBg"
+        alt=""
+        @click.self="drawer.toggleDrawer"
+      />
       <div class="drawer-content">
         <DrawerMenu v-if="drawer.drawerView === 'main'" />
         <DrawerSelectedItem v-else-if="drawer.selectedItem" />
         <DrawerSelectedDictionaryEntry
           v-else-if="drawer.selectedDictionaryEntry"
         />
-        <Bag v-else-if="drawer.drawerView === 'bag'" />
+        <Items v-else-if="drawer.drawerView === 'bag'" />
         <Phone v-else-if="drawer.drawerView === 'phone'" />
         <Dictionary v-else-if="drawer.drawerView === 'dictionary'" />
         <Stats v-else-if="drawer.drawerView === 'stats'" />
@@ -30,7 +28,7 @@ import { watch } from "vue";
 import DrawerMenu from "./DrawerMenu.vue";
 import DrawerSelectedItem from "./DrawerSelectedItem.vue";
 import DrawerSelectedDictionaryEntry from "./DrawerSelectedDictionaryEntry.vue";
-import Bag from "./Bag.vue";
+import Items from "./Items.vue";
 import Dictionary from "./Dictionary.vue";
 import Phone from "./Phone.vue";
 import Stats from "./Stats.vue";
@@ -71,13 +69,10 @@ watch(
   background-image: var(--drawer-bg);
   background-repeat: no-repeat;
   background-position: center;
-  background-size: cover; /* or "contain" if you need exact aspect */
+  background-size: cover;
   z-index: 0;
-  /* optional: add a tint to improve contrast with text */
-  /* background: linear-gradient(to bottom, rgba(0,0,0,.2), rgba(0,0,0,.2)), var(--drawer-bg); */
 }
 
-/* ensure children render above the background */
 .drawer > * {
   position: relative;
   z-index: 1;
@@ -104,22 +99,20 @@ watch(
 }
 
 .drawer-bg {
-  display: block; /* remove inline gaps */
-  height: auto; /* full height */
-  width: 100vw; /* maintain aspect ratio */
+  display: block;
+  height: auto;
+  width: 100vw;
 }
 
-/* Content overlays on top of the image and can scroll */
 .drawer-content {
   position: absolute;
-  inset: 0; /* fill drawer */
-  padding-top: 1.2vw;
-  height: clamp(220px, 24vw, 600px);
+  height: 22vw;
   overflow-y: auto;
   overscroll-behavior: contain;
   left: 19vw;
   top: 25vw;
   width: 31vw;
+  margin-top: 1.7vw;
 }
 
 .drawer-content > * {

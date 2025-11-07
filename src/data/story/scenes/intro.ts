@@ -18,6 +18,8 @@ import { useCharacterStore } from "@/stores/character";
 import { useAudioStore } from "@/stores/audio";
 import { useDictionaryStore } from "@/stores/dictionary";
 
+const sectionId = "intro";
+
 export const introScenes = {
   start: defineScene("start", function (payload): Scene {
     return {
@@ -37,7 +39,7 @@ export const introScenes = {
         },
       ],
       metadata: {
-        sectionId: "intro",
+        sectionId: sectionId,
         routes: [
           {
             text: `New game`,
@@ -97,7 +99,7 @@ export const introScenes = {
         ];
       },
       metadata: {
-        sectionId: "intro",
+        sectionId: sectionId,
         routes: [
           {
             text: "Start to wake up.",
@@ -137,7 +139,7 @@ export const introScenes = {
         },
       ],
       metadata: {
-        sectionId: "intro",
+        sectionId: sectionId,
         routes: [
           {
             text: `pay attention`,
@@ -165,7 +167,7 @@ export const introScenes = {
         },
       ],
       metadata: {
-        sectionId: "intro",
+        sectionId: sectionId,
         routes: [
           {
             text: `take responsibility`,
@@ -200,7 +202,7 @@ export const introScenes = {
         dict.addEntry("leaks");
       },
       metadata: {
-        sectionId: "intro",
+        sectionId: sectionId,
         routes: [
           {
             text: `You won't`,
@@ -229,7 +231,7 @@ export const introScenes = {
         },
       ],
       metadata: {
-        sectionId: "intro",
+        sectionId: sectionId,
         routes: [
           {
             text: `enjoy the dream`,
@@ -263,7 +265,7 @@ export const introScenes = {
         audioStore.playGenericSound(mudmanTheme);
       },
       metadata: {
-        sectionId: "intro",
+        sectionId: sectionId,
         routes: [
           {
             text: "mudman dialog",
@@ -291,7 +293,7 @@ export const introScenes = {
         },
       ],
       metadata: {
-        sectionId: "intro",
+        sectionId: sectionId,
         routes: [
           {
             text: "mudman dialog",
@@ -324,7 +326,7 @@ export const introScenes = {
         },
       ],
       metadata: {
-        sectionId: "intro",
+        sectionId: sectionId,
         routes: [
           {
             text: "mudman dialog",
@@ -355,7 +357,7 @@ export const introScenes = {
         },
       ],
       metadata: {
-        sectionId: "intro",
+        sectionId: sectionId,
         routes: [
           {
             text: "emits from them",
@@ -386,7 +388,7 @@ export const introScenes = {
         },
       ],
       metadata: {
-        sectionId: "intro",
+        sectionId: sectionId,
         routes: [
           {
             text: "dialog click",
@@ -416,7 +418,7 @@ export const introScenes = {
         },
       ],
       metadata: {
-        sectionId: "intro",
+        sectionId: sectionId,
         routes: [
           {
             text: "dialog click",
@@ -445,7 +447,7 @@ export const introScenes = {
       ],
 
       metadata: {
-        sectionId: "intro",
+        sectionId: sectionId,
         routes: [
           {
             text: "into the sky",
@@ -479,7 +481,7 @@ export const introScenes = {
         },
       ],
       metadata: {
-        sectionId: "intro",
+        sectionId: sectionId,
         routes: [
           {
             text: "no noobs allowed",
@@ -505,7 +507,7 @@ export const introScenes = {
         game.goToScene("intro14", { text: character.name });
       },
       metadata: {
-        sectionId: "intro",
+        sectionId: sectionId,
         routes: [
           {
             text: "name input enetered",
@@ -533,7 +535,7 @@ export const introScenes = {
         },
       ],
       metadata: {
-        sectionId: "intro",
+        sectionId: sectionId,
         routes: [
           {
             text: "A promise made before you were born",
@@ -564,7 +566,7 @@ export const introScenes = {
         audioStore.playGenericSound(poundingSound);
       },
       metadata: {
-        sectionId: "intro",
+        sectionId: sectionId,
         routes: [
           {
             text: "trying to replace it",
@@ -581,7 +583,7 @@ export const introScenes = {
       text: "",
       dungeonId: "forest",
       metadata: {
-        sectionId: "intro",
+        sectionId: sectionId,
         routes: [
           {
             text: `trigger`,

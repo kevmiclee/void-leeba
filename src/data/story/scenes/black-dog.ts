@@ -19,6 +19,8 @@ import { useEffectsStore } from "@/stores/effects";
 
 //TODO: MUSIC - Add bass drum
 
+const sectionId = "black-dog";
+
 export const blackDogScenes = {
   "black-dog": defineScene("black-dog", function (payload): Scene {
     return {
@@ -37,7 +39,7 @@ export const blackDogScenes = {
         },
       ],
       metadata: {
-        sectionId: "black-dog",
+        sectionId: sectionId,
         routes: [
           {
             text: "like shooting stars",
@@ -77,7 +79,7 @@ export const blackDogScenes = {
         },
       ],
       metadata: {
-        sectionId: "black-dog",
+        sectionId: sectionId,
         routes: [
           {
             text: "Go closer.",
@@ -117,7 +119,7 @@ export const blackDogScenes = {
         },
       ],
       metadata: {
-        sectionId: "black-dog",
+        sectionId: sectionId,
         routes: [
           {
             text: "Unable to look away",
@@ -150,17 +152,15 @@ export const blackDogScenes = {
         },
       ],
       metadata: {
-        sectionId: "black-dog",
+        sectionId: sectionId,
         routes: [
           {
             text: "Start acting careful.",
             next: "black-dog2",
-            //TODO: perks
           },
           {
             text: `It was hogwash then, and it's hogwash now.`,
             next: "black-dog2",
-            //TODO: perks
           },
         ],
       },
@@ -185,7 +185,7 @@ export const blackDogScenes = {
         },
       ],
       metadata: {
-        sectionId: "black-dog",
+        sectionId: sectionId,
         routes: [
           {
             text: "Ungroomed...",
@@ -230,7 +230,7 @@ export const blackDogScenes = {
         },
       ],
       metadata: {
-        sectionId: "black-dog",
+        sectionId: sectionId,
         routes: [
           {
             text: "Good puppy.",
@@ -271,7 +271,7 @@ export const blackDogScenes = {
         },
       ],
       metadata: {
-        sectionId: "black-dog",
+        sectionId: sectionId,
         routes: [
           {
             text: "flip onto its back",
@@ -299,7 +299,7 @@ export const blackDogScenes = {
         },
       ],
       metadata: {
-        sectionId: "black-dog",
+        sectionId: sectionId,
         routes: [
           {
             text: "open it",
@@ -342,7 +342,7 @@ export const blackDogScenes = {
         effects.toggleDisappearingItem(true);
       },
       metadata: {
-        sectionId: "black-dog",
+        sectionId: sectionId,
         routes: [
           {
             text: "Heal the human-faced dog's face back into a dog's face.",
@@ -409,7 +409,7 @@ export const blackDogScenes = {
           return choices;
         },
         metadata: {
-          sectionId: "black-dog",
+          sectionId: sectionId,
           routes: [
             {
               text: "Give it some dog food.",
@@ -485,7 +485,7 @@ export const blackDogScenes = {
           return choices;
         },
         metadata: {
-          sectionId: "black-dog",
+          sectionId: sectionId,
           routes: [
             {
               text: "Give it some dog food.",
@@ -554,7 +554,7 @@ export const blackDogScenes = {
         },
       ],
       metadata: {
-        sectionId: "black-dog",
+        sectionId: sectionId,
         routes: [
           {
             text: "it begins to howl",
@@ -605,7 +605,7 @@ export const blackDogScenes = {
         },
       ],
       metadata: {
-        sectionId: "black-dog",
+        sectionId: sectionId,
         routes: [
           {
             text: "getBlackDogOutcome success",
@@ -639,7 +639,7 @@ export const blackDogScenes = {
           },
         ],
         metadata: {
-          sectionId: "black-dog",
+          sectionId: sectionId,
           routes: [
             {
               text: "feel bad",
@@ -681,7 +681,7 @@ export const blackDogScenes = {
           },
         ],
         metadata: {
-          sectionId: "black-dog",
+          sectionId: sectionId,
           routes: [
             {
               text: "has dog food",
@@ -719,7 +719,7 @@ export const blackDogScenes = {
           },
         ],
         metadata: {
-          sectionId: "black-dog",
+          sectionId: sectionId,
           routes: [
             {
               text: "let the creature take the food",
@@ -788,7 +788,7 @@ export const blackDogScenes = {
           }
         },
         metadata: {
-          sectionId: "black-dog",
+          sectionId: sectionId,
           routes: [
             {
               text: "sided with a drunk or is polite",
@@ -860,7 +860,7 @@ export const blackDogScenes = {
           ];
         },
         metadata: {
-          sectionId: "black-dog",
+          sectionId: sectionId,
           routes: [
             {
               text: `"Thanks a lot!"`,
@@ -908,7 +908,7 @@ export const blackDogScenes = {
           },
         ],
         metadata: {
-          sectionId: "black-dog",
+          sectionId: sectionId,
           routes: [
             {
               text: "And alone",
@@ -944,7 +944,7 @@ export const blackDogScenes = {
         },
         text: "",
         metadata: {
-          sectionId: "black-dog",
+          sectionId: sectionId,
           routes: [
             {
               text: "drunk dialog click",
@@ -977,7 +977,7 @@ export const blackDogScenes = {
           },
         ],
         metadata: {
-          sectionId: "black-dog",
+          sectionId: sectionId,
           routes: [
             {
               text: "so scary",
@@ -1012,7 +1012,7 @@ export const blackDogScenes = {
         },
       ],
       metadata: {
-        sectionId: "black-dog",
+        sectionId: sectionId,
         routes: [
           {
             text: "viewed viral comments",
@@ -1043,7 +1043,7 @@ export const blackDogScenes = {
           },
         ],
         metadata: {
-          sectionId: "black-dog",
+          sectionId: sectionId,
           routes: [
             {
               text: "It's not helping",
@@ -1087,7 +1087,7 @@ export const blackDogScenes = {
           },
         ],
         metadata: {
-          sectionId: "black-dog",
+          sectionId: sectionId,
           routes: [
             {
               text: "into the neighborhood",
@@ -1164,7 +1164,7 @@ export const blackDogScenes = {
           },
         ],
         metadata: {
-          sectionId: "black-dog",
+          sectionId: sectionId,
           routes: [
             {
               text: "Go into the neighborhood.",
@@ -1206,7 +1206,7 @@ export const blackDogScenes = {
         },
       ],
       metadata: {
-        sectionId: "black-dog",
+        sectionId: sectionId,
         routes: [
           {
             text: "Follow it.",

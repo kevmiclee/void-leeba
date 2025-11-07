@@ -11,6 +11,8 @@ import { defineScene } from "../story";
 
 //TODO: MUSIC dream music
 
+const sectionId = "dream";
+
 export const dreamScenes = {
   dream: defineScene("dream", function (payload): Scene {
     return {
@@ -36,7 +38,7 @@ export const dreamScenes = {
         audioStore.playGenericSound(crunchyWalkingSound);
       },
       metadata: {
-        sectionId: "dream",
+        sectionId: sectionId,
         routes: [
           {
             text: `Admire the trees`,
@@ -139,7 +141,7 @@ export const dreamScenes = {
         return buttonActions;
       },
       metadata: {
-        sectionId: "dream",
+        sectionId: sectionId,
         routes: [
           {
             text: `Try to catch one`,
@@ -210,7 +212,7 @@ export const dreamScenes = {
           },
         ],
         metadata: {
-          sectionId: "dream",
+          sectionId: sectionId,
           routes: [
             {
               text: `Fall asleep`,
@@ -244,7 +246,7 @@ export const dreamScenes = {
           },
         ],
         metadata: {
-          sectionId: "dream",
+          sectionId: sectionId,
           routes: [
             {
               text: `Wait... will I fall asleep forever?`,
@@ -276,7 +278,7 @@ export const dreamScenes = {
           },
         ],
         metadata: {
-          sectionId: "dream",
+          sectionId: sectionId,
           routes: [
             {
               text: `WHat if you don't wake up?`,
@@ -308,7 +310,7 @@ export const dreamScenes = {
           },
         ],
         metadata: {
-          sectionId: "dream",
+          sectionId: sectionId,
           routes: [
             {
               text: `What a gross mushroom!`,
@@ -326,9 +328,11 @@ export const dreamScenes = {
       return {
         id: this.id,
         background: bgForest,
+        //TODO: Break this up
         text:
           `What a cruddy day! You feel off.^^You hear yourself say aloud, "Eugh! What a wash."` +
           `^^You lean back for a while just admiring the mushroom's disgustingness, worrying that you'll never wake up again.` +
+          `^^{Grab up a handful of the mushroom's flesh.}` +
           `^^You begin to hear a faint thudding noise like the labored heartbeat of ` +
           `some distant goliath. Oh no. Your dreaming was weak, filled with worry. A foreboding sense of doom cuts forces ` +
           `you to {awaken back into the first dream}.`,
@@ -348,7 +352,7 @@ export const dreamScenes = {
           },
         ],
         metadata: {
-          sectionId: "dream",
+          sectionId: sectionId,
           routes: [
             {
               text: `awaken back into the first dream`,
@@ -368,10 +372,10 @@ export const dreamScenes = {
         background: bgForest,
         //TODO: break this up
         text:
-          `Completely serene, without a worry in your mind, you fall asleep in your dream. You breathe in.` +
+          `Completely serene, without a worry in your mind, you fall asleep in your dream. {You breathe in}.` +
           `^^A new dream! You notice that you are hugging a brightly colored mushroom! You can tell because ` +
           `your face is right up against it and your arms are embracing it. The mushroom smells like a marshmallow ` +
-          `pencil, graphite and sugar. Its flesh is soft, yet springy. What a special mushroom! What a special day! ` +
+          `pencil, graphite and sugar. Its flesh is soft, yet springy. {What a special mushroom}! What a special day! ` +
           `You feel content.^^You hear yourself say aloud, "Wow! What a colorful mushroom."` +
           `^^You lean back for a while just admiring the mushroom's shape.` +
           `^^{Grab up a handful of the mushroom's flesh.}` +
@@ -392,7 +396,7 @@ export const dreamScenes = {
           },
         ],
         metadata: {
-          sectionId: "dream",
+          sectionId: sectionId,
           routes: [
             {
               text: `a hilly landscape sprawls out before you`,
@@ -431,7 +435,7 @@ export const dreamScenes = {
           },
         ],
         metadata: {
-          sectionId: "dream",
+          sectionId: sectionId,
           routes: [
             {
               text: `Breathe in`,
@@ -467,7 +471,7 @@ export const dreamScenes = {
           },
         ],
         metadata: {
-          sectionId: "dream",
+          sectionId: sectionId,
           routes: [
             {
               text: `Open your eyes`,
@@ -525,7 +529,7 @@ export const dreamScenes = {
         },
       ],
       metadata: {
-        sectionId: "dream",
+        sectionId: sectionId,
         routes: [
           {
             text: `THUNK`,

@@ -21,6 +21,7 @@ export const useDrawerStore = defineStore("drawer", {
   }),
   actions: {
     toggleDrawer() {
+      console.log("toggle it!");
       this.isDrawerOpen = !this.isDrawerOpen;
       if (this.didViewPhone && !this.isDrawerOpen) {
         const phone = usePhoneStore();

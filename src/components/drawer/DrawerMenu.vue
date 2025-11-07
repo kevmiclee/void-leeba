@@ -1,7 +1,7 @@
 <template>
   <ul class="menu-list">
     <li @click.stop="closeDrawer">
-      < {{ character.name ? `${character.name}'s '` : "" }}Drip💧
+      < {{ character.name ? `${character.name}'s ` : "" }}Drip💧
     </li>
 
     <li
@@ -36,11 +36,8 @@
         game.$reset();
         character.$reset();
         timeoutStore.$reset(); -->
+    <li>Current scene: {{ game.currentSceneId }}</li>
   </ul>
-
-  <span style="bottom: 5vw; left: 0vw; position: absolute"
-    >Current scene: {{ game.currentSceneId }}</span
-  >
 </template>
 
 <script setup lang="ts">

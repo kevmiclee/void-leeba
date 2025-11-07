@@ -10,6 +10,8 @@ import { useAudioStore } from "@/stores/audio";
 
 //TODO: MUSIC - squirrel
 
+const sectionId = "dream-squirrel";
+
 export const dreamSquirrelScenes = {
   "dream-squirrel": defineScene("dream-squirrel", function (payload): Scene {
     return {
@@ -25,7 +27,7 @@ export const dreamSquirrelScenes = {
         },
       ],
       metadata: {
-        sectionId: "dream-squirrel",
+        sectionId: sectionId,
         routes: [
           {
             text: `It's time to give chase`,
@@ -51,7 +53,7 @@ export const dreamSquirrelScenes = {
         },
       ],
       metadata: {
-        sectionId: "dream-squirrel",
+        sectionId: sectionId,
         routes: [
           {
             text: `Just a little closer...`,
@@ -79,7 +81,7 @@ export const dreamSquirrelScenes = {
         },
       ],
       metadata: {
-        sectionId: "dream-squirrel",
+        sectionId: sectionId,
         routes: [
           {
             text: `Reach for the closest branch.`,
@@ -116,7 +118,7 @@ export const dreamSquirrelScenes = {
           },
         ],
         metadata: {
-          sectionId: "dream-squirrel",
+          sectionId: sectionId,
           routes: [
             {
               text: `Keep shimmying up`,
@@ -158,7 +160,7 @@ export const dreamSquirrelScenes = {
           ];
         },
         metadata: {
-          sectionId: "dream-squirrel",
+          sectionId: sectionId,
           routes: [
             {
               text: `Push yourself even harder.`,
@@ -200,7 +202,7 @@ export const dreamSquirrelScenes = {
         },
       ],
       metadata: {
-        sectionId: "dream-squirrel",
+        sectionId: sectionId,
         routes: [
           {
             text: `squirrel dialog click`,
@@ -227,7 +229,7 @@ export const dreamSquirrelScenes = {
         },
       ],
       metadata: {
-        sectionId: "dream-squirrel",
+        sectionId: sectionId,
         routes: [
           {
             text: `snatch the furball`,
@@ -246,7 +248,7 @@ export const dreamSquirrelScenes = {
         text: "",
         miniGameId: "squirrel",
         metadata: {
-          sectionId: "dream-squirrel",
+          sectionId: sectionId,
           routes: [
             {
               text: `win`,
@@ -280,7 +282,7 @@ export const dreamSquirrelScenes = {
           },
         ],
         metadata: {
-          sectionId: "dream-squirrel",
+          sectionId: sectionId,
           routes: [
             {
               text: `squirrel dialog click`,
@@ -323,7 +325,7 @@ export const dreamSquirrelScenes = {
           audioStore.playGenericSound(fallingOutOfTreeSound);
         },
         metadata: {
-          sectionId: "dream-squirrel",
+          sectionId: sectionId,
           routes: [
             {
               text: `squirrel dialog click`,
@@ -390,7 +392,7 @@ export const dreamSquirrelScenes = {
         ];
       },
       metadata: {
-        sectionId: "dream-squirrel",
+        sectionId: sectionId,
         routes: [
           {
             text: `"Where are we going?"`,
@@ -446,7 +448,7 @@ export const dreamSquirrelScenes = {
         },
       ],
       metadata: {
-        sectionId: "dream-squirrel",
+        sectionId: sectionId,
         routes: [
           {
             text: `squirrel dialog click`,
@@ -481,7 +483,7 @@ export const dreamSquirrelScenes = {
         },
       ],
       metadata: {
-        sectionId: "dream-squirrel",
+        sectionId: sectionId,
         routes: [
           {
             text: `squirrel dialog click`,
@@ -514,7 +516,7 @@ export const dreamSquirrelScenes = {
         { text: "Inspect the squirrel.", next: "dream-squirrel9" },
       ],
       metadata: {
-        sectionId: "dream-squirrel",
+        sectionId: sectionId,
         routes: [
           {
             text: `Inspect the hongatar`,
@@ -550,7 +552,7 @@ export const dreamSquirrelScenes = {
         },
       ],
       metadata: {
-        sectionId: "dream-squirrel",
+        sectionId: sectionId,
         routes: [
           {
             text: `Inspect the eggcorn`,
@@ -584,7 +586,7 @@ export const dreamSquirrelScenes = {
           },
         ],
         metadata: {
-          sectionId: "dream-squirrel",
+          sectionId: sectionId,
           routes: [
             {
               text: `YOLO! Eat the eggcorn.`,
@@ -620,7 +622,7 @@ export const dreamSquirrelScenes = {
           },
         ],
         metadata: {
-          sectionId: "dream-squirrel",
+          sectionId: sectionId,
           routes: [
             {
               text: `squirrel dialog click`,
@@ -651,7 +653,7 @@ export const dreamSquirrelScenes = {
           },
         ],
         metadata: {
-          sectionId: "dream-squirrel",
+          sectionId: sectionId,
           routes: [
             {
               text: `squirrel dialog click`,

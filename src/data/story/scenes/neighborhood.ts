@@ -7,6 +7,8 @@ import { useCharacterStore } from "@/stores/character";
 
 //TODO: MUSIC - dog barking sounds
 
+const sectionId = "neighborhod";
+
 export const neighborhoodScenes = {
   neighborhood: defineScene("neighborhood", function (payload): Scene {
     return {
@@ -29,7 +31,7 @@ export const neighborhoodScenes = {
       background: bgDefault,
       audio: neighborhoodTheme,
       metadata: {
-        sectionId: "neighborhood",
+        sectionId: sectionId,
         routes: [
           {
             text: `Yes! Let's do it.`,
@@ -92,7 +94,7 @@ export const neighborhoodScenes = {
         character.setFlag("asking-for-trouble", false);
       },
       metadata: {
-        sectionId: "neighborhood",
+        sectionId: sectionId,
         routes: [
           {
             text: `On the corner in front of the used bookstore.`,
@@ -148,7 +150,7 @@ export const neighborhoodScenes = {
         background: bgDefault,
         audio: neighborhoodTheme,
         metadata: {
-          sectionId: "neighborhood",
+          sectionId: sectionId,
           routes: [
             {
               text: `"Don't let that stop you!"`, // good chance
@@ -177,7 +179,7 @@ export const neighborhoodScenes = {
         background: bgDefault,
         audio: neighborhoodTheme,
         metadata: {
-          sectionId: "neighborhood",
+          sectionId: sectionId,
           routes: [],
         },
       };

@@ -12,6 +12,8 @@ import { useAspectStore } from "@/stores/aspects";
 // MUSIC - tree-chase
 //TODO: MUSIC - tree-chase game
 
+const sectionId = "dream-tree-chase";
+
 export const dreamTreeChaseScenes = {
   "dream-tree-chase": defineScene(
     "dream-tree-chase",
@@ -36,7 +38,7 @@ export const dreamTreeChaseScenes = {
           audioStore.playGenericSound(treeFallingSound);
         },
         metadata: {
-          sectionId: "dream-tree-chase",
+          sectionId: sectionId,
           routes: [
             {
               text: `the din grows louder and louder`,
@@ -95,7 +97,7 @@ export const dreamTreeChaseScenes = {
           audioStore.playGenericSound(treeFallingSound);
         },
         metadata: {
-          sectionId: "dream-tree-chase",
+          sectionId: sectionId,
           routes: [
             {
               text: `run`,
@@ -125,7 +127,7 @@ export const dreamTreeChaseScenes = {
           },
         ],
         metadata: {
-          sectionId: "dream-tree-chase",
+          sectionId: sectionId,
           routes: [
             {
               text: `dodge them`,
@@ -146,7 +148,7 @@ export const dreamTreeChaseScenes = {
         text: "",
         miniGameId: "tree-chase",
         metadata: {
-          sectionId: "dream-tree-chase",
+          sectionId: sectionId,
           routes: [
             {
               text: `win`,
@@ -189,7 +191,7 @@ export const dreamTreeChaseScenes = {
           aspects.addAspect("part-bird");
         },
         metadata: {
-          sectionId: "dream-tree-chase",
+          sectionId: sectionId,
           routes: [
             {
               text: "springing off the pine needles",
@@ -226,7 +228,7 @@ export const dreamTreeChaseScenes = {
           aspects.addAspect("all-your-bones-are-broken");
         },
         metadata: {
-          sectionId: "dream-tree-chase",
+          sectionId: sectionId,
           routes: [
             {
               text: "All your bones are broken",
@@ -265,7 +267,7 @@ export const dreamTreeChaseScenes = {
           },
         ],
         metadata: {
-          sectionId: "dream-tree-chase",
+          sectionId: sectionId,
           routes: [
             {
               text: "Continue.",
