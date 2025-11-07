@@ -112,7 +112,7 @@ export const parkScenes = {
           next: "park-drunks2a",
           onChoose: () => {
             const character = useCharacterStore();
-            character.setFlag("drunk-choice", undefined);
+            character.setFlag("drunk-choice", undefined, this.id);
           },
         },
         {
@@ -120,7 +120,7 @@ export const parkScenes = {
           next: "park-drunks2b",
           onChoose: () => {
             const character = useCharacterStore();
-            character.setFlag("drunk-choice", "drunk1");
+            character.setFlag("drunk-choice", "drunk1", this.id);
           },
         },
         {
@@ -128,7 +128,7 @@ export const parkScenes = {
           next: "park-drunks2b",
           onChoose: () => {
             const character = useCharacterStore();
-            character.setFlag("drunk-choice", "drunk2");
+            character.setFlag("drunk-choice", "drunk2", this.id);
           },
         },
       ],

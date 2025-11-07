@@ -260,7 +260,7 @@ export const voidScenes = {
             next: "void-not-alone-pie1",
             onChoose: () => {
               const character = useCharacterStore();
-              character.setFlag("pie-choice", "pecan");
+              character.setFlag("pie-choice", "pecan", this.id);
             },
           },
           {
@@ -268,7 +268,7 @@ export const voidScenes = {
             next: "void-not-alone-pie1",
             onChoose: () => {
               const character = useCharacterStore();
-              character.setFlag("pie-choice", "key-lime");
+              character.setFlag("pie-choice", "key-lime", this.id);
             },
           },
           {
@@ -276,7 +276,7 @@ export const voidScenes = {
             next: "void-not-alone-pie1",
             onChoose: () => {
               const character = useCharacterStore();
-              character.setFlag("pie-choice", "cherry");
+              character.setFlag("pie-choice", "cherry", this.id);
             },
           },
         ],

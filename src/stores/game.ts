@@ -59,6 +59,7 @@ export const useGameStore = defineStore("game", {
           (e) => e.pageAcquired != newScene
         );
         character.inventory = removedItems;
+        character.undoLastStep();
         this.goToScene(newScene);
       }
     },

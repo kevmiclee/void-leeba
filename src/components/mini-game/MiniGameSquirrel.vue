@@ -3,7 +3,7 @@
     class="background"
     @mousemove="updateCursor"
     :style="{ backgroundImage: `url(${bgImage})` }"
-    @click="changeCursorTemporarily"
+    @click="changeCursorTemporarily(false)"
   >
     <div
       ref="fakeCursor"
@@ -31,26 +31,63 @@ import handClosedCursor from "@/assets/images/icons/hand-left-closed.png";
 import { onMounted, ref, nextTick } from "vue";
 import { useAudioStore } from "@/stores/audio";
 import { characters } from "@/data/characters";
+import { useGameStore } from "@/stores/game";
+import { useCharacterStore } from "@/stores/character";
+import { fateContest } from "@/data/story/helper-functions/roll-helper-functions";
+import { getCatchSquirrelOutcome } from "@/data/story/helper-functions/outcome-helper-functions";
 
 const audioStore = useAudioStore();
+const game = useGameStore();
+const character = useCharacterStore();
+
+const attempts = ref(0);
 
 function handleImageClick(event: MouseEvent) {
   const character = characters["squirrel"];
   audioStore.playCharacterSound(character.sound!);
 
-  changeCursorTemporarily();
+  changeCursorTemporarily(true);
   freezeCursor(800);
 }
 
 let timeoutId: number | null = null;
 
-function changeCursorTemporarily() {
+function changeCursorTemporarily(success: boolean) {
+  attempts.value = attempts.value + 1;
   document.body.style.cursor = `url(${handClosedCursor}) 16 16, auto`;
   if (timeoutId) clearTimeout(timeoutId);
   timeoutId = window.setTimeout(() => {
     document.body.style.cursor = `url(${handOpenCursor}) 16 16, auto`;
     timeoutId = null;
+    if (success || attempts.value > 3) {
+      document.body.style.cursor = "default";
+      goToScene(success);
+    }
   }, 800);
+}
+
+function goToScene(success: boolean) {
+  const squirrelAthletics = success ? 0 : 2;
+
+  const roll = fateContest(character.athletics.value, squirrelAthletics);
+
+  if (roll <= 0) {
+    character.setFlag("fell-from-tree", true, "dream-squirrel-game");
+  } else {
+    character.setFlag("fell-from-tree", false, "dream-squirrel-game");
+  }
+
+  const outcome = getCatchSquirrelOutcome(roll);
+
+  if (outcome.success) {
+    character.setFlag("caught-squirrel", true, "dream-squirrel-game");
+    game.goToScene("dream-squirrel4-success", {
+      filter: outcome.text,
+    });
+  } else {
+    character.setFlag("caught-squirrel", false, "dream-squirrel-game");
+    game.goToScene("dream-squirrel4-fail", { filter: outcome.text });
+  }
 }
 
 const fakeCursor = ref<HTMLElement | null>(null);
@@ -135,7 +172,6 @@ onMounted(async () => {
   width: 100vw;
   background-size: 100%;
   background-position: center !important;
-  /* background-color: white; */
   display: flex;
   flex-direction: column;
   aspect-ratio: 16/9;
@@ -159,10 +195,10 @@ onMounted(async () => {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 100px; /* Stripe width */
+  width: 100px;
   height: 100vh;
-  background: rgba(255, 0, 0, 0.2); /* Visible red stripe */
-  pointer-events: none; /* So it doesn't block clicks */
+  background: rgba(255, 0, 0, 0.2);
+  pointer-events: none;
 }
 
 .fake-cursor {

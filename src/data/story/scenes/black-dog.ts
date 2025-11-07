@@ -56,7 +56,7 @@ export const blackDogScenes = {
       background: bgBurlyBush,
       audio: spookyMusic,
       text:
-        `^Below your gaze, you think you can see a form hunched across the field from you. Like a dark and burly bush, ` +
+        `Below your gaze, you think you can see a form hunched across the field from you. Like a dark and burly bush, ` +
         `you can't make out its features. You are sure that was not there a minute ago.`,
       choices: () => [
         {
@@ -64,7 +64,7 @@ export const blackDogScenes = {
           next: "black-dog1",
           onChoose: () => {
             const character = useCharacterStore();
-            character.setFlag("black-dog-readiness", -1);
+            character.setFlag("black-dog-readiness", -1, this.id);
             character.gainStat("will", 1, this.id);
           },
         },
@@ -73,7 +73,7 @@ export const blackDogScenes = {
           next: "black-dog1",
           onChoose: () => {
             const character = useCharacterStore();
-            character.setFlag("black-dog-readiness", 1);
+            character.setFlag("black-dog-readiness", 1, this.id);
             character.loseStat("will", 1, this.id);
           },
         },
@@ -147,14 +147,22 @@ export const blackDogScenes = {
             text: "Start acting careful.",
             next: "black-dog2",
             onChoose: () => {
-              character.setFlag("black-dog-readiness", blackDogReadiness + 1);
+              character.setFlag(
+                "black-dog-readiness",
+                blackDogReadiness + 1,
+                this.id
+              );
             },
           },
           {
-            text: `It was hogwash then, and it's hogwash now.`,
+            text: `You don't believe any of that nonsense.`,
             next: "black-dog2",
             onChoose: () => {
-              character.setFlag("black-dog-readiness", blackDogReadiness - 1);
+              character.setFlag(
+                "black-dog-readiness",
+                blackDogReadiness - 1,
+                this.id
+              );
             },
           },
         ];
@@ -333,14 +341,14 @@ export const blackDogScenes = {
             text: `Heal the human-faced dog's face back into a dog's face.`,
             next: "black-dog-heal-dog",
             onChoose: () => {
-              character.setFlag("healed-dog", "dog");
+              character.setFlag("healed-dog", "dog", this.id);
             },
           },
           {
             text: `Heal the human-faced dog's body back into a human's body.`,
             next: "black-dog-heal-human",
             onChoose: () => {
-              character.setFlag("healed-dog", "human");
+              character.setFlag("healed-dog", "human", this.id);
             },
           },
         ];
@@ -386,7 +394,7 @@ export const blackDogScenes = {
             choices.push({
               text: "Give it some dog food.",
               onChoose: () => {
-                character.setFlag("gave-dog-food", true);
+                character.setFlag("gave-dog-food", true, this.id);
                 character.removeFromInventory("dog-food");
                 character.gainManners("polite", 1, this.id);
               },
@@ -463,7 +471,7 @@ export const blackDogScenes = {
               onChoose: () => {
                 character.gainStat("shitheadedness", 1, this.id);
                 character.gainManners("rude", 1, this.id);
-                character.setFlag("gave-human-dog-food", true);
+                character.setFlag("gave-human-dog-food", true, this.id);
                 character.removeFromInventory("dog-food");
               },
               next: "black-dog-done",
@@ -1007,7 +1015,7 @@ export const blackDogScenes = {
       text:
         `It doesn't matter how you spin it. One of the drunks recorded it all on their phone, ` +
         `and they've already posted to social media.` +
-        `^^Your phone is flooded with new notifications. You've {gone viral}.`,
+        `^^Your Drip💧 is flooded with new notifications. You've {gone viral}.`,
       onPageLoad: () => {
         const drawer = useDrawerStore();
         drawer.togglePhoneIsCrazy();

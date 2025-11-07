@@ -2,7 +2,7 @@ import { SceneId } from "@/data/story/story";
 import { Item } from "./item";
 import { ScenePayload } from "./story";
 import { DictionaryEntry } from "./dictionary";
-import { Flags } from "./flag";
+import { Flags, HistoryFrame } from "./flag";
 import { DrawerView } from "./drawer-view";
 import { Manners } from "./manners";
 import { Aspect } from "./aspect";
@@ -27,6 +27,8 @@ export interface CharacterState {
   athletics: Stat;
   inventory: Item[];
   flags: Flags;
+  flagHistory: HistoryFrame[];
+  currentSceneId?: SceneId;
   rude: Manners;
   depressing: Manners;
   polite: Manners;

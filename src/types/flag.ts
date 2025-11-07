@@ -1,3 +1,5 @@
+import { SceneId } from "@/data/story/story";
+
 export type FlagId =
   | "black-dog-readiness" // influences the outcome of the redblack dog attack
   | "healed-dog" // what they heal them into dictates something -- the redux, the chracter comes back to help them
@@ -33,4 +35,15 @@ export type FlagValues = {
 
 export type Flags = {
   [K in FlagId]?: FlagValues[K];
+};
+
+export type FlagChange<K extends FlagId = FlagId> = {
+  key: K;
+  prev: Flags[K] | undefined;
+  next: Flags[K] | undefined;
+};
+
+export type HistoryFrame = {
+  stepId: SceneId; // your scene/page id or incrementing number
+  changes: Map<FlagId, FlagChange>;
 };

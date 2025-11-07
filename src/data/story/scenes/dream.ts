@@ -207,7 +207,7 @@ export const dreamScenes = {
             payload: { filter: "nap" },
             onChoose: () => {
               const character = useCharacterStore();
-              character.setFlag("did-nap", true);
+              character.setFlag("did-nap", true, this.id);
             },
           },
         ],

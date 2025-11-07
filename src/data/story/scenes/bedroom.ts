@@ -260,8 +260,9 @@ export const bedroomScenes = {
               text: `Bring it to your your room to add to your collection.`,
               next: "bedroom-time-fly4",
               onChoose: () => {
+                character.addToInventory("time-fly", this.id);
                 character.gainManners("weird", 1, this.id);
-                character.setFlag("time-fly-choice", "keep");
+                character.setFlag("time-fly-choice", "keep", this.id);
               },
             },
             {
@@ -269,7 +270,7 @@ export const bedroomScenes = {
               next: "bedroom-time-fly4",
               onChoose: () => {
                 character.gainManners("polite", 1, this.id);
-                character.setFlag("time-fly-choice", "free");
+                character.setFlag("time-fly-choice", "free", this.id);
               },
             },
             {
@@ -277,7 +278,7 @@ export const bedroomScenes = {
               next: "bedroom-time-fly4",
               onChoose: () => {
                 character.gainManners("rude", 1, this.id);
-                character.setFlag("time-fly-choice", "kill");
+                character.setFlag("time-fly-choice", "kill", this.id);
               },
             },
           ];
@@ -388,7 +389,7 @@ export const bedroomScenes = {
                     : `"I killed it, of course."`,
                   onChoose: () => {
                     character.gainStat("shitheadedness", 1, this.id);
-                    character.setFlag("shib-sequence-count", 1);
+                    character.setFlag("shib-sequence-count", 1, this.id);
                   },
                   next: "bedroom-time-fly5",
                 },
@@ -396,7 +397,7 @@ export const bedroomScenes = {
                   text: `<i>Flex your muscles.</i> "Those scum are no match for me!"`,
                   onChoose: () => {
                     character.gainStat("blueMagic", 1, this.id);
-                    character.setFlag("shib-sequence-count", 1);
+                    character.setFlag("shib-sequence-count", 1, this.id);
                   },
                   next: "bedroom-time-fly5",
                 },
@@ -404,7 +405,7 @@ export const bedroomScenes = {
                   text: getShibHonestAnswer(timeFlyChoice),
                   onChoose: () => {
                     character.gainStat("will", 1, this.id);
-                    character.setFlag("shib-sequence-count", 1);
+                    character.setFlag("shib-sequence-count", 1, this.id);
                   },
                   next: "bedroom-time-fly5",
                 },
@@ -412,7 +413,7 @@ export const bedroomScenes = {
                   text: `"Glad to be of service."`,
                   onChoose: () => {
                     character.gainStat("athletics", 1, this.id);
-                    character.setFlag("shib-sequence-count", 1);
+                    character.setFlag("shib-sequence-count", 1, this.id);
                   },
                   next: "bedroom-time-fly5",
                 },
@@ -423,7 +424,8 @@ export const bedroomScenes = {
                   onChoose: () => {
                     character.setFlag(
                       "shib-sequence-count",
-                      shibSequenceCount + 1
+                      shibSequenceCount + 1,
+                      this.id
                     );
                   },
                   next: "bedroom-time-fly5",

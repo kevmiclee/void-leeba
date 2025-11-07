@@ -57,7 +57,7 @@ export const neighborhoodScenes = {
             text: `On the corner in front of the used bookstore.`,
             next: "neighborhood-drunk",
             onChoose: () => {
-              character.setFlag("art-table-success-rate", 1);
+              character.setFlag("art-table-success-rate", 1, this.id);
             },
           },
           {
@@ -66,15 +66,15 @@ export const neighborhoodScenes = {
             next: "neighborhood-drunk",
             onChoose: () => {
               const rate = getNonZeroRandomDecimal(2);
-              character.setFlag("art-table-success-rate", rate);
-              character.setFlag("asking-for-trouble", true);
+              character.setFlag("art-table-success-rate", rate, this.id);
+              character.setFlag("asking-for-trouble", true, this.id);
             },
           },
           {
             text: `Option 3`,
             next: "neighborhood-drunk",
             onChoose: () => {
-              character.setFlag("art-table-success-rate", 1.5);
+              character.setFlag("art-table-success-rate", 1.5, this.id);
             },
           },
           {
@@ -82,7 +82,7 @@ export const neighborhoodScenes = {
             next: "neighborhood-drunk",
             onChoose: () => {
               const rate = getNonZeroRandomDecimal(2);
-              character.setFlag("art-table-success-rate", rate);
+              character.setFlag("art-table-success-rate", rate, this.id);
             },
           },
         ];
@@ -91,7 +91,7 @@ export const neighborhoodScenes = {
       audio: neighborhoodTheme,
       onPageLoad: () => {
         const character = useCharacterStore();
-        character.setFlag("asking-for-trouble", false);
+        character.setFlag("asking-for-trouble", false, this.id);
       },
       metadata: {
         sectionId: sectionId,

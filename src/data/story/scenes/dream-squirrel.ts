@@ -434,7 +434,7 @@ export const dreamSquirrelScenes = {
       background: bgForest,
       text:
         getFollowSquirrelText(payload?.filter) +
-        `^^All the while the chanting is growing louder. You're sure it's voices now. ` +
+        `All the while the chanting is growing louder. You're sure it's voices now. ` +
         `It sounds like they are chanting, "We're going to a party! We're going to a party!" ` +
         `From time to time, the squirrel turns around, egging you on.`,
       dialogSequence: () => [

@@ -4,7 +4,7 @@ import { defineStore } from "pinia";
 import { useSnackbarStore } from "./snackbar";
 import { ItemId } from "@/types/item";
 import { SceneId } from "@/data/story/story";
-import { FlagId, FlagValues } from "@/types/flag";
+import { FlagId, Flags, FlagValues } from "@/types/flag";
 import { Stat, StatId } from "@/types/stat";
 import { useAudioStore } from "./audio";
 import pickUpItemSound from "@/assets/audio/story/sounds/pick-up-item.mp3";
@@ -43,6 +43,8 @@ export const useCharacterStore = defineStore("character", {
     },
     inventory: [...defaultItems],
     flags: {},
+    flagHistory: [],
+    currentSceneId: undefined,
     rude: {
       id: "rude",
       value: 0,
@@ -112,10 +114,6 @@ export const useCharacterStore = defineStore("character", {
       const statObj = this[stat] as Stat;
       statObj.value -= value;
       statObj.scenesLost.push(sceneId);
-    },
-
-    setFlag<K extends FlagId>(key: K, value: FlagValues[K]) {
-      this.flags[key] = value;
     },
 
     addToInventory(id: ItemId, pageAcquired: SceneId) {
@@ -217,6 +215,46 @@ export const useCharacterStore = defineStore("character", {
     getManners() {
       const max = Math.max(...MANNERS_KEYS.map((k) => this[k].value));
       return MANNERS_KEYS.find((k) => this[k].value === max)!;
+    },
+
+    beginStep(sceneId: SceneId) {
+      if (this.currentSceneId === sceneId) return;
+      this.currentSceneId = sceneId;
+      this.flagHistory.push({ stepId: sceneId, changes: new Map() });
+    },
+
+    setFlag<K extends FlagId>(key: K, value: FlagValues[K], sceneId: SceneId) {
+      if (!this.flagHistory.length) this.beginStep(sceneId);
+      const frame = this.flagHistory[this.flagHistory.length - 1];
+
+      if (!frame.changes.has(key)) {
+        frame.changes.set(key, {
+          key,
+          prev: this.flags[key] as Flags[K] | undefined,
+          next: value,
+        });
+      } else {
+        frame.changes.get(key)!.next = value;
+      }
+
+      this.flags[key] = value;
+    },
+
+    undoLastStep() {
+      const frame = this.flagHistory.pop();
+      if (!frame) return;
+
+      for (const { key, prev } of frame.changes.values()) {
+        if (prev === undefined) {
+          delete this.flags[key];
+        } else {
+          (this.flags as any)[key] = prev;
+        }
+      }
+
+      this.currentSceneId = this.flagHistory.length
+        ? this.flagHistory[this.flagHistory.length - 1].stepId
+        : undefined;
     },
   },
 });

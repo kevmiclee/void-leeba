@@ -34,4 +34,5 @@ export type ItemId =
   | "translator"
   | "beest-recording"
   | "brain-moss"
-  | "axe";
+  | "axe"
+  | "time-fly";

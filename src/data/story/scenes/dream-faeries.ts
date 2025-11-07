@@ -631,7 +631,7 @@ export const dreamFaeriesScenes = {
             onClick: () => {
               const game = useGameStore();
               const character = useCharacterStore();
-              character.setFlag("did-faeries", true);
+              character.setFlag("did-faeries", true, this.id);
               game.goToScene("dream1", { filter: "noFaeries" });
             },
           },
@@ -706,7 +706,7 @@ export const dreamFaeriesScenes = {
             onChoose: () => {
               const character = useCharacterStore();
               character.gainStat("will", 1, this.id);
-              character.setFlag("did-faeries", true);
+              character.setFlag("did-faeries", true, this.id);
             },
           },
         ],

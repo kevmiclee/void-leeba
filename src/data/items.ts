@@ -148,7 +148,17 @@ export const itemCatalog: Record<ItemId, Item> = {
     weight: 5,
     usable: true,
   },
+
+  "time-fly": {
+    id: "time-fly",
+    label: "Time Fly",
+    description: "Temporamusca",
+    value: 0,
+    weight: 0,
+    usable: false,
+  },
 };
+
 //TODO: More items
 
 export const defaultItems: Item[] = [
