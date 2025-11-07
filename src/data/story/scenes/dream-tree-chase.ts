@@ -246,8 +246,8 @@ export const dreamTreeChaseScenes = {
       return {
         id: this.id,
         background: bgForest,
-        //TODO: forest viewed from above
-        //TODO: speeding into space sound
+        //TODO: IMAGE - forest viewed from above
+        //TODO: SOUND - speeding into space sound
         text:
           `As you vault above the canopy, a great bird grabs you by your turtleneck. It carries you {high above the forest}. ` +
           `You can see the tree line and a sprawling countryside beyond it. Before long, you feel a sudden shift in trajectory and you ` +
@@ -285,7 +285,8 @@ export const dreamTreeChaseScenes = {
       return {
         id: this.id,
         background: bgForest,
-        //TODO: crashing back down to earth in an explosion sound -> explosion animation -> crater
+        //TODO: SOUND - crashing back down to earth in an explosion sound
+        // TODO: IMAGE - explosion animation -> crater
         text:
           `Reaching its zenith, there is a moment of quiet, motionless stillness, then you're re-entering the atmosphere, careening faster and faster ` +
           `back down until you all meet the forest floor in an explosive blast. You find yourself at the center of a massive crater. ` +
@@ -295,7 +296,7 @@ export const dreamTreeChaseScenes = {
           await new Promise((resolve) => setTimeout(resolve, 2000));
           effects.toggleIsZoomedOut(false);
           effects.toggleIsSpinning(true);
-          //TODO: toggle spin off;
+          //TODO: UI/UX - toggle spin off;
           const aspects = useAspectStore();
           aspects.addAspect("part-bird");
         },

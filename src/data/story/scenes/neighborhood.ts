@@ -14,7 +14,7 @@ export const neighborhoodScenes = {
     return {
       id: this.id,
       text:
-        //TODO: seen better days
+        //TODO: STORY - seen better days
         `What a hip, ritzy little neighborhood. It's bustling with people. A perfect place to ` +
         `set up an art table and sell some art!`,
       choices: () => [
@@ -25,7 +25,7 @@ export const neighborhoodScenes = {
         {
           text: "Not feeling it today. Go home.",
           next: "room",
-          //TODO: what if they've already been to their room?
+          //TODO: STORY - what if they've already been to their room?
         },
       ],
       background: bgDefault,
@@ -62,7 +62,7 @@ export const neighborhoodScenes = {
           },
           {
             text: `In the middle of the street.`,
-            //TODO: gets shut down faster but maybe you can shit talk him into buying a scultpture and let you keep selling
+            //TODO: STORY - gets shut down faster but maybe you can shit talk him into buying a scultpture and let you keep selling
             next: "neighborhood-drunk",
             onChoose: () => {
               const rate = getNonZeroRandomDecimal(2);

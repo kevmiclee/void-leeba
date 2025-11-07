@@ -1,5 +1,5 @@
 export type FlagId =
-  | "closer-to-black-dog" // influences the outcome of the redblack dog attack
+  | "black-dog-readiness" // influences the outcome of the redblack dog attack
   | "healed-dog" // what they heal them into dictates something -- the redux, the chracter comes back to help them
   | "gave-dog-food" // the dog comes back to help
   | "gave-human-dog-food" // the human comes back to harm, they don't get the redux, or they get an unhappy redux
@@ -15,7 +15,7 @@ export type FlagId =
   | "shib-sequence-count";
 
 export type FlagValues = {
-  "closer-to-black-dog": boolean;
+  "black-dog-readiness": number;
   "healed-dog": "dog" | "human";
   "gave-dog-food": boolean;
   "gave-human-dog-food": boolean;

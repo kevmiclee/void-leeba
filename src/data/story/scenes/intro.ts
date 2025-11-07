@@ -338,7 +338,7 @@ export const introScenes = {
   }),
 
   intro8: defineScene("intro8", function (payload): Scene {
-    //TODO: mudman laugh, loud, echo-y, glurpy
+    //TODO: SOUND - mudman laugh, loud, echo-y, glurpy
     return {
       id: this.id,
       text: `Aw man. What did he take?^^Mudman departs, gurgling his slimy gulp of a snicker 

@@ -155,7 +155,7 @@ export const useCharacterStore = defineStore("character", {
           const hasTranslator = this.hasItem("translator");
 
           if (hasTranslator) {
-            //TODO: translated book;
+            //TODO: STORY - translated book;
           } else {
             snackbar.show("You aren't fluent enough in Finnish to read this.");
           }

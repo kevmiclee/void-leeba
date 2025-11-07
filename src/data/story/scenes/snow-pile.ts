@@ -12,7 +12,7 @@ export const snowPileScenes = {
       id: this.id,
       text: `It's a snow pile.`,
       background: bgDefault,
-      //TODO: are the drunks here? Have you already met them?
+      //TODO: STORY - are the drunks here? Have you already met them?
       metadata: {
         sectionId: sectionId,
       },

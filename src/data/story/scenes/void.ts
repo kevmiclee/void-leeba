@@ -104,7 +104,7 @@ export const voidScenes = {
         },
       ],
       onPageLoad: () => {
-        //TODO: a web of thoughts zooming out
+        //TODO: IMAGE - a web of thoughts zooming out
       },
       metadata: {
         sectionId: sectionId,
@@ -233,7 +233,7 @@ export const voidScenes = {
       return {
         id: this.id,
         background: bgDefault,
-        //TODO: void-not-alone-lunch1
+        //TODO: STORY - void-not-alone-lunch1
         text: ``,
         choices: () => [],
         metadata: {
@@ -309,7 +309,7 @@ export const voidScenes = {
         background: bgDefault,
         text: `Ugh ... oh my god, yeah that's right. Mmmmmmm. Oh boy. What you wouldn't do for some pie right now.`,
         choices: () => [
-          //TODO: choices
+          //TODO: STORY -choices
         ],
         metadata: {
           sectionId: sectionId,
@@ -374,7 +374,7 @@ export const voidScenes = {
           },
           {
             text: `It can't be helped. Stay inside and weep into your gluten-free cheese puffs.`,
-            //TODO: zombies?
+            //TODO: STORY - zombies?
           },
         ],
         metadata: {
@@ -437,7 +437,7 @@ export const voidScenes = {
         background: bgDefault,
         text: `Dude... the hamster was joking! How could you give up your ${payload?.filter} to a hamster you just met?`,
         choices: () => [
-          //TODO: choices
+          //TODO: STORY - choices
         ],
         onPageLoad: () => {
           const snackbar = useSnackbarStore();
@@ -460,7 +460,7 @@ export const voidScenes = {
         text: `Get out there and show 'em what?`,
         choices: () => {
           const character = useCharacterStore();
-          //TODO: these
+          //TODO: STORY - these
           return [
             {
               text: `How it's done!`,
@@ -501,7 +501,7 @@ export const voidScenes = {
       id: this.id,
       background: "white",
       text: ``,
-      //TODO: void-alone
+      //TODO: STORY - void-alone
       choices: () => [],
       metadata: {
         sectionId: sectionId,
@@ -515,7 +515,7 @@ export const voidScenes = {
       id: this.id,
       background: "white",
       text: ``,
-      //TODO: void whatever
+      //TODO: STORY - void whatever
       choices: () => [],
       metadata: {
         sectionId: sectionId,

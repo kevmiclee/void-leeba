@@ -8,7 +8,7 @@ import { useCharacterStore } from "@/stores/character";
 import { defineScene } from "../story";
 import hypnoSong from "@/assets/audio/story/background-themes/ophelia.mp3";
 
-//TODO: player has to recite their lines and earns stats/items/aspects/something for getting it right/wrong
+//TODO: STORY - player has to recite their lines and earns stats/items/aspects/something for getting it right/wrong
 
 const sectionId = "hypno";
 

@@ -64,7 +64,7 @@ export const blackDogScenes = {
           next: "black-dog1",
           onChoose: () => {
             const character = useCharacterStore();
-            character.setFlag("closer-to-black-dog", true);
+            character.setFlag("black-dog-readiness", -1);
             character.gainStat("will", 1, this.id);
           },
         },
@@ -73,7 +73,7 @@ export const blackDogScenes = {
           next: "black-dog1",
           onChoose: () => {
             const character = useCharacterStore();
-            character.setFlag("closer-to-black-dog", false);
+            character.setFlag("black-dog-readiness", 1);
             character.loseStat("will", 1, this.id);
           },
         },
@@ -139,18 +139,26 @@ export const blackDogScenes = {
         `You recall the words of your sister the last time she read your fortune using those weird blocks and strings, ` +
         `"You must be careful! There is a Red Dog. And, there is a Black Dog." But...` +
         `^^...this is both? `,
-      choices: () => [
-        {
-          text: "Start acting careful.",
-          next: "black-dog2",
-          //TODO: perks
-        },
-        {
-          text: `It was hogwash then, and it's hogwash now.`,
-          next: "black-dog2",
-          //TODO: perks
-        },
-      ],
+      choices: () => {
+        const character = useCharacterStore();
+        const blackDogReadiness = character.flags["black-dog-readiness"] ?? 0;
+        return [
+          {
+            text: "Start acting careful.",
+            next: "black-dog2",
+            onChoose: () => {
+              character.setFlag("black-dog-readiness", blackDogReadiness + 1);
+            },
+          },
+          {
+            text: `It was hogwash then, and it's hogwash now.`,
+            next: "black-dog2",
+            onChoose: () => {
+              character.setFlag("black-dog-readiness", blackDogReadiness - 1);
+            },
+          },
+        ];
+      },
       metadata: {
         sectionId: sectionId,
         routes: [
@@ -584,11 +592,13 @@ export const blackDogScenes = {
           onClick: () => {
             const character = useCharacterStore();
             const blackDogAthletics = 3;
+            const blackDogReadiness =
+              character.flags["black-dog-readiness"] ?? 0;
 
-            //If the player is closer to the dog, it's harder to dodge its attack
+            // If the player is closer to the dog or thinks their sister's fortune-telling is hogwash,
+            // it's harder to dodge its attack
             const playerAthletics =
-              character.athletics.value +
-              (character.flags["closer-to-black-dog"] ? 0 : 1);
+              character.athletics.value + blackDogReadiness;
 
             const roll = fateContest(playerAthletics, blackDogAthletics);
 

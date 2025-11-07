@@ -12,7 +12,7 @@ export const paintScenes = {
       id: this.id,
       text: "Paint",
       background: bgDefault,
-      //TODO: paint
+      //TODO: STORY - paint
       metadata: {
         sectionId: sectionId,
       },

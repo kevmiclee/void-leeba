@@ -4,7 +4,6 @@ import partySong from "@/assets/audio/story/background-themes/party.mp3";
 import { defineScene } from "../story";
 
 const sectionId = "party";
-//TODO: meta
 
 export const partyScenes = {
   "party-keg": defineScene("party-keg", function (payload): Scene {

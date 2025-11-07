@@ -119,7 +119,6 @@ watch(
   position: relative;
   z-index: 1;
   margin: 0 0 0.6em;
-
   font-size: clamp(16px, 1.6vw, 24px);
 }
 </style>
