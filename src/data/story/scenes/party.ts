@@ -74,5 +74,5 @@ export const partyScenes = {
   }),
 };
 
-//TODO: party
+//TODO: STORY - party
 // Mudman cometh

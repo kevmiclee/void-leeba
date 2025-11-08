@@ -79,14 +79,16 @@ function goToScene(success: boolean) {
 
   const outcome = getCatchSquirrelOutcome(roll);
 
+  console.log(outcome.text);
+
   if (outcome.success) {
     character.setFlag("caught-squirrel", true, "dream-squirrel-game");
     game.goToScene("dream-squirrel4-success", {
-      filter: outcome.text,
+      text: outcome.text,
     });
   } else {
     character.setFlag("caught-squirrel", false, "dream-squirrel-game");
-    game.goToScene("dream-squirrel4-fail", { filter: outcome.text });
+    game.goToScene("dream-squirrel4-fail", { text: outcome.text });
   }
 }
 

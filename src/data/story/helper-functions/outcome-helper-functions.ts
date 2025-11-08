@@ -57,7 +57,6 @@ export function getTreeChopOutcome(roll: number): FateOutcome {
   }
 }
 
-//TODO: STORY - Use these
 export function getCatchSquirrelOutcome(roll: number): FateOutcome {
   if (roll >= 2) {
     return {
