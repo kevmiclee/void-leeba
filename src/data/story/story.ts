@@ -13,6 +13,7 @@ import { snowPileScenes } from "./scenes/snow-pile";
 import { Scene, ScenePayload } from "@/types/story";
 import { voidScenes } from "./scenes/void";
 import { paintScenes } from "./scenes/paint";
+import { zombieScenes } from "./scenes/zombies";
 
 type AllScenes = typeof introScenes &
   typeof bedroomScenes &
@@ -27,7 +28,8 @@ type AllScenes = typeof introScenes &
   typeof dreamFaeriesScenes &
   typeof dreamTreeChaseScenes &
   typeof partyScenes &
-  typeof hypnoScenes;
+  typeof hypnoScenes &
+  typeof zombieScenes;
 
 export const story: AllScenes = {
   ...introScenes,
@@ -44,6 +46,7 @@ export const story: AllScenes = {
   ...dreamTreeChaseScenes,
   ...partyScenes,
   ...hypnoScenes,
+  ...zombieScenes,
 };
 
 export type SceneId = keyof AllScenes;

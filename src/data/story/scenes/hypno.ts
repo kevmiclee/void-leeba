@@ -2,9 +2,6 @@ import { Scene } from "@/types/story";
 import bgDefault from "@/assets/images/backgrounds/new-game.png";
 import bgMemespace from "@/assets/images/backgrounds/memespace.png";
 import bgDressingRoom from "@/assets/images/backgrounds/dressing-room.png";
-import { useAspectStore } from "@/stores/aspects";
-import { useGameStore } from "@/stores/game";
-import { useCharacterStore } from "@/stores/character";
 import { defineScene } from "../story";
 import hypnoSong from "@/assets/audio/story/background-themes/ophelia.mp3";
 
@@ -23,16 +20,10 @@ export const hypnoScenes = {
         `with a script in your hands, {practicing lines for a play}.`,
       buttonActions: () => [
         {
-          action: () => {
-            const game = useGameStore();
-            game.goToScene("hypno1");
-          },
+          next: "hypno1",
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [{ text: "...", next: "hypno1" }],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -46,19 +37,10 @@ export const hypnoScenes = {
       ^{...}`,
       buttonActions: () => [
         {
-          action: () => {
-            const game = useGameStore();
-            game.goToScene("hypno2");
-          },
+          next: "hypno2",
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          { text: "Keep practicing.", next: "hypno-practice" },
-          { text: "...", next: "hypno2" },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -72,16 +54,10 @@ export const hypnoScenes = {
       PUT AN ORANGE-SODA FOUNTAIN IN MY BEDROOM!"^{...}`,
       buttonActions: () => [
         {
-          action: () => {
-            const game = useGameStore();
-            game.goToScene("hypno3");
-          },
+          next: "hypno3",
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [{ text: "...", next: "hypno3" }],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -96,13 +72,7 @@ export const hypnoScenes = {
         { text: "Keep practicing.", next: "hypno-practice" },
         { text: "Finish.", next: "hypno4" },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          { text: "Keep practicing.", next: "hypno-practice" },
-          { text: "Finish.", next: "hypno4" },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -119,13 +89,7 @@ export const hypnoScenes = {
         { text: "Keep practicing.", next: "hypno-practice1" },
         { text: "Finish.", next: "hypno4" },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          { text: "Keep practicing.", next: "hypno-practice1" },
-          { text: "Finish.", next: "hypno4" },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -140,16 +104,10 @@ export const hypnoScenes = {
         {
           text: "Finish.",
           next: "hypno4",
-          onChoose: () => {
-            const aspects = useAspectStore();
-            aspects.addAspect("well-versed");
-          },
+          aspect: "well-versed",
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [{ text: "Finish.", next: "hypno4", aspect: "well-versed" }],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -180,33 +138,10 @@ export const hypnoScenes = {
           text: `"I got this!"`,
           next: "hypno5",
           payload: { filter: "confident" },
-          onChoose: () => {
-            const character = useCharacterStore();
-            character.gainStat("will", 1, this.id);
-          },
+          stats: [{ id: "will", amount: 1 }],
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: `"I don't think I'm cut out for this."`,
-            next: "hypno5",
-          },
-          {
-            text: `"I need more time to go over my lines!"`,
-            next: "hypno-practice",
-          },
-          {
-            text: `"I got this!"`,
-            next: "hypno5",
-            stat: {
-              id: "will",
-              amount: 1,
-            },
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -224,16 +159,10 @@ export const hypnoScenes = {
               ? `Great, great. They're waiting for you out there.`
               : `Don't be ridiculous. Your part doesn't even have any lines.`
           } Quickly, put this on.`,
-          onClick: () => {
-            const game = useGameStore();
-            game.goToScene("hypno6");
-          },
+          next: "hypno6",
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [{ text: "buzz dialog click.", next: "hypno6" }],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -248,16 +177,10 @@ export const hypnoScenes = {
         `the door. You barely catch a glimpse of yourself in the dressing room mirror.^^You're a... {keg}?`,
       buttonActions: () => [
         {
-          action: () => {
-            const game = useGameStore();
-            game.goToScene("hypno7");
-          },
+          next: "hypno7",
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [{ text: "keg", next: "hypno7" }],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -273,16 +196,10 @@ export const hypnoScenes = {
         {
           characterId: "buzz",
           text: `Busy, busy! Memespace is bumpin tonight! That's why we had to bring in you eh... erm.. <i>amateurs</i>.`,
-          onClick: () => {
-            const game = useGameStore();
-            game.goToScene("hypno8");
-          },
+          next: "hypno8",
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [{ text: "buzz dialog click.", next: "hypno8" }],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -301,16 +218,10 @@ export const hypnoScenes = {
             `Here we are! Stage 2B, Leak Party. I'll let you take it from here. Break a leg! ` +
             `Figuratively, of course. If you were to actually break your leg... I knew we were forgetting something! ` +
             `The liability waiver, I have it here somewhere.`,
-          onClick: () => {
-            const game = useGameStore();
-            game.goToScene("hypno9");
-          },
+          next: "hypno9",
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [{ text: "buzz dialog click.", next: "hypno9" }],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -340,16 +251,7 @@ export const hypnoScenes = {
           next: "hypno-ready",
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: "I'm not doing this! Will yourself awake",
-            next: "hypno-ready-check",
-          },
-          { text: "I'm ready", next: "hypno-ready" },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -372,26 +274,14 @@ export const hypnoScenes = {
             text: `"I said no."`,
             next: "dream1",
             payload: { filter: "nap" },
-            onChoose: () => {
-              const character = useCharacterStore();
-              character.setFlag("did-nap", true, this.id);
-            },
+            flags: [{ id: "did-nap", value: true }],
           },
           {
             text: `"You're right. <i>The show must go on</i>!"`,
             next: "hypno-ready",
           },
         ],
-        metadata: {
-          sectionId: sectionId,
-          routes: [
-            { text: "I said no", next: "dream1" },
-            {
-              text: "You're right. <i>The show must go on</i>!",
-              next: "hypno-ready",
-            },
-          ],
-        },
+        metadata: { sectionId },
       };
     }
   ),
@@ -406,16 +296,10 @@ export const hypnoScenes = {
         {
           characterId: "buzz",
           text: "Great! I knew you were right for the job. Now remember everything I taught you.",
-          onClick: () => {
-            const game = useGameStore();
-            game.goToScene("hypno-ready1");
-          },
+          next: "hypno-ready1",
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [{ text: "buzz dialog click", next: "hypno-ready1" }],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -430,22 +314,10 @@ export const hypnoScenes = {
         `^^You hear voices approaching. Quick! {Act like a keg!}`,
       buttonActions: () => [
         {
-          action: () => {
-            const game = useGameStore();
-            const aspects = useAspectStore();
-            game.goToScene("party-keg");
-          },
+          next: "party-keg",
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: "Act like a keg",
-            next: "party-keg",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 };

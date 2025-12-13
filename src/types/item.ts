@@ -35,4 +35,5 @@ export type ItemId =
   | "beest-recording"
   | "brain-moss"
   | "axe"
-  | "time-fly";
+  | "time-fly"
+  | "leakcoin";

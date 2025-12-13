@@ -5,6 +5,7 @@ import { defineScene } from "../story";
 import { getNonZeroRandomDecimal } from "../helper-functions/outcome-helper-functions";
 import { useCharacterStore } from "@/stores/character";
 import { useGameStore } from "@/stores/game";
+import { getNeighborhoodDrunk1Dialog } from "../helper-functions/text-helper-functions";
 
 //TODO: MUSIC - dog barking sounds
 
@@ -31,19 +32,7 @@ export const neighborhoodScenes = {
       ],
       background: bgDefault,
       audio: neighborhoodTheme,
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: `Yes! Let's do it.`,
-            next: "neighborhood1",
-          },
-          {
-            text: "Not feeling it today. Go home.",
-            next: "room",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -51,70 +40,50 @@ export const neighborhoodScenes = {
     return {
       id: this.id,
       text: `Where do you set up your table?`,
-      choices: () => {
-        const character = useCharacterStore();
-        return [
-          {
-            text: `On the corner in front of the used bookstore.`,
-            next: "neighborhood-drunk",
-            onChoose: () => {
-              character.setFlag("art-table-success-rate", 1, this.id);
+      choices: () => [
+        {
+          text: `On the corner in front of the used bookstore.`,
+          next: "neighborhood-drunk",
+          flags: [{ id: "art-table-success-rate", value: 1 }],
+        },
+        {
+          text: `In the middle of the street.`,
+          //TODO: STORY - gets shut down faster but maybe you can shit talk him into buying a scultpture and let you keep selling
+          next: "neighborhood-drunk",
+          flags: [
+            {
+              id: "art-table-success-rate",
+              value: getNonZeroRandomDecimal(2),
             },
-          },
-          {
-            text: `In the middle of the street.`,
-            //TODO: STORY - gets shut down faster but maybe you can shit talk him into buying a scultpture and let you keep selling
-            next: "neighborhood-drunk",
-            onChoose: () => {
-              const rate = getNonZeroRandomDecimal(2);
-              character.setFlag("art-table-success-rate", rate, this.id);
-              character.setFlag("asking-for-trouble", true, this.id);
+            {
+              id: "asking-for-trouble",
+              value: true,
             },
-          },
-          {
-            text: `The matematically busiest street-corner.`,
-            next: "neighborhood-drunk",
-            onChoose: () => {
-              character.setFlag("art-table-success-rate", 1.5, this.id);
+          ],
+        },
+        {
+          text: `The mathematically busiest street-corner.`,
+          next: "neighborhood-drunk",
+          flags: [{ id: "art-table-success-rate", value: 1.5 }],
+        },
+        {
+          text: `It doesn't matter. Here's fine.`,
+          next: "neighborhood-drunk",
+          flags: [
+            {
+              id: "art-table-success-rate",
+              value: getNonZeroRandomDecimal(2),
             },
-          },
-          {
-            text: `It doesn't matter. Here's fine.`,
-            next: "neighborhood-drunk",
-            onChoose: () => {
-              const rate = getNonZeroRandomDecimal(2);
-              character.setFlag("art-table-success-rate", rate, this.id);
-            },
-          },
-        ];
-      },
+          ],
+        },
+      ],
       background: bgDefault,
       audio: neighborhoodTheme,
       onPageLoad: () => {
         const character = useCharacterStore();
         character.setFlag("asking-for-trouble", false, this.id);
       },
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: `On the corner in front of the used bookstore.`,
-            next: "neighborhood-drunk",
-          },
-          {
-            text: `In the middle of the street.`,
-            next: "neighborhood-drunk",
-          },
-          {
-            text: `The matematically busiest street-corner.`,
-            next: "neighborhood-drunk",
-          },
-          {
-            text: `It doesn't matter. Here's fine.`,
-            next: "neighborhood-drunk",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -133,40 +102,24 @@ export const neighborhoodScenes = {
         ],
         choices: () => [
           {
-            text: `"Don't let that stop you!"`, // good chance
+            text: `"Don't let that stop you!"`,
             next: "neighborhood-drunk1",
-            onChoose: () => {},
+            payload: { filter: "good-chance" },
           },
           {
-            text: `"The cheese is locally-sourced from grass-fed cows."`, // bad chance
+            text: `"The cheese is locally-sourced from grass-fed cows."`,
             next: "neighborhood-drunk1",
-            onChoose: () => {},
+            payload: { filter: "bad-chance" },
           },
           {
-            text: `"They make a great gift for nieces or nephews."`, // neutral chance
+            text: `"They make a great gift for nieces or nephews."`,
             next: "neighborhood-drunk1",
-            onChoose: () => {},
+            payload: { filter: "neutral-chance" },
           },
         ],
         background: bgDefault,
         audio: neighborhoodTheme,
-        metadata: {
-          sectionId: sectionId,
-          routes: [
-            {
-              text: `"Don't let that stop you!"`, // good chance
-              next: "neighborhood-drunk1",
-            },
-            {
-              text: `"The cheese is locally-sourced from grass-fed cows."`, // bad chance
-              next: "neighborhood-drunk1",
-            },
-            {
-              text: `"They make a great gift for nieces or nephews."`, // neutral chance
-              next: "neighborhood-drunk1",
-            },
-          ],
-        },
+        metadata: { sectionId },
       };
     }
   ),
@@ -177,49 +130,185 @@ export const neighborhoodScenes = {
       return {
         id: this.id,
         text: ``,
-        dialogSequence: ()=>[
-          {characterId: "drunk1", text:`That is phuckin' advanced!`, onClick: ()=>{const game = useGameStore(); game.goToScene("neighborhood-drunk1a")}}
+        dialogSequence: () => [
+          {
+            characterId: "drunk1",
+            text: getNeighborhoodDrunk1Dialog(
+              payload?.filter! as
+                | "good-chance"
+                | "bad-chance"
+                | "neutral-chance"
+            ),
+            onClick: () => {
+              const game = useGameStore();
+              switch (payload?.filter!) {
+                case "good-chance":
+                  game.goToScene("neighborhood-drunk1a");
+                  break;
+                case "bad-chance":
+                  game.goToScene("neighborhood-drunk1b");
+                  break;
+                case "neutral-chance":
+                  game.goToScene("neighborhood-drunk1c");
+                  break;
+              }
+            },
+          },
         ],
         background: bgDefault,
         audio: neighborhoodTheme,
         metadata: {
-          sectionId: sectionId,
-          routes: [],
-        },
-      };
-    }
-  ),
-   "neighborhood-drunk1a": defineScene(
-    "neighborhood-drunk1a",
-    function (payload): Scene {
-      return {
-        id: this.id,
-        text: ``,
-        background: bgDefault,
-        audio: neighborhoodTheme,
-        metadata: {
-          sectionId: sectionId,
-          routes: [],
-        },
-      };
-    }
-  ),
-   "neighborhood-drunk1a1": defineScene(
-    "neighborhood-drunk1a1",
-    function (payload): Scene {
-      return {
-        id: this.id,
-        text: ``,
-        background: bgDefault,
-        audio: neighborhoodTheme,
-        metadata: {
-          sectionId: sectionId,
-          routes: [],
+          sectionId,
+          routes: [
+            {
+              text: "drunk dialog click",
+              next: "neighborhood-drunk1a",
+            },
+            {
+              text: "drunk dialog click",
+              next: "neighborhood-drunk1b",
+            },
+            {
+              text: "drunk dialog click",
+              next: "neighborhood-drunk1c",
+            },
+          ],
         },
       };
     }
   ),
 
+  "neighborhood-drunk1a": defineScene(
+    "neighborhood-drunk1a",
+    function (payload): Scene {
+      return {
+        id: this.id,
+        text: `You are so jazzed up by the praise, that you…`,
+        background: bgDefault,
+        audio: neighborhoodTheme,
+        choices: () => [
+          {
+            text: `Start talkin' all brazen and free, flitting from topic to topic.`,
+            next: "neighborhood-drunk2",
+            stats: [
+              { id: "blueMagic", amount: 1 },
+              { id: "shitheadedness", amount: 1 },
+            ],
+          },
+          {
+            text: `Bench press the entire table above your head while discussing your process.`,
+            next: "neighborhood-drunk2",
+            stats: [
+              { id: "athletics", amount: 1 },
+              { id: "will", amount: 1 },
+            ],
+          },
+        ],
+        metadata: { sectionId },
+      };
+    }
+  ),
+
+  "neighborhood-drunk1b": defineScene(
+    "neighborhood-drunk1b",
+    function (payload): Scene {
+      return {
+        id: this.id,
+        text: `You have both been trapped in a conversation about your supply chain. {Buckle up…}`,
+        background: bgDefault,
+        audio: neighborhoodTheme,
+        buttonActions: () => [
+          {
+            next: "neighborhood-drunk1b-1",
+          },
+        ],
+        metadata: { sectionId },
+      };
+    }
+  ),
+
+  "neighborhood-drunk1b-1": defineScene(
+    "neighborhood-drunk1b-1",
+    function (payload): Scene {
+      return {
+        id: this.id,
+        text: `<i>Three hours later...</i>^^As you return from the farm carrying your whole setup between the two of 
+        you, you feel the sweat cleansing your soul.`,
+        background: bgDefault,
+        audio: neighborhoodTheme,
+        choices: () => [
+          {
+            text: `"So, as you can see, local cows make for sturdier cheese sculptures."`,
+            next: "neighborhood-drunk2",
+            stats: [
+              { id: "blueMagic", amount: 1 },
+              { id: "will", amount: 1 },
+            ],
+          },
+          {
+            text: `"Farm to table, <i>literally</i>."`,
+            next: "neighborhood-drunk2",
+            stats: [
+              { id: "athletics", amount: 1 },
+              { id: "shitheadedness", amount: 1 },
+            ],
+          },
+        ],
+        metadata: { sectionId },
+      };
+    }
+  ),
+
+  "neighborhood-drunk1c": defineScene(
+    "neighborhood-drunk1c",
+    function (payload): Scene {
+      return {
+        id: this.id,
+        text: ``,
+        background: bgDefault,
+        audio: neighborhoodTheme,
+        metadata: { sectionId },
+      };
+    }
+  ),
+
+  "neighborhood-drunk2": defineScene(
+    "neighborhood-drunk2",
+    function (payload): Scene {
+      return {
+        id: this.id,
+        text: ``,
+        background: bgDefault,
+        audio: neighborhoodTheme,
+        dialogSequence: () => [
+          {
+            characterId: "drunk1",
+            text: `Damn. Well, damn, cousin, you're as cool as a multitool. I transferred you 50 Leakcoin. 
+          I'd like the one with the human face on the ass.`,
+            next: "neighborhood2",
+          },
+        ],
+        onPageLoad: () => {
+          //TODO: depending on the converstaion, the value here changes
+          const character = useCharacterStore();
+          character.addToInventory("leakcoin", this.id, 50);
+        },
+        metadata: { sectionId },
+      };
+    }
+  ),
+
+  neighborhood2: defineScene("neighborhood2", function (payload): Scene {
+    return {
+      id: this.id,
+      text: `As the drunk walks off happily with your sculpture, you silently bid goodbye to your creation.`,
+      background: bgDefault,
+      audio: neighborhoodTheme,
+      metadata: { sectionId },
+    };
+  }),
+
+  //TODO: STORY -
   //Dog just tries to eat one (maybe you run out of sculptures to sell)
   //If you're the dog kicker, chances are any potential customers havae seen you you on social media
 };

@@ -1,7 +1,6 @@
 import { Scene } from "@/types/story";
 import bgForest from "@/assets/images/backgrounds/pine-forest.png";
 import treeFallingSound from "@/assets/audio/story/sounds/tree-falling.mp3";
-import { useGameStore } from "@/stores/game";
 import { useCharacterStore } from "@/stores/character";
 import { getTreeChaseText } from "../helper-functions/text-helper-functions";
 import { defineScene } from "../story";
@@ -27,25 +26,14 @@ export const dreamTreeChaseScenes = {
           `Soft at first, {the din grows louder and louder}.`,
         buttonActions: () => [
           {
-            action: () => {
-              const game = useGameStore();
-              game.goToScene("dream-tree-chase1");
-            },
+            next: "dream-tree-chase1",
           },
         ],
         onPageLoad: () => {
           const audioStore = useAudioStore();
           audioStore.playGenericSound(treeFallingSound);
         },
-        metadata: {
-          sectionId: sectionId,
-          routes: [
-            {
-              text: `the din grows louder and louder`,
-              next: "dream-tree-chase1",
-            },
-          ],
-        },
+        metadata: { sectionId },
       };
     }
   ),
@@ -62,33 +50,29 @@ export const dreamTreeChaseScenes = {
           Another tree falls, narrowly missing your shoulder. A tree that wasn't even there before 
           begins to fall directly overhead. You dive out of the way at the last moment.^^The trees are chasing you!`,
         choices: () => {
-          const game = useGameStore();
           const character = useCharacterStore();
+          const itemWeight = character.inventory.reduce(
+            (sum, item) => sum + item.weight,
+            0
+          );
 
           return [
             {
               text: "Run.",
-              onChoose: () => {
-                const itemWeight = character.inventory.reduce(
-                  (sum, item) => sum + item.weight,
-                  0
-                );
-                game.goToScene("dream-tree-chase-game-intro", {
-                  text:
-                    itemWeight < 4
-                      ? "You feel unencumbered and are able to move nimbly."
-                      : itemWeight < 7
-                        ? "You feel somewhat burdened by the weight of your bag. Your agility is limited."
-                        : "Why did you pick up so much stuff? You can barely move to save your life.",
-                });
+              next: "dream-tree-chase-game-intro",
+              payload: {
+                text:
+                  itemWeight < 4
+                    ? "You feel unencumbered and are able to move nimbly."
+                    : itemWeight < 7
+                      ? "You feel somewhat burdened by the weight of your bag. Your agility is limited."
+                      : "Why did you pick up so much stuff? You can barely move to save your life.",
               },
             },
             {
               text: "Pick up a handful of pine needles",
               itemId: "pine-needles",
-              onChoose: () => {
-                character.addToInventory("pine-needles", this.id);
-              },
+              items: [{ id: "pine-needles", amount: 1 }],
             },
           ];
         },
@@ -96,21 +80,14 @@ export const dreamTreeChaseScenes = {
           const audioStore = useAudioStore();
           audioStore.playGenericSound(treeFallingSound);
         },
-        metadata: {
-          sectionId: sectionId,
-          routes: [
-            {
-              text: `run`,
-              next: "dream-tree-chase-game-intro",
-            },
-          ],
-        },
+        metadata: { sectionId },
       };
     }
   ),
 
   "dream-tree-chase-game-intro": defineScene(
     "dream-tree-chase-game-intro",
+
     function (payload): Scene {
       return {
         id: this.id,
@@ -120,21 +97,10 @@ export const dreamTreeChaseScenes = {
           "^^Trees are falling all around you. You have to {dodge them}.",
         buttonActions: () => [
           {
-            action: () => {
-              const game = useGameStore();
-              game.goToScene("dream-tree-chase-game");
-            },
+            next: "dream-tree-chase-game",
           },
         ],
-        metadata: {
-          sectionId: sectionId,
-          routes: [
-            {
-              text: `dodge them`,
-              next: "dream-tree-chase-game",
-            },
-          ],
-        },
+        metadata: { sectionId },
       };
     }
   ),
@@ -180,25 +146,14 @@ export const dreamTreeChaseScenes = {
           `^^FWOOM!!! You're leaping and bounding through the air, {springing off the pine needles} like a tree frog on a trampoline.`,
         buttonActions: () => [
           {
-            action: () => {
-              const game = useGameStore();
-              game.goToScene("dream-tree-chase-fly");
-            },
+            next: "dream-tree-chase-fly",
           },
         ],
         onPageLoad: () => {
           const aspects = useAspectStore();
           aspects.addAspect("part-bird");
         },
-        metadata: {
-          sectionId: sectionId,
-          routes: [
-            {
-              text: "springing off the pine needles",
-              next: "dream-tree-chase-fly",
-            },
-          ],
-        },
+        metadata: { sectionId },
       };
     }
   ),
@@ -217,25 +172,14 @@ export const dreamTreeChaseScenes = {
           `^^You're mangled in a barrage of falling trees. {All your bones are broken.}`,
         buttonActions: () => [
           {
-            action: () => {
-              const game = useGameStore();
-              game.goToScene("dream-tree-chase-sink");
-            },
+            next: "dream-tree-chase-sink",
           },
         ],
         onPageLoad: () => {
           const aspects = useAspectStore();
           aspects.addAspect("all-your-bones-are-broken");
         },
-        metadata: {
-          sectionId: sectionId,
-          routes: [
-            {
-              text: "All your bones are broken",
-              next: "dream-tree-chase-sink",
-            },
-          ],
-        },
+        metadata: { sectionId },
       };
     }
   ),
@@ -260,21 +204,10 @@ export const dreamTreeChaseScenes = {
         },
         buttonActions: () => [
           {
-            action: () => {
-              const game = useGameStore();
-              game.goToScene("dream-tree-chase-fly1");
-            },
+            next: "dream-tree-chase-fly1",
           },
         ],
-        metadata: {
-          sectionId: sectionId,
-          routes: [
-            {
-              text: "Continue.",
-              next: "dream-tree-chase-fly1",
-            },
-          ],
-        },
+        metadata: { sectionId },
       };
     }
   ),
@@ -287,6 +220,7 @@ export const dreamTreeChaseScenes = {
         background: bgForest,
         //TODO: SOUND - crashing back down to earth in an explosion sound
         // TODO: IMAGE - explosion animation -> crater
+        //TODO: STORY - now you end up at the party as a part-bird
         text:
           `Reaching its zenith, there is a moment of quiet, motionless stillness, then you're re-entering the atmosphere, careening faster and faster ` +
           `back down until you all meet the forest floor in an explosive blast. You find yourself at the center of a massive crater. ` +
@@ -319,12 +253,10 @@ export const dreamTreeChaseScenes = {
             text:
               `Oh little pölkkypää... What you tried to do to the trees was not nice! I guess you learned your lesson though. ` +
               `Rest now.`,
-            onClick: () => {
-              const game = useGameStore();
-              game.goToScene("dream-tree-chase-sink1");
-            },
+            next: "dream-tree-chase-sink1",
           },
         ],
+        metadata: { sectionId },
       };
     }
   ),
@@ -340,12 +272,10 @@ export const dreamTreeChaseScenes = {
           `You have no choice but to {swallow it}.`,
         buttonActions: () => [
           {
-            action: () => {
-              const game = useGameStore();
-              game.goToScene("party-eggcorn");
-            },
+            next: "party-eggcorn",
           },
         ],
+        metadata: { sectionId },
       };
     }
   ),

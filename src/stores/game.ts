@@ -90,6 +90,42 @@ export const useGameStore = defineStore("game", {
       if (choice.onChoose) {
         choice.onChoose();
       }
+      if (choice.stats) {
+        const character = useCharacterStore();
+        choice.stats.forEach(({ id, amount, isLost }) => {
+          if (isLost) {
+            character.loseStat(id, amount, this.currentSceneId);
+          } else {
+            character.gainStat(id, amount, this.currentSceneId);
+          }
+        });
+      }
+      if (choice.manners) {
+        const character = useCharacterStore();
+        choice.manners.forEach(({ id, amount }) => {
+          character.gainManners(id, amount, this.currentSceneId);
+        });
+      }
+      if (choice.flags) {
+        const character = useCharacterStore();
+        choice.flags.forEach(({ id, value }) => {
+          character.setFlag(id, value, this.currentSceneId);
+        });
+      }
+      if (choice.aspect) {
+        const aspectStore = useAspectStore();
+        aspectStore.addAspect(choice.aspect);
+      }
+      if (choice.items) {
+        const character = useCharacterStore();
+        choice.items.forEach(({ id, amount, isLost, showSnackbar }) => {
+          if (isLost) {
+            character.removeFromInventory(id, showSnackbar);
+          } else {
+            character.addToInventory(id, this.currentSceneId, amount);
+          }
+        });
+      }
       if (choice.next) {
         this.goToScene(choice.next);
       }

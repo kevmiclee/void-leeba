@@ -26,26 +26,14 @@ export const dreamScenes = {
       choices: () => [{ text: "Admire the trees.", next: "dream1" }],
       buttonActions: () => [
         {
-          isItem: true,
-          action: () => {
-            const character = useCharacterStore();
-            character.addToInventory("pine-needles", this.id);
-          },
+          item: "pine-needles",
         },
       ],
       onPageLoad: () => {
         const audioStore = useAudioStore();
         audioStore.playGenericSound(crunchyWalkingSound);
       },
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: `Admire the trees`,
-            next: "dream1",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -54,6 +42,7 @@ export const dreamScenes = {
     const didFaeries = character.flags["did-faeries"];
     const didNap = character.flags["did-nap"];
 
+    //TODO:
     // payload?.filter == "fromNap"
     //       ? `You're able to wake up from the dream within the dream, but you're still dreaming. You are back ` +
     //         `where you started.^^`
@@ -94,6 +83,7 @@ export const dreamScenes = {
         let buttonActions: ButtonAction[] = [
           {
             id: "squirrel",
+            next: "dream-squirrel",
             action: () => {
               character.gainStat("athletics", 1, this.id);
               game.goToScene("dream-squirrel");
@@ -105,30 +95,27 @@ export const dreamScenes = {
           },
           {
             id: "faeries",
+            next: "dream-faeries",
             action: () => {
               character.gainStat("blueMagic", 1, this.id);
-              game.goToScene("dream-faeries");
             },
           },
           {
             id: "chop",
+            next: "dream-chop",
             action: () => {
               character.gainStat("shitheadedness", 1, this.id);
-              game.goToScene("dream-chop");
             },
           },
           {
             id: "nap",
+            next: "dream-within-a-dream",
             action: () => {
               character.gainStat("will", 1, this.id);
-              game.goToScene("dream-within-a-dream");
             },
           },
           {
-            isItem: true,
-            action: () => {
-              character.addToInventory("pine-needles", this.id);
-            },
+            item: "pine-needles",
           },
         ];
 
@@ -140,43 +127,7 @@ export const dreamScenes = {
 
         return buttonActions;
       },
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: `Try to catch one`,
-            next: "dream-squirrel",
-            stat: {
-              id: "athletics",
-              amount: 1,
-            },
-          },
-          {
-            text: `Follow them`,
-            next: "dream-faeries",
-            stat: {
-              id: "blueMagic",
-              amount: 1,
-            },
-          },
-          {
-            text: `start chopping`,
-            next: "dream-chop",
-            stat: {
-              id: "shitheadedness",
-              amount: 1,
-            },
-          },
-          {
-            text: `take a nap`,
-            next: "dream-within-a-dream",
-            stat: {
-              id: "will",
-              amount: 1,
-            },
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -192,11 +143,7 @@ export const dreamScenes = {
           `^^{Pick up a handful of brain moss.}`,
         buttonActions: () => [
           {
-            isItem: true,
-            action: () => {
-              const character = useCharacterStore();
-              character.addToInventory("brain-moss", this.id);
-            },
+            item: "brain-moss",
           },
         ],
         choices: () => [
@@ -205,25 +152,10 @@ export const dreamScenes = {
             text: `Nevermind.`,
             next: "dream1",
             payload: { filter: "nap" },
-            onChoose: () => {
-              const character = useCharacterStore();
-              character.setFlag("did-nap", true, this.id);
-            },
+            flags: [{ id: "did-nap", value: true }],
           },
         ],
-        metadata: {
-          sectionId: sectionId,
-          routes: [
-            {
-              text: `Fall asleep`,
-              next: "dream-within-a-dream1",
-            },
-            {
-              text: `Nevermind`,
-              next: "dream1",
-            },
-          ],
-        },
+        metadata: { sectionId },
       };
     }
   ),
@@ -245,19 +177,7 @@ export const dreamScenes = {
             next: "dream-within-a-dream-refuse",
           },
         ],
-        metadata: {
-          sectionId: sectionId,
-          routes: [
-            {
-              text: `Wait... will I fall asleep forever?`,
-              next: "dream-within-a-dream2",
-            },
-            {
-              text: `Nevermind`,
-              next: "dream-within-a-dream-refuse",
-            },
-          ],
-        },
+        metadata: { sectionId },
       };
     }
   ),
@@ -271,21 +191,10 @@ export const dreamScenes = {
         text: `The concept of dreaming twice is so scary! {What if you don't wake up?}`,
         buttonActions: () => [
           {
-            action: () => {
-              const game = useGameStore();
-              game.goToScene("dream-within-a-dream-refuse1");
-            },
+            next: "dream-within-a-dream-refuse1",
           },
         ],
-        metadata: {
-          sectionId: sectionId,
-          routes: [
-            {
-              text: `WHat if you don't wake up?`,
-              next: "dream-within-a-dream-refuse1",
-            },
-          ],
-        },
+        metadata: { sectionId },
       };
     }
   ),
@@ -303,21 +212,10 @@ export const dreamScenes = {
           like a rotting orange. You recoil. {What a gross mushroom!}`,
         buttonActions: () => [
           {
-            action: () => {
-              const game = useGameStore();
-              game.goToScene("dream-within-a-dream-refuse2");
-            },
+            next: "dream-within-a-dream-refuse2",
           },
         ],
-        metadata: {
-          sectionId: sectionId,
-          routes: [
-            {
-              text: `What a gross mushroom!`,
-              next: "dream-within-a-dream-refuse2",
-            },
-          ],
-        },
+        metadata: { sectionId },
       };
     }
   ),
@@ -338,28 +236,14 @@ export const dreamScenes = {
           `you to {awaken back into the first dream}.`,
         buttonActions: () => [
           {
-            isItem: true,
-            action: () => {
-              const character = useCharacterStore();
-              character.addToInventory("mushroom", this.id);
-            },
+            item: "mushroom",
           },
           {
-            action: () => {
-              const game = useGameStore();
-              game.goToScene("dream-tree-chase", { filter: "dream" });
-            },
+            next: "dream-tree-chase",
+            filter: "dream",
           },
         ],
-        metadata: {
-          sectionId: sectionId,
-          routes: [
-            {
-              text: `awaken back into the first dream`,
-              next: "dream-tree-chase",
-            },
-          ],
-        },
+        metadata: { sectionId },
       };
     }
   ),
@@ -382,28 +266,13 @@ export const dreamScenes = {
           `^^Looking up from the shroom, {a hilly landscape sprawls out before you}.`,
         buttonActions: () => [
           {
-            isItem: true,
-            action: () => {
-              const character = useCharacterStore();
-              character.addToInventory("mushroom", this.id);
-            },
+            item: "mushroom",
           },
           {
-            action: () => {
-              const game = useGameStore();
-              game.goToScene("dream-within-a-dream3");
-            },
+            next: "dream-within-a-dream3",
           },
         ],
-        metadata: {
-          sectionId: sectionId,
-          routes: [
-            {
-              text: `a hilly landscape sprawls out before you`,
-              next: "dream-within-a-dream3",
-            },
-          ],
-        },
+        metadata: { sectionId },
       };
     }
   ),
@@ -428,21 +297,10 @@ export const dreamScenes = {
           `^^{Breathe in.}`,
         buttonActions: () => [
           {
-            action: () => {
-              const game = useGameStore();
-              game.goToScene("dream-within-a-dream4");
-            },
+            next: "dream-within-a-dream4",
           },
         ],
-        metadata: {
-          sectionId: sectionId,
-          routes: [
-            {
-              text: `Breathe in`,
-              next: "dream-within-a-dream4",
-            },
-          ],
-        },
+        metadata: { sectionId },
       };
     }
   ),
@@ -464,21 +322,10 @@ export const dreamScenes = {
           `the terrain with imperceptible changes. All is as it was before.^^{Open your eyes}.`,
         buttonActions: () => [
           {
-            action: () => {
-              const game = useGameStore();
-              game.goToScene("hypno");
-            },
+            next: "hypno",
           },
         ],
-        metadata: {
-          sectionId: sectionId,
-          routes: [
-            {
-              text: `Open your eyes`,
-              next: "hypno",
-            },
-          ],
-        },
+        metadata: { sectionId },
       };
     }
   ),
@@ -529,7 +376,7 @@ export const dreamScenes = {
         },
       ],
       metadata: {
-        sectionId: sectionId,
+        sectionId,
         routes: [
           {
             text: `THUNK`,

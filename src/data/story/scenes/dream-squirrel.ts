@@ -2,7 +2,6 @@ import { Scene } from "@/types/story";
 import bgForest from "@/assets/images/backgrounds/pine-forest.png";
 import bgTrees from "@/assets/images/backgrounds/in-the-trees.png";
 import fallingOutOfTreeSound from "@/assets/audio/story/sounds/falling-out-of-tree.mp3";
-import { useGameStore } from "@/stores/game";
 import { useCharacterStore } from "@/stores/character";
 import { getFollowSquirrelText } from "../helper-functions/text-helper-functions";
 import { defineScene } from "../story";
@@ -20,21 +19,10 @@ export const dreamSquirrelScenes = {
       text: `You lock in on a squirrel. Its brown body is a corkscrew streak around the trunk. {It's time to give chase}.`,
       buttonActions: () => [
         {
-          action: () => {
-            const game = useGameStore();
-            game.goToScene("dream-squirrel0");
-          },
+          next: "dream-squirrel0",
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: `It's time to give chase`,
-            next: "dream-squirrel0",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -46,21 +34,10 @@ export const dreamSquirrelScenes = {
         {Just a little closer...} `,
       buttonActions: () => [
         {
-          action: () => {
-            const game = useGameStore();
-            game.goToScene("dream-squirrel1");
-          },
+          next: "dream-squirrel1",
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: `Just a little closer...`,
-            next: "dream-squirrel1",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -74,29 +51,10 @@ export const dreamSquirrelScenes = {
         {
           text: "Keep shimmying up.",
           next: "dream-squirrel1b",
-          onChoose: () => {
-            const character = useCharacterStore();
-            character.gainStat("athletics", 1, this.id);
-          },
+          stats: [{ id: "athletics", amount: 1 }],
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: `Reach for the closest branch.`,
-            next: "dream-squirrel1a",
-          },
-          {
-            text: `Keep shimmying up.`,
-            next: "dream-squirrel1b",
-            stat: {
-              id: "athletics",
-              amount: 1,
-            },
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -111,21 +69,10 @@ export const dreamSquirrelScenes = {
           `{Keep shimmying up}.`,
         buttonActions: () => [
           {
-            action: () => {
-              const game = useGameStore();
-              game.goToScene("dream-squirrel1b");
-            },
+            next: "dream-squirrel1b",
           },
         ],
-        metadata: {
-          sectionId: sectionId,
-          routes: [
-            {
-              text: `Keep shimmying up`,
-              next: "dream-squirrel1b",
-            },
-          ],
-        },
+        metadata: { sectionId },
       };
     }
   ),
@@ -139,47 +86,19 @@ export const dreamSquirrelScenes = {
         text: `You keep shimmying up the trunk, past the first branch. Your arms and legs are giving out. 
           The squirrel hasn't moved. The way it watches you, vacillating between tepid curiosity and 
           utter indifference, suggests the thought of you as a threat could not be further from its mind.`,
-        choices: () => {
-          const character = useCharacterStore();
-
-          return [
-            {
-              text: "Push yourself even harder.",
-              next: "dream-squirrel2",
-              onChoose: () => {
-                character.gainStat("will", 1, this.id);
-              },
-            },
-            {
-              text: "This was a bad idea. Shimmy back down before you get hurt.",
-              next: "dream-squirrel-give-up",
-              onChoose: () => {
-                character.loseStat("will", 1, this.id);
-              },
-            },
-          ];
-        },
-        metadata: {
-          sectionId: sectionId,
-          routes: [
-            {
-              text: `Push yourself even harder.`,
-              next: "dream-squirrel2",
-              stat: {
-                id: "will",
-                amount: 1,
-              },
-            },
-            {
-              text: `This was a bad idea. Shimmy back down before you get hurt.`,
-              next: "dream-squirrel-give-up",
-              stat: {
-                id: "will",
-                amount: -1,
-              },
-            },
-          ],
-        },
+        choices: () => [
+          {
+            text: "Push yourself even harder.",
+            next: "dream-squirrel2",
+            stats: [{ id: "will", amount: 1 }],
+          },
+          {
+            text: "This was a bad idea. Shimmy back down before you get hurt.",
+            next: "dream-squirrel-give-up",
+            stats: [{ id: "will", amount: 1, isLost: true }],
+          },
+        ],
+        metadata: { sectionId },
       };
     }
   ),
@@ -195,21 +114,10 @@ export const dreamSquirrelScenes = {
         {
           characterId: "squirrel",
           text: "Putoat! Putoat!",
-          onClick: () => {
-            const game = useGameStore();
-            game.goToScene("dream-squirrel3");
-          },
+          next: "dream-squirrel3",
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: `squirrel dialog click`,
-            next: "dream-squirrel3",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -222,21 +130,10 @@ export const dreamSquirrelScenes = {
         `^^In a last ditch effort, you dart your hand out to {snatch the furball}.`,
       buttonActions: () => [
         {
-          action: () => {
-            const game = useGameStore();
-            game.goToScene("dream-squirrel-game");
-          },
+          next: "dream-squirrel-game",
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: `snatch the furball`,
-            next: "dream-squirrel-game",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -248,7 +145,7 @@ export const dreamSquirrelScenes = {
         text: "",
         miniGameId: "squirrel",
         metadata: {
-          sectionId: sectionId,
+          sectionId,
           routes: [
             {
               text: `win`,
@@ -275,21 +172,10 @@ export const dreamSquirrelScenes = {
           {
             characterId: "squirrel",
             text: "Puolue! Puolue!",
-            onClick: () => {
-              const game = useGameStore();
-              game.goToScene("dream-squirrel5");
-            },
+            next: "dream-squirrel5",
           },
         ],
-        metadata: {
-          sectionId: sectionId,
-          routes: [
-            {
-              text: `squirrel dialog click`,
-              next: "dream-squirrel5",
-            },
-          ],
-        },
+        metadata: { sectionId },
       };
     }
   ),
@@ -303,36 +189,21 @@ export const dreamSquirrelScenes = {
         text: payload?.text ?? "",
         buttonActions: () => [
           {
-            isItem: true,
-            action: () => {
-              const character = useCharacterStore();
-              character.addToInventory("pinecone", this.id);
-            },
+            item: "pinecone",
           },
         ],
         dialogSequence: () => [
           {
             characterId: "squirrel",
             text: "Puolue! Puolue!",
-            onClick: () => {
-              const game = useGameStore();
-              game.goToScene("dream-squirrel5");
-            },
+            next: "dream-squirrel5",
           },
         ],
         onPageLoad: () => {
           const audioStore = useAudioStore();
           audioStore.playGenericSound(fallingOutOfTreeSound);
         },
-        metadata: {
-          sectionId: sectionId,
-          routes: [
-            {
-              text: `squirrel dialog click`,
-              next: "dream-squirrel5",
-            },
-          ],
-        },
+        metadata: { sectionId },
       };
     }
   ),
@@ -345,86 +216,43 @@ export const dreamSquirrelScenes = {
         `As you follow the squirrel, it is obvious the creature is very excited about something. ` +
         `You faintly hear what might be voices in unison like a sing-song chant, growing louder as you progress. ` +
         `This must be where the squirrel is leading you.`,
-      choices: () => {
-        const character = useCharacterStore();
-
-        return [
-          {
-            text: `"Where are we going?"`,
-            next: "dream-squirrel6",
-            payload: { filter: "where" },
-            onChoose: () => {
-              character.gainManners("polite", 1, this.id);
-            },
-          },
-          {
-            text: `"What is that infernal chanting?"`,
-            next: "dream-squirrel6",
-            payload: { filter: "what" },
-            onChoose: () => {
-              character.gainManners("depressing", 1, this.id);
-            },
-          },
-          {
-            text: `"Are we there yet?"`,
-            next: "dream-squirrel6",
-            payload: { filter: "what" },
-            onChoose: () => {
-              character.gainManners("rude", 1, this.id);
-            },
-          },
-          {
-            text: `Why am I following a squirrel?`,
-            next: "dream-squirrel6",
-            payload: { filter: "why" },
-            onChoose: () => {
-              character.gainManners("weird", 1, this.id);
-            },
-          },
-          {
-            text: `Don't speak. Don't think. Just follow.`,
-            next: "dream-squirrel6",
-            onChoose: () => {
-              character.gainManners("weird", 1, this.id);
-              character.gainStat("blueMagic", 1, this.id);
-            },
-          },
-        ];
-      },
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: `"Where are we going?"`,
-            next: "dream-squirrel6",
-            manners: "polite",
-          },
-          {
-            text: `"What is that infernal chanting"`,
-            next: "dream-squirrel6",
-            manners: "depressing",
-          },
-          {
-            text: `"Are we there yet?"`,
-            next: "dream-squirrel6",
-            manners: "rude",
-          },
-          {
-            text: `Why am I following a squirrel?`,
-            next: "dream-squirrel6",
-            manners: "weird",
-          },
-          {
-            text: `Don't speak. Don't think. Just follow.`,
-            next: "dream-squirrel6",
-            manners: "weird",
-            stat: {
-              id: "blueMagic",
-              amount: 1,
-            },
-          },
-        ],
-      },
+      choices: () => [
+        {
+          text: `"Where are we going?"`,
+          next: "dream-squirrel6",
+          payload: { filter: "where" },
+          manners: [{ id: "polite", amount: 1 }],
+        },
+        {
+          text: `"What is that infernal chanting?"`,
+          next: "dream-squirrel6",
+          payload: { filter: "what" },
+          manners: [{ id: "depressing", amount: 1 }],
+        },
+        {
+          text: `"Are we there yet?"`,
+          next: "dream-squirrel6",
+          payload: { filter: "what" },
+          manners: [{ id: "rude", amount: 1 }],
+          stats: [{ id: "shitheadedness", amount: 1 }],
+        },
+        {
+          text: `Why am I following a squirrel?`,
+          next: "dream-squirrel6",
+          payload: { filter: "why" },
+          manners: [{ id: "weird", amount: 1 }],
+        },
+        {
+          text: `Don't speak. Don't think. Just follow.`,
+          next: "dream-squirrel6",
+          manners: [{ id: "polite", amount: 1 }],
+          stats: [
+            { id: "blueMagic", amount: 1 },
+            { id: "will", amount: 1 },
+          ],
+        },
+      ],
+      metadata: { sectionId },
     };
   }),
 
@@ -441,21 +269,10 @@ export const dreamSquirrelScenes = {
         {
           characterId: "squirrel",
           text: "Puolue! Puolue!",
-          onClick: () => {
-            const game = useGameStore();
-            game.goToScene("dream-squirrel7");
-          },
+          next: "dream-squirrel7",
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: `squirrel dialog click`,
-            next: "dream-squirrel7",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -476,21 +293,10 @@ export const dreamSquirrelScenes = {
         {
           characterId: "squirrel",
           text: "Puolue! Puolue!",
-          onClick: () => {
-            const game = useGameStore();
-            game.goToScene("dream-squirrel8");
-          },
+          next: "dream-squirrel8",
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: `squirrel dialog click`,
-            next: "dream-squirrel8",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -515,19 +321,7 @@ export const dreamSquirrelScenes = {
         },
         { text: "Inspect the squirrel.", next: "dream-squirrel9" },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: `Inspect the hongatar`,
-            next: "dream-squirrel9",
-          },
-          {
-            text: `Inspect the squirrel`,
-            next: "dream-squirrel9",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -545,21 +339,10 @@ export const dreamSquirrelScenes = {
         `saw the squirrel eat. You see an uneaten one by your foot. {Inspect the eggcorn.}`,
       buttonActions: () => [
         {
-          action: () => {
-            const game = useGameStore();
-            game.goToScene("dream-squirrel10");
-          },
+          next: "dream-squirrel10",
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: `Inspect the eggcorn`,
-            next: "dream-squirrel10",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -585,19 +368,7 @@ export const dreamSquirrelScenes = {
             payload: { filter: "squirrel" },
           },
         ],
-        metadata: {
-          sectionId: sectionId,
-          routes: [
-            {
-              text: `YOLO! Eat the eggcorn.`,
-              next: "party-eggcorn",
-            },
-            {
-              text: `On second thought...`,
-              next: "party-eggcorn-check",
-            },
-          ],
-        },
+        metadata: { sectionId },
       };
     }
   ),
@@ -615,21 +386,10 @@ export const dreamSquirrelScenes = {
           {
             characterId: "squirrel",
             text: "Putoat! Putoat!",
-            onClick: () => {
-              const game = useGameStore();
-              game.goToScene("dream-squirrel-give-up1");
-            },
+            next: "dream-squirrel-give-up1",
           },
         ],
-        metadata: {
-          sectionId: sectionId,
-          routes: [
-            {
-              text: `squirrel dialog click`,
-              next: "dream-squirrel-give-up1",
-            },
-          ],
-        },
+        metadata: { sectionId },
       };
     }
   ),
@@ -646,21 +406,11 @@ export const dreamSquirrelScenes = {
           {
             characterId: "squirrel",
             text: "PUTOAT! PUTOAT!",
-            onClick: () => {
-              const game = useGameStore();
-              game.goToScene("dream-tree-chase", { filter: "squirrel" });
-            },
+            next: "dream-tree-chase",
+            filter: "squirrel",
           },
         ],
-        metadata: {
-          sectionId: sectionId,
-          routes: [
-            {
-              text: `squirrel dialog click`,
-              next: "dream-tree-chase",
-            },
-          ],
-        },
+        metadata: { sectionId },
       };
     }
   ),

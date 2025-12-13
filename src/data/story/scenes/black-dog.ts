@@ -32,21 +32,10 @@ export const blackDogScenes = {
         `^^Your attention shifts to the field as the distant lights of the highway pull your gaze, {like shooting stars}.`,
       buttonActions: () => [
         {
-          action: () => {
-            const game = useGameStore();
-            game.goToScene("black-dog0");
-          },
+          next: "black-dog0",
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: "like shooting stars",
-            next: "black-dog0",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -62,43 +51,17 @@ export const blackDogScenes = {
         {
           text: "Go closer.",
           next: "black-dog1",
-          onChoose: () => {
-            const character = useCharacterStore();
-            character.setFlag("black-dog-readiness", -1, this.id);
-            character.gainStat("will", 1, this.id);
-          },
+          stats: [{ id: "will", amount: 1 }],
+          flags: [{ id: "black-dog-readiness", value: -1 }],
         },
         {
           text: "Back away.",
           next: "black-dog1",
-          onChoose: () => {
-            const character = useCharacterStore();
-            character.setFlag("black-dog-readiness", 1, this.id);
-            character.loseStat("will", 1, this.id);
-          },
+          stats: [{ id: "will", amount: 1, isLost: true }],
+          flags: [{ id: "black-dog-readiness", value: 1 }],
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: "Go closer.",
-            next: "black-dog1",
-            stat: {
-              id: "will",
-              amount: 1,
-            },
-          },
-          {
-            text: "Back away.",
-            next: "black-dog1",
-            stat: {
-              id: "will",
-              amount: -1,
-            },
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -112,21 +75,10 @@ export const blackDogScenes = {
         `interspersed with oily black. You feel riveted to the spot, {unable to look away}.`,
       buttonActions: () => [
         {
-          action: () => {
-            const store = useGameStore();
-            store.goToScene("black-dog1a");
-          },
+          next: "black-dog1a",
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: "Unable to look away",
-            next: "black-dog1a",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -146,40 +98,20 @@ export const blackDogScenes = {
           {
             text: "Start acting careful.",
             next: "black-dog2",
-            onChoose: () => {
-              character.setFlag(
-                "black-dog-readiness",
-                blackDogReadiness + 1,
-                this.id
-              );
-            },
+            flags: [
+              { id: "black-dog-readiness", value: blackDogReadiness + 1 },
+            ],
           },
           {
             text: `You don't believe any of that nonsense.`,
             next: "black-dog2",
-            onChoose: () => {
-              character.setFlag(
-                "black-dog-readiness",
-                blackDogReadiness - 1,
-                this.id
-              );
-            },
+            flags: [
+              { id: "black-dog-readiness", value: blackDogReadiness - 1 },
+            ],
           },
         ];
       },
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: "Start acting careful.",
-            next: "black-dog2",
-          },
-          {
-            text: `It was hogwash then, and it's hogwash now.`,
-            next: "black-dog2",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -194,21 +126,10 @@ export const blackDogScenes = {
         `that its hair is caught in snarls too.{ Ungroomed...}`,
       buttonActions: () => [
         {
-          action: () => {
-            const game = useGameStore();
-            game.goToScene("black-dog2a");
-          },
+          next: "black-dog2a",
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: "Ungroomed...",
-            next: "black-dog2a",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -231,41 +152,15 @@ export const blackDogScenes = {
         {
           text: "Good puppy.",
           next: "black-dog-good",
-          onChoose: () => {
-            const character = useCharacterStore();
-            character.gainStat("blueMagic", 1, this.id);
-          },
+          stats: [{ id: "blueMagic", amount: 1 }],
         },
         {
           text: "Defend yourself.",
           next: "black-dog-bad",
-          onChoose: () => {
-            const character = useCharacterStore();
-            character.gainStat("athletics", 1, this.id);
-          },
+          stats: [{ id: "athletics", amount: 1 }],
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: "Good puppy.",
-            next: "black-dog-good",
-            stat: {
-              id: "blueMagic",
-              amount: 1,
-            },
-          },
-          {
-            text: "Defend yourself.",
-            next: "black-dog-bad",
-            stat: {
-              id: "athletics",
-              amount: 1,
-            },
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -280,21 +175,10 @@ export const blackDogScenes = {
         a mean-seeming dog may {flip onto its back}.`,
       buttonActions: () => [
         {
-          action: () => {
-            const game = useGameStore();
-            game.goToScene("black-dog-good0");
-          },
+          next: "black-dog-good0",
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: "flip onto its back",
-            next: "black-dog-good0",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -308,21 +192,10 @@ export const blackDogScenes = {
         touching the locket, and you think to {open it}.`,
       buttonActions: () => [
         {
-          action: () => {
-            const game = useGameStore();
-            game.goToScene("black-dog-good1");
-          },
+          next: "black-dog-good1",
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: "open it",
-            next: "black-dog-good1",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -334,42 +207,23 @@ export const blackDogScenes = {
       text:
         `Inside the locket is a dried bit of plant matter that smells of vanilla, and a taped lock of hair.` +
         `^^As you hold these items, they dissolve in your palm, and you feel an energy fill you with intention.`,
-      choices: () => {
-        const character = useCharacterStore();
-        return [
-          {
-            text: `Heal the human-faced dog's face back into a dog's face.`,
-            next: "black-dog-heal-dog",
-            onChoose: () => {
-              character.setFlag("healed-dog", "dog", this.id);
-            },
-          },
-          {
-            text: `Heal the human-faced dog's body back into a human's body.`,
-            next: "black-dog-heal-human",
-            onChoose: () => {
-              character.setFlag("healed-dog", "human", this.id);
-            },
-          },
-        ];
-      },
+      choices: () => [
+        {
+          text: `Heal the human-faced dog's face back into a dog's face.`,
+          next: "black-dog-heal-dog",
+          flags: [{ id: "healed-dog", value: "dog" }],
+        },
+        {
+          text: `Heal the human-faced dog's body back into a human's body.`,
+          next: "black-dog-heal-human",
+          flags: [{ id: "healed-dog", value: "human" }],
+        },
+      ],
       onPageLoad: () => {
         const effects = useEffectsStore();
         effects.toggleDisappearingItem(true);
       },
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: "Heal the human-faced dog's face back into a dog's face.",
-            next: "black-dog-heal-dog",
-          },
-          {
-            text: "Heal the human-faced dog's body back into a human's body.",
-            next: "black-dog-heal-human",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -393,11 +247,9 @@ export const blackDogScenes = {
 
             choices.push({
               text: "Give it some dog food.",
-              onChoose: () => {
-                character.setFlag("gave-dog-food", true, this.id);
-                character.removeFromInventory("dog-food");
-                character.gainManners("polite", 1, this.id);
-              },
+              flags: [{ id: "gave-dog-food", value: true }],
+              manners: [{ id: "polite", amount: 1 }],
+              items: [{ id: "dog-food", amount: 1, isLost: true }],
               next: "black-dog-done",
               payload: { filter: "food-dog" },
             });
@@ -407,17 +259,13 @@ export const blackDogScenes = {
             {
               text: "Give it some pets.",
               next: "black-dog-done",
-              onChoose: () => {
-                character.gainManners("polite", 1, this.id);
-              },
+              manners: [{ id: "polite", amount: 1 }],
               payload: { filter: "pets-dog" },
             },
             {
               text: "Do nothing.",
               next: "black-dog-done",
-              onChoose: () => {
-                character.gainManners("depressing", 1, this.id);
-              },
+              manners: [{ id: "depressing", amount: 1 }],
               payload: { filter: "nothing-dog" },
             }
           );
@@ -425,7 +273,7 @@ export const blackDogScenes = {
           return choices;
         },
         metadata: {
-          sectionId: sectionId,
+          sectionId,
           routes: [
             {
               text: "Give it some dog food.",
@@ -468,12 +316,10 @@ export const blackDogScenes = {
 
             choices.push({
               text: "Give it some dog food.",
-              onChoose: () => {
-                character.gainStat("shitheadedness", 1, this.id);
-                character.gainManners("rude", 1, this.id);
-                character.setFlag("gave-human-dog-food", true, this.id);
-                character.removeFromInventory("dog-food");
-              },
+              stats: [{ id: "shitheadedness", amount: 1 }],
+              manners: [{ id: "rude", amount: 1 }],
+              flags: [{ id: "gave-human-dog-food", value: true }],
+              items: [{ id: "dog-food", amount: 1, isLost: true }],
               next: "black-dog-done",
               payload: { filter: "food-human" },
             });
@@ -482,18 +328,14 @@ export const blackDogScenes = {
           choices.push(
             {
               text: "Give it some pets.",
-              onChoose: () => {
-                character.gainManners("weird", 1, this.id);
-              },
               next: "black-dog-done",
+              manners: [{ id: "weird", amount: 1 }],
               payload: { filter: "pets-human" },
             },
             {
               text: "Do nothing.",
-              onChoose: () => {
-                character.gainManners("polite", 1, this.id);
-              },
               next: "black-dog-done",
+              manners: [{ id: "polite", amount: 1 }],
               payload: { filter: "nothing-human" },
             }
           );
@@ -501,7 +343,7 @@ export const blackDogScenes = {
           return choices;
         },
         metadata: {
-          sectionId: sectionId,
+          sectionId,
           routes: [
             {
               text: "Give it some dog food.",
@@ -563,21 +405,10 @@ export const blackDogScenes = {
         `in campfire fills your nostrils. {It begins to howl}.`,
       buttonActions: () => [
         {
-          action: () => {
-            const game = useGameStore();
-            game.goToScene("black-dog-bad1");
-          },
+          next: "black-dog-bad1",
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: "it begins to howl",
-            next: "black-dog-bad1",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -623,7 +454,7 @@ export const blackDogScenes = {
         },
       ],
       metadata: {
-        sectionId: sectionId,
+        sectionId,
         routes: [
           {
             text: "getBlackDogOutcome success",
@@ -649,23 +480,13 @@ export const blackDogScenes = {
         buttonActions: () => [
           {
             action: () => {
-              const game = useGameStore();
               const aspects = useAspectStore();
               aspects.addAspect("animal-abuser");
-              game.goToScene("black-dog-feel-bad");
             },
+            next: "black-dog-feel-bad",
           },
         ],
-        metadata: {
-          sectionId: sectionId,
-          routes: [
-            {
-              text: "feel bad",
-              next: "black-dog-feel-bad",
-              aspect: "animal-abuser",
-            },
-          ],
-        },
+        metadata: { sectionId },
       };
     }
   ),
@@ -699,7 +520,7 @@ export const blackDogScenes = {
           },
         ],
         metadata: {
-          sectionId: sectionId,
+          sectionId,
           routes: [
             {
               text: "has dog food",
@@ -730,21 +551,13 @@ export const blackDogScenes = {
           {
             action: () => {
               const character = useCharacterStore();
-              const game = useGameStore();
               character.removeFromInventory("dog-food");
-              game.goToScene("black-dog-done", { filter: "food-dog" });
             },
+            next: "black-dog-done",
+            filter: "food-dog",
           },
         ],
-        metadata: {
-          sectionId: sectionId,
-          routes: [
-            {
-              text: "let the creature take the food",
-              next: "black-dog-done",
-            },
-          ],
-        },
+        metadata: { sectionId },
       };
     }
   ),
@@ -806,7 +619,7 @@ export const blackDogScenes = {
           }
         },
         metadata: {
-          sectionId: sectionId,
+          sectionId,
           routes: [
             {
               text: "sided with a drunk or is polite",
@@ -840,68 +653,33 @@ export const blackDogScenes = {
             text: `Now you owe <i>${payload?.filter ? "me" : "us"}</i> one!`,
           },
         ],
-        choices: () => {
-          const character = useCharacterStore();
-          return [
-            {
-              text: `"Thanks a lot!"`,
-              next: "black-dog-done-drunks",
-              payload: { filter: payload?.filter },
-              onChoose: () => {
-                character.gainManners("polite", 1, this.id);
-              },
-            },
-            {
-              text: `"I didn't ask for your help..."`,
-              next: "black-dog-done-drunks",
-              payload: { filter: payload?.filter },
-              onChoose: () => {
-                character.gainManners("rude", 1, this.id);
-              },
-            },
-            {
-              text: `"I wish you had just let it have me..."`,
-              next: "black-dog-done-drunks",
-              payload: { filter: payload?.filter },
-              onChoose: () => {
-                character.gainManners("depressing", 1, this.id);
-              },
-            },
-            {
-              text: `Go in for a hug.`,
-              next: "black-dog-done-drunks",
-              payload: { filter: payload?.filter },
-              onChoose: () => {
-                character.gainManners("weird", 1, this.id);
-              },
-            },
-          ];
-        },
-        metadata: {
-          sectionId: sectionId,
-          routes: [
-            {
-              text: `"Thanks a lot!"`,
-              next: "black-dog-done-drunks",
-              manners: "polite",
-            },
-            {
-              text: `"I didn't ask for your help..."`,
-              next: "black-dog-done-drunks",
-              manners: "rude",
-            },
-            {
-              text: `"I wish you had just let it have me..."`,
-              next: "black-dog-done-drunks",
-              manners: "depressing",
-            },
-            {
-              text: `Go in for a hug.`,
-              next: "black-dog-done-drunks",
-              manners: "weird",
-            },
-          ],
-        },
+        choices: () => [
+          {
+            text: `"Thanks a lot!"`,
+            next: "black-dog-done-drunks",
+            payload: { filter: payload?.filter },
+            manners: [{ id: "polite", amount: 1 }],
+          },
+          {
+            text: `"I didn't ask for your help..."`,
+            next: "black-dog-done-drunks",
+            payload: { filter: payload?.filter },
+            manners: [{ id: "rude", amount: 1 }],
+          },
+          {
+            text: `"I wish you had just let it have me..."`,
+            next: "black-dog-done-drunks",
+            payload: { filter: payload?.filter },
+            manners: [{ id: "depressing", amount: 1 }],
+          },
+          {
+            text: `Go in for a hug.`,
+            next: "black-dog-done-drunks",
+            payload: { filter: payload?.filter },
+            manners: [{ id: "weird", amount: 1 }],
+          },
+        ],
+        metadata: { sectionId },
       };
     }
   ),
@@ -919,21 +697,10 @@ export const blackDogScenes = {
           `You feel embarassed for what just happened. {And alone}.`,
         buttonActions: () => [
           {
-            action: () => {
-              const game = useGameStore();
-              game.goToScene("black-dog-feel-bad1");
-            },
+            next: "black-dog-feel-bad1",
           },
         ],
-        metadata: {
-          sectionId: sectionId,
-          routes: [
-            {
-              text: "And alone",
-              next: "black-dog-feel-bad1",
-            },
-          ],
-        },
+        metadata: { sectionId },
       };
     }
   ),
@@ -953,23 +720,12 @@ export const blackDogScenes = {
             {
               characterId: characterId,
               text: "Animal abuser!!",
-              onClick: () => {
-                const game = useGameStore();
-                game.goToScene("black-dog-feel-bad1");
-              },
+              next: "black-dog-feel-bad1",
             },
           ];
         },
         text: "",
-        metadata: {
-          sectionId: sectionId,
-          routes: [
-            {
-              text: "drunk dialog click",
-              next: "black-dog-feel-bad1",
-            },
-          ],
-        },
+        metadata: { sectionId },
       };
     }
   ),
@@ -988,21 +744,10 @@ export const blackDogScenes = {
           `^^Or was it because it was {so scary}?`,
         buttonActions: () => [
           {
-            action: () => {
-              const game = useGameStore();
-              game.goToScene("black-dog-viral");
-            },
+            next: "black-dog-viral",
           },
         ],
-        metadata: {
-          sectionId: sectionId,
-          routes: [
-            {
-              text: "so scary",
-              next: "black-dog-viral",
-            },
-          ],
-        },
+        metadata: { sectionId },
       };
     }
   ),
@@ -1030,7 +775,7 @@ export const blackDogScenes = {
         },
       ],
       metadata: {
-        sectionId: sectionId,
+        sectionId,
         routes: [
           {
             text: "viewed viral comments",
@@ -1054,21 +799,10 @@ export const blackDogScenes = {
           `^^{It's not helping...}`,
         buttonActions: () => [
           {
-            action: () => {
-              const game = useGameStore();
-              game.goToScene("black-dog-viral2");
-            },
+            next: "black-dog-viral2",
           },
         ],
-        metadata: {
-          sectionId: sectionId,
-          routes: [
-            {
-              text: "It's not helping",
-              next: "black-dog-viral2",
-            },
-          ],
-        },
+        metadata: { sectionId },
       };
     }
   ),
@@ -1086,41 +820,16 @@ export const blackDogScenes = {
           `^^Another part of you just wants to {go home to your room} and forget about today.`,
         buttonActions: () => [
           {
-            action: () => {
-              const game = useGameStore();
-              game.goToScene("neighborhood");
-            },
+            next: "neighborhood",
           },
           {
-            action: () => {
-              const game = useGameStore();
-              game.goToScene("snow-pile");
-            },
+            next: "snow-pile",
           },
           {
-            action: () => {
-              const game = useGameStore();
-              game.goToScene("room");
-            },
+            next: "room",
           },
         ],
-        metadata: {
-          sectionId: sectionId,
-          routes: [
-            {
-              text: "into the neighborhood",
-              next: "neighborhood",
-            },
-            {
-              text: "check by that snow pile",
-              next: "snow-pile",
-            },
-            {
-              text: "go home to your room",
-              next: "room",
-            },
-          ],
-        },
+        metadata: { sectionId },
       };
     }
   ),
@@ -1181,23 +890,7 @@ export const blackDogScenes = {
             next: "room",
           },
         ],
-        metadata: {
-          sectionId: sectionId,
-          routes: [
-            {
-              text: "Go into the neighborhood.",
-              next: "neighborhood",
-            },
-            {
-              text: `Follow the drunk${payload?.filter ? "" : "s"}.`,
-              next: "snow-pile",
-            },
-            {
-              text: "Go back home.",
-              next: "room",
-            },
-          ],
-        },
+        metadata: { sectionId },
       };
     }
   ),
@@ -1223,23 +916,7 @@ export const blackDogScenes = {
           next: "room",
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: "Follow it.",
-            next: "neighborhood",
-          },
-          {
-            text: "Play on the snowpile.",
-            next: "snow-pile",
-          },
-          {
-            text: "Go back home.",
-            next: "room",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 };

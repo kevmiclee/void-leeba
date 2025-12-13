@@ -62,6 +62,7 @@ import { dictionaryEntries } from "@/data/dictionary";
 import { useAudioStore } from "@/stores/audio";
 import { useSceneHelpers } from "@/helper-functions/scene-helpers";
 import { useEffectsStore } from "@/stores/effects";
+import { useCharacterStore } from "@/stores/character";
 
 const props = defineProps<{
   letters: string[];
@@ -128,7 +129,12 @@ function handleButtonClick(index: number) {
       if (buttonAction.action) {
         buttonAction.action();
       }
-      if (buttonAction.isItem) {
+      if (buttonAction.next) {
+        game.goToScene(buttonAction.next, { filter: buttonAction.filter });
+      }
+      if (buttonAction.item) {
+        const character = useCharacterStore();
+        character.addToInventory(buttonAction.item, game.currentSceneId);
         hideButtons.value.push(index);
       } else {
         const audioStore = useAudioStore();

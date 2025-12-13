@@ -79,8 +79,6 @@ function goToScene(success: boolean) {
 
   const outcome = getCatchSquirrelOutcome(roll);
 
-  console.log(outcome.text);
-
   if (outcome.success) {
     character.setFlag("caught-squirrel", true, "dream-squirrel-game");
     game.goToScene("dream-squirrel4-success", {

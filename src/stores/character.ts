@@ -116,14 +116,20 @@ export const useCharacterStore = defineStore("character", {
       statObj.scenesLost.push(sceneId);
     },
 
-    addToInventory(id: ItemId, pageAcquired: SceneId) {
+    addToInventory(
+      id: ItemId,
+      pageAcquired: SceneId,
+      amount?: number | undefined
+    ) {
       const audioStore = useAudioStore();
       audioStore.playGenericSound(pickUpItemSound);
       const item = itemCatalog[id];
       item.pageAcquired = pageAcquired;
-      this.inventory.push(item);
+      for (let i = 0; i < (amount ?? 1); i++) {
+        this.inventory.push(item);
+      }
       const snackbar = useSnackbarStore();
-      snackbar.show(`+1 ${item.label}`);
+      snackbar.show(`+${amount ?? 1} ${item.label}`);
     },
 
     removeFromInventory(id: ItemId, showSnackbar: boolean = true) {

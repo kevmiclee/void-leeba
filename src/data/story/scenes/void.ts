@@ -18,103 +18,65 @@ export const voidScenes = {
       id: this.id,
       background: "white",
       text:
-        `Misery is okay! It loves. Misery loves company. The Void cannot have company. It isn't <i>really there</i>. ` +
-        `It is the embodiment of Mu, the non-being of all things. When looked at closely, things have nothing in them. ` +
-        `You can magnify skin until you see there are voids between even the building blocks of life!` +
-        `^In the little bags of water that make us up, there is information with no use. There are third eyes that do not see. ` +
-        `The only "living forever" for us is in death.^Death and the Void are not the same, however. ` +
-        `If you are dead, you are somewhere. If you are dead, it means you once walked this Earf. ` +
-        `^The dead live on in others' minds--in the lessons they taught us, in the examples they set, in our memories and in our genes. ` +
-        `Absence is <i>more</i> than the Void. The Void is nothing, nowhere. ` +
-        `<i>There is no misery in the Void!</i>` +
-        `^^Is the Void alone?`,
-      choices: () => {
-        const character = useCharacterStore();
+        `The embodiment of Mu, the non-being of all things. When looked at closely, things have nothing in them. 
+        You can magnify skin until you see there are voids between even the building blocks of life! 
+        In the little bags of water that make us up, there is information with no use. There are third eyes that do not see. ` +
+        `The only "living forever" for us is {in death}.`,
+      buttonActions: () => [
+        {
+          next: "void1",
+        },
+      ],
+      metadata: { sectionId },
+    };
+  }),
 
-        return [
-          {
-            text: '"Not anymore!"',
-            next: "void-not-alone",
-            onChoose: () => {
-              character.gainManners("weird", 1, this.id);
-            },
-          },
-          {
-            text: "The Void will always be alone...",
-            next: "void-alone",
-            onChoose: () => {
-              character.gainManners("depressing", 1, this.id);
-            },
-          },
-          {
-            text: "Whatever.",
-            next: "void-whatever",
-            onChoose: () => {
-              character.gainManners("rude", 1, this.id);
-              const game = useGameStore();
-            },
-          },
-        ];
-      },
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: "Not anymore!",
-            next: "void-not-alone",
-            manners: "weird",
-          },
-          {
-            text: "The Void will always be alone...",
-            next: "void-alone",
-            manners: "depressing",
-          },
-          {
-            text: "Whatever.",
-            next: "void-whatever",
-            manners: "rude",
-          },
-        ],
-      },
+  void1: defineScene("void1", function (payload): Scene {
+    return {
+      id: this.id,
+      background: "white",
+      text:
+        `Death and the Void are not the same, however. If you are dead, you are somewhere. If you are dead, 
+        it means you once walked this Earf. The dead live on in others' minds--in the lessons they taught us, 
+        in the examples they set, in our memories and in our genes. Absence is <i>more</i> than the Void. 
+        The Void is nothing, nowhere. <i>There is no misery in the Void!</i>` +
+        `^^Is the Void alone?`,
+      choices: () => [
+        {
+          text: '"Not anymore!"',
+          next: "void-not-alone",
+          manners: [{ id: "weird", amount: 1 }],
+        },
+        {
+          text: "The Void will always be alone...",
+          next: "void-alone",
+          manners: [{ id: "depressing", amount: 1 }],
+        },
+        {
+          text: "Whatever.",
+          next: "void-whatever",
+          manners: [{ id: "rude", amount: 1 }],
+        },
+      ],
+      metadata: { sectionId },
     };
   }),
 
   "void-not-alone": defineScene("void-not-alone", function (payload): Scene {
+    //TODO: void stirring animation
     return {
       id: this.id,
       background: "white",
       text:
         `You were worried that the Void was alone. How nice. How niche. How <i>Nietzsche!</i>` +
         `^Look at you, all empathetic and virtuous, always helping out. Good on you, Void-lover!` +
-        `^^A question mark bubble appears on the page, blurring the Void. The appearance of the ? ` +
-        `triggers in you a cascade of thoughts that form into a gridded web of ideas.` +
-        `^^<i>...need to get bread and lube from the grocer, your skillshare with that twinkly-eyed, ` +
-        `tilty-capped camera-machinist, the laundry in the dryer, the pen in your cup holder, ` +
-        `a movie about Winnipeg with all-Arabic signs, A Tale of Two Towns, the R.A. Petertore tomes, ` +
-        `the black-comedy fantasy-action series about that Unitarian Universalist minister...</i>` +
-        `^^The web grows more and more complex. The connections between nodes multiply. A balmy chaos builds. ` +
-        `All of a sudden, the web explodes outwards, hurtling at light speed, getting smaller and smaller on the blank page. ` +
-        `And then {a set of questions appears}.`,
+        `^^Your emotion stirs the Void and from this disturbance a <i>something</i> {is born}.`,
       buttonActions: () => [
         {
-          action: () => {
-            const game = useGameStore();
-            game.goToScene("void-not-alone1");
-          },
+          next: "void-not-alone1",
         },
       ],
-      onPageLoad: () => {
-        //TODO: IMAGE - a web of thoughts zooming out
-      },
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: "a set of questions appears",
-            next: "void-not-alone1",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -163,27 +125,7 @@ export const voidScenes = {
         const effects = useEffectsStore();
         effects.toggleBlurChoices(true);
       },
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: "Do you believe in lice after lunch?",
-            next: "void-not-alone-lunch",
-          },
-          {
-            text: "Dad, if I have some pie, will you have some pie?",
-            next: "void-not-alone-pie",
-          },
-          {
-            text: `What's my adage again?`,
-            next: "void-not-alone-adage",
-          },
-          {
-            text: "Are we hummus or are we dander?",
-            next: "void-not-alone-hummus",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -196,33 +138,36 @@ export const voidScenes = {
         text:
           `I can feel some things upon my legs, I really don't think I ate enough nooo!` +
           `^^Your legs stretch longer and longer, longer and longer, as the lice crawl up and up, ` +
-          `and up and up. Your lunch sits on the table, remnants of white cod with hollandaise sauce, ` +
+          `and up and up. Your arms stay the same size. Your lunch sits on the table, remnants of white cod with hollandaise sauce, ` +
           `cracker breadcrumbs, a squished slice of yellow lemon, a smear of boxed mashed potatoes. ` +
           `You are now so tall you cannot reach your lunch.`,
         choices: () => [
           {
             text: "Cry openly.",
             next: "void-not-alone-lunch1",
+            stats: [{ id: "blueMagic", amount: 1 }],
           },
-          { text: "Stifle back the tears.", next: "void-not-alone-lunch1" },
+          {
+            text: "Stifle back the tears.",
+            next: "void-not-alone-lunch1",
+            stats: [{ id: "will", amount: 1 }],
+          },
+          {
+            text: `It doesn't matter. I wasn't that hungry anyway.`,
+            next: "void-not-alone-lunch1",
+            stats: [{ id: "shitheadedness", amount: 1 }],
+          },
+          {
+            text: `Finish eating by using your legs.`,
+            next: "void-not-alone-lunch1",
+            stats: [{ id: "athletics", amount: 1 }],
+          },
         ],
         onPageLoad: () => {
           const effects = useEffectsStore();
           effects.toggleStretchAvatar(true);
         },
-        metadata: {
-          sectionId: sectionId,
-          routes: [
-            {
-              text: "Cry openly.",
-              next: "void-not-alone-lunch1",
-            },
-            {
-              text: "Stifle back the tears",
-              next: "void-not-alone-lunch1",
-            },
-          ],
-        },
+        metadata: { sectionId },
       };
     }
   ),
@@ -236,10 +181,7 @@ export const voidScenes = {
         //TODO: STORY - void-not-alone-lunch1
         text: ``,
         choices: () => [],
-        metadata: {
-          sectionId: sectionId,
-          routes: [],
-        },
+        metadata: { sectionId },
       };
     }
   ),
@@ -258,45 +200,20 @@ export const voidScenes = {
           {
             text: "Pecan.",
             next: "void-not-alone-pie1",
-            onChoose: () => {
-              const character = useCharacterStore();
-              character.setFlag("pie-choice", "pecan", this.id);
-            },
+            flags: [{ id: "pie-choice", value: "pecan" }],
           },
           {
             text: "Key lime.",
             next: "void-not-alone-pie1",
-            onChoose: () => {
-              const character = useCharacterStore();
-              character.setFlag("pie-choice", "key-lime", this.id);
-            },
+            flags: [{ id: "pie-choice", value: "key-lime" }],
           },
           {
             text: "Cherry.",
             next: "void-not-alone-pie1",
-            onChoose: () => {
-              const character = useCharacterStore();
-              character.setFlag("pie-choice", "cherry", this.id);
-            },
+            flags: [{ id: "pie-choice", value: "cherry" }],
           },
         ],
-        metadata: {
-          sectionId: sectionId,
-          routes: [
-            {
-              text: "Pecan.",
-              next: "void-not-alone-pie1",
-            },
-            {
-              text: "Key lime.",
-              next: "void-not-alone-pie1",
-            },
-            {
-              text: "Cherry.",
-              next: "void-not-alone-pie1",
-            },
-          ],
-        },
+        metadata: { sectionId },
       };
     }
   ),
@@ -311,10 +228,7 @@ export const voidScenes = {
         choices: () => [
           //TODO: STORY -choices
         ],
-        metadata: {
-          sectionId: sectionId,
-          routes: [],
-        },
+        metadata: { sectionId },
       };
     }
   ),
@@ -331,27 +245,19 @@ export const voidScenes = {
           `^^That reminds you! Your adage was...`,
         choices: () => [
           {
-            text: `"Sometimes survival is the only moral choice." ...wasn't it?`,
+            text: `"Sometimes survival is the only moral choice."`,
             next: "void-not-alone-adage1",
           },
           {
-            text: `No wait it was, "It is not because things are difficult that we do not dare, it is because we do not dare that they are difficult".`,
+            text: `"It is not because things are difficult that we do not dare, it is because we do not dare that they are difficult".`,
+            next: "void-not-alone-adage1",
+          },
+          {
+            text: `"Do not wait to strike till the iron is hot; but make it hot by striking."`,
             next: "void-not-alone-adage1",
           },
         ],
-        metadata: {
-          sectionId: sectionId,
-          routes: [
-            {
-              text: `"Sometimes survival is the only moral choice." ...wasn't it?`,
-              next: "void-not-alone-adage1",
-            },
-            {
-              text: `No wait it was, "It is not because things are difficult that we do not dare, it is because we do not dare that they are difficult".`,
-              next: "void-not-alone-adage1",
-            },
-          ],
-        },
+        metadata: { sectionId },
       };
     }
   ),
@@ -359,6 +265,7 @@ export const voidScenes = {
   "void-not-alone-adage1": defineScene(
     "void-not-alone-adage1",
     function (payload): Scene {
+      //TODO: cheese puffs
       return {
         id: this.id,
         background: "white",
@@ -374,18 +281,11 @@ export const voidScenes = {
           },
           {
             text: `It can't be helped. Stay inside and weep into your gluten-free cheese puffs.`,
-            //TODO: STORY - zombies?
+            next: "zombies",
+            payload: { filter: "stay-inside" },
           },
         ],
-        metadata: {
-          sectionId: sectionId,
-          routes: [
-            {
-              text: `Get out there an' show 'em!`,
-              next: "void-not-alone-kickflip",
-            },
-          ],
-        },
+        metadata: { sectionId },
       };
     }
   ),
@@ -412,19 +312,7 @@ export const voidScenes = {
             payload: { filter: "inner child" },
           },
         ],
-        metadata: {
-          sectionId: sectionId,
-          routes: [
-            {
-              text: "Give it your soul.",
-              next: "void-not-alone-hummus1",
-            },
-            {
-              text: "Sacrifice your inner child.",
-              next: "void-not-alone-hummus1",
-            },
-          ],
-        },
+        metadata: { sectionId },
       };
     }
   ),
@@ -443,10 +331,7 @@ export const voidScenes = {
           const snackbar = useSnackbarStore();
           snackbar.show(`-1 ${payload?.filter}`);
         },
-        metadata: {
-          sectionId: sectionId,
-          routes: [],
-        },
+        metadata: { sectionId },
       };
     }
   ),
@@ -458,40 +343,33 @@ export const voidScenes = {
         id: this.id,
         background: "white",
         text: `Get out there and show 'em what?`,
-        choices: () => {
-          const character = useCharacterStore();
-          //TODO: STORY - these
-          return [
-            {
-              text: `How it's done!`,
-              onChoose: () => {
-                character.gainStat("athletics", 1, this.id);
-              },
-            },
-            {
-              text: `Who they're messin' with!`,
-              onChoose: () => {
-                character.gainStat("shitheadedness", 1, this.id);
-              },
-            },
-            {
-              text: `How many gluten-free cheese puffs you can fit in your mouth!`,
-              onChoose: () => {
-                character.gainStat("blueMagic", 1, this.id);
-              },
-            },
-            {
-              text: "The meaning of life.",
-              onChoose: () => {
-                character.gainStat("will", 1, this.id);
-              },
-            },
-          ];
-        },
-        metadata: {
-          sectionId: sectionId,
-          routes: [],
-        },
+        choices: () => [
+          {
+            text: `How it's done!`,
+            next: `zombies`,
+            payload: { filter: "how-its-done" },
+            stats: [{ id: "athletics", amount: 1 }],
+          },
+          {
+            text: `Who they're messin' with!`,
+            next: `zombies`,
+            payload: { filter: "who-theyre-messin-with" },
+            stats: [{ id: "shitheadedness", amount: 1 }],
+          },
+          {
+            text: `How many gluten-free cheese puffs you can fit in your mouth!`,
+            next: `zombies`,
+            payload: { filter: "cheese-puffs" },
+            stats: [{ id: "blueMagic", amount: 1 }],
+          },
+          {
+            text: "The meaning of life.",
+            next: `zombies`,
+            payload: { filter: "meaning-of-life" },
+            stats: [{ id: "will", amount: 1 }],
+          },
+        ],
+        metadata: { sectionId },
       };
     }
   ),
@@ -503,10 +381,7 @@ export const voidScenes = {
       text: ``,
       //TODO: STORY - void-alone
       choices: () => [],
-      metadata: {
-        sectionId: sectionId,
-        routes: [],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -517,10 +392,7 @@ export const voidScenes = {
       text: ``,
       //TODO: STORY - void whatever
       choices: () => [],
-      metadata: {
-        sectionId: sectionId,
-        routes: [],
-      },
+      metadata: { sectionId },
     };
   }),
 };

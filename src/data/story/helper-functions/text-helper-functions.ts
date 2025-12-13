@@ -155,3 +155,18 @@ export function getShibHonestAnswer(choice: "kill" | "free" | "keep"): string {
       return `"I kept it for my collection."`;
   }
 }
+
+export function getNeighborhoodDrunk1Dialog(
+  filter: "good-chance" | "bad-chance" | "neutral-chance"
+): string {
+  switch (filter) {
+    case "good-chance":
+      return `That is phuckin' advanced!`;
+    case "bad-chance":
+      return `Ah, so, you know cows from around here?`;
+    case "neutral-chance":
+      return `My nieces and nephews typically only want Leakcoin. One of your sculptures might shake them up a bit, 
+      though, give 'em nightmares or daymares, or a thought in their heads. Maybe it will just delight them. They 
+      are always delighted by stuff I can't relate to…but we would be able to relate on this (I hope they like it)!`;
+  }
+}

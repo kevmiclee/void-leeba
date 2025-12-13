@@ -17,9 +17,7 @@ export const partyScenes = {
         { characterId: "faerie1", text: "WOOOOOOOTTT!" },
         { characterId: "squirrel", text: "JOOOOOOOO!" },
       ],
-      metadata: {
-        sectionId: sectionId,
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -42,9 +40,7 @@ export const partyScenes = {
         { text: `"LET'S GOOOOOO!"` },
         { text: "Just try to blend in." },
       ],
-      metadata: {
-        sectionId: sectionId,
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -67,9 +63,7 @@ export const partyScenes = {
         { text: `"LET'S GOOOOOO!"` },
         { text: "Just try to blend in." },
       ],
-      metadata: {
-        sectionId: sectionId,
-      },
+      metadata: { sectionId },
     };
   }),
 };

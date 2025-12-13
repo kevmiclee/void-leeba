@@ -157,6 +157,15 @@ export const itemCatalog: Record<ItemId, Item> = {
     weight: 0,
     usable: false,
   },
+
+  leakcoin: {
+    id: "leakcoin",
+    label: "Leakcoin",
+    description: "Currency of the Leakyverse",
+    value: 1,
+    weight: 0,
+    usable: false,
+  },
 };
 
 //TODO: More items

@@ -19,6 +19,7 @@
 <script setup lang="ts">
 import { Dialog } from "@/types/story";
 import { useEffectsStore } from "@/stores/effects";
+import { useGameStore } from "@/stores/game";
 
 const effects = useEffectsStore();
 
@@ -48,6 +49,10 @@ function advanceDialog() {
 function onDialogClick() {
   if (props.dialog?.onClick) {
     props.dialog?.onClick();
+  }
+  if (props.dialog?.next) {
+    const game = useGameStore();
+    game.goToScene(props.dialog.next, { filter: props.dialog.filter });
   }
   if (!props.dialog?.popUp) {
     advanceDialog();
@@ -104,15 +109,13 @@ function onDialogClick() {
 }
 
 .dialog-foreground {
+  position: relative;
   border-radius: 0.3vw;
   padding: 1.2vw;
-  outline: 0.15vw solid var(--secondary-color);
-  outline-offset: -0.3vw;
   width: fit-content;
   max-width: 42vw;
   animation:
     wobbleText 1.5s infinite ease-in-out,
-    outlinePulse 2.5s infinite ease-in-out,
     wobble 2.5s infinite ease-in-out;
   text-shadow: 0px 0px 2px var(--primary-color);
   font-size: 1.5vw;
@@ -126,15 +129,27 @@ function onDialogClick() {
   cursor: default;
 }
 
-@keyframes outlinePulse {
+.dialog-foreground::after {
+  content: "";
+  position: absolute;
+  inset: 0.3vw;
+  border-radius: inherit;
+  pointer-events: none;
+  box-sizing: border-box;
+  border: 0.15vw solid var(--secondary-color);
+  animation: borderPulse 2.5s infinite ease-in-out;
+  margin: 0vw 0vw;
+}
+
+@keyframes borderPulse {
   0% {
-    outline-offset: -0.25vw;
+    margin: 0vw 0vw;
   }
   50% {
-    outline-offset: -0.3vw;
+    margin: 0.05vw 0.05vw;
   }
   100% {
-    outline-offset: -0.25vw;
+    margin: 0vw 0vw;
   }
 }
 

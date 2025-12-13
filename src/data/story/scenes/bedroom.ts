@@ -11,7 +11,6 @@ import { useCharacterStore } from "@/stores/character";
 import { useGameStore } from "@/stores/game";
 import { defineScene, SceneId } from "../story";
 import { getShibHonestAnswer } from "../helper-functions/text-helper-functions";
-import { useAspectStore } from "@/stores/aspects";
 
 const sectionId = "bedroom";
 
@@ -36,22 +35,11 @@ export const bedroomScenes = {
             characterId: "shib",
             text: `Now's your time to shine! I'm trying 
             not to imagine that little ticker whizzing around my room.`,
-            onClick: () => {
-              const game = useGameStore();
-              game.goToScene("bedroom1");
-            },
+            next: "bedroom1",
           },
         ];
       },
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: "dialog click",
-            next: "bedroom1",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -73,7 +61,7 @@ export const bedroomScenes = {
         return getBookChoices("", "bedroom2");
       },
       metadata: {
-        sectionId: sectionId,
+        sectionId,
         routes: [
           {
             text: "choose wrong book",
@@ -96,7 +84,7 @@ export const bedroomScenes = {
       audio: homeSong,
       background: bgBedroom,
       metadata: {
-        sectionId: sectionId,
+        sectionId,
         routes: [
           {
             text: "choose wrong book",
@@ -119,7 +107,7 @@ export const bedroomScenes = {
       audio: homeSong,
       background: bgBedroom,
       metadata: {
-        sectionId: sectionId,
+        sectionId,
         routes: [
           {
             text: "choose wrong book",
@@ -142,7 +130,7 @@ export const bedroomScenes = {
       audio: homeSong,
       background: bgBedroom,
       metadata: {
-        sectionId: sectionId,
+        sectionId,
         routes: [
           {
             text: "choose right book",
@@ -165,21 +153,10 @@ export const bedroomScenes = {
           {
             characterId: "shib",
             text: `YES! You picked a good book. Hurry, hurry, HURRY!`,
-            onClick: () => {
-              const game = useGameStore();
-              game.goToScene("bedroom-time-fly1");
-            },
+            next: "bedroom-time-fly1",
           },
         ],
-        metadata: {
-          sectionId: sectionId,
-          routes: [
-            {
-              text: "dialog click",
-              next: "bedroom-time-fly1",
-            },
-          ],
-        },
+        metadata: { sectionId },
       };
     }
   ),
@@ -195,21 +172,10 @@ export const bedroomScenes = {
         background: bgTimeFly,
         buttonActions: () => [
           {
-            action: () => {
-              const game = useGameStore();
-              game.goToScene("bedroom-time-fly2");
-            },
+            next: "bedroom-time-fly2",
           },
         ],
-        metadata: {
-          sectionId: sectionId,
-          routes: [
-            {
-              text: "You set the book down next to the insect",
-              next: "bedroom-time-fly2",
-            },
-          ],
-        },
+        metadata: { sectionId },
       };
     }
   ),
@@ -226,21 +192,10 @@ export const bedroomScenes = {
         background: bgTimeFly,
         buttonActions: () => [
           {
-            action: () => {
-              const game = useGameStore();
-              game.goToScene("bedroom-time-fly3");
-            },
+            next: "bedroom-time-fly3",
           },
         ],
-        metadata: {
-          sectionId: sectionId,
-          routes: [
-            {
-              text: "catch the Time Fly",
-              next: "bedroom-time-fly3",
-            },
-          ],
-        },
+        metadata: { sectionId },
       };
     }
   ),
@@ -253,56 +208,28 @@ export const bedroomScenes = {
         text: `You swoop a Bell jar over the Time Fly and carefully scoot a piece of paper underneath. Now what?`,
         audio: homeSong,
         background: bgWindowsill,
-        choices: () => {
-          const character = useCharacterStore();
-          return [
-            {
-              text: `Bring it to your your room to add to your collection.`,
-              next: "bedroom-time-fly4",
-              onChoose: () => {
-                character.addToInventory("time-fly", this.id);
-                character.gainManners("weird", 1, this.id);
-                character.setFlag("time-fly-choice", "keep", this.id);
-              },
-            },
-            {
-              text: `Let it out the window.`,
-              next: "bedroom-time-fly4",
-              onChoose: () => {
-                character.gainManners("polite", 1, this.id);
-                character.setFlag("time-fly-choice", "free", this.id);
-              },
-            },
-            {
-              text: `Kill it.`,
-              next: "bedroom-time-fly4",
-              onChoose: () => {
-                character.gainManners("rude", 1, this.id);
-                character.setFlag("time-fly-choice", "kill", this.id);
-              },
-            },
-          ];
-        },
-        metadata: {
-          sectionId: sectionId,
-          routes: [
-            {
-              text: `Bring it to your your room to add to your collection.`,
-              next: "bedroom-time-fly4",
-              manners: "weird",
-            },
-            {
-              text: `Let it out the window.`,
-              next: "bedroom-time-fly4",
-              manners: "polite",
-            },
-            {
-              text: `Kill it.`,
-              next: "bedroom-time-fly4",
-              manners: "rude",
-            },
-          ],
-        },
+        choices: () => [
+          {
+            text: `Bring it to your your room to add to your collection.`,
+            next: "bedroom-time-fly4",
+            manners: [{ id: "weird", amount: 1 }],
+            flags: [{ id: "time-fly-choice", value: "keep" }],
+            items: [{ id: "time-fly", amount: 1 }],
+          },
+          {
+            text: `Let it out the window.`,
+            next: "bedroom-time-fly4",
+            manners: [{ id: "polite", amount: 1 }],
+            flags: [{ id: "time-fly-choice", value: "free" }],
+          },
+          {
+            text: `Kill it.`,
+            next: "bedroom-time-fly4",
+            manners: [{ id: "rude", amount: 1 }],
+            flags: [{ id: "time-fly-choice", value: "kill" }],
+          },
+        ],
+        metadata: { sectionId },
       };
     }
   ),
@@ -317,21 +244,10 @@ export const bedroomScenes = {
         background: bgWindowsill,
         buttonActions: () => [
           {
-            action: () => {
-              const game = useGameStore();
-              game.goToScene("bedroom-time-fly5");
-            },
+            next: "bedroom-time-fly5",
           },
         ],
-        metadata: {
-          sectionId: sectionId,
-          routes: [
-            {
-              text: "put his mind at ease",
-              next: "bedroom-time-fly5",
-            },
-          ],
-        },
+        metadata: { sectionId },
       };
     }
   ),
@@ -387,48 +303,36 @@ export const bedroomScenes = {
                   text: killedTimeFly
                     ? `"I let it go, of course."`
                     : `"I killed it, of course."`,
-                  onChoose: () => {
-                    character.gainStat("shitheadedness", 1, this.id);
-                    character.setFlag("shib-sequence-count", 1, this.id);
-                  },
                   next: "bedroom-time-fly5",
+                  stats: [{ id: "shitheadedness", amount: 1 }],
+                  flags: [{ id: "shib-sequence-count", value: 1 }],
                 },
                 {
                   text: `<i>Flex your muscles.</i> "Those scum are no match for me!"`,
-                  onChoose: () => {
-                    character.gainStat("blueMagic", 1, this.id);
-                    character.setFlag("shib-sequence-count", 1, this.id);
-                  },
                   next: "bedroom-time-fly5",
+                  stats: [{ id: "blueMagic", amount: 1 }],
+                  flags: [{ id: "shib-sequence-count", value: 1 }],
                 },
                 {
                   text: getShibHonestAnswer(timeFlyChoice),
-                  onChoose: () => {
-                    character.gainStat("will", 1, this.id);
-                    character.setFlag("shib-sequence-count", 1, this.id);
-                  },
                   next: "bedroom-time-fly5",
+                  stats: [{ id: "will", amount: 1 }],
+                  flags: [{ id: "shib-sequence-count", value: 1 }],
                 },
                 {
                   text: `"Glad to be of service."`,
-                  onChoose: () => {
-                    character.gainStat("athletics", 1, this.id);
-                    character.setFlag("shib-sequence-count", 1, this.id);
-                  },
                   next: "bedroom-time-fly5",
+                  stats: [{ id: "athletics", amount: 1 }],
+                  flags: [{ id: "shib-sequence-count", value: 1 }],
                 },
               ]
             : [
                 {
                   text: `Try to reason with him. "Relax, don't worry."`,
-                  onChoose: () => {
-                    character.setFlag(
-                      "shib-sequence-count",
-                      shibSequenceCount + 1,
-                      this.id
-                    );
-                  },
                   next: "bedroom-time-fly5",
+                  flags: [
+                    { id: "shib-sequence-count", value: shibSequenceCount + 1 },
+                  ],
                 },
                 {
                   text: `Look at your Drip.`,
@@ -438,7 +342,7 @@ export const bedroomScenes = {
               ];
         },
         metadata: {
-          sectionId: sectionId,
+          sectionId,
           routes: [
             {
               text: "Lie",
@@ -511,23 +415,7 @@ export const bedroomScenes = {
             next: "bedroom-time-fly7",
           },
         ],
-        metadata: {
-          sectionId: sectionId,
-          routes: [
-            {
-              text: `"Um..."`,
-              next: "bedroom-time-fly7",
-            },
-            {
-              text: `"I'm sorry - I will!"`,
-              next: "bedroom-time-fly7",
-            },
-            {
-              text: `<i>Ugh.</i>`,
-              next: "bedroom-time-fly7",
-            },
-          ],
-        },
+        metadata: { sectionId },
       };
     }
   ),
@@ -545,22 +433,11 @@ export const bedroomScenes = {
             {
               characterId: "shib",
               text: `SHIT! OH SHIT, look at the time, I gotta fly.`,
-              onClick: () => {
-                const game = useGameStore();
-                game.goToScene("bedroom5");
-              },
+              next: "bedroom5",
             },
           ];
         },
-        metadata: {
-          sectionId: sectionId,
-          routes: [
-            {
-              text: "dialog click",
-              next: "bedroom5",
-            },
-          ],
-        },
+        metadata: { sectionId },
       };
     }
   ),
@@ -582,19 +459,7 @@ export const bedroomScenes = {
           next: "room",
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: "Go out and explore.",
-            next: "home2",
-          },
-          {
-            text: "Enjoy some quiet time in your room.",
-            next: "room",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -611,11 +476,8 @@ export const bedroomScenes = {
           payload: {
             text: "Maybe you'll meet a hungry dog. {Continue.}",
           },
-          onChoose: () => {
-            const character = useCharacterStore();
-            character.addToInventory("dog-food", this.id);
-            character.gainStat("athletics", 1, this.id);
-          },
+          stats: [{ id: "athletics", amount: 1 }],
+          items: [{ id: "dog-food", amount: 1 }],
         },
         {
           text: "Playing cards",
@@ -623,11 +485,8 @@ export const bedroomScenes = {
           payload: {
             text: "Maybe someone will want to play. {Continue.}",
           },
-          onChoose: () => {
-            const character = useCharacterStore();
-            character.addToInventory("cards", this.id);
-            character.gainStat("blueMagic", 1, this.id);
-          },
+          stats: [{ id: "blueMagic", amount: 1 }],
+          items: [{ id: "cards", amount: 1 }],
         },
         {
           text: "Orange spray paint",
@@ -635,11 +494,8 @@ export const bedroomScenes = {
           payload: {
             text: "Maybe you'll spray paint something. {Continue.}",
           },
-          onChoose: () => {
-            const character = useCharacterStore();
-            character.addToInventory("spray-paint", this.id);
-            character.gainStat("shitheadedness", 1, this.id);
-          },
+          stats: [{ id: "shitheadedness", amount: 1 }],
+          items: [{ id: "spray-paint", amount: 1 }],
         },
         {
           text: "Translator",
@@ -647,11 +503,8 @@ export const bedroomScenes = {
           payload: {
             text: "Maybe you'll encounter a language you can't comprehend. {Continue.}",
           },
-          onChoose: () => {
-            const character = useCharacterStore();
-            character.addToInventory("translator", this.id);
-            character.gainStat("blueMagic", 1, this.id);
-          },
+          stats: [{ id: "blueMagic", amount: 1 }],
+          items: [{ id: "translator", amount: 1 }],
         },
         {
           text: "Nothing",
@@ -659,61 +512,11 @@ export const bedroomScenes = {
           payload: {
             text: "Maybe you won't need anything. {Continue.}",
           },
-          onChoose: () => {
-            const aspects = useAspectStore();
-            const character = useCharacterStore();
-
-            aspects.addAspect("ascetic");
-            character.gainStat("will", 1, this.id);
-          },
+          stats: [{ id: "will", amount: 1 }],
+          aspect: "ascetic",
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: `Dog food can`,
-            next: "home3",
-            stat: {
-              id: "athletics",
-              amount: 1,
-            },
-          },
-          {
-            text: `Playing cards`,
-            next: "home3",
-            stat: {
-              id: "blueMagic",
-              amount: 1,
-            },
-          },
-          {
-            text: `Orange spray paint`,
-            next: "home3",
-            stat: {
-              id: "shitheadedness",
-              amount: 1,
-            },
-          },
-          {
-            text: `Translator`,
-            next: "home3",
-            stat: {
-              id: "blueMagic",
-              amount: 1,
-            },
-          },
-          {
-            text: `Nothing`,
-            next: "home3",
-            aspect: "ascetic",
-            stat: {
-              id: "will",
-              amount: 1,
-            },
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -725,21 +528,10 @@ export const bedroomScenes = {
       text: payload?.text ?? "",
       buttonActions: () => [
         {
-          action: () => {
-            const store = useGameStore();
-            store.goToScene("park");
-          },
+          next: "park",
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: `Continue`,
-            next: "park",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -756,41 +548,16 @@ export const bedroomScenes = {
         `and afternoon heat. {Wait, I'm going to the park}.`,
       buttonActions: () => [
         {
-          action: () => {
-            const store = useGameStore();
-            store.goToScene("nap");
-          },
+          next: "nap",
         },
         {
-          action: () => {
-            const store = useGameStore();
-            store.goToScene("make-something");
-          },
+          next: "make-something",
         },
         {
-          action: () => {
-            const store = useGameStore();
-            store.goToScene("park");
-          },
+          next: "park",
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: `A nap sounds nice`,
-            next: "nap",
-          },
-          {
-            text: `Settle into the chair and make something`,
-            next: "make-something",
-          },
-          {
-            text: `I'm going to the park`,
-            next: "park",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -807,19 +574,7 @@ export const bedroomScenes = {
           next: "make-something",
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: `Close your eyes`,
-            next: "dream",
-          },
-          {
-            text: `rather sit at my desk`,
-            next: "make-something",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -827,6 +582,7 @@ export const bedroomScenes = {
     return {
       id: this.id,
       audio: homeSong,
+      //TODO: break this up
       text:
         `You sit down at the desk and open to a fresh page of the pad.` +
         `^You look down onto the off-white paper. A void to fill. Dimensionless.` +
@@ -839,41 +595,16 @@ export const bedroomScenes = {
       background: bgBedroom,
       buttonActions: () => [
         {
-          action: () => {
-            const game = useGameStore();
-            game.goToScene("void");
-          },
+          next: "void",
         },
         {
-          action: () => {
-            const game = useGameStore();
-            game.goToScene("paint");
-          },
+          next: "paint",
         },
         {
-          action: () => {
-            const game = useGameStore();
-            game.goToScene("nap");
-          },
+          next: "nap",
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: `into the void`,
-            next: "void",
-          },
-          {
-            text: `paint with your heart`,
-            next: "paint",
-          },
-          {
-            text: `going to sleep`,
-            next: "nap",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 };
@@ -882,16 +613,17 @@ export const bedroomScenes = {
 // TODO: UI/UX - flag management when going forward and back
 
 function getBookChoices(filter: string, nextScene: SceneId): Choice[] {
-  const choices = [
+  const choices: Choice[] = [
     {
       text: `Harsh Mellow by Sherwan Milliams`,
       onChoose: () => {
         const game = useGameStore();
         game.setPersistAvatar(true);
-        game.goToScene(nextScene, {
-          filter: `${filter},0`,
-          text: `You've had this book for years and haven't read it, but you will. Someday. You can't get rid of it.`,
-        });
+      },
+      next: nextScene,
+      payload: {
+        filter: `${filter},0`,
+        text: `You've had this book for years and haven't read it, but you will. Someday. You can't get rid of it.`,
       },
     },
     {
@@ -899,10 +631,11 @@ function getBookChoices(filter: string, nextScene: SceneId): Choice[] {
       onChoose: () => {
         const game = useGameStore();
         game.setPersistAvatar(true);
-        game.goToScene(nextScene, {
-          filter: `${filter},1`,
-          text: `You don't even like this book, but it reminds you of the person you were when you thought you'd like books like this. You can't get rid of it.`,
-        });
+      },
+      next: nextScene,
+      payload: {
+        filter: `${filter},1`,
+        text: `You don't even like this book, but it reminds you of the person you were when you thought you'd like books like this. You can't get rid of it.`,
       },
     },
     {
@@ -910,10 +643,11 @@ function getBookChoices(filter: string, nextScene: SceneId): Choice[] {
       onChoose: () => {
         const game = useGameStore();
         game.setPersistAvatar(false);
-        game.goToScene("bedroom-time-fly", {
-          filter: `${filter},2`,
-          text: `That should work.`,
-        });
+      },
+      next: "bedroom-time-fly",
+      payload: {
+        filter: `${filter},2`,
+        text: `That should work.`,
       },
     },
     {
@@ -921,13 +655,18 @@ function getBookChoices(filter: string, nextScene: SceneId): Choice[] {
       onChoose: () => {
         const game = useGameStore();
         game.setPersistAvatar(true);
-        game.goToScene(nextScene, {
-          filter: `${filter},3`,
-          text: `Your ex gave you this one. You can't get rid of it because that feels like losing the breakup.`,
-        });
+      },
+      next: nextScene,
+      payload: {
+        filter: `${filter},3`,
+        text: `Your ex gave you this one. You can't get rid of it because that feels like losing the breakup.`,
       },
     },
   ];
+
+  if (!filter) {
+    return [];
+  }
 
   const indicesToRemove = filter
     .split(",")

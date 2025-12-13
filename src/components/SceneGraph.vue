@@ -66,6 +66,9 @@ function renderGraph() {
   const links = graphData.links;
   const sections = graphData.sectionMap;
 
+  console.log(links);
+  console.log(sections);
+
   const visibleLinks =
     activeSection.value === "All"
       ? links
@@ -98,23 +101,31 @@ function renderGraph() {
     edgeStackMap[edgeId] = stackIndex + 1;
     let midNodeId: string | null = null;
 
-    if (g.aspect || g.stat || g.manners) {
+    if (g.aspect || g.stats || g.manners) {
       midNodeId = `mid:${edgeId}:${stackIndex}`;
       syntheticNodes.add(midNodeId);
 
-      let statNodeId = g.stat?.id ?? "";
-      let mannersNodeId = g.manners ?? "";
+      let mannersNodeId = "";
+      let statNodeId = "";
 
-      if (g.stat) {
-        const index = statEdgeCountMap[g.stat.id] ?? 0;
-        statEdgeCountMap[g.stat.id] = index + 1;
-        statNodeId = `${g.stat.id}_${index + 1}`;
+      //TODO:
+      if (g.stats) {
+        for (const stat of g.stats) {
+          statNodeId = (stat?.id as string | undefined) ?? "";
+          const index = statEdgeCountMap[stat.id] ?? 0;
+          statEdgeCountMap[stat.id] = index + 1;
+          statNodeId = `${stat.id}_${index + 1}`;
+        }
       }
 
+      //TODO:
       if (g.manners) {
-        const index = mannersEdgeCountMap[g.manners] ?? 0;
-        mannersEdgeCountMap[g.manners] = index + 1;
-        mannersNodeId = `${g.manners}_${index + 1}`;
+        for (const manners of g.manners) {
+          mannersNodeId = (manners as string | undefined) ?? "";
+          const index = mannersEdgeCountMap[manners] ?? 0;
+          mannersEdgeCountMap[manners] = index + 1;
+          mannersNodeId = `${manners}_${index + 1}`;
+        }
       }
 
       const char = `${g.aspect ?? ""}^${statNodeId}^${mannersNodeId}`;
@@ -135,19 +146,47 @@ function renderGraph() {
 
       edges.push({ from: midNodeId, to: g.to, arrows: "to", smooth: true });
 
-      edges.push({
-        from: midNodeId,
-        to: `char:${char}`,
-        label: g.stat ? `${g.stat.amount > 0 ? "+" : ""}${g.stat.amount}` : "",
-        dashes: true,
-        arrows: "to",
-        color: { color: "orange" },
-        smooth: { type: "discrete", enabled: true, roundness: 0.2 },
-        length: 10,
-      });
+      for (const stat of g.stats ?? []) {
+        edges.push({
+          from: midNodeId,
+          to: `char:${char}`,
+          label: stat ? `${stat.amount > 0 ? "+" : ""}${stat.amount}` : "",
+          dashes: true,
+          arrows: "to",
+          color: { color: "purple" },
+          smooth: { type: "discrete", enabled: true, roundness: 0.2 },
+          length: 10,
+        });
+      }
+
+      for (const manners of g.manners ?? []) {
+        edges.push({
+          from: midNodeId,
+          to: `char:${char}`,
+          label: "+1",
+          dashes: true,
+          arrows: "to",
+          color: { color: "blue" },
+          smooth: { type: "discrete", enabled: true, roundness: 0.2 },
+          length: 10,
+        });
+      }
+
+      if (g.aspect) {
+        edges.push({
+          from: midNodeId,
+          to: `char:${char}`,
+          label: "",
+          dashes: true,
+          arrows: "to",
+          color: { color: "orange" },
+          smooth: { type: "discrete", enabled: true, roundness: 0.2 },
+          length: 10,
+        });
+      }
     }
 
-    if (!g.aspect && !g.stat && !g.manners) {
+    if (!g.aspect && !g.stats && !g.manners) {
       edges.push({
         from: g.from,
         to: g.to,
@@ -203,23 +242,27 @@ function renderGraph() {
     const chars = char.split("^");
     let label = "";
 
-    if (chars[0] != "") {
+    const isAspect = chars[0] != "";
+    const isStat = chars[1] != "";
+    const isManners = chars[2] != "";
+
+    if (isAspect) {
       label += `ASPECT: ${chars[0]} `;
     }
 
-    if (chars[1] != "") {
+    if (isStat) {
       label += `STAT: ${chars[1]} `;
     }
 
-    if (chars[2] != "") {
+    if (isManners) {
       label += `MANNERS: ${chars[2]} `;
     }
 
     return {
       id: `char:${char}`,
       label: label,
-      shape: "diamond",
-      color: "orange",
+      shape: isAspect ? "diamond" : isManners ? "square" : "star",
+      color: isAspect ? "orange" : isManners ? "blue" : "purple",
     };
   });
 

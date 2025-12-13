@@ -1,9 +1,7 @@
-import { Scene } from "@/types/story";
-import bgDefault from "@/assets/images/backgrounds/new-game.png";
+import { Dialog, Scene } from "@/types/story";
 import bgPark from "@/assets/images/backgrounds/park.png";
 import bgParkNight from "@/assets/images/backgrounds/park-night.png";
 import parkMusic from "@/assets/audio/story/background-themes/walk-in-the-park.mp3";
-import { useGameStore } from "@/stores/game";
 import { useCharacterStore } from "@/stores/character";
 import { CharacterId } from "@/types/character";
 import { defineScene } from "../story";
@@ -36,23 +34,7 @@ export const parkScenes = {
           next: "snow-pile",
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: `Still yourself and listen to the sounds.`,
-            next: "park-drunks",
-          },
-          {
-            text: `Leave the park and enter the neighborhood.`,
-            next: "neighborhood",
-          },
-          {
-            text: `Play on the snowpile.`,
-            next: "snow-pile",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -71,21 +53,10 @@ export const parkScenes = {
         {
           characterId: "drunk2",
           text: `That's not the Sun! It's the Moon!`,
-          onClick: () => {
-            const store = useGameStore();
-            store.goToScene("park-drunks1");
-          },
+          next: "park-drunks1",
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: `drunk dialog click`,
-            next: "park-drunks1",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -110,45 +81,20 @@ export const parkScenes = {
         {
           text: `"I'm sorry, I'm not from around here."`,
           next: "park-drunks2a",
-          onChoose: () => {
-            const character = useCharacterStore();
-            character.setFlag("drunk-choice", undefined, this.id);
-          },
+          flags: [{ id: "drunk-choice", value: undefined }],
         },
         {
           text: `"It's the Sun."`,
           next: "park-drunks2b",
-          onChoose: () => {
-            const character = useCharacterStore();
-            character.setFlag("drunk-choice", "drunk1", this.id);
-          },
+          flags: [{ id: "drunk-choice", value: "drunk1" }],
         },
         {
           text: `"It's the Moon."`,
           next: "park-drunks2b",
-          onChoose: () => {
-            const character = useCharacterStore();
-            character.setFlag("drunk-choice", "drunk2", this.id);
-          },
+          flags: [{ id: "drunk-choice", value: "drunk2" }],
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: `I'm sorry, I'm not from around here.`,
-            next: "park-drunks2a",
-          },
-          {
-            text: `It's the sun`,
-            next: "park-drunks2b",
-          },
-          {
-            text: `It's the moon`,
-            next: "park-drunks2b",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -169,48 +115,20 @@ export const parkScenes = {
         {
           text: `"I don't have time for this."`,
           next: "park-drunks3",
-          onChoose: () => {
-            const character = useCharacterStore();
-            character.gainManners("rude", 1, this.id);
-          },
+          manners: [{ id: "rude", amount: 1 }],
         },
         {
           text: `"Looking up is for the young and hopeful."`,
           next: "park-drunks3",
-          onChoose: () => {
-            const character = useCharacterStore();
-            character.gainManners("depressing", 1, this.id);
-          },
+          manners: [{ id: "depressing", amount: 1 }],
         },
         {
           text: "Just laugh.",
           next: "park-drunks3",
-          onChoose: () => {
-            const character = useCharacterStore();
-            character.gainManners("polite", 1, this.id);
-          },
+          manners: [{ id: "polite", amount: 1 }],
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: `I dont have time for this`,
-            next: "park-drunks3",
-            manners: "rude",
-          },
-          {
-            text: `Looking up is for the young and hopeful`,
-            next: "park-drunks3",
-            manners: "depressing",
-          },
-          {
-            text: `Just laugh`,
-            next: "park-drunks3",
-            manners: "polite",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -236,22 +154,11 @@ export const parkScenes = {
                 ? "drunk2"
                 : ("drunk1" as CharacterId),
             text: `.........`,
-            onClick: () => {
-              const store = useGameStore();
-              store.goToScene("park-drunks2c");
-            },
+            next: "park-drunks2c",
           },
         ];
       },
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: `drunk dialog click`,
-            next: "park-drunks2c",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -275,48 +182,20 @@ export const parkScenes = {
         {
           text: `"Not cool."`,
           next: "park-drunks3",
-          onChoose: () => {
-            const character = useCharacterStore();
-            character.gainManners("depressing", 1, this.id);
-          },
+          manners: [{ id: "depressing", amount: 1 }],
         },
         {
           text: `"YEAH! EAT IT, YA DOPE!"`,
           next: "park-drunks3",
-          onChoose: () => {
-            const character = useCharacterStore();
-            character.gainManners("rude", 1, this.id);
-          },
+          manners: [{ id: "rude", amount: 1 }],
         },
         {
           text: "Just laugh.",
           next: "park-drunks3",
-          onChoose: () => {
-            const character = useCharacterStore();
-            character.gainManners("polite", 1, this.id);
-          },
+          manners: [{ id: "polite", amount: 1 }],
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: `Not cool`,
-            next: "park-drunks3",
-            manners: "depressing",
-          },
-          {
-            text: `YEAH! EAT IT, YA DOPE!`,
-            next: "park-drunks3",
-            manners: "rude",
-          },
-          {
-            text: `Just laugh`,
-            next: "park-drunks3",
-            manners: "polite",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -341,7 +220,7 @@ export const parkScenes = {
               ? "Depressing!"
               : "";
 
-        const dialogs = [];
+        const dialogs: Dialog[] = [];
 
         if (mannersText != "") {
           dialogs.push({
@@ -353,23 +232,12 @@ export const parkScenes = {
         dialogs.push({
           characterId: (drunkChoice ?? "drunk1") as CharacterId,
           text: `Oh dang! A skatepark! Cool! Bye!`,
-          onClick: () => {
-            const store = useGameStore();
-            store.goToScene("black-dog");
-          },
+          next: "black-dog",
         });
 
         return dialogs;
       },
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: `drunk dialog click`,
-            next: "black-dog",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 };

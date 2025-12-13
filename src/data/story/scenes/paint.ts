@@ -13,9 +13,7 @@ export const paintScenes = {
       text: "Paint",
       background: bgDefault,
       //TODO: STORY - paint
-      metadata: {
-        sectionId: sectionId,
-      },
+      metadata: { sectionId },
     };
   }),
 };

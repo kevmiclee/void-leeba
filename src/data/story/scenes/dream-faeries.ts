@@ -4,7 +4,6 @@ import faeriesSong from "@/assets/audio/story/background-themes/faeries.mp3";
 import { useGameStore } from "@/stores/game";
 import { useCharacterStore } from "@/stores/character";
 import { getNapFaeries2Text } from "../helper-functions/text-helper-functions";
-import { useAspectStore } from "@/stores/aspects";
 import { defineScene } from "../story";
 import { useDictionaryStore } from "@/stores/dictionary";
 
@@ -27,11 +26,7 @@ export const dreamFaeriesScenes = {
           dictionaryEntryId: "hongatar",
         },
         {
-          isItem: true,
-          action: () => {
-            const character = useCharacterStore();
-            character.addToInventory("hongatar-trash", this.id);
-          },
+          item: "hongatar-trash",
         },
       ],
       dialogSequence: () => [
@@ -54,25 +49,14 @@ export const dreamFaeriesScenes = {
         {
           characterId: "faerie2",
           text: `Söpöt pikku puput, a thingy is following us.`,
-          onClick: () => {
-            const game = useGameStore();
-            game.goToScene("dream-faeries1");
-          },
+          next: "dream-faeries1",
         },
       ],
       onPageLoad: () => {
         const dict = useDictionaryStore();
         dict.addEntry("hongatar");
       },
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: "faerie dialog click",
-            next: "dream-faeries1",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -92,10 +76,7 @@ export const dreamFaeriesScenes = {
           text: 'Bow graciously. "Thanks for spitting in my nostril holes."',
           next: "dream-faeries2",
           payload: { filter: "bow" },
-          onChoose: () => {
-            const aspectStore = useAspectStore();
-            aspectStore.addAspect("magic-nosehairs");
-          },
+          aspect: "magic-nosehairs",
         },
         {
           text: "Get on their case about littering.",
@@ -104,34 +85,10 @@ export const dreamFaeriesScenes = {
         {
           text: `There's that squirrel again! Try to catch it.`,
           next: "dream-squirrel",
-          onChoose: () => {
-            const character = useCharacterStore();
-            character.gainStat("athletics", 1, this.id);
-          },
+          stats: [{ id: "athletics", amount: 1 }],
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: `Bow graciously. "Thanks for spitting in my nostril holes."`,
-            next: "dream-faeries2",
-            aspect: "magic-nosehairs",
-          },
-          {
-            text: `Get on their case about littering.`,
-            next: "dream-faeries-litter",
-          },
-          {
-            text: `There's that squirrel again! Try to catch it.`,
-            next: "dream-squirrel",
-            stat: {
-              id: "athletics",
-              amount: 1,
-            },
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -159,21 +116,10 @@ export const dreamFaeriesScenes = {
         {
           characterId: "faerie1",
           text: `We're going to a party!`,
-          onClick: () => {
-            const game = useGameStore();
-            game.goToScene("dream-faeries3");
-          },
+          next: "dream-faeries3",
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: `faerie dialog click`,
-            next: "dream-faeries3",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -207,19 +153,7 @@ export const dreamFaeriesScenes = {
           next: "dream-faeries4",
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: `"Um..."`,
-            next: "dream-faeries-party-check",
-          },
-          {
-            text: `"PARTY!!!"`,
-            next: "dream-faeries4",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -235,21 +169,10 @@ export const dreamFaeriesScenes = {
         {
           characterId: "faerie3",
           text: `See you soon raccoon!`,
-          onClick: () => {
-            const game = useGameStore();
-            game.goToScene("dream-faeries5");
-          },
+          next: "dream-faeries5",
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: `faerie dialog clicks`,
-            next: "dream-faeries5",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -266,19 +189,7 @@ export const dreamFaeriesScenes = {
         { text: "YOLO! Eat the eggcorn.", next: `party-eggcorn` },
         { text: "On second thought...", next: "party-eggcorn-check" },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: `YOLO! Eat the eggcorn.`,
-            next: "party-eggcorn",
-          },
-          {
-            text: `On second thought...`,
-            next: "party-eggcorn-check",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -321,7 +232,7 @@ export const dreamFaeriesScenes = {
           return choices;
         },
         metadata: {
-          sectionId: sectionId,
+          sectionId,
           routes: [
             {
               text: `"Oh I see, you were planting snail trees! The Hongatar truly are a noble breed.`,
@@ -358,61 +269,28 @@ export const dreamFaeriesScenes = {
               `replant them one snail shell at a time.`,
           },
         ],
-        choices: () => {
-          const character = useCharacterStore();
-
-          return [
-            {
-              text: `"You're lying. I saw you eating the snails!"`,
-              next: "dream-faeries2",
-              payload: { filter: "accuse" },
-              onChoose: () => {
-                character.gainManners("depressing", 1, this.id);
-              },
-            },
-            {
-              text: `"Your dedication to the ecosystem is so inspiring. If only we humans were so thoughtful and so brave."`,
-              next: "dream-faeries2",
-              payload: { filter: "flatter" },
-              onChoose: () => {
-                character.gainManners("polite", 1, this.id);
-                character.gainStat("shitheadedness", 1, this.id);
-              },
-            },
-            {
-              text: `"That is asinine."`,
-              next: "dream-faeries2",
-              payload: { filter: "insult" },
-              onChoose: () => {
-                character.gainManners("rude", 1, this.id);
-              },
-            },
-          ];
-        },
-        metadata: {
-          sectionId: sectionId,
-          routes: [
-            {
-              text: `"You're lying. I saw you eating the snails!"`,
-              next: "dream-faeries2",
-              manners: "depressing",
-            },
-            {
-              text: `"Your dedication to the ecosystem is so inspiring. If only we humans were so thoughtful and so brave."`,
-              next: "dream-faeries2",
-              manners: "polite",
-              stat: {
-                id: "shitheadedness",
-                amount: 1,
-              },
-            },
-            {
-              text: `"That is asinine."`,
-              next: "dream-faeries2",
-              manners: "rude",
-            },
-          ],
-        },
+        choices: () => [
+          {
+            text: `"You're lying. I saw you eating the snails!"`,
+            next: "dream-faeries2",
+            payload: { filter: "accuse" },
+            manners: [{ id: "depressing", amount: 1 }],
+          },
+          {
+            text: `"Your dedication to the ecosystem is so inspiring. If only we humans were so thoughtful and so brave."`,
+            next: "dream-faeries2",
+            payload: { filter: "flatter" },
+            manners: [{ id: "polite", amount: 1 }],
+            stats: [{ id: "shitheadedness", amount: 1 }],
+          },
+          {
+            text: `"That is asinine."`,
+            next: "dream-faeries2",
+            payload: { filter: "insult" },
+            manners: [{ id: "rude", amount: 1 }],
+          },
+        ],
+        metadata: { sectionId },
       };
     }
   ),
@@ -433,21 +311,10 @@ export const dreamFaeriesScenes = {
           {
             characterId: "faerie1",
             text: "Forgive us!",
-            onClick: () => {
-              const game = useGameStore();
-              game.goToScene("dream-faeries-litter-proof1");
-            },
+            next: "dream-faeries-litter-proof1",
           },
         ],
-        metadata: {
-          sectionId: sectionId,
-          routes: [
-            {
-              text: `faerie dialog click`,
-              next: "dream-faeries-litter-proof1",
-            },
-          ],
-        },
+        metadata: { sectionId },
       };
     }
   ),
@@ -478,23 +345,14 @@ export const dreamFaeriesScenes = {
           {
             characterId: "faerie3",
             text: `We found this magical tome in the forest. We can't read it but we know it's valuable. Here.`,
+            next: "dream-faeries-litter-proof2",
             onClick: () => {
               const character = useCharacterStore();
               character.addToInventory("self-help-book", this.id);
-              const game = useGameStore();
-              game.goToScene("dream-faeries-litter-proof2");
             },
           },
         ],
-        metadata: {
-          sectionId: sectionId,
-          routes: [
-            {
-              text: `faerie dialog click`,
-              next: "dream-faeries-litter-proof2",
-            },
-          ],
-        },
+        metadata: { sectionId },
       };
     }
   ),
@@ -512,56 +370,27 @@ export const dreamFaeriesScenes = {
             dictionaryEntryId: "hongatar",
           },
         ],
-        choices: () => {
-          const character = useCharacterStore();
-
-          return [
-            {
-              text: `"Let that be a lesson to you."`,
-              next: "dream-faeries2",
-              payload: { filter: "lesson" },
-              onChoose: () => {
-                character.gainManners("depressing", 1, this.id);
-              },
-            },
-            {
-              text: `"Self-help is my favorite genre, thanks!"`,
-              next: "dream-faeries2",
-              payload: { filter: "thanks" },
-              onChoose: () => {
-                character.gainManners("polite", 1, this.id);
-              },
-            },
-            {
-              text: `Wink.`,
-              next: "dream-faeries2",
-              payload: { filter: "wink" },
-              onChoose: () => {
-                character.gainManners("weird", 1, this.id);
-              },
-            },
-          ];
-        },
-        metadata: {
-          sectionId: sectionId,
-          routes: [
-            {
-              text: `"Let that be a lesson to you."`,
-              next: "dream-faeries2",
-              manners: "depressing",
-            },
-            {
-              text: `"Self-help is my favorite genre, thanks!"`,
-              next: "dream-faeries2",
-              manners: "polite",
-            },
-            {
-              text: `Wink.`,
-              next: "dream-faeries2",
-              manners: "weird",
-            },
-          ],
-        },
+        choices: () => [
+          {
+            text: `"Let that be a lesson to you."`,
+            next: "dream-faeries2",
+            payload: { filter: "lesson" },
+            manners: [{ id: "depressing", amount: 1 }],
+          },
+          {
+            text: `"Self-help is my favorite genre, thanks!"`,
+            next: "dream-faeries2",
+            payload: { filter: "thanks" },
+            manners: [{ id: "polite", amount: 1 }],
+          },
+          {
+            text: `Wink.`,
+            next: "dream-faeries2",
+            payload: { filter: "wink" },
+            manners: [{ id: "weird", amount: 1 }],
+          },
+        ],
+        metadata: { sectionId },
       };
     }
   ),
@@ -585,33 +414,14 @@ export const dreamFaeriesScenes = {
           {
             text: `"I'm good. Thanks."`,
             next: "dream-faeries-party-decline",
-            onChoose: () => {
-              const character = useCharacterStore();
-              character.gainStat("will", 1, this.id);
-            },
+            stats: [{ id: "will", amount: 1 }],
           },
           {
             text: `"PARTY!!!"`,
             next: "dream-faeries4",
           },
         ],
-        metadata: {
-          sectionId: sectionId,
-          routes: [
-            {
-              text: `"I'm good. Thanks"`,
-              next: "dream-faeries-party-decline",
-              stat: {
-                id: "will",
-                amount: 1,
-              },
-            },
-            {
-              text: `"PARTY!!!"`,
-              next: "dream-faeries4",
-            },
-          ],
-        },
+        metadata: { sectionId },
       };
     }
   ),
@@ -628,23 +438,14 @@ export const dreamFaeriesScenes = {
           {
             characterId: "faerie2",
             text: `Suit yourself!`,
+            next: "dream1",
             onClick: () => {
-              const game = useGameStore();
               const character = useCharacterStore();
               character.setFlag("did-faeries", true, this.id);
-              game.goToScene("dream1", { filter: "noFaeries" });
             },
           },
         ],
-        metadata: {
-          sectionId: sectionId,
-          routes: [
-            {
-              text: `fearie dialog click`,
-              next: "dream1",
-            },
-          ],
-        },
+        metadata: { sectionId },
       };
     }
   ),
@@ -671,7 +472,7 @@ export const dreamFaeriesScenes = {
         },
       ],
       metadata: {
-        sectionId: sectionId,
+        sectionId,
         routes: [
           {
             text: `everything goes dark`,
@@ -702,31 +503,11 @@ export const dreamFaeriesScenes = {
           {
             text: `No. Seriously. I'm not eating it.`,
             next: "dream1",
-            payload: { filter: "noFaeries" },
-            onChoose: () => {
-              const character = useCharacterStore();
-              character.gainStat("will", 1, this.id);
-              character.setFlag("did-faeries", true, this.id);
-            },
+            stats: [{ id: "will", amount: 1 }],
+            flags: [{ id: "did-faeries", value: true }],
           },
         ],
-        metadata: {
-          sectionId: sectionId,
-          routes: [
-            {
-              text: `No. Seriously. I'm not eating it`,
-              next: "dream1",
-              stat: {
-                id: "will",
-                amount: 1,
-              },
-            },
-            {
-              text: `YOLO! Eat the eggcorn`,
-              next: "party-eggcorn",
-            },
-          ],
-        },
+        metadata: { sectionId },
       };
     }
   ),

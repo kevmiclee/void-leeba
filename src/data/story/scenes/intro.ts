@@ -38,19 +38,7 @@ export const introScenes = {
           next: "credits",
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: `New game`,
-            next: "intro",
-          },
-          {
-            text: `Credits`,
-            next: "credits",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -60,65 +48,33 @@ export const introScenes = {
       text: "Hey there! You are dreaming.",
       audio: windTunnel,
       background: bgFog,
-      choices: () => {
-        const character = useCharacterStore();
-        return [
-          {
-            text: "Start to wake up.",
-            next: "intro1",
-            payload: { text: `NO! Don't wake up!` },
-            onChoose: () => {
-              character.gainStat("will", 1, this.id);
-            },
-          },
-          {
-            text: "Vivid dream? Start flying!",
-            next: "intro1",
-            payload: { text: `NO! Don't fly away!` },
-
-            onChoose: () => {
-              character.gainStat("athletics", 1, this.id);
-            },
-          },
-          {
-            text: `Don't dream, just sleep.`,
-            next: "intro1",
-            payload: { text: `NO! Don't stop dreaming!` },
-            onChoose: () => {
-              character.gainStat("shitheadedness", 1, this.id);
-            },
-          },
-          {
-            text: `Mmm... okay.`,
-            next: "intro1",
-            payload: { text: `YES!` },
-            onChoose: () => {
-              character.gainStat("blueMagic", 1, this.id);
-            },
-          },
-        ];
-      },
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: "Start to wake up.",
-            next: "intro1",
-          },
-          {
-            text: "Vivid dream? Start flying!",
-            next: "intro1",
-          },
-          {
-            text: `Don't dream, just sleep.`,
-            next: "intro1",
-          },
-          {
-            text: `Mmm... okay.`,
-            next: "intro1",
-          },
-        ],
-      },
+      choices: () => [
+        {
+          text: "Start to wake up.",
+          next: "intro1",
+          payload: { text: `NO! Don't wake up!` },
+          stats: [{ id: "will", amount: 1 }],
+        },
+        {
+          text: "Vivid dream? Start flying!",
+          next: "intro1",
+          payload: { text: `NO! Don't fly away!` },
+          stats: [{ id: "athletics", amount: 1 }],
+        },
+        {
+          text: `Don't dream, just sleep.`,
+          next: "intro1",
+          payload: { text: `NO! Don't stop dreaming!` },
+          stats: [{ id: "shitheadedness", amount: 1 }],
+        },
+        {
+          text: `Mmm... okay.`,
+          next: "intro1",
+          payload: { text: `YES!` },
+          stats: [{ id: "blueMagic", amount: 1 }],
+        },
+      ],
+      metadata: { sectionId },
     };
   }),
 
@@ -132,21 +88,10 @@ export const introScenes = {
       background: bgFog,
       buttonActions: () => [
         {
-          action: () => {
-            const game = useGameStore();
-            game.goToScene("intro2");
-          },
+          next: "intro2",
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: `pay attention`,
-            next: "intro2",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -160,21 +105,10 @@ export const introScenes = {
       background: bgFog,
       buttonActions: () => [
         {
-          action: () => {
-            const game = useGameStore();
-            game.goToScene("intro3");
-          },
+          next: "intro3",
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: `take responsibility`,
-            next: "intro3",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -191,25 +125,14 @@ export const introScenes = {
           dictionaryEntryId: "leaks",
         },
         {
-          action: () => {
-            const game = useGameStore();
-            game.goToScene("intro4");
-          },
+          next: "intro4",
         },
       ],
       onPageLoad: () => {
         const dict = useDictionaryStore();
         dict.addEntry("leaks");
       },
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: `You won't`,
-            next: "intro4",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -224,21 +147,10 @@ export const introScenes = {
       background: bgFog,
       buttonActions: () => [
         {
-          action: () => {
-            const game = useGameStore();
-            game.goToScene("intro5");
-          },
+          next: "intro5",
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: `enjoy the dream`,
-            next: "intro5",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -253,9 +165,9 @@ export const introScenes = {
         {
           characterId: "mudman",
           text: `What's that in your pocket? Are you happy to see me?`,
+          next: "intro6",
           onClick: () => {
             const game = useGameStore();
-            game.goToScene("intro6");
             game.setPersistAvatar(true);
           },
         },
@@ -264,15 +176,7 @@ export const introScenes = {
         const audioStore = useAudioStore();
         audioStore.playGenericSound(mudmanTheme);
       },
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: "mudman dialog",
-            next: "intro6",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -286,21 +190,10 @@ export const introScenes = {
         {
           characterId: "mudman",
           text: `Not happy to see me? What are you some kinda prude?`,
-          onClick: () => {
-            const game = useGameStore();
-            game.goToScene("intro7");
-          },
+          next: "intro7",
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: "mudman dialog",
-            next: "intro7",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -316,24 +209,16 @@ export const introScenes = {
           characterId: "mudman",
           text: `Lovely. Just lovely. Lovely weather for ducks all in a row row row your 
           boat gently into that good night, good night! Parting is such a sweaty sheet...`,
+          next: "intro8",
           onClick: () => {
             const audioStore = useAudioStore();
             audioStore.playGenericSound(serverFarmTheme);
             const game = useGameStore();
-            game.goToScene("intro8");
             game.setPersistAvatar(false);
           },
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: "mudman dialog",
-            next: "intro8",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -350,21 +235,10 @@ export const introScenes = {
       background: bgServerFarm,
       buttonActions: () => [
         {
-          action: () => {
-            const game = useGameStore();
-            game.goToScene("intro9");
-          },
+          next: "intro9",
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: "emits from them",
-            next: "intro9",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -381,21 +255,10 @@ export const introScenes = {
         {
           characterId: "kioskman",
           text: `Oh, Mr. Ebenenezer! Mr. Mudman is here.`,
-          onClick: () => {
-            const game = useGameStore();
-            game.goToScene("intro10");
-          },
+          next: "intro10",
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: "dialog click",
-            next: "intro10",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -410,22 +273,11 @@ export const introScenes = {
           characterId: "mr-ebeneezer",
           text: `Ah Mudman! What good fortune! You kept your word. At this rate we'll exceed 
           our Q3 earnings by 1%! Survtek recognizes loyalty. As agreed, here, one 
-          Leak Drop. Kindly deposit your loot.`,
-          onClick: () => {
-            const game = useGameStore();
-            game.goToScene("intro11");
-          },
+          Leakcoin. Kindly deposit your loot.`,
+          next: "intro11",
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: "dialog click",
-            next: "intro11",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -439,22 +291,11 @@ export const introScenes = {
       background: bgMudsplosion,
       buttonActions: () => [
         {
-          action: () => {
-            const game = useGameStore();
-            game.goToScene("intro12");
-          },
+          next: "intro12",
         },
       ],
 
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: "into the sky",
-            next: "intro12",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -474,28 +315,17 @@ export const introScenes = {
           dictionaryEntryId: "leaks",
         },
         {
-          action: () => {
-            const game = useGameStore();
-            game.goToScene("intro13");
-          },
+          next: "intro13",
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: "no noobs allowed",
-            next: "intro13",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
   intro13: defineScene("intro13", function (payload): Scene {
     return {
       id: this.id,
-      text: `Server farms, Leaks, Leak Drops...what kind of dream is this? The Supreme Hegemon of Tangential 
+      text: `Server farms, Leaks, Leakcoin...what kind of dream is this? The Supreme Hegemon of Tangential 
       Reality...what? And Sandperson, and Dirtgirl? Not to mention Mudman! Ugh, and he <i>stole</i> from you. 
       Uh oh...do you recall your name?`,
       audio: windTunnel,
@@ -507,13 +337,8 @@ export const introScenes = {
         game.goToScene("intro14", { text: character.name });
       },
       metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: "name input enetered",
-            next: "intro14",
-          },
-        ],
+        sectionId,
+        routes: [{ text: "input name", next: "intro14" }],
       },
     };
   }),
@@ -528,21 +353,10 @@ export const introScenes = {
       background: bgFog,
       buttonActions: () => [
         {
-          action: () => {
-            const game = useGameStore();
-            game.goToScene("intro15");
-          },
+          next: "intro15",
         },
       ],
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: "A promise made before you were born",
-            next: "intro15",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
@@ -555,25 +369,14 @@ export const introScenes = {
       background: bgFog,
       buttonActions: () => [
         {
-          action: () => {
-            const game = useGameStore();
-            game.goToScene("bedroom");
-          },
+          next: "bedroom",
         },
       ],
       onPageLoad: () => {
         const audioStore = useAudioStore();
         audioStore.playGenericSound(poundingSound);
       },
-      metadata: {
-        sectionId: sectionId,
-        routes: [
-          {
-            text: "trying to replace it",
-            next: "bedroom",
-          },
-        ],
-      },
+      metadata: { sectionId },
     };
   }),
 
