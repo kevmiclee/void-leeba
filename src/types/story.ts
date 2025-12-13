@@ -33,7 +33,7 @@ export interface Dialog {
   characterId: CharacterId;
   text: string;
   onClick?: () => void;
-  //TODO: Make next a function whereever it is present
+  //TODO: CHORE - Make next a function whereever it is present
   next?: SceneId;
   popUp?: boolean;
   filter?: string | undefined;

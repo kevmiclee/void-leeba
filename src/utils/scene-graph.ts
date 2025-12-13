@@ -30,7 +30,7 @@ export function getSceneGraph(): {
           to: route.next,
           label: route.text,
           aspect: route.aspect,
-          //TODO:
+          //TODO: CHORE -
           // manners: route.manners,
           // stats: route.stats,
         });

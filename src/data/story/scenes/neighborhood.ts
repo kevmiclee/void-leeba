@@ -289,7 +289,7 @@ export const neighborhoodScenes = {
           },
         ],
         onPageLoad: () => {
-          //TODO: depending on the converstaion, the value here changes
+          //TODO: CHORE - depending on the converstaion, the value here changes
           const character = useCharacterStore();
           character.addToInventory("leakcoin", this.id, 50);
         },

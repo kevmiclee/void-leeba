@@ -66,9 +66,6 @@ function renderGraph() {
   const links = graphData.links;
   const sections = graphData.sectionMap;
 
-  console.log(links);
-  console.log(sections);
-
   const visibleLinks =
     activeSection.value === "All"
       ? links
@@ -108,7 +105,6 @@ function renderGraph() {
       let mannersNodeId = "";
       let statNodeId = "";
 
-      //TODO:
       if (g.stats) {
         for (const stat of g.stats) {
           statNodeId = (stat?.id as string | undefined) ?? "";
@@ -118,7 +114,6 @@ function renderGraph() {
         }
       }
 
-      //TODO:
       if (g.manners) {
         for (const manners of g.manners) {
           mannersNodeId = (manners as string | undefined) ?? "";

@@ -582,7 +582,7 @@ export const bedroomScenes = {
     return {
       id: this.id,
       audio: homeSong,
-      //TODO: break this up
+      //TODO: CHORE - break this up
       text:
         `You sit down at the desk and open to a fresh page of the pad.` +
         `^You look down onto the off-white paper. A void to fill. Dimensionless.` +

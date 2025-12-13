@@ -42,7 +42,7 @@ export const dreamScenes = {
     const didFaeries = character.flags["did-faeries"];
     const didNap = character.flags["did-nap"];
 
-    //TODO:
+    //TODO: - CHORE
     // payload?.filter == "fromNap"
     //       ? `You're able to wake up from the dream within the dream, but you're still dreaming. You are back ` +
     //         `where you started.^^`
@@ -226,7 +226,7 @@ export const dreamScenes = {
       return {
         id: this.id,
         background: bgForest,
-        //TODO: Break this up
+        //TODO: CHORE - Break this up
         text:
           `What a cruddy day! You feel off.^^You hear yourself say aloud, "Eugh! What a wash."` +
           `^^You lean back for a while just admiring the mushroom's disgustingness, worrying that you'll never wake up again.` +
@@ -254,7 +254,7 @@ export const dreamScenes = {
       return {
         id: this.id,
         background: bgForest,
-        //TODO: break this up
+        //TODO: CHORE - break this up
         text:
           `Completely serene, without a worry in your mind, you fall asleep in your dream. {You breathe in}.` +
           `^^A new dream! You notice that you are hugging a brightly colored mushroom! You can tell because ` +
@@ -283,7 +283,7 @@ export const dreamScenes = {
       return {
         id: this.id,
         background: bgForest,
-        //TODO: break this up
+        // CHORE - break this up
         text:
           `The landscape expands into a void panorama, filling every corner of the emptiness as you inhale deeper. ` +
           `Day, night, day, night. Seasons cycle and time dutifully carves the terrain with imperceptible changes.` +
@@ -311,7 +311,7 @@ export const dreamScenes = {
       return {
         id: this.id,
         background: bgForest,
-        //TODO: break this up
+        //TODO: CHORE - break this up
         text:
           `The hum intensifies until it almost becomes unbearable, making you wince. It reaches a cresecendo and ` +
           `slowly begins its ebb back into entropic silence, leaving a ghostly impression of its power in your memory.` +
@@ -335,7 +335,7 @@ export const dreamScenes = {
       id: this.id,
       background: bgForest,
       //use tree-chase music
-      //TODO: break this up
+      //TODO: CHORE - break this up
       text:
         `You have chosen to swing a dream ax at a dream tree.` +
         `^^Looking down, you see a single-headed carbon-fiber ax in your left hand. Heh. Hefty!` +

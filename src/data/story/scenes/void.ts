@@ -1,8 +1,6 @@
 import { Scene } from "@/types/story";
 import bgDefault from "@/assets/images/backgrounds/new-game.png";
 import { defineScene } from "../story";
-import { useCharacterStore } from "@/stores/character";
-import { useGameStore } from "@/stores/game";
 import { useSnackbarStore } from "@/stores/snackbar";
 import { useEffectsStore } from "@/stores/effects";
 
@@ -63,7 +61,7 @@ export const voidScenes = {
   }),
 
   "void-not-alone": defineScene("void-not-alone", function (payload): Scene {
-    //TODO: void stirring animation
+    //TODO: UI/UX void stirring animation
     return {
       id: this.id,
       background: "white",
@@ -265,7 +263,7 @@ export const voidScenes = {
   "void-not-alone-adage1": defineScene(
     "void-not-alone-adage1",
     function (payload): Scene {
-      //TODO: cheese puffs
+      //TODO: UI/UX - cheese puffs
       return {
         id: this.id,
         background: "white",
