@@ -4,6 +4,7 @@ import neighborhoodTheme from "@/assets/audio/story/background-themes/neighborho
 import { defineScene } from "../story";
 import { getNonZeroRandomDecimal } from "../helper-functions/outcome-helper-functions";
 import { useCharacterStore } from "@/stores/character";
+import { useGameStore } from "@/stores/game";
 
 //TODO: MUSIC - dog barking sounds
 
@@ -71,7 +72,7 @@ export const neighborhoodScenes = {
             },
           },
           {
-            text: `Option 3`,
+            text: `The matematically busiest street-corner.`,
             next: "neighborhood-drunk",
             onChoose: () => {
               character.setFlag("art-table-success-rate", 1.5, this.id);
@@ -105,7 +106,7 @@ export const neighborhoodScenes = {
             next: "neighborhood-drunk",
           },
           {
-            text: `Option 3`,
+            text: `The matematically busiest street-corner.`,
             next: "neighborhood-drunk",
           },
           {
@@ -137,12 +138,12 @@ export const neighborhoodScenes = {
             onChoose: () => {},
           },
           {
-            text: `"The cheese is locally sourced from grass-fed cows."`, // bad chance
+            text: `"The cheese is locally-sourced from grass-fed cows."`, // bad chance
             next: "neighborhood-drunk1",
             onChoose: () => {},
           },
           {
-            text: `"They make a great gift for nieces and nephews."`, // neutral chance
+            text: `"They make a great gift for nieces or nephews."`, // neutral chance
             next: "neighborhood-drunk1",
             onChoose: () => {},
           },
@@ -157,11 +158,11 @@ export const neighborhoodScenes = {
               next: "neighborhood-drunk1",
             },
             {
-              text: `"The cheese is locally sourced from grass-fed cows."`, // bad chance
+              text: `"The cheese is locally-sourced from grass-fed cows."`, // bad chance
               next: "neighborhood-drunk1",
             },
             {
-              text: `"They make a great gift for nieces and nephews."`, // neutral chance
+              text: `"They make a great gift for nieces or nephews."`, // neutral chance
               next: "neighborhood-drunk1",
             },
           ],
@@ -172,6 +173,39 @@ export const neighborhoodScenes = {
 
   "neighborhood-drunk1": defineScene(
     "neighborhood-drunk1",
+    function (payload): Scene {
+      return {
+        id: this.id,
+        text: ``,
+        dialogSequence: ()=>[
+          {characterId: "drunk1", text:`That is phuckin' advanced!`, onClick: ()=>{const game = useGameStore(); game.goToScene("neighborhood-drunk1a")}}
+        ],
+        background: bgDefault,
+        audio: neighborhoodTheme,
+        metadata: {
+          sectionId: sectionId,
+          routes: [],
+        },
+      };
+    }
+  ),
+   "neighborhood-drunk1a": defineScene(
+    "neighborhood-drunk1a",
+    function (payload): Scene {
+      return {
+        id: this.id,
+        text: ``,
+        background: bgDefault,
+        audio: neighborhoodTheme,
+        metadata: {
+          sectionId: sectionId,
+          routes: [],
+        },
+      };
+    }
+  ),
+   "neighborhood-drunk1a1": defineScene(
+    "neighborhood-drunk1a1",
     function (payload): Scene {
       return {
         id: this.id,
