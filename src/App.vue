@@ -21,7 +21,7 @@ const game = useGameStore();
   --primary-color: #9f3a27;
   --secondary-color: #b56d3c;
   --tertiary-color: #e2abc0;
-  --background-color: rgba(220, 225, 225, 0.6);
+  --background-color: rgba(220, 225, 225, 0.75);
   --text-color: #333;
 }
 

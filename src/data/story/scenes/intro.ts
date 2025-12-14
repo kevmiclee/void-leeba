@@ -2,9 +2,11 @@ import { Scene } from "@/types/story";
 import bgStart from "@/assets/images/backgrounds/Landing-Page.png";
 import bgFog from "@/assets/images/backgrounds/fogland.jpg";
 import bgServerFarm from "@/assets/images/backgrounds/server-city-wasteland.png";
-import bgServerFarmHallway from "@/assets/images/backgrounds/server-farm-hallway.png";
+import bgServerHallway from "@/assets/images/backgrounds/server-hallway.png";
+import bgMudsplosion1 from "@/assets/images/backgrounds/mudsplosion1.png";
+import bgMudsplosion2 from "@/assets/images/backgrounds/mudsplosion2.png";
+import bgAboveTheClouds from "@/assets/images/backgrounds/above-the-clouds.png";
 import bgDataPurchaseKiosk from "@/assets/images/backgrounds/data-purchase-kiosk.png";
-import bgMudsplosion from "@/assets/images/backgrounds/Mudman-Crawfish-Mudsplosion.png";
 
 import introAudio from "@/assets/audio/story/background-themes/intro.mp3";
 import windTunnel from "@/assets/audio/story/background-themes/wind-tunnel.mp3";
@@ -226,7 +228,7 @@ export const introScenes = {
     //TODO: SOUND - mudman laugh, loud, echo-y, glurpy
     return {
       id: this.id,
-      text: `Aw man. What did he take?^^Mudman departs, gurgling his slimy gulp of a snicker 
+      text: `Aw man... What did he take?^^Mudman departs, gurgling his slimy gulp of a snicker 
       like a suctioned shoe un-stuck from the muck. As he fades into the distance, 
       a wash of fog recedes and at the edge of the horizon you see a gargantuan city 
       of server farms. Economically organized squares, well-lit and sterile. An atonal 
@@ -245,16 +247,15 @@ export const introScenes = {
   intro9: defineScene("intro9", function (payload): Scene {
     return {
       id: this.id,
-      text: `In the next instant, you observe Mudman standing in line at a kiosk along 
+      text: `In the next instant, you observe Mudman standing at a kiosk along 
       the server farm fences accompanied by a hog-sized crawfish. He is still cradling 
-      the glowing object he stole from you.^^He plops it down on the counter.^^Kioskman 
-      recognizes Mudman, and knocks on the backroom door of the kiosk.`,
+      the glowing object he stole from you. The smarmy kioskman greets Mudman.`,
       audio: windTunnel,
       background: bgDataPurchaseKiosk,
       dialogSequence: () => [
         {
           characterId: "kioskman",
-          text: `Oh, Mr. Ebenenezer! Mr. Mudman is here.`,
+          text: `Oh, Mr. Mudman! A pleasure as always.`,
           next: "intro10",
         },
       ],
@@ -265,15 +266,17 @@ export const introScenes = {
   intro10: defineScene("intro10", function (payload): Scene {
     return {
       id: this.id,
-      text: `Mr. Ebeneezer comes out, an unctuous look in his eyes.`,
+      text: `The kioskman looks a little nervous, as if he anticipates some trouble.`,
       audio: windTunnel,
       background: bgDataPurchaseKiosk,
       dialogSequence: () => [
         {
-          characterId: "mr-ebeneezer",
-          text: `Ah Mudman! What good fortune! You kept your word. At this rate we'll exceed 
-          our Q3 earnings by 1%! Survtek recognizes loyalty. As agreed, here, one 
-          Leakcoin. Kindly deposit your loot.`,
+          characterId: "mudman",
+          text: `...`,
+        },
+        {
+          characterId: "kioskman",
+          text: `Kindly proffer your loot, and I will deposit it...`,
           next: "intro11",
         },
       ],
@@ -284,11 +287,28 @@ export const introScenes = {
   intro11: defineScene("intro11", function (payload): Scene {
     return {
       id: this.id,
-      text: `Mudman raises the glowing object above his head. The earth below him turns to mud. The mud ripples 
-      slowly at first, building up power, until he releases the glowing object and the mud explodes upward in a
-      geyser. You watch it disappear {into the sky}.`,
+      text: `Before the kioskman can finish, Mudman raises the glowing object above his head. The earth below him gurgles
+      and turns to mud. The mud ripples slowly at first, building up power, as {clouds gather above the kiosk}.`,
       audio: windTunnel,
-      background: bgMudsplosion,
+      background: bgMudsplosion1,
+      buttonActions: () => [
+        {
+          next: "intro11a",
+        },
+      ],
+
+      metadata: { sectionId },
+    };
+  }),
+
+  intro11a: defineScene("intro11a", function (payload): Scene {
+    return {
+      id: this.id,
+      text: `The mud explodes into a geyser. Electrical tendrils whip out from the clouds. The giant crawfish shrieks 
+      with apparent ecstacy. Amid all the chaos, a stoic Mudman releases the object. It levitates serenely into the 
+      clouds, licked by the electrical tendrils, {and is carried away}.`,
+      audio: windTunnel,
+      background: bgMudsplosion2,
       buttonActions: () => [
         {
           next: "intro12",
@@ -302,14 +322,29 @@ export const introScenes = {
   intro12: defineScene("intro12", function (payload): Scene {
     return {
       id: this.id,
-      text: `Straining to see, your will pulls you like a telescope. You enter a shiny concrete 
-      hallway with caged computer servers stacked up to the ceiling in dense black rectangles 
-      studded with coldly glowing status lights. You see a myriad of programmers, coding programs 
+      text: `Straining to see, your will pulls you like a telescope. You follow as the object is guided 
+      by strange currents across the clouded sky toward the towering server farms. The towers have large 
+      portals in them for the purpose of receving {objects such as these}.`,
+      audio: windTunnel,
+      background: bgAboveTheClouds,
+      buttonActions: () => [
+        {
+          next: "intro12a",
+        },
+      ],
+      metadata: { sectionId },
+    };
+  }),
+
+  intro12a: defineScene("intro12a", function (payload): Scene {
+    return {
+      id: this.id,
+      text: `The portal opens into pink hallway. You see a myriad of programmers, coding programs 
       that will sell the behavioral futures of entire {Leaks}. To torque each reality to its limit, 
       to squeeze it dry of its data, to milk it for all the relevance it's worth. One of the 
       programmers eyes you with a standoffish glare that says, {"No noobs allowed"}.`,
       audio: windTunnel,
-      background: bgServerFarmHallway,
+      background: bgServerHallway,
       buttonActions: () => [
         {
           dictionaryEntryId: "leaks",
