@@ -28,13 +28,12 @@ export const bedroomScenes = {
         return [
           {
             characterId: "shib",
-            text: `${playerName}! Please get up and help me. There is a Time Fly on my windowsill. You said you 
-            would take care of them for me in exchange for bagels, right?`,
+            text: `Hey, ${playerName}! Would you come help me? There is a Time Fly on my windowsill. You said you 
+            would take care of them for me, right?`,
           },
           {
             characterId: "shib",
-            text: `Now's your time to shine! I'm trying 
-            not to imagine that little ticker whizzing around my room.`,
+            text: `Now's your time to shine!`,
             next: "bedroom1",
           },
         ];
@@ -46,15 +45,15 @@ export const bedroomScenes = {
   bedroom1: defineScene("bedroom1", function (payload): Scene {
     return {
       id: this.id,
-      text: `It's your flatmate, Shib. You promised you would help him with his temporomuscaphobia by dispelling 
-      any Time Flies from the apartment. The best remedy for Time Flies is to feed them a book.^^Pick a book to 
-      feed the Time Fly.`,
+      text: `It's your flatmate, Shib. You promised you would help Shib with his temporomuscaphobia by destroying 
+      any timeflies from the apartment. The best remedy for timeflies is to feed them books.^^Pick a throw-away to 
+      feed to Shib's timefly intruder.`,
       audio: homeSong,
       background: bgBedroom,
       dialogSequence: () => [
         {
           characterId: "shib",
-          text: `HURRY IT UP! I AM BARELY HOLDING IT TOGETHER!`,
+          text: `Buddy ole boy, I am barely holding it together. If you could make haste, we can go back to living our lives.`,
         },
       ],
       choices: () => {
@@ -146,13 +145,13 @@ export const bedroomScenes = {
     function (payload): Scene {
       return {
         id: this.id,
-        text: "You leave your room. Shib is waiting anxiously in the living room.",
+        text: "You leave your room. Shib is waiting outside.",
         audio: homeSong,
         background: bgLivingRoom,
         dialogSequence: () => [
           {
             characterId: "shib",
-            text: `YES! You picked a good book. Hurry, hurry, HURRY!`,
+            text: `Okay, thank you so much. I am totally out of books.`,
             next: "bedroom-time-fly1",
           },
         ],
@@ -166,8 +165,7 @@ export const bedroomScenes = {
     function (payload): Scene {
       return {
         id: this.id,
-        text: `You walk into Shib's room with the book. There's the Time Fly on the windowsill. Seems like more of 
-        these things appear everyday. No wonder Shib is on edge recently.^^{You set the book down next to the insect}.`,
+        text: `You slide into Shib's room and close the door. The timefly sits on the windowsill, preening.^^{You set the book down next to the insect}.`,
         audio: homeSong,
         background: bgTimeFly,
         buttonActions: () => [
@@ -205,7 +203,7 @@ export const bedroomScenes = {
     function (payload): Scene {
       return {
         id: this.id,
-        text: `You swoop a Bell jar over the Time Fly and carefully scoot a piece of paper underneath. Now what?`,
+        text: `You swoop a Bell jar over the timefly and scoot a piece of paper under the whole thing. Now you...`,
         audio: homeSong,
         background: bgWindowsill,
         choices: () => [
@@ -267,9 +265,9 @@ export const bedroomScenes = {
           const dialog: Dialog[] = [
             {
               characterId: "shib",
-              text: `${shibSequenceCount > 0 ? `You're not listening! ` : ""}So, you gotta just kill them, you do that for me right? You said once that you would prefer to
-            capture them and let them go. But you remember you can't living with me, right? Cause they are going to
-            come right back in.`,
+              text: `${shibSequenceCount > 0 ? `You're not listening! ` : ""}So, you gotta just kill them, you do that for me right? You said once that you like to
+            capture them and let them go. But while you're living with me, you won't, right? Cause they are going to
+            come right back in, dude. I am a timefly magnet.`,
               onClick: () => {
                 const game = useGameStore();
                 // game.setPersistAvatar(true);
@@ -277,9 +275,9 @@ export const bedroomScenes = {
             },
             {
               characterId: "shib",
-              text: `I don't know if you remember but they are attracted to my fear! They'll just home right back in
-            on me...and you know I have a phobia of them, they make me even more afraid, which attracts even more
-            time flies to me.`,
+              text: `They'll just home right back in
+            on me...they smell my fear, it attracts more
+            timeflies to me.`,
             },
           ];
 
@@ -391,13 +389,11 @@ export const bedroomScenes = {
           return [
             {
               characterId: "shib",
-              text: `${character.name}, I am serious about this. You're just gonna ignore me and look at your Drip? 
-              You don't even care how I feel. Maybe you are not such a good room mate.`,
+              text: `${character.name}, if you're just gonna ignore me and look at your Drip, I'm gonna get really mad.`,
             },
             {
               characterId: "shib",
-              text: `I need to live with someone who validates my emotions. That means even during a cyclical 
-              trauma-dump, ${character.name}.`,
+              text: `Even if you think something is insignificant, ${character.name}, you could still be empathetic when others are upset.`,
             },
           ];
         },
@@ -407,11 +403,11 @@ export const bedroomScenes = {
             next: "bedroom-time-fly7",
           },
           {
-            text: `"I'm sorry - I will!"`,
+            text: `"I'm sorry. I'll try harder."`,
             next: "bedroom-time-fly7",
           },
           {
-            text: `<i>Ugh.</i>`,
+            text: `<i>Stop. We're roommates, not friends. Don't tell me what to do.</i>`,
             next: "bedroom-time-fly7",
           },
         ],
@@ -432,7 +428,7 @@ export const bedroomScenes = {
           return [
             {
               characterId: "shib",
-              text: `SHIT! OH SHIT, look at the time, I gotta fly.`,
+              text: `SHIT! OH SHIT, look at the time!! I gotta fly. Cya.`,
               next: "bedroom5",
             },
           ];
@@ -446,7 +442,7 @@ export const bedroomScenes = {
     return {
       id: this.id,
       text: `Shib leaves. What will you do? You could go out and explore. Also, no one is home. 
-      You might enjoy some quiet time in your room.`,
+      You might enjoy some quiet time here.`,
       audio: homeSong,
       background: bgLivingRoom,
       choices: () => [
@@ -455,7 +451,7 @@ export const bedroomScenes = {
           next: "home2",
         },
         {
-          text: "Enjoy some quiet time in your room.",
+          text: "Enjoy some quiet time here.",
           next: "room",
         },
       ],
