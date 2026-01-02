@@ -11,6 +11,7 @@ import { useCharacterStore } from "@/stores/character";
 import { useGameStore } from "@/stores/game";
 import { defineScene, SceneId } from "../story";
 import { getShibHonestAnswer } from "../helper-functions/text-helper-functions";
+import { useAudioStore } from "@/stores/audio";
 
 const sectionId = "bedroom";
 
@@ -30,6 +31,10 @@ export const bedroomScenes = {
             characterId: "shib",
             text: `Hey, ${playerName}! Would you come help me? There is a Time Fly on my windowsill. You said you 
             would take care of them for me, right?`,
+            onClick: () => {
+              const audioStore = useAudioStore();
+              audioStore.fadeOutTrack();
+            },
           },
           {
             characterId: "shib",
@@ -188,6 +193,7 @@ export const bedroomScenes = {
         opportunity to {catch the Time Fly}.`,
         audio: homeSong,
         background: bgTimeFly,
+        //TODO: catch the timefly mini game
         buttonActions: () => [
           {
             next: "bedroom-time-fly3",
@@ -424,15 +430,18 @@ export const bedroomScenes = {
         text: ``,
         audio: homeSong,
         background: bgLivingRoom,
-        dialogSequence: () => {
-          return [
-            {
-              characterId: "shib",
-              text: `SHIT! OH SHIT, look at the time!! I gotta fly. Cya.`,
-              next: "bedroom5",
-            },
-          ];
-        },
+        dialogSequence: () => [
+          {
+            characterId: "shib",
+            text: `I have enough to worry about with everything going on in the news. Have you seen what's happening 
+            with the CDC? It's BOUILLABAISSE!`,
+          },
+          {
+            characterId: "shib",
+            text: `SHIT! OH SHIT, look at the time!! I gotta fly. Cya.`,
+            next: "bedroom5",
+          },
+        ],
         metadata: { sectionId },
       };
     }
@@ -578,27 +587,37 @@ export const bedroomScenes = {
     return {
       id: this.id,
       audio: homeSong,
-      //TODO: CHORE - break this up
-      text:
-        `You sit down at the desk and open to a fresh page of the pad.` +
-        `^You look down onto the off-white paper. A void to fill. Dimensionless.` +
-        `^The desire to form and create something in that void. It pulls you, amuses you, scares you. ` +
-        `You feel like proving your stoicism, resisting the urge to make marks. {Go into the Void}.` +
-        `^^You can feel the spirit rising in you, and the thrill of channeling that spirit! ` +
-        `Feelings with no where to go are like idle hands...they animate. Or, no, do they become animate hands!? ` +
-        `Nonononono! You pick up the paintbrush, smoosh some acrylic paint into the palette and {paint with your heart}.` +
-        `^^{Nah, nevermind, I'm going to sleep}.`,
+
+      text: `You sit down at the desk and open to a fresh page of the pad. You look down onto the off-white paper. 
+        A void to fill. Dimensionless. The desire to form and create something in that void. {It pulls you, amuses you, scares you}.`,
       background: bgBedroom,
       buttonActions: () => [
         {
-          next: "void",
+          next: "make-something1",
         },
+      ],
+      metadata: { sectionId },
+    };
+  }),
+
+  "make-something1": defineScene("make-something1", function (payload): Scene {
+    return {
+      id: this.id,
+      audio: homeSong,
+      text:
+        `You feel like proving your stoicism, resisting the urge to make marks. But you can also feel the spirit 
+        rising in you, and the thrill of channeling that spirit! Feelings with no where to go are like idle hands...
+        they animate. Or, no, do they become animate hands!? ` +
+        `.` +
+        `^^{Nah, nevermind, I'm going to sleep}.`,
+      background: bgBedroom,
+      choices: () => [
+        { text: "Go into the Void.", next: "void" },
         {
+          text: `Nonononono! Pick up the paintbrush, smoosh some acrylic paint into the palette and paint with your heart.`,
           next: "paint",
         },
-        {
-          next: "nap",
-        },
+        { text: `Nah, nevermind. I'm going to sleep.`, next: "nap" },
       ],
       metadata: { sectionId },
     };
@@ -660,12 +679,8 @@ function getBookChoices(filter: string, nextScene: SceneId): Choice[] {
     },
   ];
 
-  if (!filter) {
-    return [];
-  }
-
   const indicesToRemove = filter
-    .split(",")
+    ?.split(",")
     .map((str) => parseInt(str.trim()))
     .filter((num) => num !== 2 && !isNaN(num));
 

@@ -4,16 +4,8 @@
       < {{ character.name ? `${character.name}'s ` : "" }}Drip💧
     </li>
 
-    <li
-      v-if="!game.currentSceneId.includes('intro')"
-      @click.stop="setDrawerView('bag')"
-    >
-      Items
-    </li>
-    <li
-      v-if="!game.currentSceneId.includes('intro')"
-      @click.stop="setDrawerView('phone')"
-    >
+    <li @click.stop="setDrawerView('bag')">Items</li>
+    <li @click.stop="setDrawerView('phone')">
       Notifications
       <span
         v-if="drawer.notificationCount > 0 || drawer.phoneIsCrazy"
@@ -23,12 +15,7 @@
       >
     </li>
     <li @click.stop="setDrawerView('dictionary')">Dictionary</li>
-    <li
-      v-if="!game.currentSceneId.includes('intro')"
-      @click.stop="setDrawerView('stats')"
-    >
-      Stats
-    </li>
+    <li @click.stop="setDrawerView('stats')">Stats</li>
     <li @click.stop="setDrawerView('scenes')">Scenes</li>
     <li @click.stop="goToSceneGraph">Scene Graph</li>
     <li @click.stop="restart">Restart</li>

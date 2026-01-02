@@ -7,6 +7,8 @@ export const useEffectsStore = defineStore("effects", {
     isPsychedelic: false,
     psychedelicScenesRemaining: 0,
     isZoomedOut: false,
+    closer: false,
+    backAway: false,
     isSpinning: false,
     blurChoices: false,
     stretchAvatar: false,
@@ -66,6 +68,14 @@ export const useEffectsStore = defineStore("effects", {
       if (this.blurChoices) {
         this.blurChoices = false;
       }
+    },
+
+    toggleCloser(value: boolean) {
+      this.closer = value;
+    },
+
+    toggleBackAway(value: boolean) {
+      this.backAway = value;
     },
   },
 });

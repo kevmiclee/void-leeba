@@ -13,6 +13,8 @@ import windTunnel from "@/assets/audio/story/background-themes/wind-tunnel.mp3";
 import mudmanTheme from "@/assets/audio/story/background-themes/mudman-theme.mp3";
 import serverFarmTheme from "@/assets/audio/story/background-themes/server-farm2.mp3";
 import poundingSound from "@/assets/audio/story/sounds/pounding.mp3";
+import shtr from "@/assets/audio/characters/shtr.mp3";
+import mudman from "@/assets/audio/characters/mudman.mp3";
 
 import { defineScene } from "../story";
 import { useGameStore } from "@/stores/game";
@@ -76,6 +78,10 @@ export const introScenes = {
           stats: [{ id: "blueMagic", amount: 1 }],
         },
       ],
+      onPageLoad: () => {
+        const audioStore = useAudioStore();
+        audioStore.playGenericSound(shtr);
+      },
       metadata: { sectionId },
     };
   }),
@@ -83,7 +89,7 @@ export const introScenes = {
   intro1: defineScene("intro1", function (payload): Scene {
     return {
       id: this.id,
-      text: `${payload?.text} I paid for this dream, don't try to screw this up for me. 
+      text: `${payload?.text} I paid for this dream, ${payload?.text == "YES!" ? "so be a good little oneiromancer." : `don't try to screw this up for me.`} 
       Remember: I chose you, a splashing hapless clownfish, because I see something 
       special in you. So {pay attention}!`,
       audio: windTunnel,
@@ -117,22 +123,47 @@ export const introScenes = {
   intro3: defineScene("intro3", function (payload): Scene {
     return {
       id: this.id,
-      text: `Quaint organism, IT IS I! The Supreme Hegemon of Tangential Reality. 
-      It's true! I have the talent of Tangents—the power to spring {Leaks} to my liking. So get on my good side. 
-      Entertain me. Make me laugh...{You won't}!`,
+      text: `Quaint organism, IT IS I! The Supreme Hegemon of Tangential Reality. I was born from the 
+      Goofball Dust explosion. It's true! I have the talent of Tangents—the power to spring {Leaks} to my liking. 
+      So get on my good side. Entertain me. Make me laugh...You won't!`,
       audio: windTunnel,
       background: bgFog,
       buttonActions: () => [
         {
           dictionaryEntryId: "leaks",
         },
+      ],
+      choices: () => [
+        {
+          text: `"Goofball Dust Explosion?"`,
+          next: "intro3a",
+        },
+      ],
+      onPageLoad: () => {
+        const dict = useDictionaryStore();
+        dict.addEntry("leaks");
+        const audioStore = useAudioStore();
+        audioStore.playGenericSound(shtr);
+      },
+      metadata: { sectionId },
+    };
+  }),
+
+  intro3a: defineScene("intro3a", function (payload): Scene {
+    return {
+      id: this.id,
+      text: `INDEED! I am the most prominent entity born in this epochal event! My responsibility and power are 
+      unknown to other entities, whose lives it is my wont to {toy with}!`,
+      audio: windTunnel,
+      background: bgFog,
+      buttonActions: () => [
         {
           next: "intro4",
         },
       ],
       onPageLoad: () => {
         const dict = useDictionaryStore();
-        dict.addEntry("leaks");
+        dict.addEntry("Goofball Dust Explosion");
       },
       metadata: { sectionId },
     };
@@ -141,10 +172,10 @@ export const introScenes = {
   intro4: defineScene("intro4", function (payload): Scene {
     return {
       id: this.id,
-      text: `The dream you are about to see will help you...and me. It's a premonitory one 
+      text: `TAKE HEED! The dream you are about to see will help you...and me. It's a premonitory one 
       that Dirtgirl potted. All her dreams are good soil. So grow! I bartered real good for it 
       too—Sandperson told me about this dream the Giant Sand Worm had the other night. So funny, 
-      it had me in tears...whoops! Off on a tangent.^^Anyway, {enjoy the dream!}`,
+      it had me in tears...whoops! Off on a tangent.^^Anyway, {enjoy the dream}!`,
       audio: windTunnel,
       background: bgFog,
       buttonActions: () => [
@@ -152,6 +183,10 @@ export const introScenes = {
           next: "intro5",
         },
       ],
+      onPageLoad: () => {
+        const audioStore = useAudioStore();
+        audioStore.playGenericSound(shtr);
+      },
       metadata: { sectionId },
     };
   }),
@@ -176,7 +211,7 @@ export const introScenes = {
       ],
       onPageLoad: () => {
         const audioStore = useAudioStore();
-        audioStore.playGenericSound(mudmanTheme);
+        audioStore.playTrack(mudmanTheme);
       },
       metadata: { sectionId },
     };
@@ -214,7 +249,8 @@ export const introScenes = {
           next: "intro8",
           onClick: () => {
             const audioStore = useAudioStore();
-            audioStore.playGenericSound(serverFarmTheme);
+            audioStore.fadeOutTrack();
+            audioStore.playTrack(serverFarmTheme);
             const game = useGameStore();
             game.setPersistAvatar(false);
           },
@@ -240,6 +276,10 @@ export const introScenes = {
           next: "intro9",
         },
       ],
+      onPageLoad: () => {
+        const audioStore = useAudioStore();
+        audioStore.playGenericSound(mudman);
+      },
       metadata: { sectionId },
     };
   }),
@@ -341,8 +381,9 @@ export const introScenes = {
       id: this.id,
       text: `The portal opens into pink hallway. You see a myriad of programmers, coding programs 
       that will sell the behavioral futures of entire {Leaks}. To torque each reality to its limit, 
-      to squeeze it dry of its data, to milk it for all the relevance it's worth. One of the 
-      programmers eyes you with a standoffish glare that says, {"No noobs allowed"}.`,
+      to squeeze it dry of its data, to milk it for all the relevance it's worth. You see your orb 
+      drift into one of the many slimy spirals that line the walls. The programmer at the terminal 
+      glares at you standoffishly, as if to say, {"No noobs allowed"}.`,
       audio: windTunnel,
       background: bgServerHallway,
       buttonActions: () => [
@@ -381,16 +422,23 @@ export const introScenes = {
   intro14: defineScene("intro14", function (payload): Scene {
     return {
       id: this.id,
-      text: `Oh, that's right, ${payload?.text}! Well at least you still have your name.^^
+      text: `Oh, that's right, {${payload?.text}}! Well at least you still have your name.^^
       And yet...what's missing? You can feel the hole, but not the shape of what fit there. Was it your courage? 
       Your heart? No — something deeper, older. {A promise you made before you were born, maybe}...`,
       audio: windTunnel,
       background: bgFog,
       buttonActions: () => [
         {
+          dictionaryEntryId: "player",
+        },
+        {
           next: "intro15",
         },
       ],
+      onPageLoad: () => {
+        const dict = useDictionaryStore();
+        dict.addEntry("Supreme Hegemon of Tangential Reality");
+      },
       metadata: { sectionId },
     };
   }),
@@ -409,7 +457,8 @@ export const introScenes = {
       ],
       onPageLoad: () => {
         const audioStore = useAudioStore();
-        audioStore.playGenericSound(poundingSound);
+        audioStore.fadeOutTrack();
+        audioStore.playTrack(poundingSound);
       },
       metadata: { sectionId },
     };

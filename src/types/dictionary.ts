@@ -9,4 +9,8 @@ export type DictionaryEntryId =
   | "dorgang"
   | "hyperleak"
   | "whatever"
-  | "leaks";
+  | "leaks"
+  | "player"
+  | "Supreme Hegemon of Tangential Reality"
+  | "Goofball Dust Explosion"
+  | "Mudman";

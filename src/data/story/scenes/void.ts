@@ -5,8 +5,6 @@ import { useSnackbarStore } from "@/stores/snackbar";
 import { useEffectsStore } from "@/stores/effects";
 
 //TODO: MUSIC - void
-//TODO: stats?
-//TODO: items?
 
 const sectionId = "void";
 

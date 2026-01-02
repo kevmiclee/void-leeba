@@ -15,7 +15,6 @@
       v-else-if="(hasDialog || persist) && currentCharacter"
       class="avatar-wrapper"
       :key="currentCharacter.id"
-      @click.stop="onAvatarClicked"
     >
       <div class="stack">
         <img :src="currentCharacter.avatar" alt="" class="avatar base" />
@@ -41,7 +40,6 @@ const props = defineProps<{
   currentCharacter?: Character | null;
   hasDialog: boolean;
   dialogClicked: boolean;
-  onAvatarClicked?: () => void;
   persist?: boolean;
 }>();
 
@@ -57,7 +55,6 @@ const effects = useEffectsStore();
   display: flex;
   justify-content: flex-start;
   align-items: flex-end;
-  cursor: pointer;
 }
 
 .avatar-wrapper-right {

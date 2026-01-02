@@ -42,12 +42,6 @@ export const dreamScenes = {
     const didFaeries = character.flags["did-faeries"];
     const didNap = character.flags["did-nap"];
 
-    //TODO: - CHORE
-    // payload?.filter == "fromNap"
-    //       ? `You're able to wake up from the dream within the dream, but you're still dreaming. You are back ` +
-    //         `where you started.^^`
-    //       :
-
     return {
       id: this.id,
       background: bgForest,
@@ -226,18 +220,32 @@ export const dreamScenes = {
       return {
         id: this.id,
         background: bgForest,
-        //TODO: CHORE - Break this up
         text:
-          `What a cruddy day! You feel off.^^You hear yourself say aloud, "Eugh! What a wash."` +
-          `^^You lean back for a while just admiring the mushroom's disgustingness, worrying that you'll never wake up again.` +
-          `^^{Grab up a handful of the mushroom's flesh.}` +
-          `^^You begin to hear a faint thudding noise like the labored heartbeat of ` +
-          `some distant goliath. Oh no. Your dreaming was weak, filled with worry. A foreboding sense of doom cuts forces ` +
-          `you to {awaken back into the first dream}.`,
+          `What a cruddy day! You feel off. You hear yourself say aloud, "Eugh! What a wash."` +
+          `^^You lean back for a while just admiring the mushroom's disgustingness, worrying that {you'll never wake up again}.` +
+          `^^{Grab up a handful of the mushroom's flesh.}`,
         buttonActions: () => [
           {
             item: "mushroom",
           },
+          {
+            next: "dream-within-a-dream-refuse3",
+          },
+        ],
+        metadata: { sectionId },
+      };
+    }
+  ),
+
+  "dream-within-a-dream-refuse3": defineScene(
+    "dream-within-a-dream-refuse3",
+    function (payload): Scene {
+      return {
+        id: this.id,
+        background: bgForest,
+        text: `You begin to hear a faint thudding noise like the labored heartbeat of some distant goliath. Oh no. 
+          Your dreaming was weak, filled with worry. A foreboding sense of doom cuts forces you to {awaken back into the first dream}.`,
+        buttonActions: () => [
           {
             next: "dream-tree-chase",
             filter: "dream",
@@ -254,20 +262,8 @@ export const dreamScenes = {
       return {
         id: this.id,
         background: bgForest,
-        //TODO: CHORE - break this up
-        text:
-          `Completely serene, without a worry in your mind, you fall asleep in your dream. {You breathe in}.` +
-          `^^A new dream! You notice that you are hugging a brightly colored mushroom! You can tell because ` +
-          `your face is right up against it and your arms are embracing it. The mushroom smells like a marshmallow ` +
-          `pencil, graphite and sugar. Its flesh is soft, yet springy. {What a special mushroom}! What a special day! ` +
-          `You feel content.^^You hear yourself say aloud, "Wow! What a colorful mushroom."` +
-          `^^You lean back for a while just admiring the mushroom's shape.` +
-          `^^{Grab up a handful of the mushroom's flesh.}` +
-          `^^Looking up from the shroom, {a hilly landscape sprawls out before you}.`,
+        text: `Completely serene, without a worry in your mind, you fall asleep in your dream. {You breathe in}.`,
         buttonActions: () => [
-          {
-            item: "mushroom",
-          },
           {
             next: "dream-within-a-dream3",
           },
@@ -283,18 +279,9 @@ export const dreamScenes = {
       return {
         id: this.id,
         background: bgForest,
-        // CHORE - break this up
-        text:
-          `The landscape expands into a void panorama, filling every corner of the emptiness as you inhale deeper. ` +
-          `Day, night, day, night. Seasons cycle and time dutifully carves the terrain with imperceptible changes.` +
-          `^^You've never had a dream like this before. Usually it's packing, or missing busses.` +
-          `^^Settlements form. Clusters of huts dot the hillsides. Farms appear in patchwork sewn around the huts.` +
-          `^^You begin to exhale and as you do, the huts morph into vinyl-sided cookie-cutter houses. Spidery networks of highways ` +
-          `fan out and spread upon the landscape like mycelia exploring a forest floor.` +
-          `^^A hill flattens here, a plain rises into a mountain there. The houses multiply and spread out along the roads, and from ` +
-          `their coverage, large buildings and the grey of steel and asphalt overtake the vegetative green. The stars in the night ` +
-          `sky become less, the clarity of day is obscured by haze. The quiet is consumed by an ever-surmounting hum.` +
-          `^^{Breathe in.}`,
+        text: `A new dream! You notice that you are hugging a brightly colored mushroom! You can tell because your 
+          face is right up against it and your arms are embracing it. The mushroom smells like a marshmallow and pencils. 
+          Its flesh is soft, yet springy. {What a special mushroom}!`,
         buttonActions: () => [
           {
             next: "dream-within-a-dream4",
@@ -311,15 +298,123 @@ export const dreamScenes = {
       return {
         id: this.id,
         background: bgForest,
-        //TODO: CHORE - break this up
         text:
-          `The hum intensifies until it almost becomes unbearable, making you wince. It reaches a cresecendo and ` +
-          `slowly begins its ebb back into entropic silence, leaving a ghostly impression of its power in your memory.` +
-          `^^With each milliliter of breath that exits your lungs, the pervading artifical glow diminishes and the stars ` +
-          `return to their former glory, one by one.^^Buildings topple and decay as trees and fields reclaim the landscape. ` +
+          `What a special day! You feel content. You hear yourself say aloud, "Wow! What a colorful mushroom."` +
+          `^^You lean back for a while just admiring the mushroom's shape.` +
+          `^^{Grab up a handful of the mushroom's flesh.}` +
+          `^^Looking up from the shroom, {a hilly landscape sprawls out before you}.`,
+        buttonActions: () => [
+          {
+            item: "mushroom",
+          },
+          {
+            next: "dream-within-a-dream5",
+          },
+        ],
+        metadata: { sectionId },
+      };
+    }
+  ),
+
+  "dream-within-a-dream5": defineScene(
+    "dream-within-a-dream5",
+    function (payload): Scene {
+      return {
+        id: this.id,
+        background: bgForest,
+        text: `The landscape expands into a void panorama, filling every corner of the emptiness as you inhale deeper. 
+          Day, night, day, night. Seasons cycle and time dutifully carves the terrain with {imperceptible changes}.`,
+        buttonActions: () => [
+          {
+            next: "dream-within-a-dream6",
+          },
+        ],
+        metadata: { sectionId },
+      };
+    }
+  ),
+
+  "dream-within-a-dream6": defineScene(
+    "dream-within-a-dream6",
+    function (payload): Scene {
+      return {
+        id: this.id,
+        background: bgForest,
+        text:
+          `You've never had a dream like this before. Usually it's packing, or missing busses.` +
+          `^^Settlements form. Clusters of huts dot the hillsides. Farms appear in patchwork sewn around the huts.` +
+          `^^You begin to exhale and as you do, the huts morph into vinyl-sided cookie-cutter houses. Spidery networks of highways ` +
+          `fan out and spread upon the landscape like mycelia {exploring a forest floor}.` +
+          `^^A hill flattens here, a plain rises into a mountain there. The houses multiply and spread out along the roads, and from ` +
+          `their coverage, large buildings and the grey of steel and asphalt overtake the vegetative green. The stars in the night ` +
+          `sky become less, the clarity of day is obscured by haze. The quiet is consumed by an ever-surmounting hum.` +
+          `^^{Breathe in.}`,
+        buttonActions: () => [
+          {
+            next: "dream-within-a-dream4",
+          },
+        ],
+        metadata: { sectionId },
+      };
+    }
+  ),
+
+  "dream-within-a-dream7": defineScene(
+    "dream-within-a-dream7",
+    function (payload): Scene {
+      return {
+        id: this.id,
+        background: bgForest,
+        text:
+          `A hill flattens here, a plain rises into a mountain there. The houses multiply and spread out along 
+          the roads, and from their coverage, large buildings and the grey of steel and asphalt overtake the 
+          vegetative green. The stars in the night sky become less, the clarity of day is obscured by haze. 
+          The quiet is graudally consumed by an ever-surmounting hum.` +
+          `^^{Breathe in.}`,
+        buttonActions: () => [
+          {
+            next: "dream-within-a-dream8",
+          },
+        ],
+        metadata: { sectionId },
+      };
+    }
+  ),
+
+  "dream-within-a-dream8": defineScene(
+    "dream-within-a-dream8",
+    function (payload): Scene {
+      return {
+        id: this.id,
+        background: bgForest,
+        text:
+          `The hum intensifies until it almost becomes unbearable, making you wince. It reaches a cresecendo and 
+          slowly begins its ebb back into entropic silence, leaving a ghostly impression of its power in your memory.` +
+          `^^With each milliliter of breath that exits your lungs, the pervading artifical glow diminishes and the stars 
+          return to their former glory, {one by one}.^^Buildings topple and decay as trees and fields reclaim the landscape. ` +
           `The highways wither like wisps of smoke disintegrating into the hills. The once imposing grids of farms and ` +
           `neighborhoods fade into amorphous wilderness.^^Day, night, day, night. Seasons cycle and time dutifully carves ` +
           `the terrain with imperceptible changes. All is as it was before.^^{Open your eyes}.`,
+        buttonActions: () => [
+          {
+            next: "hypno",
+          },
+        ],
+        metadata: { sectionId },
+      };
+    }
+  ),
+
+  "dream-within-a-dream9": defineScene(
+    "dream-within-a-dream9",
+    function (payload): Scene {
+      return {
+        id: this.id,
+        background: bgForest,
+        text: `Buildings topple and decay as trees and fields reclaim the landscape. The highways wither like wisps of 
+          smoke disintegrating into the hills. The once imposing grids of farms and cities fade into amorphous 
+          wilderness.^^Day, night, day, night. Seasons cycle and time dutifully carves the terrain with imperceptible 
+          changes. All is as it was before.^^{Open your eyes}.`,
         buttonActions: () => [
           {
             next: "hypno",
@@ -334,14 +429,43 @@ export const dreamScenes = {
     return {
       id: this.id,
       background: bgForest,
-      //use tree-chase music
-      //TODO: CHORE - break this up
       text:
         `You have chosen to swing a dream ax at a dream tree.` +
-        `^^Looking down, you see a single-headed carbon-fiber ax in your left hand. Heh. Hefty!` +
-        `^^You spit into each of your palms and aiming at the nearest tree, you get a good look at its bark. ` +
-        `The brown armor is thick and full of a maze of paths, following the pine's vertical growth. ` +
-        `You position the ax over your left shoulder, and closing one eye, take a swing at a healthy angle to hit the tree.`,
+        `^^Looking down, you see a single-headed carbon-fiber ax in your left hand. {Heh. Hefty!}`,
+      onPageLoad: () => {
+        const character = useCharacterStore();
+        const hasAxe = character.hasItem("axe");
+
+        if (!hasAxe) {
+          character.addToInventory("axe", this.id);
+        }
+      },
+      buttonActions: () => [
+        {
+          next: "dream-chop1",
+        },
+      ],
+      metadata: {
+        sectionId,
+        routes: [
+          {
+            text: `THUNK`,
+            next: "dream-tree-chase",
+            aspect: "tree-murderer",
+          },
+        ],
+      },
+    };
+  }),
+
+  "dream-chop1": defineScene("dream-chop1", function (payload): Scene {
+    return {
+      id: this.id,
+      background: bgForest,
+      //TODO: MUSIC - use tree-chase music
+      text: `You spit into each of your palms and aiming at the nearest tree, you get a good look at its bark. 
+        The brown armor is thick and full of a maze of paths, following the pine's vertical growth.You position 
+        the ax over your left shoulder, and closing one eye, take a swing at a healthy angle to hit the tree.`,
       onPageLoad: () => {
         const character = useCharacterStore();
         const hasAxe = character.hasItem("axe");

@@ -11,7 +11,6 @@
     :currentCharacter="currentCharacter"
     :hasDialog="hasDialog ?? false"
     :dialogClicked="dialogClicked ?? false"
-    :onAvatarClicked="onAvatarClicked"
     :persist="game.persistAvatar"
   ></Avatar>
 
@@ -33,7 +32,7 @@
     :dialogClicked="dialogClicked"
     :dialog="currentDialog"
     :dialogIndex="dialogIndex"
-    :name="currentCharacter?.name ?? ''"
+    :playerName="currentCharacter?.name ?? ''"
     :rotationDeg="rotationDeg"
     @update-dialog-clicked="updateDialogClicked"
     @update-dialog-index="updateDialogIndex"
@@ -105,7 +104,7 @@ const visibleChoices = computed(() => {
 });
 const isScene = computed(() => game.currentSceneId !== "start");
 
-const isIntro = computed(() => game.currentSceneId === "intro");
+const isIntro = computed(() => game.currentSceneId.includes("intro"));
 
 function playSpeakerSound(characterId: CharacterId) {
   const character = characters[characterId];
@@ -120,23 +119,6 @@ function updateDialogClicked(value: boolean) {
 
 function updateDialogIndex(value: number) {
   dialogIndex.value = value;
-}
-
-function onAvatarClicked() {
-  if (currentDialog.value?.onClick) {
-    currentDialog.value?.onClick();
-  } else if (!currentDialog.value?.popUp) {
-    if (hasDialog.value) {
-      updateDialogIndex(dialogIndex.value + 1);
-    } else {
-      effects.updateShowChoices(true);
-    }
-  }
-
-  if (currentDialog.value?.popUp) {
-    updateDialogClicked(true);
-    effects.updateShowChoices(true);
-  }
 }
 
 function openDrawerToView(value: DrawerView) {

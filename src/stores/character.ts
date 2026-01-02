@@ -1,4 +1,4 @@
-import { defaultItems, itemCatalog } from "@/data/items";
+import { itemCatalog } from "@/data/items";
 import { CharacterState } from "@/types/state";
 import { defineStore } from "pinia";
 import { useSnackbarStore } from "./snackbar";
@@ -41,7 +41,7 @@ export const useCharacterStore = defineStore("character", {
       scenesGained: [],
       scenesLost: [],
     },
-    inventory: [...defaultItems],
+    inventory: [],
     flags: {},
     flagHistory: [],
     currentSceneId: undefined,

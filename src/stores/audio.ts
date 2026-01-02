@@ -90,6 +90,7 @@ function crossfadeTo(
 }
 
 const currentGenericAudio = ref<HTMLAudioElement | null>(null);
+const currentTrack = ref<HTMLAudioElement | null>(null);
 
 export function useAudioStore() {
   function playCharacterSound(
@@ -119,6 +120,46 @@ export function useAudioStore() {
     }
   }
 
+  function playTrack(src: string) {
+    if (!isMuted.value) {
+      currentTrack.value = new Audio(src);
+      currentTrack.value.preload = "auto";
+      currentTrack.value
+        .play()
+        .catch((e) => console.warn("Audio playback failed:", e));
+    }
+  }
+
+  function clamp(v: number) {
+    return Math.max(0, Math.min(1, v));
+  }
+
+  function fadeOutTrack(durationMs = 300) {
+    const audio = currentTrack.value;
+    if (!audio) return;
+
+    const startVolume = clamp(audio.volume);
+    const startTime = performance.now();
+
+    function step(now: number) {
+      const elapsed = now - startTime;
+      const t = Math.min(elapsed / durationMs, 1);
+
+      audio!.volume = clamp(startVolume * (1 - t));
+
+      if (t < 1) {
+        requestAnimationFrame(step);
+      } else {
+        audio!.pause();
+        audio!.currentTime = 0;
+        audio!.volume = startVolume; // reset for reuse
+        currentGenericAudio.value = null;
+      }
+    }
+
+    requestAnimationFrame(step);
+  }
+
   async function playBackgroundAudio(src: string | undefined) {
     ensureContext();
 
@@ -135,17 +176,10 @@ export function useAudioStore() {
       return;
     }
 
-    // same track already playing
     if (currentLoop?.src === src) return;
 
-    // decode & crossfade
     const buffer = await loadBuffer(src);
-    // Optional: set seamless loop region if your file has non-zero padding
-    // const loopStart = 0; // seconds
-    // const loopEnd = buffer.duration; // or a trimmed value you detect/know
     crossfadeTo(buffer, src, fadeDuration);
-    // If you want to enforce a loop segment:
-    // const next = startLoop(buffer, fadeDuration, loopStart, loopEnd); (and handle crossfade manually)
   }
 
   function click() {
@@ -171,6 +205,8 @@ export function useAudioStore() {
     playGenericSound,
     click,
     mute,
+    fadeOutTrack,
+    playTrack,
     isMuted,
   };
 }

@@ -9,6 +9,8 @@
     :class="{
       psychedelic: effects.isPsychedelic,
       'zoom-out': effects.isZoomedOut,
+      closer: effects.closer,
+      'back-away': effects.backAway,
       spin: effects.isSpinning,
     }"
     :style="[backgroundStyle, alignmentStyle, backgroundColorFilter]"
@@ -171,14 +173,28 @@ watch(
   position: relative;
   background-repeat: no-repeat;
 
-  transition:
-    background-size 15s ease-in-out,
-    transform 15s ease-in-out;
   transform: rotate(0deg);
 }
 
 .scene-wrapper.zoom-out {
   background-size: 0.1%;
+  transition:
+    background-size 15s ease-in-out,
+    transform 15s ease-in-out;
+}
+
+.scene-wrapper.closer {
+  background-size: 110%;
+  transition:
+    background-size 1s ease-in-out,
+    transform 1s ease-in-out;
+}
+
+.scene-wrapper.back-away {
+  background-size: 90%;
+  transition:
+    background-size 1s ease-in-out,
+    transform 1s ease-in-out;
 }
 
 .scene-wrapper.spin {

@@ -4,14 +4,17 @@
       v-if="hasDialog || dialogClicked"
       class="dialog-wrapper"
       :class="{ 'dialog-slide-up': dialogClicked }"
-      @click.stop="onDialogClick"
     >
       <div class="dialog-header">
         <!-- :style="{ transform: `rotate(${rotationDeg}deg)` }" -->
-        {{ name.toUpperCase() }}
+        {{ playerName.toUpperCase() }}
       </div>
 
-      <div class="dialog-foreground" v-html="dialog!.text"></div>
+      <div
+        class="dialog-foreground"
+        v-html="dialog!.text"
+        @click.stop="onDialogClick"
+      ></div>
     </div>
   </transition>
 </template>
@@ -28,7 +31,7 @@ const props = defineProps<{
   dialogClicked: boolean;
   dialog: Dialog | undefined;
   dialogIndex: number;
-  name: string;
+  playerName: string;
   rotationDeg: string;
 }>();
 
@@ -102,7 +105,6 @@ function onDialogClick() {
   position: absolute;
   bottom: 2vw;
   align-self: center;
-  cursor: pointer;
   transform: translateY(0);
   transition: transform 200ms ease-in;
   z-index: 3;
@@ -122,11 +124,11 @@ function onDialogClick() {
   background-color: var(--background-color);
   color: black;
   z-index: 1;
+  cursor: pointer;
 }
 
 .dialog-slide-up {
   transform: translateY(-20vw);
-  cursor: default;
 }
 
 .dialog-foreground::after {

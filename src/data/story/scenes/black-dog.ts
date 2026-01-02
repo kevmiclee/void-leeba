@@ -53,12 +53,25 @@ export const blackDogScenes = {
           next: "black-dog1",
           stats: [{ id: "will", amount: 1 }],
           flags: [{ id: "black-dog-readiness", value: -1 }],
+          onChoose: () => {
+            const effects = useEffectsStore();
+            effects.toggleCloser(true);
+          },
         },
         {
           text: "Back away.",
           next: "black-dog1",
           stats: [{ id: "will", amount: 1, isLost: true }],
           flags: [{ id: "black-dog-readiness", value: 1 }],
+          onChoose: () => {
+            const effects = useEffectsStore();
+            effects.toggleBackAway(true);
+          },
+        },
+        {
+          text: "Don't move a muscle.",
+          next: "black-dog1",
+          flags: [{ id: "black-dog-readiness", value: 0 }],
         },
       ],
       metadata: { sectionId },
@@ -71,7 +84,7 @@ export const blackDogScenes = {
       background: bgBurlyBush,
       audio: spookyMusic,
       text:
-        `Before you move a muscle, the dark star advances at a clip. As the distance closes, you notice rust red fur, ` +
+        `Sensing your presence, the dark star advances at a clip. As the distance closes, you notice rust red fur, ` +
         `interspersed with oily black. You feel riveted to the spot, {unable to look away}.`,
       buttonActions: () => [
         {
@@ -418,12 +431,26 @@ export const blackDogScenes = {
       background: bgBurlyBush,
       audio: spookyMusic,
 
-      text:
-        `The sound is eerily human, distincly <i>evil</i> in its gleeful exuberance. ` +
-        `Its lips purse, and its cheeks tighen around its jaw, baring a mouth filled with human teeth. ` +
-        `A stomach-seizing terror builds in you and you know...` +
-        `^^<i>This kind of creature feeds on fear.</i>` +
-        `^^You shall try a gambit, or it may best ye. You must latch onto a solid wavelength, to stabilize, secure your base.`,
+      text: `The sound is eerily human, distincly <i>evil</i> in its gleeful exuberance. Its lips 
+        purse, and its cheeks tighen around its jaw, baring a mouth filled with human teeth. 
+        A stomach-seizing terror builds in you and you know... 
+        ^^{This kind of creature feeds on fear}.`,
+      buttonActions: () => [
+        {
+          next: "black-dog-bad1a",
+        },
+      ],
+      metadata: { sectionId },
+    };
+  }),
+
+  "black-dog-bad1a": defineScene("black-dog-bad1a", function (payload): Scene {
+    return {
+      id: this.id,
+      background: bgBurlyBush,
+      audio: spookyMusic,
+
+      text: `You shall try a gambit, or it may best ye. You must latch onto a solid wavelength, to stabilize, secure your base.`,
       dialogSequence: () => [
         {
           characterId: "black-dog-scary",
@@ -816,19 +843,32 @@ export const blackDogScenes = {
         audio: spookyMusic,
         text:
           `You're done with this park. Part of you wishes you could find those drunks to give them a piece of your mind. ` +
-          `Maybe they went {into the neighborhood}. Or you could {check by that snow pile}.` +
+          `Maybe they went {into the neighborhood}.` + // Or you could {check by that snow pile}.
           `^^Another part of you just wants to {go home to your room} and forget about today.`,
-        buttonActions: () => [
-          {
-            next: "neighborhood",
-          },
-          {
-            next: "snow-pile",
-          },
-          {
-            next: "room",
-          },
-        ],
+        buttonActions: () => {
+          const effects = useEffectsStore();
+
+          return [
+            {
+              next: "neighborhood",
+              action: () => {
+                effects.clearEffects();
+              },
+            },
+            // {
+            //   next: "snow-pile",
+            //   action: () => {
+            //     effects.clearEffects();
+            //   },
+            // },
+            {
+              next: "room",
+              action: () => {
+                effects.clearEffects();
+              },
+            },
+          ];
+        },
         metadata: { sectionId },
       };
     }
@@ -875,21 +915,34 @@ export const blackDogScenes = {
 
           return dialogs;
         },
-        choices: () => [
-          {
-            text: "Go into the neighborhood.",
-            next: "neighborhood",
-            payload: { filter: "black-dog" },
-          },
-          {
-            text: `Follow the drunk${payload?.filter ? "" : "s"}.`,
-            next: "snow-pile",
-          },
-          {
-            text: "Go back home.",
-            next: "room",
-          },
-        ],
+        choices: () => {
+          const effects = useEffectsStore();
+
+          return [
+            {
+              text: "Go into the neighborhood.",
+              next: "neighborhood",
+              payload: { filter: "black-dog" },
+              onChoose: () => {
+                effects.clearEffects();
+              },
+            },
+            // {
+            //   text: `Follow the drunk${payload?.filter ? "" : "s"}.`,
+            //   next: "snow-pile",
+            //   onChoose: () => {
+            //     effects.clearEffects();
+            //   },
+            // },
+            {
+              text: "Go back home.",
+              next: "room",
+              onChoose: () => {
+                effects.clearEffects();
+              },
+            },
+          ];
+        },
         metadata: { sectionId },
       };
     }
@@ -901,21 +954,34 @@ export const blackDogScenes = {
       background: bgBurlyBush,
       audio: spookyMusic,
       text: getBlackDogDoneText(payload?.filter ?? ""),
-      choices: () => [
-        {
-          text: "Follow it.",
-          next: "neighborhood",
-          payload: { filter: "black-dog" },
-        },
-        {
-          text: "Play on the snowpile.",
-          next: "snow-pile",
-        },
-        {
-          text: "Go back home.",
-          next: "room",
-        },
-      ],
+      choices: () => {
+        const effects = useEffectsStore();
+
+        return [
+          {
+            text: "Follow it.",
+            next: "neighborhood",
+            payload: { filter: "black-dog" },
+            onChoose: () => {
+              effects.clearEffects();
+            },
+          },
+          // {
+          //   text: "Play on the snowpile.",
+          //   next: "snow-pile",
+          //   onChoose: () => {
+          //     effects.clearEffects();
+          //   },
+          // },
+          {
+            text: "Go back home.",
+            next: "room",
+            onChoose: () => {
+              effects.clearEffects();
+            },
+          },
+        ];
+      },
       metadata: { sectionId },
     };
   }),

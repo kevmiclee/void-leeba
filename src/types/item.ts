@@ -1,5 +1,3 @@
-import { itemCatalog } from "@/data/items";
-
 export interface Item {
   id: ItemId;
   label: string;
@@ -14,15 +12,7 @@ export interface Item {
   usable: boolean;
 }
 
-export const defaultItems: Item[] = [
-  // itemCatalog["dragon-ring"],
-  // itemCatalog["patched-coat"],
-];
-
 export type ItemId =
-  // | "dragon-ring"
-  // | "patched-coat"
-  // |
   | "pinecone"
   | "pine-needles"
   | "mushroom"

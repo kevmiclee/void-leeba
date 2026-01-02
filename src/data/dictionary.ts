@@ -26,7 +26,7 @@ export const dictionaryEntries: Record<DictionaryEntryId, DictionaryEntry> = {
     name: "Leaks",
     description: `Leaks are the portals between tangetial realities. These portals can take the 
     form of computers, phones, reflections and mirrors. They can be connecting any realities, 
-    but usually there's a reason. For example, a pun, a strong emotional stress or an obsession.`,
+    but there's always a reason. For example, a pun, a double-meaning, a strong emotional stress or an obsession.`,
   },
 
   dorgang: {
@@ -47,5 +47,35 @@ export const dictionaryEntries: Record<DictionaryEntryId, DictionaryEntry> = {
     name: "Whatever",
     description:
       "Whatever can be somewhere, somehow, something. But it has not figured out where that is yet.",
+  },
+
+  player: {
+    id: "player",
+    name: "Player",
+    description: `#PLAYER# is you. The {Supreme Hegemon of Tangential Reality} chose you, a splashing hapless clownfish, 
+    because they see something special in you.`,
+  },
+
+  "Supreme Hegemon of Tangential Reality": {
+    id: "Supreme Hegemon of Tangential Reality",
+    name: "Supreme Hegemon of Tangential Reality",
+    description: `The Supreme Hegemon of Tangential Reality (SHTR) was born from the {Goofball Dust Explosion}. 
+    As the most prominent entity born in this epochal event, it carries with it responsibility and power unknown 
+    to other entities. The SHTR holds dominion over and is omniscient of all Tangetial Realities. It behooves the 
+    {player} to entertain the SHTR and make them laugh so they bestow a kind eye on their existence.`,
+  },
+
+  "Goofball Dust Explosion": {
+    id: "Goofball Dust Explosion",
+    name: "Goofball Dust Explosion",
+    description:
+      "The Goofball Dust Explosion (GDE) is the primordial event that spawned all {leaks}.",
+  },
+
+  //TODO: CHORE - Mudman description
+  Mudman: {
+    id: "Mudman",
+    name: "Mudman",
+    description: "",
   },
 };

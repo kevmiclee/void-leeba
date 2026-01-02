@@ -1,5 +1,5 @@
 import { Scene } from "@/types/story";
-import bgDefault from "@/assets/images/backgrounds/new-game.png";
+import bgNeighborhood from "@/assets/images/backgrounds/neighborhood.png";
 import neighborhoodTheme from "@/assets/audio/story/background-themes/neighborhood.mp3";
 import { defineScene } from "../story";
 import { getNonZeroRandomDecimal } from "../helper-functions/outcome-helper-functions";
@@ -30,7 +30,7 @@ export const neighborhoodScenes = {
           //TODO: STORY - what if they've already been to their room?
         },
       ],
-      background: bgDefault,
+      background: bgNeighborhood,
       audio: neighborhoodTheme,
       metadata: { sectionId },
     };
@@ -77,7 +77,7 @@ export const neighborhoodScenes = {
           ],
         },
       ],
-      background: bgDefault,
+      background: bgNeighborhood,
       audio: neighborhoodTheme,
       onPageLoad: () => {
         const character = useCharacterStore();
@@ -117,7 +117,7 @@ export const neighborhoodScenes = {
             payload: { filter: "neutral-chance" },
           },
         ],
-        background: bgDefault,
+        background: bgNeighborhood,
         audio: neighborhoodTheme,
         metadata: { sectionId },
       };
@@ -155,7 +155,7 @@ export const neighborhoodScenes = {
             },
           },
         ],
-        background: bgDefault,
+        background: bgNeighborhood,
         audio: neighborhoodTheme,
         metadata: {
           sectionId,
@@ -184,7 +184,7 @@ export const neighborhoodScenes = {
       return {
         id: this.id,
         text: `You are so jazzed up by the praise, that you…`,
-        background: bgDefault,
+        background: bgNeighborhood,
         audio: neighborhoodTheme,
         choices: () => [
           {
@@ -215,7 +215,7 @@ export const neighborhoodScenes = {
       return {
         id: this.id,
         text: `You have both been trapped in a conversation about your supply chain. {Buckle up…}`,
-        background: bgDefault,
+        background: bgNeighborhood,
         audio: neighborhoodTheme,
         buttonActions: () => [
           {
@@ -234,7 +234,7 @@ export const neighborhoodScenes = {
         id: this.id,
         text: `<i>Three hours later...</i>^^As you return from the farm carrying your whole setup between the two of 
         you, you feel the sweat cleansing your soul.`,
-        background: bgDefault,
+        background: bgNeighborhood,
         audio: neighborhoodTheme,
         choices: () => [
           {
@@ -265,7 +265,7 @@ export const neighborhoodScenes = {
       return {
         id: this.id,
         text: ``,
-        background: bgDefault,
+        background: bgNeighborhood,
         audio: neighborhoodTheme,
         metadata: { sectionId },
       };
@@ -278,7 +278,7 @@ export const neighborhoodScenes = {
       return {
         id: this.id,
         text: ``,
-        background: bgDefault,
+        background: bgNeighborhood,
         audio: neighborhoodTheme,
         dialogSequence: () => [
           {
@@ -302,7 +302,7 @@ export const neighborhoodScenes = {
     return {
       id: this.id,
       text: `As the drunk walks off happily with your sculpture, you silently bid goodbye to your creation.`,
-      background: bgDefault,
+      background: bgNeighborhood,
       audio: neighborhoodTheme,
       metadata: { sectionId },
     };

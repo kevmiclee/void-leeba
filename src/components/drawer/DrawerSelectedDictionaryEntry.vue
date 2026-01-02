@@ -1,6 +1,9 @@
 <template>
   <div class="sub-menu-header" @click.stop="clearDictionaryEntry">
-    < {{ drawer.selectedDictionaryEntry!.name }}
+    <
+    {{
+      drawer.selectedDictionaryEntry!.name.replaceAll("Player", character.name)
+    }}
   </div>
   <p class="item-desc">
     <template v-for="(chunk, index) in parsedDescription" :key="index">
@@ -19,6 +22,7 @@
 <script setup lang="ts">
 import { dictionaryEntries } from "@/data/dictionary";
 import { useAudioStore } from "@/stores/audio";
+import { useCharacterStore } from "@/stores/character";
 import { useDictionaryStore } from "@/stores/dictionary";
 import { useDrawerStore } from "@/stores/drawer";
 import { DictionaryEntry, DictionaryEntryId } from "@/types/dictionary";
@@ -27,6 +31,7 @@ import { computed } from "vue";
 const drawer = useDrawerStore();
 const dictionary = useDictionaryStore();
 const audioStore = useAudioStore();
+const character = useCharacterStore();
 
 const rawDescription = computed(
   () => drawer.selectedDictionaryEntry!.description
@@ -41,14 +46,20 @@ const parsedDescription = computed(() => {
   while ((match = regex.exec(rawDescription.value)) !== null) {
     if (match.index > lastIndex) {
       result.push({
-        text: rawDescription.value.slice(lastIndex, match.index),
+        text: rawDescription.value
+          .slice(lastIndex, match.index)
+          .replaceAll("#PLAYER#", character.name),
       });
     }
 
     const dictionaryEntryId = match[1] as DictionaryEntryId;
+
     const entry = dictionaryEntries[dictionaryEntryId];
 
-    result.push({ text: entry.name, entry: entry });
+    result.push({
+      text: entry.name,
+      entry: entry,
+    });
     lastIndex = regex.lastIndex;
   }
 

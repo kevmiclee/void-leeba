@@ -17,6 +17,7 @@ export const parkScenes = {
       background: bgPark,
       audio: parkMusic,
       text:
+        //TODO: STORY -- re-work this
         `You are in the park. In the distance, a rusted children's play structure. ` +
         `Behind the play structure, an empty public pool, long disused in bleached yellow and blue. ` +
         `Behind you, a derelict soccer field, basketball court, and extensive skatepark. To your side, a huge snow pile.`,
@@ -29,10 +30,10 @@ export const parkScenes = {
           text: "Leave the park and enter the neighborhood.",
           next: "neighborhood",
         },
-        {
-          text: "Play on the snowpile.",
-          next: "snow-pile",
-        },
+        // {
+        //   text: "Play on the snowpile.",
+        //   next: "snow-pile",
+        // },
       ],
       metadata: { sectionId },
     };
@@ -43,10 +44,24 @@ export const parkScenes = {
       id: this.id,
       background: bgParkNight,
       audio: parkMusic,
+      text: `The sun sets over the park. A few stars resist the city's lights. The playground and fences now 
+        set into silhouettes. As your eyes adjust, the park takes on a {dark grey black clarity}.`,
+      buttonActions: () => [
+        {
+          next: "park-drunks0",
+        },
+      ],
+      metadata: { sectionId },
+    };
+  }),
+
+  "park-drunks0": defineScene("park-drunks0", function (payload): Scene {
+    return {
+      id: this.id,
+      background: bgParkNight,
+      audio: parkMusic,
       text:
-        `The sun sets over the park. A few stars resist the city's lights. The playground and fences now 
-        set into silhouettes. As your eyes adjust, the park takes on a dark grey black clarity. The stars 
-        and a white crescent illuminate it with a soft whiteness devoid of color.` +
+        `The stars and a big splotchy orb illuminate the park with a soft whiteness devoid of color.` +
         `^^You hear two drunks arguing as they walk along, looking up and pointing.`,
       dialogSequence: () => [
         { characterId: "drunk1", text: `That's not the Moon! It's the Sun!` },
