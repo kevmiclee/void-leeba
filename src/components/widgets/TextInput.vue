@@ -68,7 +68,7 @@ function handleEnter() {
   font-size: 1.5vw;
   font-weight: bold;
   outline: none;
-  font-family: "Courier New";
+  font-family: "Times";
 }
 
 input:focus {

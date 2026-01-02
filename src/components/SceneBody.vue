@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="wrapper" :style="narrativeOffset">
     <div
       class="animated-text"
       :class="{
@@ -156,6 +156,10 @@ function handleButtonClick(index: number) {
   }
 }
 
+const narrativeOffset = computed(
+  () => game.currentScene(game.currentScenePayload).narrativeOffset
+);
+
 watch(
   () => game.currentSceneId,
   async () => {
@@ -180,7 +184,7 @@ watch(
 }
 
 .wrapper {
-  margin: 1vw 10vw;
+  margin: 1vw 20vw;
   position: relative;
   font-weight: 500;
   width: fit-content;

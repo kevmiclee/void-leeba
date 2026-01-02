@@ -27,7 +27,7 @@ const game = useGameStore();
 
 html,
 body {
-  font-family: "Courier New";
+  font-family: "Times New Roman", serif;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
@@ -39,7 +39,7 @@ body {
 button {
   height: 2.8vw;
   font-size: 1.5vw;
-  font-family: "Courier New";
+  font-family: "Oswald", sans-serif;
   font-weight: 700;
   border: 0.15vw solid black;
   border-radius: 0.3vw;

@@ -64,6 +64,7 @@ export interface Scene {
   metadata?: SceneMetadata;
   hasInput?: boolean;
   onInputEntered?: () => void;
+  narrativeOffset?: any;
 }
 
 export interface FateOutcome {

@@ -1,7 +1,7 @@
 import { Scene } from "@/types/story";
 import bgStart from "@/assets/images/backgrounds/Landing-Page.png";
 import bgFog from "@/assets/images/backgrounds/fogland.jpg";
-import bgServerFarm from "@/assets/images/backgrounds/server-city-wasteland.png";
+import bgServerFarm from "@/assets/images/backgrounds/server-city-wasteland.jpeg";
 import bgServerHallway from "@/assets/images/backgrounds/server-hallway.png";
 import bgMudsplosion1 from "@/assets/images/backgrounds/mudsplosion1.png";
 import bgMudsplosion2 from "@/assets/images/backgrounds/mudsplosion2.png";
@@ -271,6 +271,11 @@ export const introScenes = {
       hum {emits from them}.`,
       audio: windTunnel,
       background: bgServerFarm,
+      narrativeOffset: {
+        top: "19vw",
+        left: "-28vw",
+        margin: "1vw 30vw",
+      },
       buttonActions: () => [
         {
           next: "intro9",
@@ -367,6 +372,11 @@ export const introScenes = {
       portals in them for the purpose of receving {objects such as these}.`,
       audio: windTunnel,
       background: bgAboveTheClouds,
+      narrativeOffset: {
+        top: "11vw",
+        left: "-28vw",
+        margin: "1vw 30vw",
+      },
       buttonActions: () => [
         {
           next: "intro12a",
