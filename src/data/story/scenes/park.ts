@@ -61,7 +61,7 @@ export const parkScenes = {
       background: bgParkNight,
       audio: parkMusic,
       text:
-        `The stars and a big splotchy orb illuminate the park with a soft whiteness devoid of color.` +
+        `The stars and a big, splotchy orb illuminate the park with a soft whiteness devoid of color.` +
         `^^You hear two drunks arguing as they walk along, looking up and pointing.`,
       dialogSequence: () => [
         { characterId: "drunk1", text: `That's not the Moon! It's the Sun!` },

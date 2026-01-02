@@ -413,7 +413,7 @@ export const bedroomScenes = {
             next: "bedroom-time-fly7",
           },
           {
-            text: `<i>Stop. We're roommates, not friends. Don't tell me what to do.</i>`,
+            text: `"<i>Stop. We're roommates, not friends. Don't tell me what to do.</i>"`,
             next: "bedroom-time-fly7",
           },
         ],
@@ -434,7 +434,7 @@ export const bedroomScenes = {
           {
             characterId: "shib",
             text: `I have enough to worry about with everything going on in the news. Have you seen what's happening 
-            with the CDC? It's BOUILLABAISSE!`,
+            with the CDC? It's an absolute BOUILLABAISSE!`,
           },
           {
             characterId: "shib",
