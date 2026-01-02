@@ -13,4 +13,7 @@ export type DictionaryEntryId =
   | "player"
   | "Supreme Hegemon of Tangential Reality"
   | "Goofball Dust Explosion"
+  | "keg"
+  | "Leakyverse"
+  | "beer"
   | "Mudman";

@@ -59,13 +59,72 @@ export const partyScenes = {
         { characterId: "squirrel", text: "JOOOOOOOO!" },
       ],
       choices: () => [
-        { text: `"Oh hell yeah! There's a keg!"` },
-        { text: `"LET'S GOOOOOO!"` },
+        { text: `"Oh hell yeah! There's a keg!"`, next: "party-monster1"},
+        { text: `"LET'S GOOOOOO!"`, next: "party-monster1" },
         { text: "Just try to blend in." },
       ],
       metadata: { sectionId },
     };
   }),
+
+  "party-monster1": defineScene("party-monster1", function (payload): Scene {
+    return {
+      id: this.id,
+      background: bgDefault,
+      text:
+        `The faeries and squirrel usher you up to the {keg}.` +
+        `You can feel the thrum of their excitement as they lift you upside down.` +
+        `They all work together to pump the keg.` +
+        'You hold the nozzle up to your mouth, and...',
+      audio: partySong,
+      backgroundFilter: "invert(1)",
+      dialogSequence: () => [
+        { characterId: "keg", text: "*looms*" },
+      ],
+      choices: () => [
+        { text: `...chug.`, next: "party-monster2"},
+      ],
+      buttonActions: () => [
+          {
+            dictionaryEntryId: "keg",
+          },
+        ],
+      metadata: { sectionId },
+    };
+  }),
+
+   "party-monster2": defineScene("party-monster2", function (payload): Scene {
+    return {
+      id: this.id,
+      background: bgDefault,
+      text:
+        `You drink in the keg's contents. All around you, the party erupts in glee.`,
+      audio: partySong,
+      backgroundFilter: "invert(1)",
+      dialogSequence: () => [
+        { characterId: "squirrel", text: "Joo!" },
+        { characterId: "faerie1", text: "That's the spirit!", next: "party-monster3" },
+      ],
+      metadata: { sectionId },
+    };
+  }),
+
+   "party-monster3": defineScene("party-monster3", function (payload): Scene {
+    return {
+      id: this.id,
+      background: bgDefault,
+      text:
+        `You drink in the keg's contents. All around you, the party erupts in glee.`,
+      audio: partySong,
+      backgroundFilter: "invert(1)",
+      dialogSequence: () => [
+        { characterId: "squirrel", text: "Joo!" },
+        { characterId: "faerie1", text: "That's the spirit!" },
+      ],
+      metadata: { sectionId },
+    };
+  }),
+
 };
 
 //TODO: STORY - party

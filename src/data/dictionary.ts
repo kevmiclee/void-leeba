@@ -69,7 +69,31 @@ export const dictionaryEntries: Record<DictionaryEntryId, DictionaryEntry> = {
     id: "Goofball Dust Explosion",
     name: "Goofball Dust Explosion",
     description:
-      "The Goofball Dust Explosion (GDE) is the primordial event that spawned all {leaks}.",
+      "The Goofball Dust Explosion (GDE) is the primordial event that spawned all {Leaks}.",
+  },
+
+   keg: {
+    id: "keg",
+    name: "Keg",
+    description:
+      `A keg is a consumer product that dispenses liquid by forcing it under pressure out through a dispenser nozzle.` +
+      `Kegs were invented in the EARF Leak to dispense a psychoactive poison liquid called {beer} that lowers inhibitions and numbs pain.` +
+      `Kegs allow for high-volume dispensation of beer.` ,
+  },
+
+  beer: {
+    id: "beer",
+    name: "Beer",
+    description:
+      `Beer is a psychoactive poison liquid that lowers inhibitions and numbs pain. Beer has its origins in the EARF Leak` +
+      'And has now dispersed throughout the {Leakyverse}.',
+  },
+
+  Leakyverse: {
+    id: "Leakyverse",
+    name: "Leakyverse",
+    description:
+      `The Leakyverse refers to the sum total of {Leaks} and their interconnections.` ,
   },
 
   //TODO: CHORE - Mudman description

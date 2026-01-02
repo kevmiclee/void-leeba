@@ -19,4 +19,5 @@ export type CharacterId =
   | "mudman"
   | "kioskman"
   | "mr-ebeneezer"
+  | "keg"
   | "shib";
