@@ -61,7 +61,7 @@ export const dreamScenes = {
             : `^^A group of {pine faeries} emerge from the knot of a nearby tree. They circle around you, teasing you, ` +
               `plucking your eyelashes and spitting in your nostril holes. They swirl away off to your left. {Follow them}.`
         }` +
-        `^^Daggum forest faeries. Yep, if you had you an ax, you'd {start chopping} down all these trees, right this second. If you don't, ` +
+        `^^Dadgum forest faeries. Yep, if you had you an ax, you'd {start chopping} down all these trees, right this second. If you don't, ` +
         `someone else surely will. A place like this? Prime real estate. Goodbye paradise, hello parking lot!` +
         `${
           didNap
