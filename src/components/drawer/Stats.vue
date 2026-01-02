@@ -2,10 +2,13 @@
   <div class="sub-menu-header" @click.stop="drawer.resetDrawerView">
     < Stats
   </div>
-  <p class="stat">Blue Magic: {{ character.blueMagic.value }}</p>
-  <p class="stat">Will: {{ character.will.value }}</p>
-  <p class="stat">Shitheadedness: {{ character.shitheadedness.value }}</p>
-  <p class="stat">Athletics: {{ character.athletics.value }}</p>
+  <div class="stat-header">
+    Skills
+    <p class="stat">Blue Magic: {{ character.blueMagic.value }}</p>
+    <p class="stat">Will: {{ character.will.value }}</p>
+    <p class="stat">Shitheadedness: {{ character.shitheadedness.value }}</p>
+    <p class="stat">Athletics: {{ character.athletics.value }}</p>
+  </div>
   <div v-if="aspects.length > 0" class="stat-header">
     Aspects
     <p v-for="(aspect, index) in aspects" class="stat">
@@ -18,17 +21,18 @@
       Description: {{ aspect.description }}
     </p>
   </div>
-  <div v-if="Object.keys(character.flags).length > 0" class="stat-header">
+  <!-- <div v-if="Object.keys(character.flags).length > 0" class="stat-header">
     Flags
     <p v-for="(value, key) in character.flags" class="stat">
       {{ key }}: {{ value }}
     </p>
-  </div>
-  <div v-if="character.manners" class="stat-header">
+  </div> -->
+  <div class="stat-header">
     Manners
-    <p class="stat">
-      {{ character.manners }}
-    </p>
+    <p class="stat">Rude: {{ character.rude.value }}</p>
+    <p class="stat">Depressing: {{ character.depressing.value }}</p>
+    <p class="stat">Polite: {{ character.polite.value }}</p>
+    <p class="stat">Weird: {{ character.weird.value }}</p>
   </div>
 </template>
 
@@ -48,11 +52,12 @@ const aspects = computed(() => aspectsStore.aspects);
 <style scoped>
 .stat-header {
   font-weight: 600;
-  margin-left: 1vw;
+  left: 0.5vw;
 }
 
 .stat {
   margin-top: 0.5vw;
+  margin-left: 0.5vw;
   font-weight: 400;
   font-size: 1vw;
 }

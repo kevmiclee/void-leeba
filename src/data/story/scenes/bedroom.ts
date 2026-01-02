@@ -411,10 +411,22 @@ export const bedroomScenes = {
           {
             text: `"I'm sorry. I'll try harder."`,
             next: "bedroom-time-fly7",
+            manners: [
+              {
+                id: "polite",
+                amount: 1,
+              },
+            ],
           },
           {
             text: `"<i>Stop. We're roommates, not friends. Don't tell me what to do.</i>"`,
             next: "bedroom-time-fly7",
+            manners: [
+              {
+                id: "rude",
+                amount: 1,
+              },
+            ],
           },
         ],
         metadata: { sectionId },

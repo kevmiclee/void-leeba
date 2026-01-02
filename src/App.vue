@@ -103,5 +103,6 @@ button:focus {
   padding: 0.2vw 0.5vw;
   font-size: 1.2vw;
   line-height: 1;
+  font-family: "Oswald", sans-serif;
 }
 </style>

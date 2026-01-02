@@ -152,7 +152,7 @@ export const introScenes = {
   intro3a: defineScene("intro3a", function (payload): Scene {
     return {
       id: this.id,
-      text: `INDEED! I am the most prominent entity born in this epochal event! My responsibility and power are 
+      text: `INDEED! I am the most prominent entity born from that epochal event! My responsibility and power are 
       unknown to other entities, whose lives it is my wont to {toy with}!`,
       audio: windTunnel,
       background: bgFog,
