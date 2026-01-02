@@ -1,7 +1,7 @@
 import { Scene } from "@/types/story";
 import bgStart from "@/assets/images/backgrounds/Landing-Page.png";
 import bgFog from "@/assets/images/backgrounds/fogland.jpg";
-import bgServerFarm from "@/assets/images/backgrounds/server-city-wasteland.jpeg";
+import bgServerFarm from "@/assets/images/backgrounds/server-city-wasteland.png";
 import bgServerHallway from "@/assets/images/backgrounds/server-hallway.png";
 import bgMudsplosion1 from "@/assets/images/backgrounds/mudsplosion1.png";
 import bgMudsplosion2 from "@/assets/images/backgrounds/mudsplosion2.png";
