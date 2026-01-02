@@ -96,7 +96,6 @@ export const itemCatalog: Record<ItemId, Item> = {
     id: "beest-recording",
     label: "Beest recording",
     description: ``,
-    //TODO: description
     value: 0,
     weight: 1,
     usable: true,

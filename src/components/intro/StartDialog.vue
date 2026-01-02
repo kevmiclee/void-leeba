@@ -49,7 +49,7 @@ function startGame() {
 }
 
 .message {
-  font-size: 18px;
+  font-size: 1.2vw;
   color: #333;
   margin-bottom: 1.1vw;
 }

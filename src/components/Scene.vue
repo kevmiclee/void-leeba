@@ -69,7 +69,6 @@ import SceneBody from "@/components/SceneBody.vue";
 import SceneGraph from "@/components/SceneGraph.vue";
 import Choices from "@/components/widgets/Choices.vue";
 import FadeInOverlay from "@/components/overlays/FadeInOverlay.vue";
-import Fog from "@/components/overlays/Fog.vue";
 import Sidebar from "@/components/widgets/Sidebar.vue";
 import { Scene } from "@/types/story";
 import DisappearingItem from "./overlays/DisappearingItem.vue";
