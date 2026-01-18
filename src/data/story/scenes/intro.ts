@@ -60,9 +60,9 @@ export const introScenes = {
           stats: [{ id: "will", amount: 1 }],
         },
         {
-          text: "Vivid dream? Start flying!",
+          text: "Lucid dream! Start flying immediately.",
           next: "intro1",
-          payload: { text: `NO! Don't fly away!` },
+          payload: { text: `NO! Come back here!` },
           stats: [{ id: "athletics", amount: 1 }],
         },
         {
@@ -89,9 +89,9 @@ export const introScenes = {
   intro1: defineScene("intro1", function (payload): Scene {
     return {
       id: this.id,
-      text: `${payload?.text} I paid for this dream, ${payload?.text == "YES!" ? "so be a good little oneiromancer." : `don't try to screw this up for me.`} 
-      Remember: I chose you, a splashing hapless clownfish, because I see something 
-      special in you. So {pay attention}!`,
+      text: `${payload?.text} I paid for this dream, ${payload?.text == "YES!" ? "so please be an attentive oneiromancer." : `don't be lazy!`} 
+      Remember: I chose you, you cute little clownfish, because I see something 
+      special in you. {Pay attention}!`,
       audio: windTunnel,
       background: bgFog,
       buttonActions: () => [
@@ -125,7 +125,7 @@ export const introScenes = {
       id: this.id,
       text: `Quaint organism, IT IS I! The Supreme Hegemon of Tangential Reality. I was born from the 
       Goofball Dust explosion. It's true! I have the talent of Tangents—the power to spring {Leaks} to my liking. 
-      So get on my good side. Entertain me. Make me laugh...You won't!`,
+      So get on my good side and make me laugh...please!`,
       audio: windTunnel,
       background: bgFog,
       buttonActions: () => [
@@ -153,7 +153,7 @@ export const introScenes = {
     return {
       id: this.id,
       text: `INDEED! I am the most prominent entity born from that epochal event! My responsibility and power are 
-      unknown to other entities, whose lives it is my wont to {toy with}!`,
+      unknown to other entities, their lives it is my wont to {toy with}!`,
       audio: windTunnel,
       background: bgFog,
       buttonActions: () => [

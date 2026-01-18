@@ -19,8 +19,8 @@ export const parkScenes = {
       text:
         //TODO: STORY -- re-work this
         `You are in the park. In the distance, a rusted children's play structure. ` +
-        `Behind the play structure, an empty public pool, long disused in bleached yellow and blue. ` +
-        `Behind you, a derelict soccer field, basketball court, and extensive skatepark. To your side, a huge snow pile.`,
+        `Behind the play structure, an empty public pool, long disused. ` +
+        `Behind you, a derelict soccer field, basketball court, an extensive skatepark, and a mountainous snow pile.`,
       choices: () => [
         {
           text: "Still yourself and listen to the sounds.",

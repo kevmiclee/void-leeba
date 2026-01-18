@@ -51,14 +51,14 @@ export const bedroomScenes = {
     return {
       id: this.id,
       text: `It's your flatmate, Shib. You promised you would help Shib with his temporomuscaphobia by destroying 
-      any timeflies from the apartment. The best remedy for timeflies is to feed them books.^^Pick a throw-away to 
+      any timeflies in the flat. The best remedy for timeflies is to feed them books.^^Pick a throw-away to 
       feed to Shib's timefly intruder.`,
       audio: homeSong,
       background: bgBedroom,
       dialogSequence: () => [
         {
           characterId: "shib",
-          text: `Buddy ole boy, I am barely holding it together. If you could make haste, we can go back to living our lives.`,
+          text: `Buddy ole lifeform, I am barely holding it together. If you could make haste, I can go back to living my life.`,
         },
       ],
       choices: () => {
@@ -162,7 +162,7 @@ export const bedroomScenes = {
         ],
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   "bedroom-time-fly1": defineScene(
@@ -180,7 +180,7 @@ export const bedroomScenes = {
         ],
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   "bedroom-time-fly2": defineScene(
@@ -201,7 +201,7 @@ export const bedroomScenes = {
         ],
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   "bedroom-time-fly3": defineScene(
@@ -235,7 +235,7 @@ export const bedroomScenes = {
         ],
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   "bedroom-time-fly4": defineScene(
@@ -253,7 +253,7 @@ export const bedroomScenes = {
         ],
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   "bedroom-time-fly5": defineScene(
@@ -379,7 +379,7 @@ export const bedroomScenes = {
           ],
         },
       };
-    }
+    },
   ),
 
   "bedroom-time-fly6": defineScene(
@@ -431,7 +431,7 @@ export const bedroomScenes = {
         ],
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   "bedroom-time-fly7": defineScene(
@@ -456,7 +456,7 @@ export const bedroomScenes = {
         ],
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   bedroom5: defineScene("bedroom5", function (payload): Scene {
@@ -697,7 +697,7 @@ function getBookChoices(filter: string, nextScene: SceneId): Choice[] {
     .filter((num) => num !== 2 && !isNaN(num));
 
   const filteredChoices = choices.filter(
-    (_, index) => !indicesToRemove.includes(index)
+    (_, index) => !indicesToRemove.includes(index),
   );
 
   return filteredChoices;

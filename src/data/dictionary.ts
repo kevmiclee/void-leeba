@@ -15,10 +15,10 @@ export const dictionaryEntries: Record<DictionaryEntryId, DictionaryEntry> = {
     id: "hyperleak",
     name: "Hyperleak",
     description:
-      `A Hyperleak is a prosumer product. Invented by Survecap, this machine is under constant corporate surveillance ` +
-      `throughout all Leaks. If you do anything on this machine, Survecap will know for sure. Client-side scanning, baby.` +
+      `A Hyperleak is a prosumer product. Invented by ServTek, this machine is under constant corporate surveillance ` +
+      `throughout all Leaks. If you do anything on this machine, ServTek will know for sure. Client-side scanning, baby.` +
       `<br><br>That being said, this machine is SO user-friendly or 'easy-to-use'. Though, it is easy to use mostly because ` +
-      `everyone in the Leakyverse uses Survecap interfaces and are used to their particular type of user-hostile. Organisms resist change.`,
+      `everyone in the Leakyverse uses ServTek interfaces and are used to their particular type of user-hostile. Organisms resist change.`,
   },
 
   leaks: {
@@ -72,13 +72,13 @@ export const dictionaryEntries: Record<DictionaryEntryId, DictionaryEntry> = {
       "The Goofball Dust Explosion (GDE) is the primordial event that spawned all {Leaks}.",
   },
 
-   keg: {
+  keg: {
     id: "keg",
     name: "Keg",
     description:
       `A keg is a consumer product that dispenses liquid by forcing it under pressure out through a dispenser nozzle.` +
       `Kegs were invented in the EARF Leak to dispense a psychoactive poison liquid called {beer} that lowers inhibitions and numbs pain.` +
-      `Kegs allow for high-volume dispensation of beer.` ,
+      `Kegs allow for high-volume dispensation of beer.`,
   },
 
   beer: {
@@ -86,14 +86,13 @@ export const dictionaryEntries: Record<DictionaryEntryId, DictionaryEntry> = {
     name: "Beer",
     description:
       `Beer is a psychoactive poison liquid that lowers inhibitions and numbs pain. Beer has its origins in the EARF Leak` +
-      'And has now dispersed throughout the {Leakyverse}.',
+      "And has now dispersed throughout the {Leakyverse}.",
   },
 
   Leakyverse: {
     id: "Leakyverse",
     name: "Leakyverse",
-    description:
-      `The Leakyverse refers to the sum total of {Leaks} and their interconnections.` ,
+    description: `The Leakyverse refers to the sum total of {Leaks} and their interconnections.`,
   },
 
   //TODO: CHORE - Mudman description

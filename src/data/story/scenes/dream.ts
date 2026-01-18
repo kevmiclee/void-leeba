@@ -116,7 +116,7 @@ export const dreamScenes = {
         buttonActions = buttonActions.filter(
           (action) =>
             (!character.flags["did-faeries"] || action.id != "faeries") &&
-            (!character.flags["did-nap"] || action.id != "nap")
+            (!character.flags["did-nap"] || action.id != "nap"),
         );
 
         return buttonActions;
@@ -151,7 +151,7 @@ export const dreamScenes = {
         ],
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   "dream-within-a-dream1": defineScene(
@@ -173,7 +173,7 @@ export const dreamScenes = {
         ],
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   "dream-within-a-dream-refuse": defineScene(
@@ -190,7 +190,7 @@ export const dreamScenes = {
         ],
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   "dream-within-a-dream-refuse1": defineScene(
@@ -211,7 +211,7 @@ export const dreamScenes = {
         ],
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   "dream-within-a-dream-refuse2": defineScene(
@@ -234,7 +234,7 @@ export const dreamScenes = {
         ],
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   "dream-within-a-dream-refuse3": defineScene(
@@ -253,7 +253,7 @@ export const dreamScenes = {
         ],
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   "dream-within-a-dream2": defineScene(
@@ -270,7 +270,7 @@ export const dreamScenes = {
         ],
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   "dream-within-a-dream3": defineScene(
@@ -289,7 +289,7 @@ export const dreamScenes = {
         ],
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   "dream-within-a-dream4": defineScene(
@@ -313,7 +313,7 @@ export const dreamScenes = {
         ],
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   "dream-within-a-dream5": defineScene(
@@ -331,7 +331,7 @@ export const dreamScenes = {
         ],
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   "dream-within-a-dream6": defineScene(
@@ -356,7 +356,7 @@ export const dreamScenes = {
         ],
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   "dream-within-a-dream7": defineScene(
@@ -378,7 +378,7 @@ export const dreamScenes = {
         ],
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   "dream-within-a-dream8": defineScene(
@@ -402,7 +402,7 @@ export const dreamScenes = {
         ],
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   "dream-within-a-dream9": defineScene(
@@ -422,7 +422,7 @@ export const dreamScenes = {
         ],
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   "dream-chop": defineScene("dream-chop", function (payload): Scene {

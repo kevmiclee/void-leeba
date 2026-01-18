@@ -184,7 +184,7 @@ export const blackDogScenes = {
       audio: spookyMusic,
       text: `You remember back to your childhood, to a dog you had, Calla. Calla, so stinky, so sweet, so loyal. 
         The contrast between your childhood pet and this creature is striking. You feel few of the same feelings, 
-        despite the bodily similarity. And yet, you just love dogs, and you know that if you follow certain procedures, 
+        due to the unease it fills you with. And yet, you just love dogs, and you know that if you follow certain procedures, 
         a mean-seeming dog may {flip onto its back}.`,
       buttonActions: () => [
         {
@@ -280,7 +280,7 @@ export const blackDogScenes = {
               next: "black-dog-done",
               manners: [{ id: "depressing", amount: 1 }],
               payload: { filter: "nothing-dog" },
-            }
+            },
           );
 
           return choices;
@@ -289,7 +289,7 @@ export const blackDogScenes = {
           sectionId,
           routes: [
             {
-              text: "Give it some dog food.",
+              text: "Ask it if it wants food.",
               next: "black-dog-done",
               manners: "polite",
             },
@@ -306,7 +306,7 @@ export const blackDogScenes = {
           ],
         },
       };
-    }
+    },
   ),
 
   "black-dog-heal-human": defineScene(
@@ -328,7 +328,7 @@ export const blackDogScenes = {
             7;
 
             choices.push({
-              text: "Give it some dog food.",
+              text: "Ask if it wants dog food.",
               stats: [{ id: "shitheadedness", amount: 1 }],
               manners: [{ id: "rude", amount: 1 }],
               flags: [{ id: "gave-human-dog-food", value: true }],
@@ -350,7 +350,7 @@ export const blackDogScenes = {
               next: "black-dog-done",
               manners: [{ id: "polite", amount: 1 }],
               payload: { filter: "nothing-human" },
-            }
+            },
           );
 
           return choices;
@@ -380,7 +380,7 @@ export const blackDogScenes = {
           ],
         },
       };
-    }
+    },
   ),
 
   "black-dog-heal-human-redux": defineScene(
@@ -404,7 +404,7 @@ export const blackDogScenes = {
           `I heard the Moondog at the counter—I stop, I freeze. There they were, winking back at me, bearded, beastly, and barking up the tree` +
           `—of music—it was music to my ease.`,
       };
-    }
+    },
   ),
 
   "black-dog-bad": defineScene("black-dog-bad", function (payload): Scene {
@@ -515,7 +515,7 @@ export const blackDogScenes = {
         ],
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   "black-dog-bad-fail": defineScene(
@@ -532,7 +532,7 @@ export const blackDogScenes = {
               const game = useGameStore();
               const character = useCharacterStore();
               const hasDogFood = character.inventory.some(
-                (item) => item.id == "dog-food"
+                (item) => item.id == "dog-food",
               );
               const drunkChoice = character.flags["drunk-choice"];
 
@@ -560,7 +560,7 @@ export const blackDogScenes = {
           ],
         },
       };
-    }
+    },
   ),
 
   "black-dog-bad-fail-food": defineScene(
@@ -586,7 +586,7 @@ export const blackDogScenes = {
         ],
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   "black-dog-bad-fail-drunks": defineScene(
@@ -659,7 +659,7 @@ export const blackDogScenes = {
           ],
         },
       };
-    }
+    },
   ),
 
   "black-dog-bad-fail-drunks-help": defineScene(
@@ -708,7 +708,7 @@ export const blackDogScenes = {
         ],
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   "black-dog-bad-fail-drunks-leave": defineScene(
@@ -729,7 +729,7 @@ export const blackDogScenes = {
         ],
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   "black-dog-feel-bad": defineScene(
@@ -754,7 +754,7 @@ export const blackDogScenes = {
         text: "",
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   "black-dog-feel-bad1": defineScene(
@@ -776,7 +776,7 @@ export const blackDogScenes = {
         ],
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   "black-dog-viral": defineScene("black-dog-viral", function (payload): Scene {
@@ -831,7 +831,7 @@ export const blackDogScenes = {
         ],
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   "black-dog-viral2": defineScene(
@@ -871,7 +871,7 @@ export const blackDogScenes = {
         },
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   "black-dog-done-drunks": defineScene(
@@ -945,7 +945,7 @@ export const blackDogScenes = {
         },
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   "black-dog-done": defineScene("black-dog-done", function (payload): Scene {
