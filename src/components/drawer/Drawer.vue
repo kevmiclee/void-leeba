@@ -46,7 +46,7 @@ watch(
       drawer.clearItem();
       drawer.setDrawerView("main");
     }
-  }
+  },
 );
 </script>
 
@@ -95,7 +95,7 @@ watch(
   height: auto;
   z-index: 1001;
   padding-top: 1.2vw;
-  overflow-y: auto;
+  overflow-y: hidden;
 }
 
 .drawer-bg {
@@ -107,7 +107,8 @@ watch(
 .drawer-content {
   position: absolute;
   height: 22vw;
-  overflow-y: auto;
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
   overscroll-behavior: contain;
   left: 19vw;
   top: 25vw;

@@ -27,8 +27,6 @@
     </div>
   </div>
 
-  <!-- TODO: SCROLL BARS -->
-
   <transition name="fade">
     <div
       v-if="drawer.isDrawerOpen"

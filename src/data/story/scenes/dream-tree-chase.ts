@@ -35,7 +35,7 @@ export const dreamTreeChaseScenes = {
         },
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   "dream-tree-chase1": defineScene(
@@ -53,7 +53,7 @@ export const dreamTreeChaseScenes = {
           const character = useCharacterStore();
           const itemWeight = character.inventory.reduce(
             (sum, item) => sum + item.weight,
-            0
+            0,
           );
 
           return [
@@ -71,7 +71,6 @@ export const dreamTreeChaseScenes = {
             },
             {
               text: "Pick up a handful of pine needles",
-              itemId: "pine-needles",
               items: [{ id: "pine-needles", amount: 1 }],
             },
           ];
@@ -82,7 +81,7 @@ export const dreamTreeChaseScenes = {
         },
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   "dream-tree-chase-game-intro": defineScene(
@@ -102,7 +101,7 @@ export const dreamTreeChaseScenes = {
         ],
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   "dream-tree-chase-game": defineScene(
@@ -129,7 +128,7 @@ export const dreamTreeChaseScenes = {
           ],
         },
       };
-    }
+    },
   ),
 
   "dream-tree-chase-game-win": defineScene(
@@ -155,7 +154,7 @@ export const dreamTreeChaseScenes = {
         },
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   "dream-tree-chase-game-lose": defineScene(
@@ -181,7 +180,7 @@ export const dreamTreeChaseScenes = {
         },
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   "dream-tree-chase-fly": defineScene(
@@ -209,7 +208,7 @@ export const dreamTreeChaseScenes = {
         ],
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   "dream-tree-chase-fly1": defineScene(
@@ -235,7 +234,7 @@ export const dreamTreeChaseScenes = {
           aspects.addAspect("part-bird");
         },
       };
-    }
+    },
   ),
 
   "dream-tree-chase-sink": defineScene(
@@ -258,7 +257,7 @@ export const dreamTreeChaseScenes = {
         ],
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   "dream-tree-chase-sink1": defineScene(
@@ -277,6 +276,6 @@ export const dreamTreeChaseScenes = {
         ],
         metadata: { sectionId },
       };
-    }
+    },
   ),
 };

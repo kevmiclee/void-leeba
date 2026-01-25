@@ -77,7 +77,7 @@ const currentDialog = computed(() => {
   }
 });
 const currentCharacter = computed(() =>
-  currentDialog.value ? characters[currentDialog.value.characterId] : null
+  currentDialog.value ? characters[currentDialog.value.characterId] : null,
 );
 
 const showChoices = computed(() => {
@@ -98,7 +98,11 @@ const visibleChoices = computed(() => {
   if (currentScene.choices) {
     return currentScene
       .choices()
-      .filter((ch) => !ch.itemId || !itemsForScene.includes(ch.itemId));
+      .filter(
+        (ch) =>
+          !ch.items ||
+          ch.items.some((item) => !itemsForScene.includes(item.id)),
+      );
   }
   return [];
 });
@@ -131,7 +135,7 @@ function onChoiceClicked(choice: Choice) {
   if (choice.drawerView) {
     openDrawerToView(choice.drawerView);
   }
-  if (choice.next || choice.onChoose) {
+  if (choice.next || choice.onChoose || choice.items) {
     game.chooseOption(choice);
   }
   updateDialogIndex(0);
@@ -149,7 +153,7 @@ watch(
       playSpeakerSound(currentDialog.value!.characterId);
     }
   },
-  { deep: true }
+  { deep: true },
 );
 
 watch(
@@ -157,7 +161,7 @@ watch(
   () => {
     dialogIndex.value = 0;
     dialogClicked.value = false;
-  }
+  },
 );
 </script>
 

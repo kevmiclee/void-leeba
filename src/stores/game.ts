@@ -56,7 +56,7 @@ export const useGameStore = defineStore("game", {
         const newScene = this.scenes[newIndex];
         const character = useCharacterStore();
         const removedItems = character.inventory.filter(
-          (e) => e.pageAcquired != newScene
+          (e) => e.pageAcquired != newScene,
         );
         character.inventory = removedItems;
         character.undoLastStep();

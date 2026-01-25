@@ -416,9 +416,6 @@ export const introScenes = {
       background: bgYourFate,
       buttonActions: () => [
         {
-          dictionaryEntryId: "leaks",
-        },
-        {
           next: "intro13",
         },
       ],
