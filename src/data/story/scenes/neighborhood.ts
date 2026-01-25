@@ -16,7 +16,7 @@ export const neighborhoodScenes = {
     return {
       id: this.id,
       text:
-        //TODO: STORY - seen better days
+        //TODO: STORY - re-write this part
         `What a hip, ritzy little neighborhood. It's bustling with people. A perfect place to ` +
         `set up an art table and sell some art!`,
       choices: () => [
@@ -24,10 +24,10 @@ export const neighborhoodScenes = {
           text: `Yes! Let's do it.`,
           next: "neighborhood1",
         },
+        // TODO: CHORE - only if they haven't completed the room storylines
         {
           text: "Not feeling it today. Go home.",
           next: "room",
-          //TODO: STORY - what if they've already been to their room?
         },
       ],
       background: bgNeighborhood,

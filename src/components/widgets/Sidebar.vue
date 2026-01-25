@@ -27,6 +27,8 @@
     </div>
   </div>
 
+  <!-- TODO: SCROLL BARS -->
+
   <transition name="fade">
     <div
       v-if="drawer.isDrawerOpen"
@@ -53,14 +55,14 @@ const audioStore = useAudioStore();
 
 const scenes = computed(() => game.scenes);
 const currentSceneIndex = computed(() =>
-  scenes.value.indexOf(game.currentSceneId)
+  scenes.value.indexOf(game.currentSceneId),
 );
 const canGoForward = computed(
-  () => currentSceneIndex.value < scenes.value.length - 1
+  () => currentSceneIndex.value < scenes.value.length - 1,
 );
 const numberOfPhoneItems = computed(() => {
   const distinctScenes = Array.from(new Set(scenes.value)).filter(
-    (s) => !s.includes("intro")
+    (s) => !s.includes("intro"),
   );
   return Math.floor(distinctScenes.length / 4);
 });
@@ -114,7 +116,7 @@ watch(
       animatedCount.value = drawer.notificationCount;
     }
   },
-  { immediate: true }
+  { immediate: true },
 );
 
 watch(
@@ -130,7 +132,7 @@ watch(
     drawer.updateNotificationCount(newCount);
     animatedCount.value = newCount;
   },
-  { deep: true }
+  { deep: true },
 );
 </script>
 

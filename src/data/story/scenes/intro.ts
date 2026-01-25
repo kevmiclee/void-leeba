@@ -7,6 +7,7 @@ import bgMudsplosion1 from "@/assets/images/backgrounds/mudsplosion1.png";
 import bgMudsplosion2 from "@/assets/images/backgrounds/mudsplosion2.png";
 import bgAboveTheClouds from "@/assets/images/backgrounds/above-the-clouds.png";
 import bgDataPurchaseKiosk from "@/assets/images/backgrounds/data-purchase-kiosk.png";
+import bgYourFate from "@/assets/images/backgrounds/your-fate.png";
 
 import introAudio from "@/assets/audio/story/background-themes/intro.mp3";
 import windTunnel from "@/assets/audio/story/background-themes/wind-tunnel.mp3";
@@ -391,11 +392,28 @@ export const introScenes = {
       id: this.id,
       text: `The portal opens into pink hallway. You see a myriad of programmers, coding programs 
       that will sell the behavioral futures of entire {Leaks}. To torque each reality to its limit, 
-      to squeeze it dry of its data, to milk it for all the relevance it's worth. You see your orb 
-      drift into one of the many slimy spirals that line the walls. The programmer at the terminal 
-      glares at you standoffishly, as if to say, {"No noobs allowed"}.`,
+      to squeeze it dry of its data, to milk it {for all the relevance it's worth}.`,
       audio: windTunnel,
       background: bgServerHallway,
+      buttonActions: () => [
+        {
+          dictionaryEntryId: "leaks",
+        },
+        {
+          next: "intro12b",
+        },
+      ],
+      metadata: { sectionId },
+    };
+  }),
+
+  intro12b: defineScene("intro12b", function (payload): Scene {
+    return {
+      id: this.id,
+      text: `You see your orb drift into one of the many oozy spirals that line the walls. The programmer at the terminal 
+      glares at you standoffishly, as if to say, {"No noobs allowed"}.`,
+      audio: windTunnel,
+      background: bgYourFate,
       buttonActions: () => [
         {
           dictionaryEntryId: "leaks",
@@ -411,7 +429,7 @@ export const introScenes = {
   intro13: defineScene("intro13", function (payload): Scene {
     return {
       id: this.id,
-      text: `Server farms, Leaks, Leakcoin...what kind of dream is this? The Supreme Hegemon of Tangential 
+      text: `Server farms, Leaks, Leakcoin...what kind of dream is this? The Supreme Hegemon of Tangential
       Reality...what? And Sandperson, and Dirtgirl? Not to mention Mudman! Ugh, and he <i>stole</i> from you. 
       Uh oh...do you recall your name?`,
       audio: windTunnel,

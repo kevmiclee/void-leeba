@@ -861,6 +861,8 @@ export const blackDogScenes = {
             //     effects.clearEffects();
             //   },
             // },
+            // TODO: CHORE - only if they haven't completed the room storylines
+
             {
               next: "room",
               action: () => {
@@ -920,7 +922,7 @@ export const blackDogScenes = {
 
           return [
             {
-              text: "Go into the neighborhood.",
+              text: "Follow it.",
               next: "neighborhood",
               payload: { filter: "black-dog" },
               onChoose: () => {
@@ -934,6 +936,8 @@ export const blackDogScenes = {
             //     effects.clearEffects();
             //   },
             // },
+            // TODO: CHORE - only if they haven't completed the room storylines
+
             {
               text: "Go back home.",
               next: "room",
@@ -973,6 +977,8 @@ export const blackDogScenes = {
           //     effects.clearEffects();
           //   },
           // },
+          // TODO: CHORE - only if they haven't completed the room storylines
+
           {
             text: "Go back home.",
             next: "room",

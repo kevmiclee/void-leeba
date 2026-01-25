@@ -4,12 +4,15 @@
       v-if="showUserAvatar || (persist && !currentCharacter)"
       class="avatar-wrapper"
     >
-      <img
-        :src="userAvatar"
-        alt="User avatar"
-        class="avatar"
-        :class="{ grow: effects.stretchAvatar }"
-      />
+      <div class="stack">
+        <img
+          :src="userAvatar"
+          alt="User avatar"
+          class="avatar base"
+          :class="{ grow: effects.stretchAvatar }"
+        />
+        <img :src="userAvatar" alt="" class="avatar wobble" />
+      </div>
     </div>
     <div
       v-else-if="(hasDialog || persist) && currentCharacter"

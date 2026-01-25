@@ -128,6 +128,5 @@ export const characters: Record<CharacterId, Character> = {
     name: "Keg",
     avatar: shibAvatar,
     sound: shibSound,
-  }
-  
+  },
 };

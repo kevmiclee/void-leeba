@@ -37,7 +37,7 @@ const game = useGameStore();
 const drawer = useDrawerStore();
 
 const scenes = computed(() =>
-  game.scenes.filter((sc) => !sc.includes("intro"))
+  game.scenes.filter((sc) => !sc.includes("intro")),
 );
 
 const numberOfPhoneItems = computed(() => {
@@ -46,9 +46,11 @@ const numberOfPhoneItems = computed(() => {
 });
 
 const items = computed(() => {
-  return phoneItems.length <= numberOfPhoneItems.value
-    ? phoneItems
-    : phoneItems.slice(0, numberOfPhoneItems.value);
+  const list =
+    phoneItems.length <= numberOfPhoneItems.value
+      ? phoneItems
+      : phoneItems.slice(0, numberOfPhoneItems.value);
+  return [...list].reverse();
 });
 
 const isViral = computed(() => {

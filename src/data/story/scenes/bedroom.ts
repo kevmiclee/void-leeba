@@ -636,7 +636,6 @@ export const bedroomScenes = {
   }),
 };
 
-// TODO: STORY - Shib hints at strange things they've noticed happening in the city,
 // TODO: UI/UX - flag management when going forward and back
 
 function getBookChoices(filter: string, nextScene: SceneId): Choice[] {

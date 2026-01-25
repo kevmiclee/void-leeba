@@ -29,7 +29,7 @@ export const phoneItems: PhoneItem[] = [
     title: `Block your windows, quarantine in your homes, don't let the disease spread.`,
   },
   {
-    title: `Army deployed to contain outbreak. Shelter in palce.`,
+    title: `Army deployed to contain outbreak. Shelter in place.`,
   },
 ];
 
