@@ -249,7 +249,7 @@ export const dreamFaeriesScenes = {
           ],
         },
       };
-    }
+    },
   ),
 
   "dream-faeries-litter-no-proof": defineScene(
@@ -270,6 +270,7 @@ export const dreamFaeriesScenes = {
           },
         ],
         choices: () => [
+          //TODO: if you have the trash, you get the option again
           {
             text: `"You're lying. I saw you eating the snails!"`,
             next: "dream-faeries2",
@@ -292,7 +293,7 @@ export const dreamFaeriesScenes = {
         ],
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   "dream-faeries-litter-proof": defineScene(
@@ -316,7 +317,7 @@ export const dreamFaeriesScenes = {
         ],
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   "dream-faeries-litter-proof1": defineScene(
@@ -354,7 +355,7 @@ export const dreamFaeriesScenes = {
         ],
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   "dream-faeries-litter-proof2": defineScene(
@@ -392,7 +393,7 @@ export const dreamFaeriesScenes = {
         ],
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   "dream-faeries-party-check": defineScene(
@@ -423,7 +424,7 @@ export const dreamFaeriesScenes = {
         ],
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   "dream-faeries-party-decline": defineScene(
@@ -447,7 +448,7 @@ export const dreamFaeriesScenes = {
         ],
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   "party-eggcorn": defineScene("party-eggcorn", function (payload): Scene {
@@ -509,6 +510,6 @@ export const dreamFaeriesScenes = {
         ],
         metadata: { sectionId },
       };
-    }
+    },
   ),
 };

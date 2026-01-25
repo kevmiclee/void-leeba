@@ -1,3 +1,5 @@
+import { SceneId } from "@/data/story/story";
+
 export interface Item {
   id: ItemId;
   label: string;
@@ -10,6 +12,7 @@ export interface Item {
   permanent?: boolean;
   pageAcquired?: string;
   usable: boolean;
+  useScenes?: SceneId[];
 }
 
 export type ItemId =

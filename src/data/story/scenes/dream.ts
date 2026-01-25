@@ -344,14 +344,10 @@ export const dreamScenes = {
           `You've never had a dream like this before. Usually it's packing, or missing busses.` +
           `^^Settlements form. Clusters of huts dot the hillsides. Farms appear in patchwork sewn around the huts.` +
           `^^You begin to exhale and as you do, the huts morph into vinyl-sided cookie-cutter houses. Spidery networks of highways ` +
-          `fan out and spread upon the landscape like mycelia {exploring a forest floor}.` +
-          `^^A hill flattens here, a plain rises into a mountain there. The houses multiply and spread out along the roads, and from ` +
-          `their coverage, large buildings and the grey of steel and asphalt overtake the vegetative green. The stars in the night ` +
-          `sky become less, the clarity of day is obscured by haze. The quiet is consumed by an ever-surmounting hum.` +
-          `^^{Breathe in.}`,
+          `fan out and spread upon the landscape like mycelia {exploring a forest floor}.`,
         buttonActions: () => [
           {
-            next: "dream-within-a-dream4",
+            next: "dream-within-a-dream7",
           },
         ],
         metadata: { sectionId },
@@ -391,13 +387,10 @@ export const dreamScenes = {
           `The hum intensifies until it almost becomes unbearable, making you wince. It reaches a cresecendo and 
           slowly begins its ebb back into entropic silence, leaving a ghostly impression of its power in your memory.` +
           `^^With each milliliter of breath that exits your lungs, the pervading artifical glow diminishes and the stars 
-          return to their former glory, {one by one}.^^Buildings topple and decay as trees and fields reclaim the landscape. ` +
-          `The highways wither like wisps of smoke disintegrating into the hills. The once imposing grids of farms and ` +
-          `neighborhoods fade into amorphous wilderness.^^Day, night, day, night. Seasons cycle and time dutifully carves ` +
-          `the terrain with imperceptible changes. All is as it was before.^^{Open your eyes}.`,
+          return to their former glory, {one by one}.`,
         buttonActions: () => [
           {
-            next: "hypno",
+            next: "dream-within-a-dream9",
           },
         ],
         metadata: { sectionId },

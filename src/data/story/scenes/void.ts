@@ -86,6 +86,7 @@ export const voidScenes = {
       choices: () => {
         const effects = useEffectsStore();
 
+        //TODO: Clear variables here and for tall balloon man and any other variables
         return [
           {
             text: "Do you believe in lice after lunch?",
@@ -165,7 +166,7 @@ export const voidScenes = {
         },
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   "void-not-alone-lunch1": defineScene(
@@ -179,7 +180,7 @@ export const voidScenes = {
         choices: () => [],
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   "void-not-alone-pie": defineScene(
@@ -211,7 +212,7 @@ export const voidScenes = {
         ],
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   "void-not-alone-pie1": defineScene(
@@ -226,7 +227,7 @@ export const voidScenes = {
         ],
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   "void-not-alone-adage": defineScene(
@@ -255,7 +256,7 @@ export const voidScenes = {
         ],
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   "void-not-alone-adage1": defineScene(
@@ -283,7 +284,7 @@ export const voidScenes = {
         ],
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   "void-not-alone-hummus": defineScene(
@@ -310,7 +311,7 @@ export const voidScenes = {
         ],
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   "void-not-alone-hummus1": defineScene(
@@ -329,7 +330,7 @@ export const voidScenes = {
         },
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   "void-not-alone-kickflip": defineScene(
@@ -367,7 +368,7 @@ export const voidScenes = {
         ],
         metadata: { sectionId },
       };
-    }
+    },
   ),
 
   "void-alone": defineScene("void-alone", function (payload): Scene {

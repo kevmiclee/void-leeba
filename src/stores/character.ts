@@ -119,7 +119,7 @@ export const useCharacterStore = defineStore("character", {
     addToInventory(
       id: ItemId,
       pageAcquired: SceneId,
-      amount?: number | undefined
+      amount?: number | undefined,
     ) {
       const audioStore = useAudioStore();
       audioStore.playGenericSound(pickUpItemSound);
@@ -145,7 +145,7 @@ export const useCharacterStore = defineStore("character", {
       }
     },
 
-    async useItem(id: ItemId) {
+    async useItem(id: ItemId, sceneId: SceneId) {
       const effects = useEffectsStore();
       const snackbar = useSnackbarStore();
 
@@ -169,7 +169,10 @@ export const useCharacterStore = defineStore("character", {
           break;
       }
 
-      if (itemCatalog[id].type == "consumable") {
+      if (
+        itemCatalog[id].type == "consumable" &&
+        itemCatalog[id].useScenes?.includes(sceneId)
+      ) {
         this.removeFromInventory(id, false);
       }
     },

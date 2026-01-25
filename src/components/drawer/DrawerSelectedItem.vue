@@ -16,18 +16,22 @@ import { useSnackbarStore } from "@/stores/snackbar";
 import { useCharacterStore } from "@/stores/character";
 import { useDrawerStore } from "@/stores/drawer";
 import { useAudioStore } from "@/stores/audio";
+import { useGameStore } from "@/stores/game";
 
 const snackbar = useSnackbarStore();
 const character = useCharacterStore();
 const drawer = useDrawerStore();
 const audioStore = useAudioStore();
+const game = useGameStore();
+const sceneId = game.currentScene(game.currentScenePayload).id;
 
 async function useItem() {
+  //TODO: don't remove item unless it can actually be used
   audioStore.click();
   const item = drawer.selectedItem!;
   drawer.closeDrawer();
   await snackbar.show(item.actionText ?? "Nothing happened.");
-  character.useItem(item.id);
+  character.useItem(item.id, sceneId);
 }
 
 function dropItem() {
