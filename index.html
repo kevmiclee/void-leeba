@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,6 +9,7 @@
     :root {
       color-scheme: dark;
     }
+
     body {
       margin: 0;
       min-height: 100vh;
@@ -18,20 +20,24 @@
       color: #e6e1d4;
       font-family: Georgia, "Iowan Old Style", Palatino, serif;
     }
+
     main {
       width: min(28rem, calc(100% - 3rem));
     }
+
     h1 {
       margin: 0 0 1.75rem;
       font-size: 2.75rem;
       font-weight: normal;
       letter-spacing: 0.01em;
     }
+
     nav {
       display: flex;
       flex-direction: column;
       gap: 0.75rem;
     }
+
     a {
       display: block;
       padding: 0.85rem 1rem;
@@ -39,11 +45,13 @@
       color: #e8b860;
       text-decoration: none;
     }
+
     a:hover,
     a:focus {
       background: #e8b860;
       color: #121214;
     }
+
     p {
       margin: 1.25rem 0 0;
       color: #a39e92;
@@ -51,16 +59,31 @@
       font-size: 0.95rem;
       line-height: 1.45;
     }
+    code {
+      display: block;
+      margin-top: 0.75rem;
+      padding: 0.75rem;
+      background: #1c1c20;
+      color: #e6e1d4;
+      font-size: 0.82rem;
+      line-height: 1.4;
+      overflow-wrap: anywhere;
+    }
   </style>
 </head>
+
 <body>
   <main>
     <h1>Leaks of Fate</h1>
     <nav>
-      <a href="https://github.com/kevmiclee/void-leeba/releases/download/leaks-of-fate-demo/Leaks-of-Fate-mac.zip">Download for Mac</a>
-      <a href="https://github.com/kevmiclee/void-leeba/releases/download/leaks-of-fate-demo/Leaks-of-Fate-windows.exe">Download for Windows</a>
+      <a href="https://github.com/kevmiclee/void-leeba/releases/download/leaks-of-fate-demo/Leaks-of-Fate-mac.zip">Download
+        for Mac</a>
+      <a href="https://github.com/kevmiclee/void-leeba/releases/download/leaks-of-fate-demo/Leaks-of-Fate-windows.exe">Download
+        for Windows</a>
     </nav>
-    <p>On a Mac, unzip the download, then right-click Leaks of Fate and choose Open the first time.</p>
+    <p>On a Mac, unzip the download. The first time it is blocked, open Terminal and paste this, then open the app:</p>
+    <p><code>xattr -dr com.apple.quarantine ~/Downloads/Leaks\ of\ Fate.app</code></p>
   </main>
 </body>
+
 </html>
