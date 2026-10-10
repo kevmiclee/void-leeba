@@ -1,64 +1,66 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" href="/void-leeba/assets/favicon-BFRfWCgQ.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="fonts.googleapis.com" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Void Leeba</title>
-    <script type="module" crossorigin src="/void-leeba/assets/index-CXtytw84.js"></script>
-    <link rel="stylesheet" crossorigin href="/void-leeba/assets/index-CYrZfmfi.css">
-  </head>
-  <body>
-    <div id="app">
-      <div
-        id="boot-loader"
-        style="
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          height: 100vh;
-          background: black;
-          font-family:
-            system-ui,
-            -apple-system,
-            Segoe UI,
-            Roboto,
-            sans-serif;
-        "
-      >
-        <div style="width: 320px">
-          <div style="font-size: 14px; margin-bottom: 10px">
-            Loading assets…
-          </div>
-
-          <div
-            style="
-              height: 10px;
-              background: black;
-              border-radius: 999px;
-              overflow: hidden;
-            "
-          >
-            <div
-              id="boot-progress"
-              style="
-                height: 100%;
-                width: 0%;
-                background: white;
-                transition: width 120ms linear;
-              "
-            ></div>
-          </div>
-
-          <div
-            id="boot-progress-text"
-            style="font-size: 12px; color: white; margin-top: 8px"
-          >
-            0%
-          </div>
-        </div>
-      </div>
-    </div>
-  </body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Leaks of Fate</title>
+  <style>
+    :root {
+      color-scheme: dark;
+    }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #121214;
+      color: #e6e1d4;
+      font-family: Georgia, "Iowan Old Style", Palatino, serif;
+    }
+    main {
+      width: min(28rem, calc(100% - 3rem));
+    }
+    h1 {
+      margin: 0 0 1.75rem;
+      font-size: 2.75rem;
+      font-weight: normal;
+      letter-spacing: 0.01em;
+    }
+    nav {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    a {
+      display: block;
+      padding: 0.85rem 1rem;
+      border: 1px solid #e8b860;
+      color: #e8b860;
+      text-decoration: none;
+    }
+    a:hover,
+    a:focus {
+      background: #e8b860;
+      color: #121214;
+    }
+    p {
+      margin: 1.25rem 0 0;
+      color: #a39e92;
+      font-family: system-ui, sans-serif;
+      font-size: 0.95rem;
+      line-height: 1.45;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Leaks of Fate</h1>
+    <nav>
+      <a href="https://github.com/kevmiclee/void-leeba/releases/download/leaks-of-fate-demo/Leaks-of-Fate-mac.zip">Download for Mac</a>
+      <a href="https://github.com/kevmiclee/void-leeba/releases/download/leaks-of-fate-demo/Leaks-of-Fate-windows.exe">Download for Windows</a>
+    </nav>
+    <p>On a Mac, unzip the download, then right-click Leaks of Fate and choose Open the first time.</p>
+  </main>
+</body>
 </html>
